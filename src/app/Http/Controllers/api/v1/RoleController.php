@@ -28,7 +28,7 @@ class RoleController extends ApiController
      *
      * @OA\Get(
      *     path="/roles",
-     *     tags = {"Peoples"},
+     *     tags = {"People"},
      *     @OA\Response(response="200", description="Display a listing of the resource"),
      *     @OA\Response(
      *          response="404",

@@ -32,6 +32,6 @@ class CreateForeignStaffStaffRole extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foreign_staff_staff_role');
+        Schema::dropIfExists('staff_role_staff');
     }
 }

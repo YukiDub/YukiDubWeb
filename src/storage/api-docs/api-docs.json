@@ -356,7 +356,7 @@
         "/roles": {
             "get": {
                 "tags": [
-                    "Peoples"
+                    "People"
                 ],
                 "summary": "Display a listing of the resource.",
                 "operationId": "4baf15bf19bdd61eaa6ab9da8f8eac18",

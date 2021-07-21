@@ -45,7 +45,16 @@ class PeopleRepository extends BaseRepository
      * @param int $id
      * @return mixed
      */
-    public function getById(int $id){
+    public function getById(int $id)
+    {
         return $this->startConditions()::find($id);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getRoles($id){
+        return $this->startConditions()->find($id)->roles;
     }
 }
