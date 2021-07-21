@@ -1,0 +1,552 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "YukiDub API documentation",
+        "contact": {
+            "email": "admin@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/v1",
+            "description": "Default server"
+        }
+    ],
+    "paths": {
+        "/genres": {
+            "get": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "bf9a1563d1c58d1b55ea126bedca05e9",
+                "responses": {
+                    "default": {
+                        "description": "Display a listing of the resource"
+                    }
+                }
+            }
+        },
+        "/genres/{id}": {
+            "get": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "Display the specified resource.",
+                "operationId": "a37bfbb1d0fe2f6cc59d72504964a500",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The genre id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Display the specified resource"
+                    }
+                }
+            }
+        },
+        "/people": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "fe240329edeaa62a22386f07292dd46d",
+                "parameters": [
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "number of people per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "role",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Store a newly created resource in storage.",
+                "operationId": "342ce6ad24faee8d2fbb1f999ca75742",
+                "parameters": [
+                    {
+                        "name": "nameJp",
+                        "in": "query",
+                        "description": "nameJp",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 24,
+                            "minimum": 2
+                        },
+                        "example": "緑川 光"
+                    },
+                    {
+                        "name": "nameEn",
+                        "in": "query",
+                        "description": "nameEn",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 30,
+                            "minimum": 2
+                        },
+                        "example": "Hikaru Midorikawa"
+                    },
+                    {
+                        "name": "nameRu",
+                        "in": "query",
+                        "description": "nameRu",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 30,
+                            "minimum": 2
+                        },
+                        "example": "Хикару Мидорикава"
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "birthday",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        },
+                        "example": "1997-01-11"
+                    },
+                    {
+                        "name": "webSite",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "url"
+                        },
+                        "example": "http://hikaru23.hatenablog.com/"
+                    },
+                    {
+                        "name": "roles",
+                        "in": "query",
+                        "description": "roles",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "added a new people",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PeopleRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UnprocessableEntityRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "people not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/people/{id}": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Display the specified resource.",
+                "operationId": "299c27072e818c0953666a319362de73",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Display the specified resource"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Remove the specified resource from storage.",
+                "operationId": "9c02f1cbf6a089913973d8db4bfdacea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "removed"
+                    }
+                }
+            }
+        },
+        "/people/{id}/works": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "operationId": "52ff67ca9fc0322d11de7e05e2bdf666",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/people/{id}/roles": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "operationId": "b15e2b493ae7c5c4cd0988b769fa397a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/roles": {
+            "get": {
+                "tags": [
+                    "Peoples"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "4baf15bf19bdd61eaa6ab9da8f8eac18",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "NotFoundRequest": {
+                "title": "UnprocessableEntityRequest",
+                "description": "UnprocessableEntityRequest",
+                "properties": {
+                    "status": {
+                        "title": "status",
+                        "description": "status code",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 404
+                    },
+                    "message": {
+                        "title": "message",
+                        "description": "The message error",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Not found."
+                    }
+                },
+                "type": "object"
+            },
+            "PeopleModel": {
+                "title": "PeopleModel's model",
+                "description": "PeopleModel",
+                "properties": {
+                    "staff_id": {
+                        "title": "staff_id",
+                        "description": "The staff id",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 4
+                    },
+                    "nameJp": {
+                        "title": "nameJp",
+                        "description": "The nameJp",
+                        "type": "string",
+                        "format": "string",
+                        "example": "緑川 光"
+                    },
+                    "nameEn": {
+                        "title": "nameEn",
+                        "description": "The nameEn",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Hikaru Midorikawa"
+                    },
+                    "nameRu": {
+                        "title": "nameRu",
+                        "description": "nameRu",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Хикару Мидорикава"
+                    },
+                    "birthday": {
+                        "title": "birthday",
+                        "description": "birthday",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1997-01-11"
+                    },
+                    "webSite": {
+                        "title": "webSite",
+                        "description": "webSite",
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://hikaru23.hatenablog.com/"
+                    }
+                },
+                "type": "object"
+            },
+            "PeopleRequest": {
+                "title": "People model",
+                "description": "People model object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/PeopleModel"
+                    },
+                    "roles": {
+                        "$ref": "#/components/schemas/StaffRoles"
+                    }
+                },
+                "type": "object"
+            },
+            "StaffRoles": {
+                "title": "StaffModel's model",
+                "description": "StaffModel",
+                "properties": {
+                    "role_id": {
+                        "title": "role_id",
+                        "description": "The role_id",
+                        "type": "integer",
+                        "format": "string",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "The name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "mangaka"
+                    }
+                },
+                "type": "object"
+            },
+            "UnprocessableEntityRequest": {
+                "title": "UnprocessableEntityRequest",
+                "description": "UnprocessableEntityRequest",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "description": "The message error",
+                        "type": "string",
+                        "format": "string",
+                        "example": "The given data was invalid."
+                    },
+                    "errors": {
+                        "title": "errors list",
+                        "description": "The errors list",
+                        "properties": {
+                            "errors": {
+                                "title": "nameJp",
+                                "description": "The message error",
+                                "type": "string",
+                                "format": "string",
+                                "example": "The name jp field is required."
+                            }
+                        },
+                        "type": "object",
+                        "format": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "X-APP-ID": {
+                "type": "apiKey",
+                "name": "X-APP-ID",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "People"
+        },
+        {
+            "name": "Genres",
+            "description": "for anime, manga, ranobe, genres"
+        },
+        {
+            "name": "Anime"
+        },
+        {
+            "name": "Manga"
+        },
+        {
+            "name": "Ranobe"
+        },
+        {
+            "name": "Users"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
