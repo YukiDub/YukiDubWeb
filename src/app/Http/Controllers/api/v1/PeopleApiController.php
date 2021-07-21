@@ -10,12 +10,14 @@ use App\Http\Requests\PeopleIndexRequest;
 use App\Http\Requests\StaffRequest;
 use App\Http\Resources\PeopleCollection;
 use App\Http\Resources\PeopleResource;
+use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use App\Models\Staff;
 use App\Repositories\PeopleRepository;
 use App\Repositories\PeopleRolesRepository;
 use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class PeopleApiController extends ApiController
@@ -291,9 +293,8 @@ class PeopleApiController extends ApiController
         $this->recordExists($people);
 
         if(Staff::find($id)->first()->delete()){
-            return response(null, 200);
+            return response(null, 204);
         }
-
     }
 
 
@@ -332,7 +333,7 @@ class PeopleApiController extends ApiController
 
     /**
      * @param $id
-     * @return string
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @OA\Get(
      *     path="/people/{id}/roles",
      *     tags = {"People"},
@@ -357,8 +358,9 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function getRoles(int $id){
+    public function getRoles(int $id): AnonymousResourceCollection
+    {
         $repository = $this->peopleRepo;
-        return "заглушка, здесь пока ничего нет";
+        return RoleResource::collection($repository->getRoles($id));
     }
 }
