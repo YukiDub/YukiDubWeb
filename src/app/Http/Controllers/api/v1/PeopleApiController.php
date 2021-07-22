@@ -14,7 +14,7 @@ use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use App\Models\Staff;
 use App\Repositories\PeopleRepository;
-use App\Repositories\PeopleRolesRepository;
+use App\Repositories\GenresRepository;
 use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -28,7 +28,7 @@ class PeopleApiController extends ApiController
     public function __construct()
     {
         $this->peopleRepo = new PeopleRepository();
-        $this->peopleRolesRepo = new PeopleRolesRepository();
+        $this->peopleRolesRepo = new GenresRepository();
     }
 
     /**
