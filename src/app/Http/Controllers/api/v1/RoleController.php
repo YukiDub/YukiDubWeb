@@ -9,7 +9,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Resources\RoleCollection;
 use App\Http\Resources\RoleResource;
 use App\Models\Role;
-use App\Repositories\PeopleRolesRepository;
+use App\Repositories\GenresRepository;
 use Illuminate\Http\Request;
 
 class RoleController extends ApiController
@@ -18,7 +18,7 @@ class RoleController extends ApiController
 
     public function __construct()
     {
-        $this->repository = new PeopleRolesRepository();
+        $this->repository = new GenresRepository();
     }
 
     /**

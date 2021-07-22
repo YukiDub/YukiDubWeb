@@ -8,10 +8,19 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Resources\GenresResource;
 use App\Models\Genre;
+use App\Repositories\GenresRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class GenresApiController extends ApiController
 {
+
+    protected $genresRep;
+
+    public function __construct()
+    {
+        $this->genresRep = new GenresRepository();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +33,7 @@ class GenresApiController extends ApiController
      */
     public function index(): AnonymousResourceCollection
     {
-        return GenresResource::collection(Genre::all());
+        return GenresResource::collection($this->genresRep->getList());
     }
 
 
@@ -48,8 +57,9 @@ class GenresApiController extends ApiController
      * @param  int  $id
      * @return GenresResource
      */
-    public function show($id)
+    public function show($id): GenresResource
     {
-        return new GenresResource(Genre::findOrFail($id));
+        $this->recordExists($genre = $this->genresRep->getById($id));
+        return new GenresResource($genre);
     }
 }
