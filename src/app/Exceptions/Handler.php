@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 use Exception;
@@ -38,6 +39,10 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return response()->json(['status'=>404, 'message'=>'Not found'], 404);
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request){
+            return response()->json(['status'=>405, 'message'=>'The GET method is not supported for this route'], 404);
         });
     }
 }

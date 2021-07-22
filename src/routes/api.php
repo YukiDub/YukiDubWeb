@@ -4,6 +4,8 @@
  */
 
 use App\Http\Controllers\api\v1\AnimesApiController;
+use App\Http\Controllers\api\v1\Auth\LoginController;
+use App\Http\Controllers\api\v1\Auth\RegisterController;
 use App\Http\Controllers\api\v1\GenresApiController;
 use App\Http\Controllers\api\v1\PeopleApiController;
 use App\Http\Controllers\api\v1\RoleController;
@@ -36,4 +38,15 @@ Route::prefix("v1")->group(function (){
     Route::apiResource("anime", AnimesApiController::class);
 
     Route::apiResource("roles", RoleController::class);
+
+
+
+
+
+
+    Route::prefix('auth')->group(function (){
+        Route::post('register', [RegisterController::class, 'register']);
+        Route::get('login', [LoginController::class, 'login']);
+    });
+
 });
