@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('{any}', function () {
+//    return view('index');
+//})->where('any', '.*');
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+
+Route::get('/test', function (){
+    $user = \App\Models\User::find(1);
+    return $user;
+});
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::get('/login/success', function () {
+    return 'ok';
+})->name('login.success');

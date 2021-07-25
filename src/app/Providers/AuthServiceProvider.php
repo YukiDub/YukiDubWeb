@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Staff;
+use App\Policies\StaffPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
@@ -15,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Staff::class => StaffPolicy::class
     ];
 
     /**
@@ -28,8 +31,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::routes();
 
-        Passport::tokensExpireIn(now()->addMinute(15));
-        Passport::refreshTokensExpireIn(now()->addDay(30));
+        Passport::enableImplicitGrant();
+        Passport::tokensExpireIn(now()->addMinute(30));
+        Passport::refreshTokensExpireIn(now()->addMonth(2));
         Passport::personalAccessTokensExpireIn(now()->addMonth(2));
     }
 }

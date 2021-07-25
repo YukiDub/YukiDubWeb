@@ -2,15 +2,63 @@
 
 namespace App\Http\Controllers\api\v1\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\api\v1\ApiController;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
 
-class RegisterController extends Controller
+class RegisterController extends ApiController
 {
     /**
+     * New user registration
      * @param RegistrationRequest $request
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Post (
+     *     path="/auth/register",
+     *     tags = {"Auth"},
+     *
+     *     @OA\Response(
+     *         response="200",
+     *         description="....",
+     *         @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Parameter(
+     *          name = "name",
+     *          in = "query",
+     *          description = "name",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *    @OA\Parameter(
+     *          name = "email",
+     *          in = "query",
+     *          description = "email",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *    @OA\Parameter(
+     *          name = "password",
+     *          in = "query",
+     *          description = "password",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *    @OA\Parameter(
+     *          name = "password_confirmation",
+     *          in = "query",
+     *          description = "password confirmation",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     )
+     * )
      */
     public function register(RegistrationRequest $request): \Illuminate\Http\JsonResponse
     {
