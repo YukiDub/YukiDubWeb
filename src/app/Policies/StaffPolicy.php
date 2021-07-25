@@ -6,7 +6,7 @@ use App\Models\Policy;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StaffPolicy
+class StaffPolicy extends PolicyBase
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class StaffPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $this->checkPermission($user, 'staff.viewAny');
     }
 
     /**
@@ -30,8 +30,9 @@ class StaffPolicy
      */
     public function view(User $user, Policy $policy)
     {
-
+        return $this->checkPermission($user, 'staff.view');
     }
+
 
     /**
      * Determine whether the user can create models.
@@ -41,7 +42,7 @@ class StaffPolicy
      */
     public function create(User $user)
     {
-//        dd($user->roles()->get());
+        return $this->checkPermission($user, 'staff.create');
     }
 
     /**
@@ -65,7 +66,7 @@ class StaffPolicy
      */
     public function delete(User $user, Policy $policy)
     {
-        //
+        return $this->checkPermission($user, 'staff.delete');
     }
 
     /**
