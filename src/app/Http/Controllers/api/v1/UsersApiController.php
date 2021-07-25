@@ -6,6 +6,8 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Http\Resources\UserResource;
+use Auth;
 use Illuminate\Http\Request;
 
 class UsersApiController extends ApiController
@@ -63,5 +65,31 @@ class UsersApiController extends ApiController
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     * @return UserResource
+     *
+     * @OA\Get(
+     *     path="/auth/profile",
+     *     tags = {"Auth"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthorized",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     * )
+     */
+    public function authUser(){
+        return UserResource::make(Auth::user());
     }
 }

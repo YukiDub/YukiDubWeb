@@ -18,6 +18,77 @@
         }
     ],
     "paths": {
+        "/auth/login": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "2c118d63c9a6b663832e8c612e7962a3",
+                "responses": {
+                    "200": {
+                        "description": "....",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "New user registration",
+                "operationId": "a7ec57acc2a0a8b7898382c574daeb48",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "password confirmation",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "....",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/genres": {
             "get": {
                 "tags": [
@@ -228,7 +299,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/people/{id}": {
@@ -255,6 +331,37 @@
                     }
                 }
             },
+            "put": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Update the specified resource in storage.",
+                "operationId": "e3363ffcf2d0a21590f0437d4ae88680",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "removed",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
             "delete": {
                 "tags": [
                     "People"
@@ -274,9 +381,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "removed"
+                        "description": "removed",
+                        "content": {
+                            "application/json": {}
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/people/{id}/works": {
@@ -284,6 +399,7 @@
                 "tags": [
                     "People"
                 ],
+                "summary": "Display a listing of the work this person",
                 "operationId": "52ff67ca9fc0322d11de7e05e2bdf666",
                 "parameters": [
                     {
@@ -321,6 +437,7 @@
                 "tags": [
                     "People"
                 ],
+                "summary": "Display a listing of the roles this person",
                 "operationId": "b15e2b493ae7c5c4cd0988b769fa397a",
                 "parameters": [
                     {
@@ -378,6 +495,33 @@
                         }
                     }
                 }
+            }
+        },
+        "/auth/profile": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "0004d1cddd81df5c78d33b718b0be3a2",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         }
     },
@@ -518,14 +662,17 @@
             }
         },
         "securitySchemes": {
-            "X-APP-ID": {
+            "Authorization": {
                 "type": "apiKey",
-                "name": "X-APP-ID",
+                "name": "Authorization",
                 "in": "header"
             }
         }
     },
     "tags": [
+        {
+            "name": "Auth"
+        },
         {
             "name": "People"
         },

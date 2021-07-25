@@ -19,6 +19,7 @@ use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PeopleApiController extends ApiController
 {
@@ -99,6 +100,9 @@ class PeopleApiController extends ApiController
      * @OA\Post (
      *     path="/people",
      *     tags = {"People"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
      *     @OA\Response(
      *          response="201",
      *          description="added a new people",
@@ -200,6 +204,10 @@ class PeopleApiController extends ApiController
      */
     public function store(StaffRequest $request): JsonResponse
     {
+        if($request->user()->cannot('create', Staff::class)){
+            abort(401);
+        };
+
         $people = new Staff();
 
         $people->fill($request->validated());
@@ -248,6 +256,28 @@ class PeopleApiController extends ApiController
     /**
      * Update the specified resource in storage.
      *
+     * @OA\Put (
+     *     path="/people/{id}",
+     *     tags = {"People"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(
+     *          response=200,
+     *          description="removed",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The people id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     *
      * @param StaffRequest $request
      * @param int $id
      * @return PeopleResource
@@ -275,7 +305,14 @@ class PeopleApiController extends ApiController
      * @OA\Delete  (
      *     path="/people/{id}",
      *     tags = {"People"},
-     *     @OA\Response(response=200, description="removed"),
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(
+     *          response=200,
+     *          description="removed",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -299,6 +336,7 @@ class PeopleApiController extends ApiController
 
 
     /**
+     * Display a listing of the work this person
      * @param $id
      * @return string
      * @OA\Get(
@@ -332,6 +370,7 @@ class PeopleApiController extends ApiController
 
 
     /**
+     * Display a listing of the roles this person
      * @param $id
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @OA\Get(
