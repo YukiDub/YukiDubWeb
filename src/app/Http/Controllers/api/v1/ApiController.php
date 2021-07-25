@@ -19,6 +19,11 @@ namespace App\Http\Controllers\api\v1;
  *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
  *     )
  * )
+ *
+ * @OA\Tag(
+ *     name="Auth"
+ * )
+ *
  * @OA\Tag(
  *     name="People",
  * )
@@ -51,8 +56,8 @@ namespace App\Http\Controllers\api\v1;
  * @OA\SecurityScheme(
  *     type="apiKey",
  *     in="header",
- *     name="X-APP-ID",
- *     securityScheme="X-APP-ID"
+ *     name="Authorization",
+ *     securityScheme="Authorization"
  * )
  */
 
