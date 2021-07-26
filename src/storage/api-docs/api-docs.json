@@ -394,13 +394,13 @@
                 ]
             }
         },
-        "/people/{id}/works": {
+        "/people/{id}/roles": {
             "get": {
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing of the work this person",
-                "operationId": "52ff67ca9fc0322d11de7e05e2bdf666",
+                "summary": "Display a listing of the roles this person",
+                "operationId": "b15e2b493ae7c5c4cd0988b769fa397a",
                 "parameters": [
                     {
                         "name": "id",
@@ -430,15 +430,59 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Remove roles this person",
+                "operationId": "ba1bf87913fdc3290583ebf751e00e48",
+                "parameters": [
+                    {
+                        "name": "roles",
+                        "in": "query",
+                        "description": "roles",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
-        "/people/{id}/roles": {
+        "/people/{id}/works": {
             "get": {
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing of the roles this person",
-                "operationId": "b15e2b493ae7c5c4cd0988b769fa397a",
+                "summary": "Display a listing of the work this person",
+                "operationId": "52ff67ca9fc0322d11de7e05e2bdf666",
                 "parameters": [
                     {
                         "name": "id",
