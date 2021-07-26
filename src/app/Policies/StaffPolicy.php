@@ -54,7 +54,7 @@ class StaffPolicy extends PolicyBase
      */
     public function update(User $user, Policy $policy)
     {
-        //
+        return $this->checkPermission($user, 'staff.update');
     }
 
     /**

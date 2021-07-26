@@ -63,6 +63,7 @@ final class Versions
   'guzzlehttp/promises' => '1.4.1@8e7d04f1f6450fef59366c399cfad4b9383aa30d',
   'guzzlehttp/psr7' => '1.8.2@dc960a912984efb74d0a90222870c72c87f10c91',
   'intervention/image' => '2.6.0@a2d7238069bb01322f9c2a661449955434fec9c6',
+  'itsgoingd/clockwork' => 'v5.0.8@01686ebbf75d8e121dfb1b60e52f334858793830',
   'justinrainbow/json-schema' => '5.2.11@2ab6744b7296ded80f8cc4f9509abbff393399aa',
   'laravel/framework' => 'v8.47.0@93db226946453f4285558b7c3166ddb6e7ea5400',
   'laravel/passport' => 'v10.1.3@a5e4471dd99b7638ab5ca3ecab6cd87cf37eb410',

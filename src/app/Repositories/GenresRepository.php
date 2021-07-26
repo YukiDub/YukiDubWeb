@@ -31,10 +31,10 @@ class GenresRepository extends BaseRepository
     }
 
     /**
-     * @param int $id
+     * @param int|array $id
      * @return mixed
      */
-    public function getById(int $id)
+    public function getById($id)
     {
         return $this->startConditions()->find($id);
     }

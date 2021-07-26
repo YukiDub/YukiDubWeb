@@ -7,11 +7,12 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Requests\PeopleIndexRequest;
+use App\Http\Requests\RemoveRoleStaffRequest;
 use App\Http\Requests\StaffRequest;
 use App\Http\Resources\PeopleCollection;
 use App\Http\Resources\PeopleResource;
+use App\Http\Resources\RoleCollection;
 use App\Http\Resources\RoleResource;
-use App\Models\Role;
 use App\Models\Staff;
 use App\Repositories\PeopleRepository;
 use App\Repositories\GenresRepository;
@@ -19,7 +20,6 @@ use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class PeopleApiController extends ApiController
 {
@@ -204,22 +204,20 @@ class PeopleApiController extends ApiController
      */
     public function store(StaffRequest $request): JsonResponse
     {
-        if($request->user()->cannot('create', Staff::class)){
-            abort(401);
-        };
+//        if($request->user()->cannot('create', Staff::class)){
+//            return response()->json(['status'=>403, 'message'=>'Forbidden'], 403);
+//        };
 
         $people = new Staff();
-
         $people->fill($request->validated());
-        $people->save();
 
         if($request->hasFile("avatar")){
             $people->avatarExtention = $request->file("avatar")->getClientOriginalExtension();
             Images::upload($request->file("avatar"), $people->staff_id, "/public/images/peoples/");
         }
 
-        $roles = Role::find($request->get("roles"));
-        $people->roles()->attach($roles);
+        $people->save();
+        $people->roles()->attach($request->get("roles"));
 
         return response()->json(["data"=>new PeopleResource($people), "status"=>"created"], 201);
     }
@@ -289,11 +287,58 @@ class PeopleApiController extends ApiController
         $this->recordExists($people = Staff::find($id));
         $people->fill($request->all());
 
-        $roles = $rolesRepository->get($request->get("roles"));
-        $people->roles()->attach($roles);
-
         $people->update();
+
+        $people->roles()->sync($request->get("roles"));
+
         return new PeopleResource($people);
+    }
+
+    /**
+     * Remove roles this person
+     * @param int $peopleId
+     * @param RemoveRoleStaffRequest $request
+     * @return RoleCollection|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @OA\Delete (
+     *     path="/people/{id}/roles",
+     *     tags = {"People"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Response(
+     *          response="404",
+     *          description="not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *
+     *     @OA\Parameter(
+     *          name = "roles",
+     *          in = "query",
+     *          description = "roles",
+     *          required=true,
+     *          @OA\Schema(
+     *             type="array",
+     *             @OA\Items(
+     *                 type="integer"
+     *              )
+     *         )
+     *     )
+     * )
+     */
+    public function removeRole(int $peopleId, RemoveRoleStaffRequest $request)
+    {
+        $peopleRepository = $this->peopleRepo;
+
+        $this->recordExists($peopleRepository->getById($peopleId));
+        $staff = Staff::find($peopleId);
+
+        $staff->roles()->detach($request->validated());
+
+        return response(null, 204);
     }
 
     /**
@@ -324,14 +369,12 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function destroy($id)
+    public function destroy(int $id): Response
     {
-        $people = $this->peopleRepo->getById($id);
-        $this->recordExists($people);
+        $this->recordExists($people = Staff::find($id));
+        $people->first()->delete();
 
-        if(Staff::find($id)->first()->delete()){
-            return response(null, 204);
-        }
+        return response(null, 204);
     }
 
 

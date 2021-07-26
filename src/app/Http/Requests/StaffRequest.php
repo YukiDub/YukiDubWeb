@@ -54,8 +54,8 @@ class StaffRequest extends FormRequest
                 "max:255",
                 "url"
             ],
-            "roles"=>"array|required|exists:staff_role,role_id",
-            "roles.*"=>"integer|distinct",
+            "roles"=>"array|required",
+            "roles.*"=>"integer|distinct|exists:staff_role,role_id",
             "avatar"=>"image|max:9900|dimensions:width=225,height=317"
         ];
 
@@ -68,7 +68,7 @@ class StaffRequest extends FormRequest
                 return $rules;
                 break;
 
-            case "PUT":
+            default:
                 return [
                     "nameJp"=>"string|min:2|max:24",
                     "nameEn"=>"string|min:2|max:30",
@@ -76,7 +76,7 @@ class StaffRequest extends FormRequest
                     "birthday"=>"date|date_format:Y-m-d",
                     "webSite"=>"max:255|url",
                     "roles"=>"array",
-                    "roles.*"=>"integer|distinct",
+                    "roles.*"=>"integer|distinct|exists:staff_role,role_id",
                     "avatar"=>"image|max:9900|dimensions:width=225,height=317"
                 ];
                 break;
