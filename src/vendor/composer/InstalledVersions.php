@@ -601,6 +601,15 @@ private static $installed = array (
       ),
       'reference' => 'a2d7238069bb01322f9c2a661449955434fec9c6',
     ),
+    'itsgoingd/clockwork' => 
+    array (
+      'pretty_version' => 'v5.0.8',
+      'version' => '5.0.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '01686ebbf75d8e121dfb1b60e52f334858793830',
+    ),
     'justinrainbow/json-schema' => 
     array (
       'pretty_version' => '5.2.11',

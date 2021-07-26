@@ -18,6 +18,10 @@ abstract class PolicyBase
     {
         if($user->roles()->with('permissions')->whereHas('permissions', function ($permissions) use ($permissionName) {
             $permissions->whereName($permissionName);
-        })->first()) return true; else return false;
+        })->first()){
+            return true;
+        }
+
+        return false;
     }
 }
