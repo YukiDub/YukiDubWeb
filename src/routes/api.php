@@ -31,14 +31,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix("v1")->group(function (){
-    Route::apiResource("people", PeopleApiController::class);
+    Route::apiResource('users', UsersApiController::class);
+
+
+    Route::apiResource("people", PeopleApiController::class)->only(['index', 'show']);
+    Route::apiResource("people", PeopleApiController::class)->only(['store', 'update', 'destroy'])
+    ->middleware('auth:api');
+
     Route::get('people/{id}/works', [PeopleApiController::class, "getWorks"]);
     Route::get('people/{id}/roles', [PeopleApiController::class, "getRoles"]);
     Route::delete('people/{peopleId}/roles/', [PeopleApiController::class, 'removeRole']);
 
     Route::apiResource("genres", GenresApiController::class)->only(['index', 'show']);
     Route::apiResource("anime", AnimesApiController::class);
-
     Route::apiResource("roles", RoleController::class);
 
 
@@ -46,6 +51,6 @@ Route::prefix("v1")->group(function (){
         Route::post('register', [RegisterController::class, 'register']);
         Route::get('login', [LoginController::class, 'login']);
         Route::post('accessToken', [LoginController::class, 'getAccessToken']);
-        Route::get('profile', [UsersApiController::class, 'authUser'])->middleware('auth:api');
+        Route::get('profile', [UsersApiController::class, 'authUser'])->middleware(['auth:api', 'scope:profile-management']);
     });
 });

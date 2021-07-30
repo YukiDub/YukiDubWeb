@@ -85,10 +85,14 @@ class User extends Authenticatable
 
     public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(UserRole::class, 'user_user_roles_permissions', 'user_id', 'permission_id');
+        return $this->belongsToMany(UserRole::class, 'user_user_roles_permissions', 'user_id', 'role_id');
     }
 
-    public function getRolesAttribute(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getRolesAttribute(): \Illuminate\Database\Eloquent\Collection
+    {
         return $this->roles()->get();
     }
 }

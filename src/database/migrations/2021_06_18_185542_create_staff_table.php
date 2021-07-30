@@ -22,6 +22,14 @@ class CreateStaffTable extends Migration
             $table->string("webSite")->default(null)->nullable(true);
             $table->string("avatarExtention")->default(null)->nullable(true);
         });
+
+        DB::table('permissions')->insert([
+            ['name'=>'staff.viewAny'],
+            ['name'=>'staff.view'],
+            ['name'=>'staff.update'],
+            ['name'=>'staff.delete'],
+            ['name'=>'staff.delete']
+        ]);
     }
 
     /**

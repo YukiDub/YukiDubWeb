@@ -37,6 +37,7 @@ class LoginController extends ApiController
             'client_secret' => $client->secret,
             'username' => $request->get('email'),
             'password' => $request->get('password'),
+            'scope'=>'*'
         ];
 
         $request = Request::create('/oauth/token', 'POST', $data);
@@ -62,7 +63,7 @@ class LoginController extends ApiController
             'refresh_token' => $request->get('refresh_token'),
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'scope' => '',
+            'scope'=>'*'
         ];
 
         $request = Request::create('/oauth/token', 'POST', $data);

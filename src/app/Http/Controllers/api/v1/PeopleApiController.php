@@ -88,7 +88,7 @@ class PeopleApiController extends ApiController
         $perPage = $request->get("count") ? $request->get('count') : 6;
 
         if($request->get("role")){
-            $peopleRepository->withRole($request->get("role"));
+            $peopleRepository->setRole($request->get("role"));
         }
 
         return new PeopleCollection($peopleRepository->getList($perPage));
@@ -204,9 +204,9 @@ class PeopleApiController extends ApiController
      */
     public function store(StaffRequest $request): JsonResponse
     {
-//        if($request->user()->cannot('create', Staff::class)){
-//            return response()->json(['status'=>403, 'message'=>'Forbidden'], 403);
-//        };
+        if($request->user()->cannot('create', Staff::class)){
+            return response()->json(['status'=>403, 'message'=>'Access denied'], 403);
+        };
 
         $people = new Staff();
         $people->fill($request->validated());
@@ -242,7 +242,7 @@ class PeopleApiController extends ApiController
      * @param  int  $id
      * @return PeopleResource
      */
-    public function show(int $id)
+    public function show(int $id): PeopleResource
     {
         $repository = $this->peopleRepo;
         $this->recordExists($people = $repository->getById($id));
@@ -254,7 +254,7 @@ class PeopleApiController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @OA\Put (
+     * @OA\Patch  (
      *     path="/people/{id}",
      *     tags = {"People"},
      *     security={
@@ -275,6 +275,7 @@ class PeopleApiController extends ApiController
      *         )
      *     )
      * )
+     *
      *
      * @param StaffRequest $request
      * @param int $id
