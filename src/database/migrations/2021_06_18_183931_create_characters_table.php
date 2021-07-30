@@ -14,7 +14,7 @@ class CreateCharactersTable extends Migration
     public function up()
     {
         Schema::create('characters', function (Blueprint $table) {
-            $table->id('characterId');
+            $table->id('character_id');
             $table->string("nameJp", 24)->nullable(false);
             $table->string("nameEn", 30)->default(null);
             $table->string("nameRu", 30)->default(null);

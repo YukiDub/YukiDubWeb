@@ -1,14 +1,10 @@
 <?php
 
-/*
- * Copyright (c) YukiDub. Author: M9snikFeed <m9snikfeed@gmail.com>.
- */
-
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class RoleCollection extends ResourceCollection
+class UserCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -16,7 +12,7 @@ class RoleCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request): array
+    public function toArray($request)
     {
         return $this->collection->toArray();
     }
