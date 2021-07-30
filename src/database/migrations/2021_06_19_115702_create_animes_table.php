@@ -19,21 +19,21 @@ class CreateAnimesTable extends Migration
             $table->enum("type", ["TV Series", "Movie", "OVA", "ONA", "Special", "Music"])->nullable(false);
             $table->integer("episode")->nullable(false)->default(0);
             $table->integer("episodesReleased")->nullable(false)->default(0);
-            $table->date("nextEpisode");
-            $table->time("episodeDuration");
+            $table->date("nextEpisode")->nullable(true)->default(null);
+            $table->time("episodeDuration")->nullable(true)->default(null);
             $table->enum("status", ["released", "ongoing", "announced"]);
-            $table->date("startDate")->nullable(false);
-            $table->date("releaseDate");
+            $table->date("startDate")->nullable(true)->default(null);
+            $table->date("releaseDate")->nullable(true)->default(null);
             $table->enum("ageRating", ["G", "PG", "PG-13", "R-17", "R+", "Rx"]);
             $table->string("nameJp", 50)->nullable(false);
             $table->string("nameEn", 120)->nullable(false);
             $table->string("nameRu", 120)->nullable(true);
-            $table->string("descriptionJp");
-            $table->string("descriptionEn");
-            $table->string("descriptionRu");
+            $table->string("descriptionJp")->nullable(true)->default(null);
+            $table->string("descriptionEn")->nullable(true)->default(null);
+            $table->string("descriptionRu")->nullable(true)->default(null);
 
             $table->unsignedBigInteger("score");
-            $table->foreign("score")->on("scores")->references("scoreId")->onDelete("cascade");
+            $table->foreign("score")->on("scores")->references("score_id")->onDelete("cascade");
 
             $table->unsignedBigInteger("producer");
             $table->foreign("producer")->on("anime_producers")->references("producerId")->onDelete("cascade");
