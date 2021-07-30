@@ -14,7 +14,7 @@ class CreateScoresTable extends Migration
     public function up()
     {
         Schema::create('scores', function (Blueprint $table) {
-            $table->id("scoreId");
+            $table->id("score_id");
             $table->integer("count")->default(0);
             $table->integer("total")->default(0);
         });
