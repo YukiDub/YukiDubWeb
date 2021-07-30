@@ -331,12 +331,12 @@
                     }
                 }
             },
-            "put": {
+            "delete": {
                 "tags": [
                     "People"
                 ],
-                "summary": "Update the specified resource in storage.",
-                "operationId": "e3363ffcf2d0a21590f0437d4ae88680",
+                "summary": "Remove the specified resource from storage.",
+                "operationId": "9c02f1cbf6a089913973d8db4bfdacea",
                 "parameters": [
                     {
                         "name": "id",
@@ -362,12 +362,12 @@
                     }
                 ]
             },
-            "delete": {
+            "patch": {
                 "tags": [
                     "People"
                 ],
-                "summary": "Remove the specified resource from storage.",
-                "operationId": "9c02f1cbf6a089913973d8db4bfdacea",
+                "summary": "Update the specified resource in storage.",
+                "operationId": "296d5aa701c4a02d4acdfd59c5818ec6",
                 "parameters": [
                     {
                         "name": "id",
@@ -524,6 +524,132 @@
                 "responses": {
                     "200": {
                         "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "98e33ac94127798318f52de14f95873f",
+                "parameters": [
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "number of people per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "role",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display the specified resource.",
+                "operationId": "f1e3481f66e1c8dfe377358bd2e31e10",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display the specified resource",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update the specified resource in storage.",
+                "operationId": "57ed2953201091ee5995f7ee7b679587",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Update the specified resource in storage",
+                        "content": {
+                            "application/json": {}
+                        }
                     },
                     "404": {
                         "description": "not found",

@@ -66,7 +66,7 @@ class Anime extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "animeId";
+    protected $primaryKey = "anime_id";
     public $timestamps = false;
 
     public $attributes =[

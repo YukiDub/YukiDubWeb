@@ -21,7 +21,7 @@ class PeopleRepository extends BaseRepository
     /**
      * @param string $role
      */
-    public function withRole(string $role){
+    public function setRole(string $role){
         $this->role = $role;
     }
 
