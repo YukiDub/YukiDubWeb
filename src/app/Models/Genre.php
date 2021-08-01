@@ -22,14 +22,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Genre whereNameEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Genre whereNameJp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Genre whereNameRu($value)
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @mixin \Eloquent
  */
 class Genre extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "genreId";
+    protected $primaryKey = "genre_id";
     public $timestamps = false;
+
+    protected $hidden = ['pivot'];
 
     protected $fillable = [
         "nameJp",

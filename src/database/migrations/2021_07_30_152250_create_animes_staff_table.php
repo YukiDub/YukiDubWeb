@@ -16,7 +16,9 @@ class CreateAnimesStaffTable extends Migration
         Schema::create('animes_staff', function (Blueprint $table) {
             $table->unsignedBigInteger('anime_id');
             $table->unsignedBigInteger('staff_id');
+            $table->unsignedBigInteger('role_id');
 
+            $table->foreign('role_id')->on('staff_role')->references('role_id')->onDelete('cascade');
             $table->foreign('anime_id')->on('animes')->references('anime_id')->onDelete('cascade');
             $table->foreign('staff_id')->on('staff')->references('staff_id')->onDelete('cascade');
 

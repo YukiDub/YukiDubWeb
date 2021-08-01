@@ -41,6 +41,8 @@ class Staff extends Model
     public $timestamps = false;
     public $primaryKey = "staff_id";
 
+    protected $hidden = ['pivot'];
+
     protected $fillable = [
         "nameJp",
         "nameEn",
