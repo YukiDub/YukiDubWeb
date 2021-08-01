@@ -19,9 +19,10 @@ class AnimesApiController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index()
     {
-        return AnimeResource::collection(Anime::all());
+//        return AnimeResource::collection(Anime::all());
+        return Anime::with(['genres', 'staff', 'characters'])->get();
     }
 
     /**

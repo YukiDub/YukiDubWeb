@@ -38,7 +38,9 @@ class Character extends Model
 {
     use HasFactory;
 
-    public $primaryKey = "characterId";
+    public $primaryKey = "character_id";
+
+    protected $hidden = ['pivot'];
 
     protected $fillable = [
         "nameJp",
