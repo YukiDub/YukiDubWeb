@@ -37,9 +37,6 @@ class CreateAnimesTable extends Migration
 
             $table->unsignedBigInteger("producer");
             $table->foreign("producer")->on("anime_producers")->references("producerId")->onDelete("cascade");
-
-            $table->unsignedBigInteger("playerVideos")->default(null);
-            $table->foreign("playerVideos")->on("player_videos")->references("videoId")->onDelete("cascade");
         });
     }
 
