@@ -13,17 +13,8 @@ class StaffRoleSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
-        \App\Models\Role::factory(['name'=>'test'])->create();
+        \App\Models\Role::factory(['name'=>'Mangaka'])->create();
+        \App\Models\Role::factory(['name'=>'Producer'])->create();
+        \App\Models\Role::factory(['name'=>'Seiyu'])->create();
     }
 }
