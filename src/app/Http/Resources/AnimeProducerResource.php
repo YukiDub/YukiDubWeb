@@ -18,6 +18,9 @@ class AnimeProducerResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->producerId,
+            'name'=>$this->name
+        ];
     }
 }

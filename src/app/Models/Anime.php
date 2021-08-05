@@ -108,6 +108,7 @@ class Anime extends Model
         return $this->belongsToMany(Staff::class, 'animes_staff', 'anime_id', 'staff_id');
     }
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -115,4 +116,22 @@ class Anime extends Model
     {
         return $this->belongsToMany(Character::class, 'animes_characters', 'anime_id', 'character_id');
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function producer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(AnimeProducer::class, 'producerId', 'producer');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function score(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Score::class, 'score_id', 'score');
+    }
+
 }

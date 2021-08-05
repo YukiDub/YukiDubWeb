@@ -18,6 +18,62 @@
         }
     ],
     "paths": {
+        "/anime": {
+            "get": {
+                "tags": [
+                    "Anime"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "f64753b0c8e444ea86e872c3579e1c1f",
+                "parameters": [
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "number of people per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "genre",
+                        "in": "query",
+                        "description": "genre",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/auth/login": {
             "get": {
                 "tags": [
