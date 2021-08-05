@@ -7,22 +7,79 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AnimeResource;
+use App\Http\Requests\AnimeRequest;
+use App\Http\Resources\AnimeCollection;
 use App\Models\Anime;
+use App\Repositories\AnimeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class AnimesApiController extends Controller
+class AnimesApiController extends ApiController
 {
+    protected $animeRepo;
+
+    public function __construct()
+    {
+        $this->animeRepo = new AnimeRepository();
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return AnonymousResourceCollection
+     * @OA\Get(
+     *     path="/anime",
+     *     tags = {"Anime"},
+     *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Response(
+     *          response="404",
+     *          description="not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *
+     *     @OA\Parameter(
+     *          name = "perPage",
+     *          in = "query",
+     *          description = "number of people per page",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *          name = "page",
+     *          in = "query",
+     *          description = "page",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *
+     *     @OA\Parameter(
+     *          name = "genre",
+     *          in = "query",
+     *          description = "genre",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="int"
+     *         )
+     *     )
+     * )
+     *
+     * @return AnimeCollection
      */
-    public function index()
+    public function index(AnimeRequest $request): AnimeCollection
     {
-//        return AnimeResource::collection(Anime::all());
-        return Anime::with(['genres', 'staff', 'characters'])->get();
+        $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+
+        return new AnimeCollection(
+            $this->animeRepo
+                ->allRelationsPaginate()
+                ->paginate($perPage)
+        );
     }
 
     /**
