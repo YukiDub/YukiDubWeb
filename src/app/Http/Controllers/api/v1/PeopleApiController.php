@@ -85,7 +85,7 @@ class PeopleApiController extends ApiController
     {
         $peopleRepository = $this->peopleRepo;
 
-        $perPage = $request->get("count") ? $request->get('count') : 6;
+        $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
 
         if($request->get("role")){
             $peopleRepository->setRole($request->get("role"));

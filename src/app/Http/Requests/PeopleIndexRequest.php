@@ -28,7 +28,7 @@ class PeopleIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            "count"=>"integer|min:1|max:100"
+            "perPage"=>"integer|min:1|max:100"
         ];
     }
 }

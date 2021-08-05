@@ -17,7 +17,7 @@ class AnimeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,29 +27,39 @@ class AnimeRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            "posterUrl" => "required|image",
-            "type"=> "required|in:TV Series,Movie,OVA,ONA,Special,Music",
-            "episode"=> "integer",
-            "episodesReleased"=> "integer",
-            "nextEpisode"=> "date",
+
+        switch ($this->method()){
+            case 'GET':
+                return [
+                    'perPage'=>'integer|max:100|min:1'
+                ];
+                break;
+            case 'POST':
+                return [
+                    "posterUrl" => "required|image",
+                    "type"=> "required|in:TV Series,Movie,OVA,ONA,Special,Music",
+                    "episode"=> "integer",
+                    "episodesReleased"=> "integer",
+                    "nextEpisode"=> "date",
 //            "episodeDuration"=> "time",
-            "status"=> "required",
-            "startDate"=> "required|date",
-            "releaseDate"=> "date",
+                    "status"=> "required",
+                    "startDate"=> "required|date",
+                    "releaseDate"=> "date",
 //            "genres"=> "string",
-            "ageRating"=> "required|in:G,PG,PG-13,R-17,R+,Rx",
-            "nameJp"=> "required|string|min:1|max:50",
-            "nameEn"=> "required|string|min:1|max:120",
-            "nameRu"=> "string|min:1|max:120",
-            "descriptionJp"=> "string",
-            "descriptionEn"=> "string",
-            "descriptionRu"=> "string",
+                    "ageRating"=> "required|in:G,PG,PG-13,R-17,R+,Rx",
+                    "nameJp"=> "required|string|min:1|max:50",
+                    "nameEn"=> "required|string|min:1|max:120",
+                    "nameRu"=> "string|min:1|max:120",
+                    "descriptionJp"=> "string",
+                    "descriptionEn"=> "string",
+                    "descriptionRu"=> "string",
 //            "staff"=> "string",
 //            "characters"=> "",
 //            "score"=> "",
 //            "producer"=> "",
 //            "playerVideos"=> "",
-        ];
+                ];
+                break;
+        }
     }
 }
