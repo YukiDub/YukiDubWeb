@@ -27,7 +27,7 @@ class CreateStaffTable extends Migration
             ['name'=>'staff.viewAny'],
             ['name'=>'staff.view'],
             ['name'=>'staff.update'],
-            ['name'=>'staff.delete'],
+            ['name'=>'staff.create'],
             ['name'=>'staff.delete']
         ]);
     }

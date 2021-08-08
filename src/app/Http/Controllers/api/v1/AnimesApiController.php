@@ -9,6 +9,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnimeRequest;
 use App\Http\Resources\AnimeCollection;
+use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
 use App\Repositories\AnimeRepository;
 use Illuminate\Http\Request;
@@ -96,12 +97,41 @@ class AnimesApiController extends ApiController
     /**
      * Display the specified resource.
      *
+     *   @OA\Get   (
+     *     path="/anime/{id}",
+     *     tags = {"Anime"},
+     *     @OA\Response(
+     *          response=201,
+     *          description="Display the specified resource",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Response(
+     *          response="404",
+     *          description="anime not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The people id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return AnimeResource
      */
     public function show($id)
     {
-        //
+        $this->recordExists($anime = $this->animeRepo->getById($id));
+
+        return AnimeResource::make($anime);
     }
 
     /**
@@ -119,11 +149,44 @@ class AnimesApiController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
+     *  @OA\Delete  (
+     *     path="/anime/{id}",
+     *     tags = {"Anime"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(
+     *          response=200,
+     *          description="removed",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Response(
+     *          response="404",
+     *          description="anime not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The people id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\Response
     {
-        //
+        $this->recordExists($anime = Anime::find($id));
+        $anime->delete();
+
+        return response(null, 204);
     }
 }

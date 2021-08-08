@@ -26,6 +26,12 @@ class AnimeRepository extends BaseRepository
         return $this->startConditions()->all();
     }
 
+    public function whereGenre($genre){
+        return $this->startConditions()::with('genres')->whereHas('genres', function ($q) use ($genre) {
+            $q->where("genre", "=", $genre);
+        });
+    }
+
     /**
      * @param int|array $id
      * @return mixed
@@ -38,5 +44,12 @@ class AnimeRepository extends BaseRepository
     public function allRelationsPaginate(): \Illuminate\Database\Eloquent\Builder
     {
         return $this->startConditions()->with(['genres', 'staff', 'characters', 'producer', 'score']);
+    }
+
+    public function getByPeopleId(int $id){
+        return $this->startConditions()
+            ->with(['genres', 'characters', 'producer', 'score'])
+            ->join('animes_staff', 'animes_staff.anime_id', '=', 'animes.anime_id')
+            ->where('animes_staff.staff_id', '=', $id);
     }
 }

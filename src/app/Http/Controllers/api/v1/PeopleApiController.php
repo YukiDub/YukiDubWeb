@@ -6,14 +6,15 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Http\Requests\PeopleAnimesRequest;
 use App\Http\Requests\PeopleIndexRequest;
-use App\Http\Requests\RemoveRoleStaffRequest;
 use App\Http\Requests\StaffRequest;
+use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\PeopleCollection;
 use App\Http\Resources\PeopleResource;
-use App\Http\Resources\RoleCollection;
 use App\Http\Resources\RoleResource;
 use App\Models\Staff;
+use App\Repositories\AnimeRepository;
 use App\Repositories\PeopleRepository;
 use App\Repositories\GenresRepository;
 use App\YukiDub\Images;
@@ -25,18 +26,19 @@ class PeopleApiController extends ApiController
 {
     protected $peopleRepo;
     protected $peopleRolesRepo;
+    protected $animeRepo;
 
     public function __construct()
     {
         $this->peopleRepo = new PeopleRepository();
         $this->peopleRolesRepo = new GenresRepository();
+        $this->animeRepo = new AnimeRepository();
     }
 
     /**
      * Display a listing of the resource.
      *
      * @param PeopleIndexRequest $request
-     * @return PeopleCollection
      *
      * @OA\Get(
      *     path="/people",
@@ -52,7 +54,7 @@ class PeopleApiController extends ApiController
      *      ),
      *
      *     @OA\Parameter(
-     *          name = "count",
+     *          name = "perPage",
      *          in = "query",
      *          description = "number of people per page",
      *          required=false,
@@ -81,7 +83,7 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function index(PeopleIndexRequest $request): PeopleCollection
+    public function index(PeopleIndexRequest $request)
     {
         $peopleRepository = $this->peopleRepo;
 
@@ -217,7 +219,7 @@ class PeopleApiController extends ApiController
         }
 
         $people->save();
-        $people->roles()->attach($request->get("roles"));
+//        $people->roles()->attach($request->get("roles"));
 
         return response()->json(["data"=>new PeopleResource($people), "status"=>"created"], 201);
     }
@@ -250,7 +252,6 @@ class PeopleApiController extends ApiController
         return new PeopleResource($people);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -265,6 +266,14 @@ class PeopleApiController extends ApiController
      *          description="removed",
      *          @OA\MediaType(mediaType="application/json")
      *     ),
+     *     @OA\Response(
+     *          response="404",
+     *          description="people not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -279,67 +288,21 @@ class PeopleApiController extends ApiController
      *
      * @param StaffRequest $request
      * @param int $id
-     * @return PeopleResource
+     * @return JsonResponse
      */
-    public function update(StaffRequest $request, int $id): PeopleResource
+    public function update(StaffRequest $request, int $id): JsonResponse
     {
-        $rolesRepository = $this->peopleRolesRepo;
-
         $this->recordExists($people = Staff::find($id));
+
+        if($request->user()->cannot('update', $people)){
+            return response()->json(['status'=>'Sent for moderation'], 201);
+        };
+
         $people->fill($request->all());
-
         $people->update();
+//        $people->roles()->sync($request->get("roles"));
 
-        $people->roles()->sync($request->get("roles"));
-
-        return new PeopleResource($people);
-    }
-
-    /**
-     * Remove roles this person
-     * @param int $peopleId
-     * @param RemoveRoleStaffRequest $request
-     * @return RoleCollection|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
-     * @OA\Delete (
-     *     path="/people/{id}/roles",
-     *     tags = {"People"},
-     *     security={
-     *       {"Authorization": {}},
-     *     },
-     *     @OA\Response(response="200", description="Display a listing of the resource"),
-     *     @OA\Response(
-     *          response="404",
-     *          description="not found",
-     *          @OA\JsonContent(
-     *              type="array",
-     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
-     *          )
-     *      ),
-     *
-     *     @OA\Parameter(
-     *          name = "roles",
-     *          in = "query",
-     *          description = "roles",
-     *          required=true,
-     *          @OA\Schema(
-     *             type="array",
-     *             @OA\Items(
-     *                 type="integer"
-     *              )
-     *         )
-     *     )
-     * )
-     */
-    public function removeRole(int $peopleId, RemoveRoleStaffRequest $request)
-    {
-        $peopleRepository = $this->peopleRepo;
-
-        $this->recordExists($peopleRepository->getById($peopleId));
-        $staff = Staff::find($peopleId);
-
-        $staff->roles()->detach($request->validated());
-
-        return response(null, 204);
+        return response()->json(new PeopleResource($people), 201);
     }
 
     /**
@@ -408,8 +371,100 @@ class PeopleApiController extends ApiController
      * )
      */
     public function getWorks(int $id){
-        $repository = $this->peopleRepo;
-        return "заглушка, здесь пока ничего нет";
+        $this->recordExists($people = $this->peopleRepo->getById($id));
+
+        $data = [
+            'animes'=>new AnimeCollection($people->popularAnimes()), //надо будет выводить только самые топовые анимехи (т.е сортировать по рейтингу)
+            'mangas'=>[
+                '..'
+            ],
+            'ranobe'=>[
+                '..'
+            ],
+            'visual-novel'=>[
+                '...'
+            ]
+        ];
+
+        return response()->json($data,201);
+    }
+
+
+    /**
+     * Display a listing of the anime list this person
+     * @param $id
+     * @return AnimeCollection
+     * @OA\Get(
+     *     path="/people/{id}/animes",
+     *     tags = {"People"},
+     *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Response(
+     *          response="404",
+     *          description="not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The people id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="perPage",
+     *         in="query",
+     *         description="Count of objects per page. ( 1 <= perPage >= 100 )",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     */
+    public function getAnime(PeopleAnimesRequest $request,int $id): AnimeCollection
+    {
+        $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+
+        return new AnimeCollection($this->animeRepo->getByPeopleId($id)->paginate($perPage));
+    }
+
+
+    /**
+     * Display a listing of the manga list this person
+     * @param $id
+     * @return AnimeCollection
+     * @OA\Get(
+     *     path="/people/{id}/mangas",
+     *     tags = {"People"},
+     *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Response(
+     *          response="404",
+     *          description="not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The people id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     */
+    public function getMangas(int $id)
+    {
+        //
     }
 
 

@@ -54,8 +54,8 @@ class StaffRequest extends FormRequest
                 "max:255",
                 "url"
             ],
-            "roles"=>"array|required",
-            "roles.*"=>"integer|distinct|exists:staff_role,role_id",
+//            "roles"=>"array|required",
+//            "roles.*"=>"integer|distinct|exists:staff_role,role_id",
             "avatar"=>"image|max:9900|dimensions:width=225,height=317"
         ];
 
@@ -76,8 +76,8 @@ class StaffRequest extends FormRequest
                     "birthday"=>"date|date_format:Y-m-d",
                     "webSite"=>"max:255|url",
                     "roles"=>"array",
-                    "roles.*"=>"integer|distinct|exists:staff_role,role_id",
-                    "avatar"=>"image|max:9900|dimensions:width=225,height=317"
+//                    "roles.*"=>"integer|distinct|exists:staff_role,role_id",
+//                    "avatar"=>"image|max:9900|dimensions:width=225,height=317"
                 ];
                 break;
         }
