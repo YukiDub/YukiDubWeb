@@ -40,6 +40,8 @@ Route::prefix("v1")->group(function (){
 
     Route::get('people/{id}/works', [PeopleApiController::class, "getWorks"]);
     Route::get('people/{id}/roles', [PeopleApiController::class, "getRoles"]);
+    Route::get('people/{id}/animes', [PeopleApiController::class, "getAnime"]);
+    Route::get('people/{id}/mangas', [PeopleApiController::class, "getMangas"]);
     Route::delete('people/{peopleId}/roles/', [PeopleApiController::class, 'removeRole']);
 
     Route::apiResource("genres", GenresApiController::class)->only(['index', 'show']);
