@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateAnimeChangesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('anime_changes', function (Blueprint $table) {
+            $table->unsignedBigInteger('anime_id');
+            $table->unsignedBigInteger('change_id');
+
+            $table->foreign('anime_id')->on('animes')->references('anime_id')->onDelete('cascade');
+            $table->foreign('change_id')->on('changes_histories')->references('change_id')->onDelete('cascade');
+
+            $table->primary(['anime_id', 'change_id']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('anime_changes');
+    }
+}

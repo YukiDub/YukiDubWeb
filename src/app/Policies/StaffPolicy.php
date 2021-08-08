@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Policy;
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -54,7 +55,7 @@ class StaffPolicy extends PolicyBase
      * @param  \App\Models\Policy  $policy
      * @return mixed
      */
-    public function update(User $user, Policy $policy)
+    public function update(User $user, Staff $staff)
     {
         return $this->checkPermission($user, 'staff.update');
     }
