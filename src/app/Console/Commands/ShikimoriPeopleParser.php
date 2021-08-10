@@ -7,21 +7,21 @@ use App\Services\ShikimoriService;
 use Illuminate\Console\Command;
 use SebastianBergmann\Timer\Timer;
 
-class Shikimori extends Command
+class ShikimoriPeopleParser extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'shikimori:parse';
+    protected $signature = 'shiki:peoples';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'shikimori parser';
+    protected $description = 'shikimori people(staff) parser';
 
     /**
      * Execute the console command.
@@ -36,15 +36,17 @@ class Shikimori extends Command
         try{
             for ($i = 1; $i <= 1000; $i++){
                 $peopleParse = $shikiService->getPeopleById($i);
+                $this->alert('parsing new people');
                 $staff->firstOrCreate([
                     'malId'=>$peopleParse['id'],
                     'nameJp'=>$peopleParse['japanese'],
-                    'nameEn'=>$peopleParse['name'],
-                    'nameRu'=>$peopleParse['russian'],
-                    'birthday'=>$peopleParse['birthday'],
-                    'webSite'=>$peopleParse['website']
+                    'nameEn'=>$peopleParse['name'] ? $peopleParse['name'] : null,
+                    'nameRu'=>$peopleParse['russian'] ? $peopleParse['russian'] : null,
+                    'birthday'=>$peopleParse['birthday'] ? $peopleParse['birthday'] : null,
+                    'webSite'=>$peopleParse['website'] ? $peopleParse['website'] : null
                 ]);
                 sleep(rand(120,340));
+                $this->alert("sleeping");
             }
         }
         catch (\Exception $exception){

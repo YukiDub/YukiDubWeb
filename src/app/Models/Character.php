@@ -43,6 +43,7 @@ class Character extends Model
     protected $hidden = ['pivot'];
 
     protected $fillable = [
+        "mailId",
         "nameJp",
         "nameEn",
         "nameRu",
