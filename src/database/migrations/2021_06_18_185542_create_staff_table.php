@@ -15,12 +15,12 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id("staff_id");
+            $table->integer('malId')->nullable(true)->default(null)->unique();
             $table->string("nameJp", 24)->nullable(false);
             $table->string("nameEn", 30)->nullable(true);
             $table->string("nameRu", 30)->default(null)->nullable(true);;
             $table->date("birthday")->default(null)->nullable(true);
             $table->string("webSite")->default(null)->nullable(true);
-            $table->integer('malId')->nullable(true)->default(null);
             $table->string("avatarExtention")->default(null)->nullable(true);
         });
 
