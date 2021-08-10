@@ -21,7 +21,13 @@ class ShikimoriService
         $this->url = config('services.shikimori.url');
     }
 
-    public function send(string $type, $path, $data = []){
+    /**
+     * @param string $type
+     * @param $path
+     * @param array $data
+     * @return mixed
+     */
+    public function collApi(string $type, $path, $data = []){
         $response =  Http::withUserAgent('YukiDub-parser')
                 ->$type($this->url . $path, $data);
         $data = $response->json();
@@ -32,8 +38,13 @@ class ShikimoriService
         return $data;
     }
 
-    public function getPeopleById($id){
+    public function getPeopleById(int $id){
         $path = 'people/' . $id;
-        return $this->send('get', $path);
+        return $this->collApi('get', $path);
+    }
+
+    public function getCharactersById(int $id){
+        $path = 'characters/' . $id;
+        return $this->collApi('get', $path);
     }
 }
