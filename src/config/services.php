@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'shikimori'=>[
+        'url'=>env('SHIKIMORI_API_URL'),
+        'token'=>env('SHIKIMORI_TOKEN_URL')
+    ]
+
 ];
