@@ -57,4 +57,18 @@ class PeopleRepository extends BaseRepository
     public function getRoles($id){
         return $this->startConditions()->find($id)->roles;
     }
+
+    public function getChangesById($id){
+        $data =  $this->startConditions()
+            ->with(['changes'=>function($query){
+                $query
+                    ->join('users', 'users.id', '=', 'changes_histories.user_id')
+                    ->addSelect(['changes_histories.*', 'users.name as user_name']);
+            }])
+            ->find($id);
+
+        if($data){
+            return $data->changes;
+        } else return null;
+    }
 }

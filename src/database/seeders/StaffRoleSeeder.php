@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class StaffRoleSeeder extends Seeder
@@ -13,8 +14,8 @@ class StaffRoleSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Role::factory(['name'=>'Mangaka'])->create();
-        \App\Models\Role::factory(['name'=>'Producer'])->create();
-        \App\Models\Role::factory(['name'=>'Seiyu'])->create();
+        Role::factory(['name'=>'Mangaka'])->create();
+        Role::factory(['name'=>'Producer'])->create();
+        Role::factory(['name'=>'Seiyu'])->create();
     }
 }

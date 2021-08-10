@@ -72,6 +72,14 @@ class Staff extends Model
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function changes(): BelongsToMany
+    {
+        return $this->belongsToMany(ChangesHistory::class, "staff_changes", "staff_id", "change_id");
+    }
+
+    /**
      * @param int $count
      * @return \Illuminate\Database\Eloquent\Collection
      */
