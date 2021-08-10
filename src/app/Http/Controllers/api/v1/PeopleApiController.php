@@ -6,14 +6,14 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Http\Requests\StaffCreateRequest;
 use App\Http\Requests\PeopleAnimesRequest;
 use App\Http\Requests\PeopleIndexRequest;
-use App\Http\Requests\StaffRequest;
+use App\Http\Requests\StaffUpdateRequest;
 use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\PeopleCollection;
 use App\Http\Resources\PeopleResource;
 use App\Http\Resources\RoleResource;
-use App\Models\ChangesHistory;
 use App\Models\Staff;
 use App\Repositories\AnimeRepository;
 use App\Repositories\PeopleRepository;
@@ -207,10 +207,10 @@ class PeopleApiController extends ApiController
      *         )
      *     )
      * )
-     * @param StaffRequest $request
+     * @param StaffCreateRequest $request
      * @return JsonResponse
      */
-    public function store(StaffRequest $request): JsonResponse
+    public function store(StaffCreateRequest $request): JsonResponse
     {
         if($request->user()->cannot('create', Staff::class)){
             return response()->json(['status'=>403, 'message'=>'Access denied'], 403);
@@ -297,11 +297,11 @@ class PeopleApiController extends ApiController
      * )
      *
      *
-     * @param StaffRequest $request
+     * @param StaffUpdateRequest $request
      * @param int $id
      * @return JsonResponse
      */
-    public function update(StaffRequest $request, int $id): JsonResponse
+    public function update(StaffUpdateRequest $request, int $id): JsonResponse
     {
         $this->recordExists($people = Staff::find($id));
         $afterAttributes = $people->getAttributes();
