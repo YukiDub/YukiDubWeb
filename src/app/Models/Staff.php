@@ -49,8 +49,8 @@ class Staff extends Model
         "nameRu",
         "birthday",
         "webSite",
-        "staff_role",
-        "avatarExtention"
+        "avatarExtention",
+        "malId"
     ];
 
 
