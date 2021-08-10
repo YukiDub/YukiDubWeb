@@ -25,10 +25,13 @@ class GenresSeeder extends Seeder
         \App\Models\Genre::factory(['nameJp'=>'少女', 'nameEn'=>'Shoujo', 'nameRu'=>'Сёдзё'])
             ->create();
 
-        \App\Models\Genre::factory(['nameJp'=>'少女愛', 'nameEn'=>'Shojo-ai', 'nameRu'=>'Сёдзё-ай'])
+        \App\Models\Genre::factory(['nameJp'=>'少女愛', 'nameEn'=>'Shoujo Ai', 'nameRu'=>'Сёдзё-ай'])
             ->create();
 
         \App\Models\Genre::factory(['nameJp'=>'女性', 'nameEn'=>'Josei', 'nameRu'=>'Дзёсей'])
+            ->create();
+
+        \App\Models\Genre::factory(['nameJp'=>'ジェンダーベンダー', 'nameEn'=>'Gender Bender', 'nameRu'=>'Смена пола'])
             ->create();
 
         \App\Models\Genre::factory(['nameJp'=>'コメディ', 'nameEn'=>'Comedy', 'nameRu'=>'Комедия'])
