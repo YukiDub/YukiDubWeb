@@ -38,7 +38,7 @@ class ShikimoriCharactersParser extends Command
                 $charactersParse = $shikiService->getCharactersById($i);
                 $this->alert('parsing new character');
                 $character->firstOrCreate([
-                    'mailId'=>$charactersParse['id'],
+                    'malId'=>$charactersParse['id'],
                     'nameJp'=>$charactersParse['japanese'],
                     'nameEn'=>$charactersParse['name'] ? $charactersParse['name'] : null,
                     'nameRu'=>$charactersParse['russian'] ? $charactersParse['russian'] : null,
