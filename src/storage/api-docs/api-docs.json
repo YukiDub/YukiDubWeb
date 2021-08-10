@@ -548,6 +548,44 @@
                 ]
             }
         },
+        "/people/{id}/changes": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Display a listing changes",
+                "operationId": "77bc9c2c5b67dd2bf55a5e7af7f276c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/people/{id}/works": {
             "get": {
                 "tags": [

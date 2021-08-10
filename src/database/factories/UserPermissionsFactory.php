@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Staff;
+use App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StaffFactory extends Factory
+class UserPermissionsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Staff::class;
+    protected $model = Permission::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,7 @@ class StaffFactory extends Factory
     public function definition()
     {
         return [
-            'nameEn'=>$this->faker->name,
-            'nameJp'=>\Str::random(20),
-            'nameRu'=>\Str::random(20),
-            'birthday'=>$this->faker->date(),
-            'webSite'=>\Str::random(69)
+            //
         ];
     }
 }

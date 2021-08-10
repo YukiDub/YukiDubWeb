@@ -15,9 +15,9 @@ class CreateChangesHistoriesTable extends Migration
     {
         Schema::create('changes_histories', function (Blueprint $table) {
             $table->id('change_id');
-            $table->string('type');
+            $table->string('action');
             $table->enum('status', ['accepted', 'moderate', 'rejected']);
-            $table->json('changes');
+            $table->json('changes')->nullable(true)->default(null);
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id');
