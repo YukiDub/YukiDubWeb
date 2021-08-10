@@ -38,6 +38,8 @@ Route::prefix("v1")->group(function (){
     Route::apiResource("people", PeopleApiController::class)->only(['store', 'update', 'destroy'])
     ->middleware('auth:api');
 
+
+    Route::get('people/{id}/changes', [PeopleApiController::class, "changes"]);
     Route::get('people/{id}/works', [PeopleApiController::class, "getWorks"]);
     Route::get('people/{id}/roles', [PeopleApiController::class, "getRoles"]);
     Route::get('people/{id}/animes', [PeopleApiController::class, "getAnime"]);

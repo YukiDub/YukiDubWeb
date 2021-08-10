@@ -13,26 +13,32 @@ use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\PeopleCollection;
 use App\Http\Resources\PeopleResource;
 use App\Http\Resources\RoleResource;
+use App\Models\ChangesHistory;
 use App\Models\Staff;
 use App\Repositories\AnimeRepository;
 use App\Repositories\PeopleRepository;
 use App\Repositories\GenresRepository;
+use App\Services\HistoryService;
 use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PeopleApiController extends ApiController
 {
     protected $peopleRepo;
     protected $peopleRolesRepo;
     protected $animeRepo;
+    protected $historyService;
 
     public function __construct()
     {
         $this->peopleRepo = new PeopleRepository();
         $this->peopleRolesRepo = new GenresRepository();
         $this->animeRepo = new AnimeRepository();
+        $this->historyService = new HistoryService();
     }
 
     /**
@@ -217,9 +223,14 @@ class PeopleApiController extends ApiController
             $people->avatarExtention = $request->file("avatar")->getClientOriginalExtension();
             Images::upload($request->file("avatar"), $people->staff_id, "/public/images/peoples/");
         }
-
         $people->save();
-//        $people->roles()->attach($request->get("roles"));
+
+        $this->historyService->createAction(
+            'Adding a new staff',
+            'accepted',
+            Auth::user()->id,
+            $people
+        );
 
         return response()->json(["data"=>new PeopleResource($people), "status"=>"created"], 201);
     }
@@ -293,16 +304,32 @@ class PeopleApiController extends ApiController
     public function update(StaffRequest $request, int $id): JsonResponse
     {
         $this->recordExists($people = Staff::find($id));
+        $afterAttributes = $people->getAttributes();
+        $people->fill($request->all());
+        $moderate = true;
 
-        if($request->user()->cannot('update', $people)){
-            return response()->json(['status'=>'Sent for moderation'], 201);
+        if(!$people->isDirty()){
+            throw new BadRequestHttpException('There were no changes');
+        }
+
+        if(!$request->user()->cannot('update', $people)){
+            $moderate = false;
+            $people->update();
         };
 
-        $people->fill($request->all());
-        $people->update();
-//        $people->roles()->sync($request->get("roles"));
+        $this->historyService->updateAction(
+            'Staff update',
+            $moderate ? 'moderate' : 'accepted',
+            Auth::user()->id,
+            $people,
+            $afterAttributes,
+            $request->all(),
+        );
 
-        return response()->json(new PeopleResource($people), 201);
+        if($moderate){
+            return response()->json(['status'=>'Sent for moderation'], 200);
+        }
+        return response()->json(new PeopleResource($people), 200);
     }
 
     /**
@@ -336,11 +363,47 @@ class PeopleApiController extends ApiController
     public function destroy(int $id): Response
     {
         $this->recordExists($people = Staff::find($id));
+        $peopleData = $people->getAttributes();
         $people->first()->delete();
 
+        $this->historyService->removeAction($peopleData, Auth::user()->id, 'Staff removal');
         return response(null, 204);
     }
 
+    /**
+     * Display a listing changes
+     * @param $id
+     * @return JsonResponse
+     * @OA\Get(
+     *     path="/people/{id}/changes",
+     *     tags = {"People"},
+     *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Response(
+     *          response="404",
+     *          description="not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The people id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     */
+    public function changes($id): JsonResponse
+    {
+        $this->recordExists($changes = $this->peopleRepo->getChangesById($id));
+
+        return response()->json($changes, 200);
+    }
 
     /**
      * Display a listing of the work this person
@@ -389,7 +452,6 @@ class PeopleApiController extends ApiController
         return response()->json($data,201);
     }
 
-
     /**
      * Display a listing of the anime list this person
      * @param $id
@@ -433,7 +495,6 @@ class PeopleApiController extends ApiController
         return new AnimeCollection($this->animeRepo->getByPeopleId($id)->paginate($perPage));
     }
 
-
     /**
      * Display a listing of the manga list this person
      * @param $id
@@ -466,7 +527,6 @@ class PeopleApiController extends ApiController
     {
         //
     }
-
 
     /**
      * Display a listing of the roles this person

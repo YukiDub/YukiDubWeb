@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Staff;
+use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
-        \App\Models\Staff::factory(10)->create();
+        $this->call([
+            GenresSeeder::class,
+            StaffRoleSeeder::class,
+            UsersRolesSeeder::class
+        ]);
 
+        User::factory(10)->create();
+        Staff::factory(10)->create();
 
-        (new GenresSeeder())->run();
-        (new StaffRoleSeeder())->run();
+        User::all()->each(function ($user) {
+            $user->roles()->attach(2);
+        });
     }
 }
