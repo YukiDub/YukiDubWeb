@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnimeProducersTable extends Migration
+class CreateAnimeStudiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateAnimeProducersTable extends Migration
      */
     public function up()
     {
-        Schema::create('anime_producers', function (Blueprint $table) {
-            $table->id("producerId");
-            $table->string("name", 20)->nullable(false);
+        Schema::create('anime_studios', function (Blueprint $table) {
+            $table->id("studio_id");
+            $table->string("name", 20)->nullable(false)->unique();
         });
     }
 
@@ -26,6 +26,6 @@ class CreateAnimeProducersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anime_producers');
+        Schema::dropIfExists('anime_studios');
     }
 }

@@ -47,4 +47,9 @@ class ShikimoriService
         $path = 'characters/' . $id;
         return $this->collApi('get', $path);
     }
+
+    public function getAnimeById(int $id){
+        $path = 'animes/' . $id;
+        return $this->collApi('get', $path);
+    }
 }

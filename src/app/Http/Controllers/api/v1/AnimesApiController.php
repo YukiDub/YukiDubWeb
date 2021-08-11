@@ -78,7 +78,7 @@ class AnimesApiController extends ApiController
 
         return new AnimeCollection(
             $this->animeRepo
-                ->allRelationsPaginate()
+                ->allRelations()
                 ->paginate($perPage)
         );
     }

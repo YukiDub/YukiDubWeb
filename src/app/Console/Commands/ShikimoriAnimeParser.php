@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Models\Anime;
+use App\Models\AnimeStudio;
+use App\Models\Genre;
+use App\Models\Score;
+use App\Services\ShikimoriService;
+use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+
+class ShikimoriAnimeParser extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'shiki:anime';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'shikimori people(staff) parser';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $shikiService = new ShikimoriService();
+        for ($id = 1; $id <= 30; $id++){
+            try{
+                $animeParse = $shikiService->getAnimeById($id);
+                $this->alert('parsing new anime');
+                $score = Score::create();
+
+                $anime = Anime::create([
+                    'mal_id'=>$animeParse['id'],
+                    'shiki_score'=>$animeParse['score'],
+                    //                    "posterUrl"=>$charactersParse['id'], // переделать...
+                    "type"=>$animeParse['kind'],
+                    "episodes"=>(int)$animeParse['episodes'] ? $animeParse['episodes'] : 0,
+                    "episodes_released"=>(int)
+                          $animeParse['episodes_aired'] ? $animeParse['episodes_aired']
+                        : ($animeParse['status'] == 'released' ? $animeParse['episodes'] : 0),
+                    "next_episode_at"=>null,
+                    "episode_duration"=>$animeParse['duration'] ? date('G:i:s', mktime(0, $animeParse['duration'], 0)) : null,
+                    "status"=>$animeParse['status'],
+                    "aired_on"=> (int)$animeParse['aired_on'] ? $animeParse['aired_on'] : null,
+                    "released_on"=> (int)$animeParse['released_on'] ? $animeParse['released_on'] : null,
+                    "age_rating"=> $animeParse['rating'] ? $animeParse['rating'] : null,
+                    "name_jp"=>$animeParse['japanese'][0],
+                    "name_en"=>$animeParse['name'],
+                    "name_ru"=>$animeParse['russian'] ? $animeParse['russian'] : null,
+                    "description_ru"=>$animeParse['description'] ? $animeParse['description'] : null,
+                    "description_ru_source"=>'https://shikimori.one/animes/' . $id,
+                    'score'=>$score->score_id
+                ]);
+
+                foreach ($animeParse['studios'] as $studioItem){
+                    if(empty($studio = AnimeStudio::where('name', '=', $studioItem['name'])->first())){
+                        $studio = AnimeStudio::create(['name'=>$studioItem['name']]);
+                    }
+                    $anime->studios()->attach($studio);
+                }
+
+                foreach ($animeParse['genres'] as $genreItem){
+                    $genre = Genre::where('nameEn', '=', $genreItem['name'])->first();
+                    $anime->genres()->attach($genre);
+                }
+            }
+            catch (\Exception $ex){
+
+            }
+                sleep(rand(12,23));
+                $this->alert("sleeping");
+        }
+
+        return "Good";
+    }
+}

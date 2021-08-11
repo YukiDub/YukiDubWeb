@@ -7,6 +7,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Models\Anime
@@ -69,26 +71,32 @@ class Anime extends Model
     protected $primaryKey = "anime_id";
     public $timestamps = false;
 
-    public $attributes =[
-        "posterUrl",
+    public $fillable =[
+        'mal_id',
+        'shiki_score',
+        "poster_url",
         "type",
-        "episode",
-        "episodesReleased",
-        "nextEpisode",
-        "episodeDuration",
+        "episodes",
+        "episodes_released",
+        "next_episode_at",
+        "episode_duration",
         "status",
-        "startDate",
-        "releaseDate",
-        "ageRating",
-        "nameJp",
-        "nameEn",
-        "nameRu",
-        "descriptionJp",
-        "descriptionEn",
-        "descriptionRu",
-        "score",
-        "producer",
-        "playerVideos",
+        "aired_on",
+        "released_on",
+        "age_rating",
+        "name_jp",
+        "name_en",
+        "name_ru",
+        "description_jp",
+        "description_en",
+        "description_ru",
+        'description_jp_author',
+        'description_en_author',
+        'description_ru_author',
+        'description_ru_source',
+        'description_en_source',
+        'description_jp_source',
+        "score"
     ];
 
 
@@ -119,17 +127,17 @@ class Anime extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function producer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function studios(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasOne(AnimeProducer::class, 'producerId', 'producer');
+        return $this->belongsToMany(AnimeStudio::class, 'anime_anime_studios', 'anime_id', 'studio_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function score(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function score(): HasOne
     {
         return $this->hasOne(Score::class, 'score_id', 'score');
     }
