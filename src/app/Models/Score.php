@@ -25,4 +25,11 @@ use Illuminate\Database\Eloquent\Model;
 class Score extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'score_id';
+
+    protected $fillable = [
+      'count',
+      'total'
+    ];
+    public $timestamps = false;
 }
