@@ -15,28 +15,38 @@ class CreateAnimesTable extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id("anime_id");
-            $table->string("posterUrl")->nullable(false)->default('default.png');
-            $table->enum("type", ["TV Series", "Movie", "OVA", "ONA", "Special", "Music"])->nullable(false);
-            $table->integer("episode")->nullable(false)->default(0);
-            $table->integer("episodesReleased")->nullable(false)->default(0);
-            $table->date("nextEpisode")->nullable(true)->default(null);
-            $table->time("episodeDuration")->nullable(true)->default(null);
+            $table->integer("mal_id")->nullable(true)->default(null)->unique();
+            $table->integer("shiki_score")->nullable(true)->default(null);
+            $table->string("poster_url")->nullable(false)->default('default.png');
+            $table->enum("type", ["tv", "movie", "ova", "ona", "special", "music"])->nullable(false);
+            $table->integer("episodes")->nullable(false)->default(0);
+            $table->integer("episodes_released")->nullable(false)->default(0);
+            $table->date("next_episode_at")->nullable(true)->default(null);
+            $table->time("episode_duration")->nullable(true)->default(null);
             $table->enum("status", ["released", "ongoing", "announced"]);
-            $table->date("startDate")->nullable(true)->default(null);
-            $table->date("releaseDate")->nullable(true)->default(null);
-            $table->enum("ageRating", ["G", "PG", "PG-13", "R-17", "R+", "Rx"]);
-            $table->string("nameJp", 50)->nullable(false);
-            $table->string("nameEn", 120)->nullable(false);
-            $table->string("nameRu", 120)->nullable(true);
-            $table->string("descriptionJp")->nullable(true)->default(null);
-            $table->string("descriptionEn")->nullable(true)->default(null);
-            $table->string("descriptionRu")->nullable(true)->default(null);
+            $table->date("aired_on")->nullable(true)->default(null);
+            $table->date("released_on")->nullable(true)->default(null);
+            $table->enum("age_rating", ["g", "pg", "pg_13", "r", "r_plus", "rx"])->nullable(true)->default(null);
+            $table->string("name_jp", 50)->nullable(false);
+            $table->string("name_en", 120)->nullable(false);
+            $table->string("name_ru", 120)->nullable(true);
+
+            $table->text("description_jp")->nullable(true)->default(null);
+            $table->text("description_jp_source")->nullable(true)->default(null);
+            $table->unsignedBigInteger("description_jp_author")->nullable(true)->default(null);
+            $table->text("description_en")->nullable(true)->default(null);
+            $table->string("description_en_source")->nullable(true)->default(null);
+            $table->unsignedBigInteger("description_en_author")->nullable(true)->default(null);
+            $table->text("description_ru")->nullable(true)->default(null);
+            $table->string("description_ru_source")->nullable(true)->default(null);
+            $table->unsignedBigInteger("description_ru_author")->nullable(true)->default(null);
 
             $table->unsignedBigInteger("score");
             $table->foreign("score")->on("scores")->references("score_id")->onDelete("cascade");
 
-            $table->unsignedBigInteger("producer");
-            $table->foreign("producer")->on("anime_producers")->references("producerId")->onDelete("cascade");
+            $table->foreign('description_jp_author')->on('users')->references('id')->onDelete('cascade');
+            $table->foreign('description_en_author')->on('users')->references('id')->onDelete('cascade');
+            $table->foreign('description_ru_author')->on('users')->references('id')->onDelete('cascade');
         });
     }
 

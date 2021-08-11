@@ -41,14 +41,14 @@ class AnimeRepository extends BaseRepository
         return $this->startConditions()->find($id);
     }
 
-    public function allRelationsPaginate(): \Illuminate\Database\Eloquent\Builder
+    public function allRelations(): \Illuminate\Database\Eloquent\Builder
     {
-        return $this->startConditions()->with(['genres', 'staff', 'characters', 'producer', 'score']);
+        return $this->startConditions()->with(['genres', 'staff', 'characters', 'studios', 'score']);
     }
 
     public function getByPeopleId(int $id){
         return $this->startConditions()
-            ->with(['genres', 'characters', 'producer', 'score'])
+            ->with(['genres', 'characters', 'studios', 'score'])
             ->join('animes_staff', 'animes_staff.anime_id', '=', 'animes.anime_id')
             ->where('animes_staff.staff_id', '=', $id);
     }
