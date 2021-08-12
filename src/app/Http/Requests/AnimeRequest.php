@@ -27,11 +27,16 @@ class AnimeRequest extends FormRequest
      */
     public function rules()
     {
-
         switch ($this->method()){
             case 'GET':
                 return [
-                    'perPage'=>'integer|max:100|min:1'
+                    'perPage'=>'integer|max:100|min:1',
+                    'fields'=>'array',
+                    'fields.*'=>'string',
+                    'genres'=>'array',
+                    'genres.*'=>'string|exists:genres,nameEn',
+                    'studios'=>'array',
+                    'studios.*'=>'string|exists:anime_studios,name'
                 ];
                 break;
             case 'POST':
