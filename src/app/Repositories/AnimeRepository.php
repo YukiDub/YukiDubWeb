@@ -14,16 +14,41 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnimeRepository extends BaseRepository
 {
+
     protected function getModelClass(): string
     {
         return Anime::class;
     }
 
     /**
-     * @return array|Application[]|Collection|Model[]
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getList(){;
-        return $this->startConditions()->all();
+    public function getList(array $fields = [], array $filterGenres = [], array $filterStudios = []){
+        $relations = array_diff($fields, $this->startConditions()->getFillable());
+        $fields = array_diff($fields, $relations);
+        array_push($fields, 'anime_id', 'score');
+
+        $query = $this->startConditions()::with($relations);
+
+        if (!empty($filterGenres)){
+            array_push($relations, 'genres');
+            foreach ($filterGenres as $genre){
+                $query->whereHas('genres', function ($query) use ($genre) {
+                $query->where('nameEn', '=', $genre);
+                });
+            }
+        }
+
+        if (!empty($filterStudios)){
+            array_push($relations, 'studios');
+            foreach ($filterStudios as $studio){
+                $query->whereHas('studios', function ($query) use ($studio) {
+                    $query->where('name', '=', $studio);
+                });
+            }
+        }
+
+        return $query->select($fields);
     }
 
     public function whereGenre($genre){
@@ -41,6 +66,7 @@ class AnimeRepository extends BaseRepository
         return $this->startConditions()->find($id);
     }
 
+    
     public function allRelations(): \Illuminate\Database\Eloquent\Builder
     {
         return $this->startConditions()->with(['genres', 'staff', 'characters', 'studios', 'score']);

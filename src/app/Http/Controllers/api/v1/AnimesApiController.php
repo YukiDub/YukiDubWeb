@@ -75,10 +75,15 @@ class AnimesApiController extends ApiController
     public function index(AnimeRequest $request): AnimeCollection
     {
         $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+        $fields = $request->get('fields');
 
         return new AnimeCollection(
             $this->animeRepo
-                ->allRelations()
+                ->getList(
+                    $fields,
+                    $request->get('genres') ? $request->get('genres') : [],
+                    $request->get('genres') ? $request->get('studios') : []
+                )
                 ->paginate($perPage)
         );
     }

@@ -72,6 +72,7 @@ class Anime extends Model
     public $timestamps = false;
 
     public $fillable =[
+        'anime_id',
         'mal_id',
         'shiki_score',
         "poster_url",
