@@ -10,9 +10,6 @@ use App\Http\Controllers\api\v1\GenresApiController;
 use App\Http\Controllers\api\v1\PeopleApiController;
 use App\Http\Controllers\api\v1\RoleController;
 use App\Http\Controllers\api\v1\UsersApiController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,18 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix("v1")->group(function (){
     Route::apiResource('users', UsersApiController::class);
-
 
     Route::apiResource("people", PeopleApiController::class)->only(['index', 'show']);
     Route::apiResource("people", PeopleApiController::class)->only(['store', 'update', 'destroy'])
     ->middleware('auth:api');
-
 
     Route::get('people/{id}/changes', [PeopleApiController::class, "changes"]);
     Route::get('people/{id}/works', [PeopleApiController::class, "getWorks"]);
@@ -47,9 +38,14 @@ Route::prefix("v1")->group(function (){
     Route::delete('people/{peopleId}/roles/', [PeopleApiController::class, 'removeRole']);
 
     Route::apiResource("genres", GenresApiController::class)->only(['index', 'show']);
-    Route::apiResource("anime", AnimesApiController::class);
-    Route::apiResource("roles", RoleController::class);
 
+    Route::apiResource("anime", AnimesApiController::class)->only(['index', 'show']);
+    Route::apiResource("anime", AnimesApiController::class)->only(['store', 'update', 'destroy'])
+    ->middleware('auth:api');
+    Route::post('anime/{id}/vote', [AnimesApiController::class, 'vote'])->middleware('auth:api');
+    Route::post('anime/{id}/score', [AnimesApiController::class, 'getScore']);
+
+    Route::apiResource("roles", RoleController::class);
 
     Route::prefix('auth')->group(function (){
         Route::post('register', [RegisterController::class, 'register']);

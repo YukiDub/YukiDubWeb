@@ -45,12 +45,27 @@
                         }
                     },
                     {
-                        "name": "genre",
+                        "name": "genres",
                         "in": "query",
-                        "description": "genre",
+                        "description": "genres",
                         "required": false,
                         "schema": {
-                            "type": "int"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "studios",
+                        "in": "query",
+                        "description": "studios",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         }
                     }
                 ],
@@ -124,7 +139,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "The people id",
+                        "description": "the anime id",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -157,6 +172,102 @@
                         "Authorization": []
                     }
                 ]
+            }
+        },
+        "/anime/{id}/vote": {
+            "post": {
+                "tags": [
+                    "Anime"
+                ],
+                "summary": "Sending vote",
+                "operationId": "e79861431504a27a7bbba71e778984bb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the anime id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "vote",
+                        "in": "query",
+                        "description": "vote field",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "sended",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "anime not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/anime/{id}/score": {
+            "get": {
+                "tags": [
+                    "Anime"
+                ],
+                "summary": "Show score the anime",
+                "operationId": "0a10dd707d30869207c39ba5f74ef4da",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the anime id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "sended",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "anime not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/auth/login": {
@@ -930,6 +1041,20 @@
     },
     "components": {
         "schemas": {
+            "Genres": {
+                "title": "genre model",
+                "description": "Genre",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "The name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Comedy"
+                    }
+                },
+                "type": "object"
+            },
             "NotFoundRequest": {
                 "title": "UnprocessableEntityRequest",
                 "description": "UnprocessableEntityRequest",

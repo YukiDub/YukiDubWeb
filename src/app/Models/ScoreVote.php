@@ -30,4 +30,15 @@ use Illuminate\Database\Eloquent\Model;
 class ScoreVote extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'score_vote_id';
+    public $timestamps = true;
+
+    protected $fillable = [
+      'score_vote_id',
+      'user',
+      'rating',
+      'score_id',
+    ];
+
 }
