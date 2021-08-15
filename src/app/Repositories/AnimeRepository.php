@@ -8,9 +8,6 @@
 namespace App\Repositories;
 
 use App\Models\Anime;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class AnimeRepository extends BaseRepository
 {
@@ -23,13 +20,13 @@ class AnimeRepository extends BaseRepository
     /**
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getList(array $fields = [], array $filterGenres = [], array $filterStudios = []){
+    public function getList(array $fields = [], array $filterGenres = [], array $filterStudios = [], array $filterSeasons = []){
         $relations = array_diff($fields, $this->startConditions()->getFillable());
+        $primaryKey = $this->startConditions()->getKeyName();
         $fields = array_diff($fields, $relations);
-        array_push($fields, 'anime_id', 'score');
+        array_push($fields, 'anime_id');
 
         $query = $this->startConditions()::with($relations);
-
         if (!empty($filterGenres)){
             array_push($relations, 'genres');
             foreach ($filterGenres as $genre){
@@ -48,7 +45,7 @@ class AnimeRepository extends BaseRepository
             }
         }
 
-        return $query->select($fields);
+        return $query->select($fields)->join('scores', 'scores.score_id', '=', 'animes.score');
     }
 
     public function whereGenre($genre){
@@ -66,15 +63,24 @@ class AnimeRepository extends BaseRepository
         return $this->startConditions()->find($id);
     }
 
+    /**
+     * @param int|array $id
+     * @return mixed
+     */
+    public function getByIdAllRelations($id)
+    {
+        return $this->startConditions()->with(['genres', 'staff', 'characters', 'studios'])->find($id);
+    }
+
     
     public function allRelations(): \Illuminate\Database\Eloquent\Builder
     {
-        return $this->startConditions()->with(['genres', 'staff', 'characters', 'studios', 'score']);
+        return $this->startConditions()->with(['genres', 'staff', 'characters', 'studios']);
     }
 
     public function getByPeopleId(int $id){
         return $this->startConditions()
-            ->with(['genres', 'characters', 'studios', 'score'])
+            ->with(['genres', 'characters', 'studios', 'scoreInfo'])
             ->join('animes_staff', 'animes_staff.anime_id', '=', 'animes.anime_id')
             ->where('animes_staff.staff_id', '=', $id);
     }

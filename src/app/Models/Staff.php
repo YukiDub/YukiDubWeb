@@ -87,7 +87,7 @@ class Staff extends Model
     {
         return $this->belongsToMany(Anime::class, "animes_staff", "staff_id", "anime_id")
             ->join('scores', 'animes.score', '=', 'scores.score_id')
-            ->orderBy('scores.total', 'DESC')
+            // ->orderBy('scores.total', 'DESC')
             ->limit($count)
             ->get();
     }

@@ -28,8 +28,16 @@ class Score extends Model
     protected $primaryKey = 'score_id';
 
     protected $fillable = [
-      'count',
-      'total'
+      'rating'
     ];
+
+    protected $hidden = [
+        'score_id'
+    ];
+
     public $timestamps = false;
+
+    public function votes(){
+        return $this->hasMany(ScoreVote::class, 'score_id', 'score_id');
+    }
 }

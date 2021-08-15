@@ -5,9 +5,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -71,6 +71,11 @@ class Anime extends Model
     protected $primaryKey = "anime_id";
     public $timestamps = false;
 
+    protected $dates =[
+      'aired_on',
+      'released_on'
+    ];
+
     public $fillable =[
         'anime_id',
         'mal_id',
@@ -96,10 +101,8 @@ class Anime extends Model
         'description_ru_author',
         'description_ru_source',
         'description_en_source',
-        'description_jp_source',
-        "score"
+        'description_jp_source'
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -126,7 +129,6 @@ class Anime extends Model
         return $this->belongsToMany(Character::class, 'animes_characters', 'anime_id', 'character_id');
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -138,9 +140,12 @@ class Anime extends Model
     /**
      * @return HasOne
      */
-    public function score(): HasOne
+    public function scoreInfo(): HasOne
     {
-        return $this->hasOne(Score::class, 'score_id', 'score');
+        return $this->hasOne(Score::class, 'score_id', 'score')
+            ->leftJoin('score_votes', 'score_votes.score_id', '=', 'scores.score_id')
+            ->selectRaw('scores.*, count(score_votes.score_vote_id) as count_votes')
+            ->groupBy('scores.score_id');
     }
 
 }

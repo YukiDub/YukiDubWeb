@@ -6,14 +6,15 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\AnimeRequest;
+use App\Http\Requests\CreateAnimeRequest;
+use App\Http\Requests\SendVoteRequest;
 use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
 use App\Repositories\AnimeRepository;
+use App\Services\VoteService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class AnimesApiController extends ApiController
 {
@@ -22,6 +23,9 @@ class AnimesApiController extends ApiController
     public function __construct()
     {
         $this->animeRepo = new AnimeRepository();
+
+        $this->resource = AnimeResource::class;
+        parent::__construct();
     }
 
     /**
@@ -60,32 +64,47 @@ class AnimesApiController extends ApiController
      *     ),
      *
      *     @OA\Parameter(
-     *          name = "genre",
+     *          name = "genres",
      *          in = "query",
-     *          description = "genre",
+     *          description = "genres",
      *          required=false,
      *          @OA\Schema(
-     *             type="int"
+     *             type="array",
+     *             @OA\Items(
+     *                  type="string"
+     *              )
+     *         )
+     *     ),
+     *
+     *    @OA\Parameter(
+     *          name = "studios",
+     *          in = "query",
+     *          description = "studios",
+     *          required=false,
+     *          @OA\Schema(
+     *             type="array",
+     *             @OA\Items(
+     *                  type="string"
+     *              )
      *         )
      *     )
      * )
      *
      * @return AnimeCollection
      */
-    public function index(AnimeRequest $request): AnimeCollection
+    public function index(AnimeRequest $request)
     {
         $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
-        $fields = $request->get('fields');
 
-        return new AnimeCollection(
-            $this->animeRepo
-                ->getList(
-                    $fields,
-                    $request->get('genres') ? $request->get('genres') : [],
-                    $request->get('genres') ? $request->get('studios') : []
-                )
-                ->paginate($perPage)
-        );
+        $data = $this->animeRepo
+            ->getList(
+                $request->get("fields") ? $request->get('fields') : [],
+                $request->get('genres') ? $request->get('genres') : [],
+                $request->get('studios') ? $request->get('studios') : [],
+                $request->get('seasons') ? $request->get('seasons') : []
+            )
+            ->paginate($perPage);
+        return $this->response->withCollection($data);
     }
 
     /**
@@ -94,9 +113,22 @@ class AnimesApiController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAnimeRequest $request)
     {
-        //
+        //if(!$this->aired_on){
+        //    return null;
+        //}
+
+        //$date = (Carbon::make($this->aired_on))->format('z');
+        //if($date < 80 || $date > 356){
+        //    return 'Winter';
+        //}
+        //if($date < 173){
+        //    return 'Spring';
+        //}
+        //if($date < 266){
+        //    return 'Summer';
+        //}
     }
 
     /**
@@ -130,13 +162,13 @@ class AnimesApiController extends ApiController
      * )
      *
      * @param  int  $id
-     * @return AnimeResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        $this->recordExists($anime = $this->animeRepo->getById($id));
+        $this->recordExists($anime = $this->animeRepo->getByIdAllRelations($id));
 
-        return AnimeResource::make($anime);
+        return $this->response->withItem($anime);
     }
 
     /**
@@ -176,7 +208,7 @@ class AnimesApiController extends ApiController
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="The people id",
+     *         description="the anime id",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",
@@ -185,13 +217,136 @@ class AnimesApiController extends ApiController
      * )
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): \Illuminate\Http\Response
+    public function destroy($id): \Illuminate\Http\JsonResponse
     {
         $this->recordExists($anime = Anime::find($id));
         $anime->delete();
 
-        return response(null, 204);
+        return $this->response->withNoContent();
+    }
+
+
+    /** Sending vote
+     *  @OA\Post  (
+     *  path="/anime/{id}/vote",
+     *  tags = {"Anime"},
+     *  security={
+     *    {"Authorization": {   }},
+     *  },
+     *  @OA\Response(
+     *          response=201,
+     *          description="sended",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *  @OA\Response(
+     *       response="404",
+     *       description="anime not found",
+     *       @OA\JsonContent(
+     *           type="array",
+     *           @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *       )
+     *   ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="the anime id",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="integer",
+     *      )
+     *  ),
+     *  @OA\Parameter(
+     *      name="vote",
+     *      in="query",
+     *      description="vote field",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="integer",
+     *      )
+     *  )
+     * )
+     * Sending vote
+     * @param $id
+     * @param SendVoteRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     */
+    public function vote($id, SendVoteRequest $request){
+        $this->recordExists($anime = Anime::find($id));
+
+        if($request->user()->cannot('createVote', $anime)){
+            return $this->response->withForbidden(['Access denied']);
+        };
+
+        $voteService = new VoteService();
+        $status = $voteService->createVote(Auth()->user()->id, $request->get('vote'), $anime->score);
+
+        return $this->response->json(['status'=>$status]);
+    }
+
+    /** Show score the anime
+     *
+     *  @OA\Get  (
+     *  path="/anime/{id}/score",
+     *  tags = {"Anime"},
+     *  @OA\Response(
+     *          response=201,
+     *          description="sended",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *  @OA\Response(
+     *       response="404",
+     *       description="anime not found",
+     *       @OA\JsonContent(
+     *           type="array",
+     *           @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *       )
+     *   ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="the anime id",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="integer",
+     *      )
+     *  )
+     * )
+     * @return array
+     */
+    public function getScore($id): array
+    {
+        $this->recordExists($anime = Anime::find($id));
+        $score = $this->scoreRepo;
+
+        return [
+            'score'=>[
+                'total'=>8,
+                'count'=>2,
+            ],
+            'votes'=>
+                [
+                    [
+                        'user'=>[
+                            'id'=>1,
+                            'name'=>'Admin'
+                        ],
+                        'score'=>8,
+                        'created_at'=>'..',
+                        'updated_at'=>'..'
+                    ],
+
+                    [
+                        'user'=>[
+                            'id'=>1,
+                            'name'=>'test123'
+                        ],
+                        'score'=>8,
+                        'created_at'=>'..',
+                        'updated_at'=>'..'
+                    ],
+                ]
+        ];
     }
 }

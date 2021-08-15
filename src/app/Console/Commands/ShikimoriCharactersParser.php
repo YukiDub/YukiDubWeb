@@ -6,6 +6,7 @@ use App\Models\Character;
 use App\Models\Staff;
 use App\Services\ShikimoriService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Date;
 
 class ShikimoriCharactersParser extends Command
 {

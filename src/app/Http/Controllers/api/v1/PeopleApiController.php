@@ -11,7 +11,7 @@ use App\Http\Requests\PeopleAnimesRequest;
 use App\Http\Requests\PeopleIndexRequest;
 use App\Http\Requests\StaffUpdateRequest;
 use App\Http\Resources\AnimeCollection;
-use App\Http\Resources\PeopleCollection;
+use App\Http\Resources\AnimeResource;
 use App\Http\Resources\PeopleResource;
 use App\Http\Resources\RoleResource;
 use App\Models\Staff;
@@ -22,9 +22,7 @@ use App\Services\HistoryService;
 use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PeopleApiController extends ApiController
 {
@@ -39,6 +37,8 @@ class PeopleApiController extends ApiController
         $this->peopleRolesRepo = new GenresRepository();
         $this->animeRepo = new AnimeRepository();
         $this->historyService = new HistoryService();
+        $this->resource = PeopleResource::class;
+        parent::__construct();
     }
 
     /**
@@ -99,7 +99,7 @@ class PeopleApiController extends ApiController
             $peopleRepository->setRole($request->get("role"));
         }
 
-        return new PeopleCollection($peopleRepository->getList($perPage));
+        return $this->response->withCollection($peopleRepository->getList($perPage));
     }
 
     /**
@@ -213,7 +213,7 @@ class PeopleApiController extends ApiController
     public function store(StaffCreateRequest $request): JsonResponse
     {
         if($request->user()->cannot('create', Staff::class)){
-            return response()->json(['status'=>403, 'message'=>'Access denied'], 403);
+            return $this->response->withBadRequest('Access denied');
         };
 
         $people = new Staff();
@@ -232,7 +232,7 @@ class PeopleApiController extends ApiController
             $people
         );
 
-        return response()->json(["data"=>new PeopleResource($people), "status"=>"created"], 201);
+        return $this->response->withNoContent();
     }
 
     /**
@@ -253,14 +253,14 @@ class PeopleApiController extends ApiController
      *     )
      * )
      * @param  int  $id
-     * @return PeopleResource
+     * @return JsonResponse
      */
-    public function show(int $id): PeopleResource
+    public function show(int $id): JsonResponse
     {
         $repository = $this->peopleRepo;
         $this->recordExists($people = $repository->getById($id));
 
-        return new PeopleResource($people);
+        return $this->response->withItem($people);
     }
 
     /**
@@ -309,7 +309,7 @@ class PeopleApiController extends ApiController
         $moderate = true;
 
         if(!$people->isDirty()){
-            throw new BadRequestHttpException('There were no changes');
+            return $this->response->withBadRequest('There were no changes');
         }
 
         if(!$request->user()->cannot('update', $people)){
@@ -327,16 +327,16 @@ class PeopleApiController extends ApiController
         );
 
         if($moderate){
-            return response()->json(['status'=>'Sent for moderation'], 200);
+            return $this->response->json(['status'=>'Sent for moderation']);
         }
-        return response()->json(new PeopleResource($people), 200);
+        return $this->response->withItem($people);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return JsonResponse
      *
      * @OA\Delete  (
      *     path="/people/{id}",
@@ -360,14 +360,14 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function destroy(int $id): Response
+    public function destroy(int $id): JsonResponse
     {
         $this->recordExists($people = Staff::find($id));
         $peopleData = $people->getAttributes();
         $people->first()->delete();
 
         $this->historyService->removeAction($peopleData, Auth::user()->id, 'Staff removal');
-        return response(null, 204);
+        return $this->response->withNoContent();
     }
 
     /**
@@ -401,8 +401,7 @@ class PeopleApiController extends ApiController
     public function changes($id): JsonResponse
     {
         $this->recordExists($changes = $this->peopleRepo->getChangesById($id));
-
-        return response()->json($changes, 200);
+        return $this->response->json($changes);
     }
 
     /**
@@ -435,9 +434,10 @@ class PeopleApiController extends ApiController
      */
     public function getWorks(int $id){
         $this->recordExists($people = $this->peopleRepo->getById($id));
+        $animeCollection = $this->response->setResource(AnimeResource::class)->withCollection($people->popularAnimes());
 
         $data = [
-            'animes'=>new AnimeCollection($people->popularAnimes()), //надо будет выводить только самые топовые анимехи (т.е сортировать по рейтингу)
+            'animes'=>$animeCollection, //надо будет выводить только самые топовые анимехи (т.е сортировать по рейтингу)
             'mangas'=>[
                 '..'
             ],
@@ -449,7 +449,7 @@ class PeopleApiController extends ApiController
             ]
         ];
 
-        return response()->json($data,201);
+        return $this->response->json($data);
     }
 
     /**
@@ -488,11 +488,12 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function getAnime(PeopleAnimesRequest $request,int $id): AnimeCollection
+    public function getAnime(PeopleAnimesRequest $request,int $id)
     {
         $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+        $data = $this->animeRepo->getByPeopleId($id)->paginate($perPage);
 
-        return new AnimeCollection($this->animeRepo->getByPeopleId($id)->paginate($perPage));
+        return $this->response->setResource(AnimeResource::class)->withCollection($data);
     }
 
     /**
