@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Anime;
 use App\Models\Staff;
+use App\Policies\AnimePolicy;
 use App\Policies\StaffPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Staff::class => StaffPolicy::class
+        Staff::class => StaffPolicy::class,
+        Anime::class => AnimePolicy::class
     ];
 
     /**

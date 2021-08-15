@@ -62,9 +62,18 @@ namespace App\Http\Controllers\api\v1;
  */
 
 use App\Http\Controllers\Controller;
+use App\Support\Response;
 
 class ApiController extends Controller
 {
+    protected $response;
+    protected $resource;
+
+    public function __construct()
+    {
+        $this->response = new Response(response(), $this->resource);
+    }
+
     protected function recordExists($record)
     {
         if(!$record){

@@ -19,6 +19,49 @@ class AnimeResource extends JsonResource
      */
     public function toArray($request)
     {
+        $scoreStats = [
+            [
+                "rating"=>1,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>2,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>3,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>4,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>5,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>6,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>7,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>8,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>9,
+                "count_votes"=>10,
+            ],
+            [
+                "rating"=>10,
+                "count_votes"=>10,
+            ],
+        ];
+
         return [
             'id'=>$this->anime_id,
             'mal_id'=>$this->when($this->mal_id, $this->mal_id),
@@ -29,6 +72,7 @@ class AnimeResource extends JsonResource
             "episodes_released"=>$this->when($this->episodes_released, $this->episodes_released),
             "next_episode_at"=>$this->when($this->next_episode_at, $this->next_episode_at),
             "episode_duration"=>$this->when($this->episode_duration, $this->episode_duration),
+            'season'=>$this->when($this->season, $this->season),
             "status"=>$this->when($this->status, $this->status),
             "aired_on"=> $this->when($this->aired_on, $this->aired_on),
             "released_on"=>$this->when($this->released_on, $this->released_on),
@@ -48,20 +92,9 @@ class AnimeResource extends JsonResource
             'genres'=> GenresResource::collection($this->whenLoaded('genres')),
             'staff'=> new PeopleCollection($this->whenLoaded('staff')),
             'characters'=> new CharactersCollection($this->whenLoaded('characters')),
-            'score'=> $this->score()->get(),
             'studios'=>AnimeStudiosResource::collection($this->whenLoaded('studios')),
-            'rates_scores_stats'=> [
-                1=>10,
-                2=>5,
-                3=>19,
-                4=>3,
-                5=>1,
-                6=>8,
-                7=>10,
-                8=>30,
-                9=>1352,
-                10=>4903,
-            ],
+            'score'=> $this->when($this->scoreInfo, $this->scoreInfo),
+            'scores_stats'=> $this->when($this->scoreInfo, $scoreStats),
             'anime_favoured' => false
         ];
     }
