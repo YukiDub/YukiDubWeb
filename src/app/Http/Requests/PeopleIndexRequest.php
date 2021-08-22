@@ -28,7 +28,8 @@ class PeopleIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            "perPage"=>"integer|min:1|max:100"
+            "perPage"=>"integer|min:1|max:100",
+            "role"=>"string|exists:staff_role,name"
         ];
     }
 }
