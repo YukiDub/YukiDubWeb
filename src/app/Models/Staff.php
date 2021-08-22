@@ -76,7 +76,9 @@ class Staff extends Model
      */
     public function changes(): BelongsToMany
     {
-        return $this->belongsToMany(ChangesHistory::class, "staff_changes", "staff_id", "change_id");
+        return $this->belongsToMany(ChangesHistory::class, "staff_changes", "staff_id", "change_id")
+            ->join('users', 'users.id', '=', 'changes_histories.user_id')
+            ->addSelect(['changes_histories.*', 'users.name as user_name']);
     }
 
     /**
@@ -92,4 +94,14 @@ class Staff extends Model
             ->get();
     }
 
+
+    public function getChanges(): \Illuminate\Database\Eloquent\Builder
+    {
+        return $this->with(['changes'=>function($query){
+            $query
+                ->join('users', 'users.id', '=', 'changes_histories.user_id')
+                ->addSelect(['changes_histories.*', 'users.name as user_name']);
+            }]);
+            //->find($id);
+    }
 }

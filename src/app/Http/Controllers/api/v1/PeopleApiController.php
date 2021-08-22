@@ -15,27 +15,17 @@ use App\Http\Resources\AnimeResource;
 use App\Http\Resources\PeopleResource;
 use App\Http\Resources\RoleResource;
 use App\Models\Staff;
-use App\Repositories\AnimeRepository;
-use App\Repositories\PeopleRepository;
-use App\Repositories\GenresRepository;
 use App\Services\HistoryService;
 use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class PeopleApiController extends ApiController
 {
-    protected $peopleRepo;
-    protected $peopleRolesRepo;
-    protected $animeRepo;
     protected $historyService;
 
     public function __construct()
     {
-        $this->peopleRepo = new PeopleRepository();
-        $this->peopleRolesRepo = new GenresRepository();
-        $this->animeRepo = new AnimeRepository();
         $this->historyService = new HistoryService();
         $this->resource = PeopleResource::class;
         parent::__construct();
@@ -89,17 +79,20 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function index(PeopleIndexRequest $request)
+    public function index(PeopleIndexRequest $request): \Illuminate\Http\Resources\Json\ResourceCollection
     {
-        $peopleRepository = $this->peopleRepo;
-
         $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+        $staff = (new Staff())::with('roles');
 
         if($request->get("role")){
-            $peopleRepository->setRole($request->get("role"));
+            $staff = $staff->whereHas('roles', function ($q) use ($request) {
+                $q->where("name", "=", $request->get("role"));
+            })->paginate($perPage);
+
+            return $this->response->withCollection($staff);
         }
 
-        return $this->response->withCollection($peopleRepository->getList($perPage));
+        return $this->response->withCollection($staff->paginate($perPage));
     }
 
     /**
@@ -257,8 +250,7 @@ class PeopleApiController extends ApiController
      */
     public function show(int $id): JsonResponse
     {
-        $repository = $this->peopleRepo;
-        $this->recordExists($people = $repository->getById($id));
+        $people = Staff::findOrFail($id);
 
         return $this->response->withItem($people);
     }
@@ -303,7 +295,7 @@ class PeopleApiController extends ApiController
      */
     public function update(StaffUpdateRequest $request, int $id): JsonResponse
     {
-        $this->recordExists($people = Staff::find($id));
+        $people = Staff::findOrFail($id);
         $afterAttributes = $people->getAttributes();
         $people->fill($request->all());
         $moderate = true;
@@ -362,9 +354,9 @@ class PeopleApiController extends ApiController
      */
     public function destroy(int $id): JsonResponse
     {
-        $this->recordExists($people = Staff::find($id));
+        $people = Staff::findOrFail($id);
         $peopleData = $people->getAttributes();
-        $people->first()->delete();
+        $people->delete();
 
         $this->historyService->removeAction($peopleData, Auth::user()->id, 'Staff removal');
         return $this->response->withNoContent();
@@ -398,10 +390,10 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function changes($id): JsonResponse
+    public function changes($id)
     {
-        $this->recordExists($changes = $this->peopleRepo->getChangesById($id));
-        return $this->response->json($changes);
+        $staff = Staff::findOrFail($id);
+        return $this->response->json($staff->changes);
     }
 
     /**
@@ -433,8 +425,8 @@ class PeopleApiController extends ApiController
      * )
      */
     public function getWorks(int $id){
-        $this->recordExists($people = $this->peopleRepo->getById($id));
-        $animeCollection = $this->response->setResource(AnimeResource::class)->withCollection($people->popularAnimes());
+        $staff = Staff::findOrFail($id);
+        $animeCollection = $this->response->setResource(AnimeResource::class)->withCollection($staff->popularAnimes());
 
         $data = [
             'animes'=>$animeCollection, //надо будет выводить только самые топовые анимехи (т.е сортировать по рейтингу)
@@ -455,7 +447,7 @@ class PeopleApiController extends ApiController
     /**
      * Display a listing of the anime list this person
      * @param $id
-     * @return AnimeCollection
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection
      * @OA\Get(
      *     path="/people/{id}/animes",
      *     tags = {"People"},
@@ -490,8 +482,9 @@ class PeopleApiController extends ApiController
      */
     public function getAnime(PeopleAnimesRequest $request,int $id)
     {
+        $staff = Staff::findOrFail($id);
         $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
-        $data = $this->animeRepo->getByPeopleId($id)->paginate($perPage);
+        $data = $staff->animes()->paginate($perPage);
 
         return $this->response->setResource(AnimeResource::class)->withCollection($data);
     }
@@ -532,7 +525,7 @@ class PeopleApiController extends ApiController
     /**
      * Display a listing of the roles this person
      * @param $id
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection
      * @OA\Get(
      *     path="/people/{id}/roles",
      *     tags = {"People"},
@@ -557,9 +550,9 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function getRoles(int $id): AnonymousResourceCollection
+    public function getRoles(int $id): \Illuminate\Http\Resources\Json\ResourceCollection
     {
-        $repository = $this->peopleRepo;
-        return RoleResource::collection($repository->getRoles($id));
+        $staff = Staff::findOrFail($id);
+        return $this->response->setResource(RoleResource::class)->withCollection($staff->roles);
     }
 }
