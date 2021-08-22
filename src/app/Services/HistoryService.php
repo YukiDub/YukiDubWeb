@@ -24,62 +24,59 @@ class HistoryService
     }
 
     /** Create adding history
-     * @param string $type
+     * @param string $action
      * @param string $status
      * @param int $userId
-     * @param Model|null $model
+     * @param Model $modelObject
      */
-    public function createAction(string $type, string $status, int $userId, Model $model)
+    public function createAction(string $action, string $status, int $userId, Model $modelObject)
     {
         $history = $this->model::firstOrCreate([
-            'action'=>$type,
+            'action'=>$action,
             'status'=>$status,
             'changes'=>null,
             'user_id'=>$userId
         ]);
-        $model->changes()->attach($history);
+        $modelObject->changes()->attach($history);
     }
 
     /** Create updating history
-     * @param string $type
+     * @param string $action
      * @param string $status
      * @param int $userId
-     * @param Model $model
-     * @param $after
-     * @param $newData
+     * @param Model $modelObject
      */
-    public function updateAction(string $type, string $status, int $userId, Model $model, $after , $newData)
+    public function updateAction(string $action, string $status, int $userId, Model $modelObject)
     {
         $before = new Staff();
-        $before->fill($model->getAttributes());
-        $before->fill($newData);
+        $before->fill($modelObject->getAttributes());
 
         $changes = array([
-            'after'=> $after,
+            'after'=> $modelObject->getOriginal(),
             'before'=> $before->getAttributes()
         ]);
 
-        $history = $this->model::firstOrCreate([
-            'action'=>$type,
-            'status'=>$status,
-            'changes'=>$newData ? $changes : null,
-            'user_id'=>$userId
-        ]);
+      $history = $this->model::firstOrCreate([
+          'action'=>$action,
+          'status'=>$status,
+          'changes'=>$changes,
+          'user_id'=>$userId
+      ]);
 
-        $history->save();
-        $model->changes()->attach($history);
+      $history->save();
+      $modelObject->changes()->attach($history);
     }
 
     /** Create removing history
-     * @param array $after
-     * @param int $userId
      * @param string $action
+     * @param Model $modelObject
+     * @param int $userId
      */
-    public function removeAction(array $after, int $userId, string $action)
+    public function removeAction(string $action, Model $modelObject, int $userId)
     {
         $changes = array([
-            'after'=> $after,
-            'before'=> []
+            'after'=> $modelObject->getOriginal(),
+            'before'=> null
         ]);
 
         $history = $this->model::firstOrCreate([
