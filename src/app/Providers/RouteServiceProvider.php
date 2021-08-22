@@ -2,14 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Anime;
 use App\Models\Staff;
+use App\Observers\AnimeObserver;
 use App\Observers\StaffObserver;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Passport;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -52,6 +53,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Staff::observe(StaffObserver::class);
+        Anime::observe(AnimeObserver::class);
     }
 
     /**
