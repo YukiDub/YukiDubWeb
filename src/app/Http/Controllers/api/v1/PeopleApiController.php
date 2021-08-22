@@ -218,13 +218,6 @@ class PeopleApiController extends ApiController
         }
         $people->save();
 
-        $this->historyService->createAction(
-            'Adding a new staff',
-            'accepted',
-            Auth::user()->id,
-            $people
-        );
-
         return $this->response->withNoContent();
     }
 
@@ -296,31 +289,24 @@ class PeopleApiController extends ApiController
     public function update(StaffUpdateRequest $request, int $id): JsonResponse
     {
         $people = Staff::findOrFail($id);
-        $afterAttributes = $people->getAttributes();
         $people->fill($request->all());
-        $moderate = true;
 
         if(!$people->isDirty()){
             return $this->response->withBadRequest('There were no changes');
         }
 
-        if(!$request->user()->cannot('update', $people)){
-            $moderate = false;
-            $people->update();
+        if($request->user()->cannot('update', $people)){
+            $this->historyService->updateAction(
+                'Staff update',
+                'moderate',
+                Auth::user()->id,
+                $people
+            );
+
+            return $this->response->json(['status'=>'Sent for moderation']);
         };
 
-        $this->historyService->updateAction(
-            'Staff update',
-            $moderate ? 'moderate' : 'accepted',
-            Auth::user()->id,
-            $people,
-            $afterAttributes,
-            $request->all(),
-        );
-
-        if($moderate){
-            return $this->response->json(['status'=>'Sent for moderation']);
-        }
+        $people->update();
         return $this->response->withItem($people);
     }
 
@@ -355,10 +341,8 @@ class PeopleApiController extends ApiController
     public function destroy(int $id): JsonResponse
     {
         $people = Staff::findOrFail($id);
-        $peopleData = $people->getAttributes();
         $people->delete();
 
-        $this->historyService->removeAction($peopleData, Auth::user()->id, 'Staff removal');
         return $this->response->withNoContent();
     }
 
