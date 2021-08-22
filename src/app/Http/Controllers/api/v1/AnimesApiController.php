@@ -9,21 +9,16 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Requests\AnimeRequest;
 use App\Http\Requests\CreateAnimeRequest;
 use App\Http\Requests\SendVoteRequest;
-use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
-use App\Repositories\AnimeRepository;
 use App\Services\VoteService;
 use Illuminate\Http\Request;
 
 class AnimesApiController extends ApiController
 {
-    protected $animeRepo;
 
     public function __construct()
     {
-        $this->animeRepo = new AnimeRepository();
-
         $this->resource = AnimeResource::class;
         parent::__construct();
     }
@@ -90,21 +85,23 @@ class AnimesApiController extends ApiController
      *     )
      * )
      *
-     * @return AnimeCollection
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection
      */
-    public function index(AnimeRequest $request)
+    public function index(AnimeRequest $request): \Illuminate\Http\Resources\Json\ResourceCollection
     {
-        $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+        $fields = $request->get("fields") ?? ['name_en', 'name_jp', 'name_ru'];
+        $relations = $request->get("relations") ?? ['studios', 'genres'];
+        $perPage = $request->get("perPage") ?? 6;
 
-        $data = $this->animeRepo
-            ->getList(
-                $request->get("fields") ? $request->get('fields') : [],
-                $request->get('genres') ? $request->get('genres') : [],
-                $request->get('studios') ? $request->get('studios') : [],
-                $request->get('seasons') ? $request->get('seasons') : []
-            )
-            ->paginate($perPage);
-        return $this->response->withCollection($data);
+        $anime = Anime::with($relations) // разобраться с выводом scores
+            ->ofGenres($request->get("genres") ?? [])
+            ->ofStudios($request->get("studios") ?? [])
+            ->fields($request->get("fields") ?? ['*'])
+            ->ofOrders($request->get("orders") ?? [])
+            ->ofStatus($request->get("status"))
+            ->ofAgeRating($request->get("rating"));
+
+        return $this->response->withCollection($anime->paginate($perPage));
     }
 
     /**
@@ -164,9 +161,9 @@ class AnimesApiController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($id): \Illuminate\Http\JsonResponse
     {
-        $this->recordExists($anime = $this->animeRepo->getByIdAllRelations($id));
+        $anime = Anime::findOrFail($id);
 
         return $this->response->withItem($anime);
     }
@@ -221,9 +218,10 @@ class AnimesApiController extends ApiController
      */
     public function destroy($id): \Illuminate\Http\JsonResponse
     {
-        $this->recordExists($anime = Anime::find($id));
+        $anime = Anime::findOrFail($id);
         $anime->delete();
 
+        //ДОБАВИТЬ ИСТОРИЮ УДАЛЕНИЯ
         return $this->response->withNoContent();
     }
 
@@ -273,7 +271,7 @@ class AnimesApiController extends ApiController
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function vote($id, SendVoteRequest $request){
-        $this->recordExists($anime = Anime::find($id));
+        $anime = Anime::findOrFail($id);
 
         if($request->user()->cannot('createVote', $anime)){
             return $this->response->withForbidden(['Access denied']);
@@ -317,8 +315,8 @@ class AnimesApiController extends ApiController
      */
     public function getScore($id): array
     {
-        $this->recordExists($anime = Anime::find($id));
-        $score = $this->scoreRepo;
+        $anime = Anime::findOrFail($id);
+        //$score = $this->scoreRepo;
 
         return [
             'score'=>[

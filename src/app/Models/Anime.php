@@ -76,6 +76,8 @@ class Anime extends Model
       'released_on'
     ];
 
+    protected $relations = ['genres', 'staff', 'characters', 'studios'];
+
     public $fillable =[
         'anime_id',
         'mal_id',
@@ -146,6 +148,56 @@ class Anime extends Model
             ->leftJoin('score_votes', 'score_votes.score_id', '=', 'scores.score_id')
             ->selectRaw('scores.*, count(score_votes.score_vote_id) as count_votes')
             ->groupBy('scores.score_id');
+    }
+
+    /**
+     * @param $query
+     * @param array $genres
+     * @return mixed
+     */
+    public function scopeOfGenres($query, array $genres = []){
+        foreach ($genres as $genre){
+            $query->with('genres')->whereHas('genres', function ($query) use ($genre) {
+                $query->where('nameEn', '=', $genre);
+            });
+        }
+        return $query;
+    }
+
+    public function scopeOfStudios($query, array $studios = []){
+        foreach ($studios as $studio){
+            $query->with('studios')->whereHas('studios', function ($query) use ($studio) {
+                $query->where('name', '=', $studio);
+            });
+        }
+        return $query;
+    }
+
+    public function scopeOfStatus($query, string $status = null){
+        if($status){
+            $query->where('status', '=', $status);
+        }
+        return $query;
+    }
+
+    public function scopeOfAgeRating($query, string $rating = null){
+        if($rating){
+            $query->where('age_rating', '=', $rating);
+        }
+        return $query;
+    }
+
+    public function scopeFields($query, array $fields = ['*']){
+        array_push($fields, $this->getKeyName());
+        return $query->select($fields);
+    }
+
+
+    public function scopeOfOrders($query, array $orders = []){
+        foreach ($orders as $name=>$order){
+            $query->orderBy($name, $order);
+        }
+        return $query;
     }
 
 }

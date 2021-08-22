@@ -6,7 +6,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Anime;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AnimeRequest extends FormRequest
 {
@@ -32,12 +34,23 @@ class AnimeRequest extends FormRequest
                 return [
                     'perPage'=>'integer|max:100|min:1',
                     'fields'=>'array',
-                    'fields.*'=>'string',
+                    'fields.*'=>[
+                        'string',
+                        Rule::in((new Anime())->getFillable())
+                    ],
                     'genres'=>'array',
                     'genres.*'=>'string|exists:genres,nameEn',
                     'studios'=>'array',
-                    'studios.*'=>'string|exists:anime_studios,name'
-                ];
+                    'studios.*'=>'string|exists:anime_studios,name',
+                    'status'=>'string|in:ongoing,released,announced',
+                    'episodes'=>'integer',
+                    'episodes_released'=>'integer',
+                    'episode_duration'=>'string',
+                    'age_rating'=>'string|in:g,pg,pg_13,r,r+,rx',
+                    'orders'=>'array',
+                    'orders.*'=>'string',
+                    'orders.*.*'=>'required|in:ASC,DESC'
+                        ];
                 break;
             case 'POST':
                 return [

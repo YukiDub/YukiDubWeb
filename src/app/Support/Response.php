@@ -55,10 +55,9 @@ class Response
     }
 
     /**
-     * Collection.
-     *
+     * return collection.
      */
-    public function withCollection($data)
+    public function withCollection($data): Collection
     {
         return ($this->resource::collection($data));
     }
