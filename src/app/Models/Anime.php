@@ -81,6 +81,7 @@ class Anime extends Model
     public $fillable =[
         'anime_id',
         'mal_id',
+        'score',
         'shiki_score',
         "poster_url",
         "type",

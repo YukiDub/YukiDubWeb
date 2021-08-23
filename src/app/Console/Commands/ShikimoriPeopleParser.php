@@ -38,12 +38,12 @@ class ShikimoriPeopleParser extends Command
                 $peopleParse = $shikiService->getPeopleById($i);
                 $this->alert('parsing new people');
                 $staff->firstOrCreate([
-                    'malId'=>$peopleParse['id'],
-                    'nameJp'=>$peopleParse['japanese'],
-                    'nameEn'=>$peopleParse['name'] ? $peopleParse['name'] : null,
-                    'nameRu'=>$peopleParse['russian'] ? $peopleParse['russian'] : null,
+                    'mal_id'=>$peopleParse['id'],
+                    'name_jp'=>$peopleParse['japanese'],
+                    'name_en'=>$peopleParse['name'] ? $peopleParse['name'] : null,
+                    'name_ru'=>$peopleParse['russian'] ? $peopleParse['russian'] : null,
                     'birthday'=>$peopleParse['birthday'] ? $peopleParse['birthday'] : null,
-                    'webSite'=>$peopleParse['website'] ? $peopleParse['website'] : null
+                    'website'=>$peopleParse['website'] ? $peopleParse['website'] : null
                 ]);
                 sleep(rand(120,340));
                 $this->alert("sleeping");
