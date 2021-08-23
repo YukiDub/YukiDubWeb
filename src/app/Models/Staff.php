@@ -114,7 +114,6 @@ class Staff extends Model
                 $q->where("name", "=", $roleName);
             });
         }
-
        return $query;
    }
 }
