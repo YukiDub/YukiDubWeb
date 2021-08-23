@@ -22,9 +22,11 @@ class StaffObserver
      */
     public function created(Staff $staff)
     {
-        $user = \Auth::user();
-        $this->historyService
-            ->createAction('staff created', 'accepted', $user->id, $staff);
+        if (\Auth::check()){
+            $user = \Auth::user();
+            $this->historyService
+                ->createAction('staff created', 'accepted', $user->id, $staff);
+        }
     }
 
     /**
@@ -35,9 +37,11 @@ class StaffObserver
      */
     public function updated(Staff $staff)
     {
-        $user = \Auth::user();
-        $this->historyService
-            ->updateAction('staff updated', 'accepted', $user->id, $staff);
+        if (\Auth::check()){
+            $user = \Auth::user();
+            $this->historyService
+                ->updateAction('staff updated', 'accepted', $user->id, $staff);
+        }
     }
 
     /**
@@ -48,8 +52,10 @@ class StaffObserver
      */
     public function deleted(Staff $staff)
     {
-       $user = \Auth::user();
-       $this->historyService
-           ->removeAction('staff removed', $staff, $user->id);
+        if (\Auth::check()){
+            $user = \Auth::user();
+            $this->historyService
+                ->removeAction('staff removed', $staff, $user->id);
+        }
     }
 }

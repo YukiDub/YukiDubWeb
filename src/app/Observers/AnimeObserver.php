@@ -22,9 +22,11 @@ class AnimeObserver
      */
     public function created(Anime $anime)
     {
-        $user = \Auth::user();
-        $this->historyService
-            ->createAction('anime created', 'accepted', $user->id, $anime);
+        if (\Auth::check()){
+            $user = \Auth::user();
+            $this->historyService
+                ->createAction('anime created', 'accepted', $user->id, $anime);
+        }
     }
 
     /**
@@ -35,9 +37,11 @@ class AnimeObserver
      */
     public function updated(Anime $anime)
     {
-        $user = \Auth::user();
-        $this->historyService
-            ->updateAction('anime updated', 'accepted', $user->id, $anime);
+        if (\Auth::check()){
+            $user = \Auth::user();
+            $this->historyService
+                ->updateAction('anime updated', 'accepted', $user->id, $anime);
+        }
     }
 
     /**
@@ -48,8 +52,10 @@ class AnimeObserver
      */
     public function deleted(Anime $anime)
     {
-        $user = \Auth::user();
-        $this->historyService
-            ->removeAction('anime removed', $anime, $user->id);
+        if (\Auth::check()){
+            $user = \Auth::user();
+            $this->historyService
+                ->removeAction('anime removed', $anime, $user->id);
+        }
     }
 }
