@@ -26,14 +26,14 @@ class PeopleResource extends JsonResource
           "name_ru"=>$this->name_ru,
           "birthday"=>$this->birthday,
           "website"=>$this->website,
-          "roles"=>$this->roles,
+          "roles"=>RoleResource::collection($this->whenLoaded('roles')),
           "images"=>[
               'original'=>$this->avatar_original,
               'preview'=>$this->avatar_preview,
               'x94'=>$this->avatar_x96,
               'x48'=>$this->avatar_x48
           ],
-          "animes"=>$this->when($this->animes, AnimeCollection::make($this->animes)),
+          "animes"=>AnimeCollection::make($this->whenLoaded('animes')),
           "person_favoured"=>false,
           "topic_id"=>"не реализовано"
         ];
