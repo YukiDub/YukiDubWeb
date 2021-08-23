@@ -18,19 +18,6 @@ class PeopleResource extends JsonResource
      */
     public function toArray($request)
     {
-        if($this->avatarExtention){
-            $images = [
-                "original"=> "/storage/images/peoples/" . $this->staff_id . "_original." . $this->avatarExtention,
-                "preview"=> "/storage/images/peoples/" . $this->staff_id . "_preview." . $this->avatarExtention,
-            ];
-        }
-        else{
-            $images = [
-                "original"=> "/storage/images/peoples/default_original.png",
-                "preview"=> "/storage/images/peoples/default_preview.png",
-            ];
-        }
-
         return [
           "staff_id"=>$this->staff_id,
           "nameJp"=>$this->nameJp,
@@ -39,7 +26,12 @@ class PeopleResource extends JsonResource
           "birthday"=>$this->birthday,
           "webSite"=>$this->webSite,
           "roles"=>$this->roles,
-          "image"=>$images,
+          "images"=>[
+              'original'=>$this->avatar_original,
+              'preview'=>$this->avatar_preview,
+              'x94'=>$this->avatar_x96,
+              'x48'=>$this->avatar_x48
+          ],
           "person_favoured"=>false,
           "topic_id"=>"не реализовано"
         ];
