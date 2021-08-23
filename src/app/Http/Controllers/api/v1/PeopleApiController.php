@@ -16,9 +16,7 @@ use App\Http\Resources\AnimeResource;
 use App\Http\Resources\PeopleResource;
 use App\Http\Resources\RoleResource;
 use App\Models\Staff;
-use App\Providers\ImagesServiceProvider;
 use App\Services\HistoryService;
-use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,20 +79,13 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function index(PeopleIndexRequest $request): \Illuminate\Http\Resources\Json\ResourceCollection
+    public function index(PeopleIndexRequest $request)
     {
         $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
         $staff = (new Staff())::with('roles');
 
-        if($request->get("role")){
-            $staff = $staff->whereHas('roles', function ($q) use ($request) {
-                $q->where("name", "=", $request->get("role"));
-            })->paginate($perPage);
-
-            return $this->response->withCollection($staff);
-        }
-
-        return $this->response->withCollection($staff->paginate($perPage));
+        $staff = $staff->ofRole($request->get("role"))->paginate($perPage);
+        return $this->response->withCollection($staff);
     }
 
     /**
@@ -252,9 +243,9 @@ class PeopleApiController extends ApiController
      * @param  int  $id
      * @return JsonResponse
      */
-    public function show(int $id): JsonResponse
+    public function show(int $id)
     {
-        $people = Staff::findOrFail($id);
+        $people = Staff::with('animes')->findOrFail($id);
 
         return $this->response->withItem($people);
     }

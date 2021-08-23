@@ -20,11 +20,12 @@ class PeopleResource extends JsonResource
     {
         return [
           "staff_id"=>$this->staff_id,
-          "nameJp"=>$this->nameJp,
-          "nameEn"=>$this->nameEn,
-          "nameRu"=>$this->nameRu,
+          'mal_id'=>$this->staff_id,
+          "name_jp"=>$this->name_jp,
+          "name_en"=>$this->name_en,
+          "name_ru"=>$this->name_ru,
           "birthday"=>$this->birthday,
-          "webSite"=>$this->webSite,
+          "website"=>$this->website,
           "roles"=>$this->roles,
           "images"=>[
               'original'=>$this->avatar_original,
@@ -32,6 +33,7 @@ class PeopleResource extends JsonResource
               'x94'=>$this->avatar_x96,
               'x48'=>$this->avatar_x48
           ],
+          "animes"=>$this->when($this->animes, AnimeCollection::make($this->animes)),
           "person_favoured"=>false,
           "topic_id"=>"не реализовано"
         ];
