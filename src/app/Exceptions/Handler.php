@@ -55,6 +55,10 @@ class Handler extends ExceptionHandler
             $this->renderable(function (BadRequestHttpException $e, $request){
                 return response()->json(['status'=>403, 'message'=>$e->getMessage()], 403);
             });
+
+            $this->renderable(function (ImageException $e, $request){
+                return response()->json(['status'=>403, 'message'=>$e->getMessage()], 403);
+            });
         }
     }
 }
