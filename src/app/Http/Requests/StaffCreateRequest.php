@@ -24,19 +24,19 @@ class StaffCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "nameJp"=>[
+            "name_jp"=>[
                 "required",
                 "string",
                 "min:2",
                 "max:24"
             ],
-            "nameEn"=>[
+            "name_en"=>[
                 "required",
                 "string",
                 "min:2",
                 "max:30"
             ],
-            "nameRu"=>[
+            "name_ru"=>[
                 "string",
                 "min:2",
                 "max:30"
@@ -45,7 +45,7 @@ class StaffCreateRequest extends FormRequest
                 "date",
                 "date_format:Y-m-d"
             ],
-            "webSite"=>[
+            "web_site"=>[
                 "max:255",
                 "url"
             ],

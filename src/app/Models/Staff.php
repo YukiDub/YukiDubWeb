@@ -45,13 +45,16 @@ class Staff extends Model
     protected $hidden = ['pivot'];
 
     protected $fillable = [
-        "nameJp",
-        "nameEn",
-        "nameRu",
-        "birthday",
-        "webSite",
-        "avatarExtention",
-        "malId"
+        'name_jp',
+        'name_en',
+        'name_ru',
+        'birthday',
+        'web_site',
+        'avatar_original',
+        'avatar_preview',
+        'avatar_x96',
+        'avatar_x48',
+        'malId'
     ];
 
     /**

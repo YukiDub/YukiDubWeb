@@ -6,6 +6,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Facades\ImageService;
 use App\Http\Requests\StaffCreateRequest;
 use App\Http\Requests\PeopleAnimesRequest;
 use App\Http\Requests\PeopleIndexRequest;
@@ -15,6 +16,7 @@ use App\Http\Resources\AnimeResource;
 use App\Http\Resources\PeopleResource;
 use App\Http\Resources\RoleResource;
 use App\Models\Staff;
+use App\Providers\ImagesServiceProvider;
 use App\Services\HistoryService;
 use App\YukiDub\Images;
 use Illuminate\Http\JsonResponse;
@@ -213,8 +215,17 @@ class PeopleApiController extends ApiController
         $people->fill($request->validated());
 
         if($request->hasFile("avatar")){
-            $people->avatarExtention = $request->file("avatar")->getClientOriginalExtension();
-            Images::upload($request->file("avatar"), $people->staff_id, "/public/images/peoples/");
+            $imageName = $people->nameEn . "_" . \Str::random(20);
+            $previews = [
+              'preview'=>'154x240',
+              'x96'=>'96x150',
+              'x48'=>'48x75'
+            ];
+            $images = ImageService::setPreviews($previews)->upload($request->file('avatar'), $imageName, '/images/peoples/');
+            $people->avatar_original = $images['original'];
+            $people->avatar_preview = $images['preview'];
+            $people->avatar_x96 = $images['x96'];
+            $people->avatar_x48 = $images['x48'];
         }
         $people->save();
 
@@ -342,6 +353,14 @@ class PeopleApiController extends ApiController
     {
         $people = Staff::findOrFail($id);
         $people->delete();
+
+        $people = $people->getOriginal();
+        ImageService::remove(
+            $people['avatar_original'],
+            $people['avatar_preview'],
+            $people['avatar_x96'],
+            $people['avatar_x48'],
+        );
 
         return $this->response->withNoContent();
     }
