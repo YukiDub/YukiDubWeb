@@ -245,7 +245,7 @@ class PeopleApiController extends ApiController
      */
     public function show(int $id)
     {
-        $people = Staff::with('animes')->findOrFail($id);
+        $people = Staff::with('animes', 'roles')->findOrFail($id);
 
         return $this->response->withItem($people);
     }
