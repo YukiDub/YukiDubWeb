@@ -49,12 +49,12 @@ class Staff extends Model
         'name_en',
         'name_ru',
         'birthday',
-        'web_site',
+        'website',
         'avatar_original',
         'avatar_preview',
         'avatar_x96',
         'avatar_x48',
-        'malId'
+        'mal_id'
     ];
 
     /**
@@ -107,4 +107,14 @@ class Staff extends Model
             }]);
             //->find($id);
     }
+
+   public function scopeOfRole($query, string $roleName = null){
+        if($roleName){
+            $query->with('roles')->whereHas('roles', function ($q) use ($roleName) {
+                $q->where("name", "=", $roleName);
+            });
+        }
+
+       return $query;
+   }
 }
