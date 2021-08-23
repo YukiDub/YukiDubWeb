@@ -22,11 +22,11 @@ class StaffFactory extends Factory
     public function definition()
     {
         return [
-            'nameEn'=>$this->faker->name,
-            'nameJp'=>\Str::random(20),
-            'nameRu'=>\Str::random(20),
+            'name_en'=>$this->faker->name,
+            'name_jp'=>\Str::random(20),
+            'name_ru'=>\Str::random(20),
             'birthday'=>$this->faker->date(),
-            'webSite'=>\Str::random(69)
+            'web_site'=>\Str::random(69)
         ];
     }
 }
