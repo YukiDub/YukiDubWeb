@@ -18,7 +18,7 @@ class ImagesService
 
     public function upload($image, $name, $path){
         $extension = $image->getClientOriginalExtension();
-        if(!$origImage = Storage::disk($this->disk)->putFileAs($path, $image, $name . '.'. $extension)){
+        if(!$origImage = Storage::disk($this->disk)->putFileAs($path . '/original', $image, $name . '.'. $extension)){
             throw new ImageException('there was an error loading the image');
         }
 
@@ -32,7 +32,7 @@ class ImagesService
                 $size = explode('x', $preview);
                 $makeImage = $makeImage->resize($size[0], $size[1]);
 
-                $imagePath =  $path . $name . '_' . $previewName . '.' . $extension;
+                $imagePath =  $path . '/' . $previewName . '/' . $name . '.' . $extension;
                 Storage::disk($this->disk)->put($imagePath, $makeImage->save()->__toString());
 
                 $images[$previewName] = $imagePath;

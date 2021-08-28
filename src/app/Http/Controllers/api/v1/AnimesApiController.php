@@ -135,10 +135,10 @@ class AnimesApiController extends ApiController
                 '/images/animes/'
             );
 
-//            $people->avatar_original = $images['original'];
-//            $people->avatar_preview = $images['preview'];
-//            $people->avatar_x96 = $images['x96'];
-//            $people->avatar_x48 = $images['x48'];
+            $data['poster_original'] = $images['original'];
+            $data['poster_preview'] = $images['preview'];
+            $data['poster_x96'] = $images['x96'];
+            $data['poster_x48'] = $images['x48'];
         }
 
         Anime::firstOrCreate($data);
