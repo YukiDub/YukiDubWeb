@@ -274,4 +274,11 @@ class Anime extends Model
         return $query;
     }
 
+    public function changes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(ChangesHistory::class, "anime_changes", "anime_id", "change_id")
+            ->join('users', 'users.id', '=', 'changes_histories.user_id')
+            ->addSelect(['changes_histories.*', 'users.name as user_name']);
+    }
+
 }
