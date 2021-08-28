@@ -11,6 +11,7 @@ use App\Http\Requests\CreateAnimeRequest;
 use App\Http\Requests\SendVoteRequest;
 use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
+use App\Models\ScoreVote;
 use App\Services\VoteService;
 use Illuminate\Http\Request;
 
@@ -89,11 +90,10 @@ class AnimesApiController extends ApiController
      */
     public function index(AnimeRequest $request): \Illuminate\Http\Resources\Json\ResourceCollection
     {
-        $fields = $request->get("fields") ?? ['name_en', 'name_jp', 'name_ru'];
         $relations = $request->get("relations") ?? ['studios', 'genres'];
         $perPage = $request->get("perPage") ?? 6;
 
-        $anime = Anime::with($relations) // разобраться с выводом scores
+        $anime = Anime::with($relations)
             ->ofGenres($request->get("genres") ?? [])
             ->ofStudios($request->get("studios") ?? [])
             ->fields($request->get("fields") ?? ['*'])
@@ -161,11 +161,11 @@ class AnimesApiController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id): \Illuminate\Http\JsonResponse
+    public function show($id)
     {
-        $anime = Anime::with(['genres', 'studios', 'staff'])
-
-            ->findOrFail($id);
+        $anime = Anime::with(['genres', 'studios', 'staff', 'scoreInfo', 'characters'])
+            ->findOrFail($id)
+            ->scoreVotes();
 
         return $this->response->withItem($anime);
     }
@@ -223,7 +223,6 @@ class AnimesApiController extends ApiController
         $anime = Anime::findOrFail($id);
         $anime->delete();
 
-        //ДОБАВИТЬ ИСТОРИЮ УДАЛЕНИЯ
         return $this->response->withNoContent();
     }
 
@@ -283,70 +282,5 @@ class AnimesApiController extends ApiController
         $status = $voteService->createVote(Auth()->user()->id, $request->get('vote'), $anime->score);
 
         return $this->response->json(['status'=>$status]);
-    }
-
-    /** Show score the anime
-     *
-     *  @OA\Get  (
-     *  path="/anime/{id}/score",
-     *  tags = {"Anime"},
-     *  @OA\Response(
-     *          response=201,
-     *          description="sended",
-     *          @OA\MediaType(mediaType="application/json")
-     *     ),
-     *  @OA\Response(
-     *       response="404",
-     *       description="anime not found",
-     *       @OA\JsonContent(
-     *           type="array",
-     *           @OA\Items(ref="#/components/schemas/NotFoundRequest")
-     *       )
-     *   ),
-     *  @OA\Parameter(
-     *      name="id",
-     *      in="path",
-     *      description="the anime id",
-     *      required=true,
-     *      @OA\Schema(
-     *          type="integer",
-     *      )
-     *  )
-     * )
-     * @return array
-     */
-    public function getScore($id): array
-    {
-        $anime = Anime::findOrFail($id);
-        //$score = $this->scoreRepo;
-
-        return [
-            'score'=>[
-                'total'=>8,
-                'count'=>2,
-            ],
-            'votes'=>
-                [
-                    [
-                        'user'=>[
-                            'id'=>1,
-                            'name'=>'Admin'
-                        ],
-                        'score'=>8,
-                        'created_at'=>'..',
-                        'updated_at'=>'..'
-                    ],
-
-                    [
-                        'user'=>[
-                            'id'=>1,
-                            'name'=>'test123'
-                        ],
-                        'score'=>8,
-                        'created_at'=>'..',
-                        'updated_at'=>'..'
-                    ],
-                ]
-        ];
     }
 }
