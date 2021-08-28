@@ -5,6 +5,7 @@
 
 namespace App\Models;
 
+use App\Services\VoteService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -123,7 +124,8 @@ class Anime extends Model
      */
     public function staff(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Staff::class, 'animes_staff', 'anime_id', 'staff_id');
+        return $this->belongsToMany(Staff::class, 'animes_staff', 'anime_id', 'staff_id')
+            ->with('roles');
     }
 
 
@@ -152,6 +154,64 @@ class Anime extends Model
             ->leftJoin('score_votes', 'score_votes.score_id', '=', 'scores.score_id')
             ->selectRaw('scores.*, count(score_votes.score_vote_id) as count_votes')
             ->groupBy('scores.score_id');
+    }
+
+    public function scoreVotes()
+    {
+        $this->append('score_votes');
+        return $this;
+    }
+
+    public function getScoreVotesAttribute(){
+        $scores = ScoreVote::where('score_id', '=', $this->score)->get();
+        $data = [
+            1 =>[
+                "rating"=>1,
+                "count_votes"=>0,
+            ],
+            2=> [
+                "rating"=>2,
+                "count_votes"=>0,
+            ],
+            3=> [
+                "rating"=>3,
+                "count_votes"=>0,
+            ],
+            4=> [
+                "rating"=>4,
+                "count_votes"=>0,
+            ],
+            5=> [
+                "rating"=>5,
+                "count_votes"=>0,
+            ],
+            6=> [
+                "rating"=>6,
+                "count_votes"=>0,
+            ],
+            7=> [
+                "rating"=>7,
+                "count_votes"=>0,
+            ],
+            8=> [
+                "rating"=>8,
+                "count_votes"=>0,
+            ],
+            9=> [
+                "rating"=>9,
+                "count_votes"=>0,
+            ],
+            10=> [
+                "rating"=>10,
+                "count_votes"=>0,
+            ],
+        ];
+
+        foreach ($scores as $score){
+            $rating = $score->rating;
+            $data[$rating]['count_votes'] += 1;
+        }
+        return $data;
     }
 
     /**
