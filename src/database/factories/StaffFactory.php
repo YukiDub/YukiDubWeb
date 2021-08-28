@@ -26,7 +26,7 @@ class StaffFactory extends Factory
             'name_jp'=>\Str::random(20),
             'name_ru'=>\Str::random(20),
             'birthday'=>$this->faker->date(),
-            'web_site'=>\Str::random(69)
+            'website'=>\Str::random(69)
         ];
     }
 }
