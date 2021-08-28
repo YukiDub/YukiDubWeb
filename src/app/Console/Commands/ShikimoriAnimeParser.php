@@ -2,13 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Facades\ImageService;
 use App\Models\Anime;
 use App\Models\AnimeStudio;
 use App\Models\Genre;
 use App\Models\Score;
 use App\Services\ShikimoriService;
+use Faker\Provider\File;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class ShikimoriAnimeParser extends Command
 {
@@ -40,10 +42,18 @@ class ShikimoriAnimeParser extends Command
                 $this->alert('parsing new anime');
                 $score = Score::create();
 
+                $imageOriginalPath = 'https://shikimori.one' . $animeParse['image']['original'];
+                $imagePreviewPath = 'https://shikimori.one' . $animeParse['image']['preview'];
+                $imageX96Path = 'https://shikimori.one' . $animeParse['image']['x96'];
+                $imageX48nalPath = 'https://shikimori.one' . $animeParse['image']['x48'];
+
                 $anime = Anime::create([
                     'mal_id'=>$animeParse['id'],
                     'shiki_score'=>$animeParse['score'],
-                    //                    "posterUrl"=>$charactersParse['id'], // переделать...
+                    "poster_original"=>ImageService::remoteUpload($imageOriginalPath, 'images/animes/original'),
+                    "poster_preview"=>ImageService::remoteUpload($imagePreviewPath, 'images/animes/preview'),
+                    "poster_x96"=>ImageService::remoteUpload($imageX96Path, 'images/animes/x96'),
+                    "poster_x48"=>ImageService::remoteUpload($imageX48nalPath, 'images/animes/x48'),
                     "type"=>$animeParse['kind'],
                     "episodes"=>(int)$animeParse['episodes'] ? $animeParse['episodes'] : 0,
                     "episodes_released"=>(int)
@@ -75,9 +85,9 @@ class ShikimoriAnimeParser extends Command
                     $anime->genres()->attach($genre);
                 }
             }
-            catch (\Exception $ex){
+           catch (\Exception $ex){
 
-            }
+           }
                 sleep(rand(12,23));
                 $this->alert("sleeping");
         }

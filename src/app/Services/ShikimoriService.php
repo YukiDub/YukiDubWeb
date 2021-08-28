@@ -52,4 +52,8 @@ class ShikimoriService
         $path = 'animes/' . $id;
         return $this->collApi('get', $path);
     }
+
+    public function getUrl(){
+        return $this->url;
+    }
 }

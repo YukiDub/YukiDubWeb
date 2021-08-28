@@ -66,7 +66,12 @@ class AnimeResource extends JsonResource
             'id'=>$this->anime_id,
             'mal_id'=>$this->when($this->mal_id, $this->mal_id),
             'shiki_score'=>$this->when($this->shiki_score,$this->shiki_score),
-            "poster_url" => $this->when($this->poster_url,$this->poster_url),
+            "poster" => [
+                'original'=>$this->poster_original,
+                'preview'=>$this->poster_preview,
+                'x96'=>$this->poster_x96,
+                'x48'=>$this->poster_x48,
+            ],
             "type"=> $this->when($this->type,$this->type),
             "episodes"=>$this->when($this->episodes,$this->episodes),
             "episodes_released"=>$this->when($this->episodes_released, $this->episodes_released),
