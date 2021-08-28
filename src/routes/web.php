@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ Route::get('/test', function (){
     $user = \App\Models\User::find(1);
     return $user;
 });
+
+Route::get('animes', [AnimeController::class, 'view']);
 
 Route::get('/login', function () {
     return view('login');
