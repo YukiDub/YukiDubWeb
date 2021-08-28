@@ -17,7 +17,11 @@ class CreateAnimesTable extends Migration
             $table->id("anime_id");
             $table->integer("mal_id")->nullable(true)->default(null)->unique();
             $table->integer("shiki_score")->nullable(true)->default(null);
-            $table->string("poster_url")->nullable(false)->default('default.png');
+            $table->string("poster_original")->nullable(false)->default('default_original.png');
+            $table->string("poster_preview")->nullable(false)->default('default_preview.png');
+            $table->string("poster_x96")->nullable(false)->default('default_x96.png');
+            $table->string("poster_x48")->nullable(false)->default('default_original.png');
+
             $table->enum("type", ["tv", "movie", "ova", "ona", "special", "music"])->nullable(false);
             $table->integer("episodes")->nullable(false)->default(0);
             $table->integer("episodes_released")->nullable(false)->default(0);

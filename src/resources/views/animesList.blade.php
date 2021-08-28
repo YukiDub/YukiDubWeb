@@ -10,14 +10,12 @@
     <div class="anime-inner">
         @foreach($animes as $anime)
             <div class="anime-item">
-                <img alt="Kaizoku Oujo" src="https://dere.shikimori.one/system/animes/preview/42544.jpg?1628882411" srcset="https://dere.shikimori.one/system/animes/original/42544.jpg?1628882411 2x">
+                <img alt="Kaizoku Oujo" src="{{asset('/storage/' . $anime->poster_preview)}}">
 
-                <p>Аниме: {{$anime->name_ru}} / {{$anime->name_en}}</p>
-{{--                <p>Японское название: {{$anime->name_jp}}</p>--}}
-
-{{--                <p>Жанры:@foreach($anime->genres as $genre)--}}
-{{--                        <a>{{$genre->nameEn}}</a>--}}
-{{--                @endforeach--}}
+                <p>{{$anime->name_ru}} / {{$anime->name_en}}</p>
+                <p>Жанры:@foreach($anime->genres as $genre)
+                        <a>{{$genre->nameEn}}</a>
+                @endforeach
             </div>
         @endforeach
     </div>

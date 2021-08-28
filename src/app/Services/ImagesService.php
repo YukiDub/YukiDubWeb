@@ -42,6 +42,14 @@ class ImagesService
         return $images;
     }
 
+    public function remoteUpload($path, $to){
+        $imagePath = explode('/', $path);
+        $imageName = end($imagePath);
+        $imageName = explode('?', $imageName)[0];
+
+        return \Storage::disk($this->disk)->putFileAs($to, $path, $imageName);
+    }
+
     public function remove(...$path){
         foreach ($path as $item){
             if (!empty($item)){

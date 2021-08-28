@@ -163,7 +163,9 @@ class AnimesApiController extends ApiController
      */
     public function show($id): \Illuminate\Http\JsonResponse
     {
-        $anime = Anime::findOrFail($id);
+        $anime = Anime::with(['genres', 'studios', 'staff'])
+
+            ->findOrFail($id);
 
         return $this->response->withItem($anime);
     }
