@@ -70,7 +70,7 @@ class Anime extends Model
     use HasFactory;
 
     protected $primaryKey = "anime_id";
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $dates =[
       'aired_on',
@@ -110,6 +110,16 @@ class Anime extends Model
         'description_en_source',
         'description_jp_source'
     ];
+
+
+    protected static function booted()
+    {
+        static::creating(function ($anime){
+            $score = Score::create();
+            $anime->score = 1;
+        });
+        parent::booted();
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

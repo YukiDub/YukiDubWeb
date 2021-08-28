@@ -6,12 +6,14 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Facades\ImageService;
 use App\Http\Requests\AnimeRequest;
 use App\Http\Requests\CreateAnimeRequest;
 use App\Http\Requests\SendVoteRequest;
 use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
 use App\Models\ScoreVote;
+use App\Models\User;
 use App\Services\VoteService;
 use Illuminate\Http\Request;
 
@@ -108,13 +110,39 @@ class AnimesApiController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateAnimeRequest $request)
     {
-        //if(!$this->aired_on){
-        //    return null;
-        //}
+        if($request->user()->cannot('create', Anime::class)){
+            return $this->response->withForbidden();
+        };
+
+        $data = $request->validated();
+
+        if ($request->hasFile('poster')){
+            $name = $request->get('name_en') . \Str::random(19);
+            $previews = [
+                'preview'=>'154x240',
+                'x96'=>'96x150',
+                'x48'=>'48x75'
+            ];
+
+            $images = ImageService::setPreviews($previews)->
+            upload(
+                $request->file('poster'),
+                $name,
+                '/images/animes/'
+            );
+
+//            $people->avatar_original = $images['original'];
+//            $people->avatar_preview = $images['preview'];
+//            $people->avatar_x96 = $images['x96'];
+//            $people->avatar_x48 = $images['x48'];
+        }
+
+        Anime::firstOrCreate($data);
+        return $this->response->withNoContent();
 
         //$date = (Carbon::make($this->aired_on))->format('z');
         //if($date < 80 || $date > 356){

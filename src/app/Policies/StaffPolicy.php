@@ -19,7 +19,6 @@ class StaffPolicy extends PolicyBase
      */
     public function viewAny(User $user)
     {
-//        return $this->checkPermission($user, 'staff.viewAny');
         return true;
     }
 
@@ -32,7 +31,6 @@ class StaffPolicy extends PolicyBase
      */
     public function view(User $user, Policy $policy)
     {
-//        return $this->checkPermission($user, 'staff.view');
         return true;
     }
 

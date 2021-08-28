@@ -34,6 +34,7 @@ class CreateAnimesTable extends Migration
             $table->string("name_jp", 50)->nullable(false);
             $table->string("name_en", 120)->nullable(false);
             $table->string("name_ru", 120)->nullable(true);
+            $table->timestamps();
 
             $table->text("description_jp")->nullable(true)->default(null);
             $table->text("description_jp_source")->nullable(true)->default(null);
