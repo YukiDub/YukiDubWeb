@@ -5,6 +5,7 @@
 
 namespace App\Models;
 
+use App\Facades\ImageService;
 use App\Services\VoteService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -119,6 +120,27 @@ class Anime extends Model
             $anime->score = 1;
         });
         parent::booted();
+    }
+
+    public function uploadPoster($file)
+    {
+        $previews = [
+            'preview'=>'154x240',
+            'x96'=>'96x150',
+            'x48'=>'48x75'
+        ];
+
+        $images = ImageService::setPreviews($previews)->
+        upload(
+            $file,
+            $this->name_en . \Str::random(18),
+            '/images/animes/'
+        );
+
+        $this->poster_original = $images['original'];
+        $this->poster_preview = $images['preview'];
+        $this->poster_x96 = $images['x96'];
+        $this->poster_x48 = $images['x48'];
     }
 
     /**

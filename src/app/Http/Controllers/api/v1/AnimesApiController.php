@@ -116,32 +116,16 @@ class AnimesApiController extends ApiController
     {
         if($request->user()->cannot('create', Anime::class)){
             return $this->response->withForbidden();
-        };
-
-        $data = $request->validated();
-
-        if ($request->hasFile('poster')){
-            $name = $request->get('name_en') . \Str::random(19);
-            $previews = [
-                'preview'=>'154x240',
-                'x96'=>'96x150',
-                'x48'=>'48x75'
-            ];
-
-            $images = ImageService::setPreviews($previews)->
-            upload(
-                $request->file('poster'),
-                $name,
-                '/images/animes/'
-            );
-
-            $data['poster_original'] = $images['original'];
-            $data['poster_preview'] = $images['preview'];
-            $data['poster_x96'] = $images['x96'];
-            $data['poster_x48'] = $images['x48'];
         }
 
-        Anime::firstOrCreate($data);
+        $anime = Anime::firstOrCreate($request->validated());
+
+        if ($request->hasFile('poster')){
+            $anime->uploadPoster($request->file('poster'));
+        }
+
+        $anime->save();
+
         return $this->response->withNoContent();
 
         //$date = (Carbon::make($this->aired_on))->format('z');
