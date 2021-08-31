@@ -118,7 +118,7 @@ class AnimesApiController extends ApiController
             return $this->response->withForbidden();
         }
 
-        $anime = Anime::firstOrCreate($request->validated());
+        $anime = (new Anime())->fill($request->validated());
 
         if ($request->hasFile('poster')){
             $anime->uploadPoster($request->file('poster'));
@@ -191,7 +191,7 @@ class AnimesApiController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
