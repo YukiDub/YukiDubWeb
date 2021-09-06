@@ -12,10 +12,9 @@ use App\Http\Requests\CreateAnimeRequest;
 use App\Http\Requests\SendVoteRequest;
 use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
-use App\Models\ScoreVote;
-use App\Models\User;
+use App\Services\HistoryService;
 use App\Services\VoteService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AnimesApiController extends ApiController
 {
@@ -109,10 +108,10 @@ class AnimesApiController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param CreateAnimeRequest $request
+     * @return JsonResponse
      */
-    public function store(CreateAnimeRequest $request)
+    public function store(CreateAnimeRequest $request): JsonResponse
     {
         if($request->user()->cannot('create', Anime::class)){
             return $this->response->withForbidden();
@@ -125,8 +124,14 @@ class AnimesApiController extends ApiController
         }
 
         $anime->save();
+        $anime->genres()->attach($request->get('genres'));
+        $anime->studios()->attach($request->get('studios'));
 
-        return $this->response->withNoContent();
+        return $this->response->withCreated(
+            [
+                'anime_id'=>$anime->getKey()
+            ]
+        );
 
         //$date = (Carbon::make($this->aired_on))->format('z');
         //if($date < 80 || $date > 356){
@@ -162,7 +167,7 @@ class AnimesApiController extends ApiController
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="The people id",
+     *         description="The anime id",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",
@@ -171,7 +176,7 @@ class AnimesApiController extends ApiController
      * )
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show($id)
     {
@@ -185,13 +190,122 @@ class AnimesApiController extends ApiController
     /**
      * Update the specified resource in storage.
      *
+     *   @OA\Patch(
+     *     path="/anime/{id}",
+     *     tags = {"Anime"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(
+     *          response=201,
+     *          description="Display the specified resource",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Response(
+     *          response="404",
+     *          description="anime not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The anime id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     )
+     * )
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(AnimeRequest $request, $id)
     {
+        $anime = Anime::findOrFail($id);
+        $anime->fill($request->validated());
 
+        if(!$anime->isDirty()){
+            return $this->response->noChanges();
+        }
+
+        if($request->user()->cannot('update', Anime::class)){
+            $historyService = new HistoryService();
+            $historyService->updateAction('update anime', 'moderate', \Auth::user()->id, $anime);
+            return $this->response->moderatedStatus();
+        }
+
+        if ($request->hasFile('poster')){
+            $anime->uploadPoster($request->file('poster'));
+        }
+
+        $anime->update();
+        return $this->response->acceptedStatus();
+    }
+
+    /**
+     * Update poster the specified resource.
+     *
+     *   @OA\Post(
+     *     path="/anime/{id}/poster",
+     *     tags = {"Anime"},
+     *     security={
+     *       {"Authorization": {}},
+     *     },
+     *     @OA\Response(
+     *          response=201,
+     *          description="Display the specified resource",
+     *          @OA\MediaType(mediaType="application/json")
+     *     ),
+     *     @OA\Response(
+     *          response="404",
+     *          description="anime not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The anime id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="poster",
+     *         in="query",
+     *         description="Poster file",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="file",
+     *         )
+     *     )
+     * )
+    **/
+    public function updatePoster(AnimeRequest $request, $id): JsonResponse
+    {
+        $anime = Anime::findOrFail($id);
+
+        $image = ImageService::upload($request->file('poster'), $anime->nameEn, '/animes/moderate');
+        $anime->poster_original = $image['original'];
+
+        if(!$request->user()->cannot('update', Anime::class)){
+            $historyService = new HistoryService();
+            $historyService->updateAction('update anime poster', 'moderate', \Auth::user()->id, $anime);
+
+            return $this->response->moderatedStatus();
+        }
+
+        $anime->uploadPoster($request->file('poster'));
+        $anime->save();
+        return $this->response->acceptedStatus();
     }
 
     /**
@@ -228,9 +342,9 @@ class AnimesApiController extends ApiController
      * )
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function destroy($id): \Illuminate\Http\JsonResponse
+    public function destroy($id): JsonResponse
     {
         $anime = Anime::findOrFail($id);
         $anime->delete();
@@ -281,7 +395,7 @@ class AnimesApiController extends ApiController
      * Sending vote
      * @param $id
      * @param SendVoteRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|JsonResponse|\Illuminate\Http\Response
      */
     public function vote($id, SendVoteRequest $request){
         $anime = Anime::findOrFail($id);

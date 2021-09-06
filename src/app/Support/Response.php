@@ -62,13 +62,10 @@ class Response
         return ($this->resource::collection($data));
     }
 
+
     /**
-     * Return a 201 response with the given created resource.
-     *
      * @param null $resource
-     *
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
      */
     public function withCreated($resource = null): \Illuminate\Http\JsonResponse
     {
@@ -154,9 +151,43 @@ class Response
      */
     public function withError($message): \Illuminate\Http\JsonResponse
     {
-        return $this->json([
+        return $this->response->json([
             'messages' => is_array($message) ? $message : [$message]
         ]);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function acceptedStatus(): \Illuminate\Http\JsonResponse
+    {
+        return $this->json(
+            [
+                'status'=>'accepted'
+            ]
+        );
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function moderatedStatus(): \Illuminate\Http\JsonResponse
+    {
+        return $this->json(
+            [
+                'status'=>'moderated'
+            ]
+        );
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function noChanges(): \Illuminate\Http\JsonResponse
+    {
+        return $this->withBadRequest(
+            'There were no changes'
+        );
     }
 
     /**
