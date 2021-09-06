@@ -2,15 +2,16 @@
 
 namespace App\Console\Commands;
 
+use App\Exceptions\ShikimoriException;
 use App\Facades\ImageService;
 use App\Models\Anime;
 use App\Models\AnimeStudio;
 use App\Models\Genre;
 use App\Models\Score;
-use App\Services\ShikimoriService;
-use Faker\Provider\File;
+use App\Services\Shikimori\ShikimoriService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class ShikimoriAnimeParser extends Command
 {
@@ -36,7 +37,7 @@ class ShikimoriAnimeParser extends Command
     public function handle()
     {
         $shikiService = new ShikimoriService();
-        for ($id = 30; $id <= 500; $id++){
+        for ($id = 2; $id <= 3; $id++){
             try{
                 $animeParse = $shikiService->getAnimeById($id);
                 $this->alert('parsing new anime');
@@ -64,11 +65,11 @@ class ShikimoriAnimeParser extends Command
                     "status"=>$animeParse['status'],
                     "aired_on"=> (int)$animeParse['aired_on'] ? $animeParse['aired_on'] : null,
                     "released_on"=> (int)$animeParse['released_on'] ? $animeParse['released_on'] : null,
-                    "age_rating"=> $animeParse['rating'] ? $animeParse['rating'] : null,
+                    "age_rating"=> $animeParse['rating'] ?: null,
                     "name_jp"=>$animeParse['japanese'][0],
                     "name_en"=>$animeParse['name'],
-                    "name_ru"=>$animeParse['russian'] ? $animeParse['russian'] : null,
-                    "description_ru"=>$animeParse['description'] ? $animeParse['description'] : null,
+                    "name_ru"=> $animeParse['russian'] ?: null,
+                    "description_ru"=>$animeParse['description'] ?: null,
                     "description_ru_source"=>'https://shikimori.one/animes/' . $id,
                     'score'=>$score->score_id
                 ]);
@@ -85,13 +86,14 @@ class ShikimoriAnimeParser extends Command
                     $anime->genres()->attach($genre);
                 }
             }
-           catch (\Exception $ex){
+           catch (QueryException $queryException){
 
            }
-                sleep(rand(12,23));
+           catch (ShikimoriException $shikiEx){
+                Log::emergency($shikiEx);
+           }
                 $this->alert("sleeping");
+                sleep(rand(12,23));
         }
-
-        return "Good";
     }
 }

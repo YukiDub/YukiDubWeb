@@ -100,6 +100,10 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'shiki' => [
+            'path' => storage_path('logs/shikimori-parser.log'),
+        ],
     ],
 
 ];

@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Character;
-use App\Models\Staff;
-use App\Services\ShikimoriService;
+use App\Services\Shikimori\ShikimoriService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Date;
 
@@ -36,7 +35,7 @@ class ShikimoriCharactersParser extends Command
 
         try{
             for ($i = 1; $i <= 1000; $i++){
-                $charactersParse = $shikiService->getCharactersById($i);
+                $charactersParse = $shikiService->getCharacterById($i);
                 $this->alert('parsing new character');
                 $character->firstOrCreate([
                     'malId'=>$charactersParse['id'],
