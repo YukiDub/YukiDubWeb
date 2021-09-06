@@ -43,7 +43,11 @@ class CreateAnimeRequest extends FormRequest
             "description_ru"=>'string',
             'description_ru_source'=>'string',
             'description_en_source'=>'string',
-            'description_jp_source'=>'string'
+            'description_jp_source'=>'string',
+            'genres'=>'array',
+            'genres.*'=>'required|integer|exists:genres,genre_id',
+            'studios'=>'array',
+            'studios.*'=>'required|integer|exists:anime_studios,studio_id'
         ];
     }
 }

@@ -52,10 +52,32 @@ class AnimeRequest extends FormRequest
                     'orders.*.*'=>'required|in:ASC,DESC'
                         ];
                 break;
+            case 'PUT' AND 'PATH':
+                return [
+                    "posterUrl" => "image",
+                    "type"=> "in:tv,Movie,OVA,ONA,Special,Music",
+                    "episode"=> "integer",
+                    "episodes_released"=> "integer",
+                    "next_episode"=> "date",
+//            "episodeDuration"=> "time",
+                    "status"=> "string",
+                    "start_date"=> "date",
+                    "release_date"=> "date",
+//            "genres"=> "string",
+                    "ageRating"=> "in:G,PG,PG-13,R-17,R+,Rx",
+                    "name_jp"=> "string|min:1|max:50",
+                    "name_en"=> "string|min:1|max:120",
+                    "name_ru"=> "string|min:1|max:120",
+                    "description_jp"=> "string",
+                    "description_en"=> "string",
+                    "description_ru"=> "string",
+                    "genres"
+                ];
+                break;
             case 'POST':
                 return [
                     "posterUrl" => "required|image",
-                    "type"=> "required|in:TV Series,Movie,OVA,ONA,Special,Music",
+                    "type"=> "required|in:tv,Movie,OVA,ONA,Special,Music",
                     "episode"=> "integer",
                     "episodesReleased"=> "integer",
                     "nextEpisode"=> "date",

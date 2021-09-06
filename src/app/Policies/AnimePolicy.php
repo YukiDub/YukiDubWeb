@@ -49,11 +49,11 @@ class AnimePolicy extends PolicyBase
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Anime  $anime
-     * @return mixed
+     * @return bool
      */
-    public function update(User $user, Anime $anime)
+    public function update(User $user, Anime $anime = null): bool
     {
-        //
+        return $this->checkPermission($user, 'anime.update');
     }
 
     /**

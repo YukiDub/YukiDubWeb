@@ -36,7 +36,7 @@ class ShikimoriAnimeParser extends Command
     public function handle()
     {
         $shikiService = new ShikimoriService();
-        for ($id = 1; $id <= 30; $id++){
+        for ($id = 30; $id <= 500; $id++){
             try{
                 $animeParse = $shikiService->getAnimeById($id);
                 $this->alert('parsing new anime');

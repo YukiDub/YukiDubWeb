@@ -100,7 +100,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "The people id",
+                        "description": "The anime id",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -149,6 +149,105 @@
                 "responses": {
                     "200": {
                         "description": "removed",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "anime not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Anime"
+                ],
+                "summary": "Update the specified resource in storage.",
+                "operationId": "9f37c935036c04298e4b23e0b179211b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The anime id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Display the specified resource",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "anime not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/anime/{id}/poster": {
+            "post": {
+                "tags": [
+                    "Anime"
+                ],
+                "summary": "Update poster the specified resource.",
+                "operationId": "3564e58099bab181da83b76a3d7d6b37",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The anime id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "poster",
+                        "in": "query",
+                        "description": "Poster file",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Display the specified resource",
                         "content": {
                             "application/json": {}
                         }
@@ -227,47 +326,6 @@
                         "Authorization": []
                     }
                 ]
-            }
-        },
-        "/anime/{id}/score": {
-            "get": {
-                "tags": [
-                    "Anime"
-                ],
-                "summary": "Show score the anime",
-                "operationId": "0a10dd707d30869207c39ba5f74ef4da",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "the anime id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "sended",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "404": {
-                        "description": "anime not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/NotFoundRequest"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         },
         "/auth/login": {

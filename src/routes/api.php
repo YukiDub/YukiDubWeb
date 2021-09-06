@@ -42,6 +42,7 @@ Route::prefix("v1")->group(function (){
     Route::apiResource("anime", AnimesApiController::class)->only(['index', 'show']);
     Route::apiResource("anime", AnimesApiController::class)->only(['store', 'update', 'destroy'])
     ->middleware('auth:api');
+    Route::post('anime/{id}/poster', [AnimesApiController::class, 'updatePoster'])->middleware('auth:api');
     Route::post('anime/{id}/vote', [AnimesApiController::class, 'vote'])->middleware('auth:api');
     Route::post('anime/{id}/score', [AnimesApiController::class, 'getScore']);
 
