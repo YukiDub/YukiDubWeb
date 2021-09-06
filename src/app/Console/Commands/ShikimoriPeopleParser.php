@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Staff;
-use App\Services\ShikimoriService;
+use App\Services\Shikimori\ShikimoriService;
 use Illuminate\Console\Command;
-use SebastianBergmann\Timer\Timer;
 
 class ShikimoriPeopleParser extends Command
 {
