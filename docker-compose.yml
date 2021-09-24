@@ -8,9 +8,13 @@ services:
     build:
       context: .
       dockerfile: nginx.dockerfile
+      args:
+        - NGINXUSER=${NGINXUSER:-www-data}
+        - NGINXGROUP=${NGINXGROUP:-www-data}
     container_name: nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
@@ -42,11 +46,12 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     container_name: php
     volumes:
       - ./src:/var/www/html:delegated
-    ports:
-      - "8000:8000"
     networks:
       - laravel
 
@@ -54,8 +59,12 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     restart: always
     command: php artisan queue:work
+    user: ${PHPUSER:-www-data}
     volumes:
       - ./src:/var/www/html
     networks:
@@ -65,10 +74,14 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     restart: always
     ports:
       - "6001:6001"
     command: php artisan websockets:serve
+    user: ${PHPUSER:-www-data}
     volumes:
       - ./src:/var/www/html
     networks:
@@ -78,16 +91,19 @@ services:
     build:
       context: .
       dockerfile: composer.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     container_name: composer
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
-    user: laravel
+    user: ${PHPUSER:-www-data}
+    entrypoint: ['composer', '--ignore-platform-reqs']
     networks:
       - laravel
-    entrypoint: ['composer', '--ignore-platform-reqs']
 
   npm:
     image: node:13.7
@@ -96,18 +112,22 @@ services:
       - ./src:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
+    networks:
+      - laravel
 
   artisan:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     container_name: artisan
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
-    user: laravel
     entrypoint: ['php', '/var/www/html/artisan']
     networks:
       - laravel
