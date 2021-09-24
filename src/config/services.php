@@ -32,7 +32,14 @@ return [
 
     'shikimori'=>[
         'url'=>env('SHIKIMORI_API_URL'),
-        'token'=>env('SHIKIMORI_TOKEN_URL')
+        'client'=>env('SHIKIMORI_CLIENT_ID'),
+        'secret'=>env('SHIKIMORI_SECRET'),
+    ],
+
+    'google'=>[
+        'redirect'=>env('GOOGLE_API_REDIRECT', 'http://dev.yukidub.fun/auth/google/callback'),
+        'client_id'=>env('GOOGLE_API_CLIENT_ID'),
+        'client_secret'=>env('GOOGLE_API_CLIENT_SECRET'),
     ]
 
 ];

@@ -147,6 +147,8 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/itsgoingd/clockwork" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/league/oauth1-client" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/laravel/socialite" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

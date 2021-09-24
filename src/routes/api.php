@@ -49,7 +49,7 @@ Route::prefix("v1")->group(function (){
     Route::apiResource("roles", RoleController::class);
 
     Route::prefix('auth')->group(function (){
-        Route::post('register', [RegisterController::class, 'register']);
+        Route::post('register', [RegisterController::class, 'callBack']);
         Route::get('login', [LoginController::class, 'login']);
         Route::post('accessToken', [LoginController::class, 'getAccessToken']);
         Route::get('profile', [UsersApiController::class, 'authUser'])->middleware(['auth:api', 'scope:profile-management']);

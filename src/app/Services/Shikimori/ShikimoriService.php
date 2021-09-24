@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\Http;
 class ShikimoriService
 {
     protected $url;
-    protected $token;
     protected $userAgent;
 
     public function __construct()
     {
-        $this->url = config('services.shikimori.url');
         $this->userAgent = config('app.name');
+        $this->url = config('services.shikimori.url');
     }
 
     /**
@@ -37,9 +36,9 @@ class ShikimoriService
         if($response->serverError()){
             throw new ShikimoriException('Server error');
         }
-        if($response->status()){
-            throw new ShikimoriException('Not found');
-        }
+//        if($response->status()){
+//            throw new ShikimoriException('Not found');
+//        }
 
         return $data;
     }
@@ -51,7 +50,7 @@ class ShikimoriService
      */
     public function getPeopleById(int $id){
         try{
-            $path = 'people/' . $id;
+            $path = 'api/people/' . $id;
             return $this->collApi('get', $path);
         }
         catch (ShikimoriException $ex){
@@ -66,7 +65,7 @@ class ShikimoriService
      */
     public function getCharacterById(int $id){
         try{
-            $path = 'characters/' . $id;
+            $path = 'api/characters/' . $id;
             return $this->collApi('get', $path);
         }
         catch (ShikimoriException $ex){
@@ -81,7 +80,7 @@ class ShikimoriService
      */
     public function getAnimeById(int $id){
         try{
-            $path = 'animes/' . $id;
+            $path = 'api/animes/' . $id;
             return $this->collApi('get', $path);
         }
         catch (ShikimoriException $ex){
@@ -91,5 +90,37 @@ class ShikimoriService
 
     public function getUrl(){
         return $this->url;
+    }
+
+    /**
+     * @param \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed $secret
+     */
+    public function setSecret($secret): void
+    {
+        $this->secret = $secret;
+    }
+
+    /**
+     * @param \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed $clientId
+     */
+    public function setClientId($clientId): void
+    {
+        $this->clientId = $clientId;
+    }
+
+    /**
+     * @param \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed $userAgent
+     */
+    public function setUserAgent($userAgent): void
+    {
+        $this->userAgent = $userAgent;
+    }
+
+    /**
+     * @param array $scopes
+     */
+    public function setScopes(array $scopes): void
+    {
+        $this->scopes = $scopes;
     }
 }
