@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1\Auth;
 
 use App\Http\Controllers\api\v1\ApiController;
 use App\Http\Requests\LoginRequest;
+use App\Services\AuthServices\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,23 +28,9 @@ class LoginController extends ApiController
      */
     function login(LoginRequest $request): \Symfony\Component\HttpFoundation\Response
     {
-        $client = DB::table('oauth_clients')
-            ->where('password_client', true)
-            ->first();
+        $user = (new AuthService())->login($request->get('email'), $request->get('password'));
 
-        $data = [
-            'grant_type' => 'password',
-            'client_id' => $client->id,
-            'client_secret' => $client->secret,
-            'username' => $request->get('email'),
-            'password' => $request->get('password'),
-            'scope'=>'*'
-        ];
-
-        $request = Request::create('/oauth/token', 'POST', $data);
-        $data = json_decode(app()->handle($request)->getContent());
-
-        return redirect('index#access_token='. $data->access_token . "&refresh_token=$data->refresh_token");
+        return redirect('index#access_token='. $user->getAccessToken() . "&refresh_token=" . $user->getRefreshToken());
     }
 
 
@@ -52,21 +39,10 @@ class LoginController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    function getAccessToken(Request $request): \Symfony\Component\HttpFoundation\Response
+    function getAccessToken(Request $request)
     {
-        $client = DB::table('oauth_clients')
-            ->where('password_client', true)
-            ->first();
+        $token =  AuthService::updateAccessToken($request->get('refresh_token'));
 
-        $data = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $request->get('refresh_token'),
-            'client_id' => $client->id,
-            'client_secret' => $client->secret,
-            'scope'=>'*'
-        ];
-
-        $request = Request::create('/oauth/token', 'POST', $data);
-        return app()->handle($request);
+        return $this->response->json(['refresh_token'=>$token]);
     }
 }

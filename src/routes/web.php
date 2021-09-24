@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\api\v1\Auth\RegisterController;
+use App\Http\Controllers\api\v1\Auth\ShikimoriAuthController;
+use App\Http\Controllers\api\v1\Auth\SocialLoginController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +32,28 @@ Route::get('/test', function (){
     return $user;
 });
 
+Route::prefix('auth')->group(function (){
+    Route::get('login', function () {
+        return view('login');
+    })->name('login');
+
+    Route::get('success', function () {
+        return view('Auth.Registration.success');
+    })->name('auth.success');
+
+    Route::get('{provider}/redirect/', [SocialLoginController::class, 'redirect'])
+        ->name('social.login');
+
+    Route::get('{provider}/callback', [SocialLoginController::class, 'login']);
+
+    Route::post('complete', [SocialLoginController::class, 'completion'])
+        ->name('social.registration.completion');
+});
+
 Route::get('animes', [AnimeController::class, 'view']);
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('auth/registration', [RegisterController::class, 'register']);
 
-Route::get('/login/success', function () {
+Route::get('auth/login/success', function () {
     return 'ok';
 })->name('login.success');

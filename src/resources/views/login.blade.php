@@ -20,7 +20,11 @@
                 <label for="exampleInputPassword1">Пароль</label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Войти</button>
+            <div>
+                <a href="{{route('social.login', ['provider'=>'google'])}}">Google</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Войти</button>
         </form>
     </div>
 </body>

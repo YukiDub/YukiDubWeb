@@ -5,13 +5,24 @@ namespace App\Http\Controllers\api\v1\Auth;
 use App\Http\Controllers\api\v1\ApiController;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
+use App\Services\AuthServices\AuthService;
+use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
+
+    protected $authService;
+
+    public function __construct()
+    {
+        $this->authService = new AuthService();
+        parent::__construct();
+    }
+
     /**
      * New user registration
      * @param RegistrationRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      *
      * @OA\Post (
      *     path="/auth/register",
@@ -60,15 +71,19 @@ class RegisterController extends ApiController
      *     )
      * )
      */
-    public function register(RegistrationRequest $request): \Illuminate\Http\JsonResponse
+    public function register(Request $request)
     {
+        return view('Auth/Registration/registration');
+    }
 
+    public function callBack(RegistrationRequest $request)
+    {
         $user = User::create([
             'name'=>$request->get('name'),
             'email'=>$request->get('email'),
             'password'=>bcrypt($request->get('password'))
         ]);
 
-        return response()->json(['status'=>201], 201);
+        return view('Auth/Registration/success');
     }
 }

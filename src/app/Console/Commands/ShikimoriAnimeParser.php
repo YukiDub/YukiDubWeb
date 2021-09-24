@@ -37,7 +37,7 @@ class ShikimoriAnimeParser extends Command
     public function handle()
     {
         $shikiService = new ShikimoriService();
-        for ($id = 2; $id <= 3; $id++){
+        for ($id = 1; $id <= 50000; $id++){
             try{
                 $animeParse = $shikiService->getAnimeById($id);
                 $this->alert('parsing new anime');
@@ -93,7 +93,7 @@ class ShikimoriAnimeParser extends Command
                 Log::emergency($shikiEx);
            }
                 $this->alert("sleeping");
-                sleep(rand(12,23));
+                sleep(rand(40,120));
         }
     }
 }

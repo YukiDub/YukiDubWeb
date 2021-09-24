@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Laravel\Socialite\Two\InvalidStateException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -59,6 +60,18 @@ class Handler extends ExceptionHandler
             $this->renderable(function (ImageException $e, $request){
                 return response()->json(['status'=>403, 'message'=>$e->getMessage()], 403);
             });
+
+            $this->renderable(function (AuthException $e, $request){
+                return response()->json(['status'=>404, 'message'=>$e->getMessage()], 400);
+            });
+
+            $this->renderable(function (InvalidStateException $e, $request){
+                return response()->json(['status'=>400, 'message'=>$e->getMessage()], 400);
+            });
         }
+
+        $this->renderable(function (InvalidStateException $e, $request){
+            return abort(403, 'Authorisation Error');
+        });
     }
 }

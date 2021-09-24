@@ -57,7 +57,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'shikimori_id',
+        'email_verified_at',
+        'active'
+    ];
+
+    protected $attributes = [
+        'active'=>false,
+        'email_verified_at'=>null,
     ];
 
     protected $appends = ['roles'];
