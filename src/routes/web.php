@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\api\v1\Auth\RegisterController;
-use App\Http\Controllers\api\v1\Auth\ShikimoriAuthController;
 use App\Http\Controllers\api\v1\Auth\SocialLoginController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,13 +24,13 @@ Route::get('/', function () {
     return view('index');
 });
 
-
-Route::get('/test', function (){
+Route::get('/test', function () {
     $user = \App\Models\User::find(1);
+
     return $user;
 });
 
-Route::prefix('auth')->group(function (){
+Route::prefix('auth')->group(function () {
     Route::get('login', function () {
         return view('login');
     })->name('login');

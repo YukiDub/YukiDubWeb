@@ -9,17 +9,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Character
+ * App\Models\Character.
  *
- * @property int $characterId
- * @property string $nameJp
- * @property string $nameEn
- * @property string $nameRu
- * @property string $descriptionJp
- * @property string $descriptionEn
- * @property string $descriptionRu
+ * @property int                             $characterId
+ * @property string                          $nameJp
+ * @property string                          $nameEn
+ * @property string                          $nameRu
+ * @property string                          $descriptionJp
+ * @property string                          $descriptionEn
+ * @property string                          $descriptionRu
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Character newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Character newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Character query()
@@ -38,17 +39,17 @@ class Character extends Model
 {
     use HasFactory;
 
-    public $primaryKey = "character_id";
+    public $primaryKey = 'character_id';
 
     protected $hidden = ['pivot'];
 
     protected $fillable = [
-        "malId",
-        "nameJp",
-        "nameEn",
-        "nameRu",
-        "descriptionJp",
-        "descriptionEn",
-        "descriptionRu",
+        'malId',
+        'nameJp',
+        'nameEn',
+        'nameRu',
+        'descriptionJp',
+        'descriptionEn',
+        'descriptionRu',
     ];
 }

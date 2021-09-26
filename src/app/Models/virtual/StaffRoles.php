@@ -21,7 +21,7 @@ class StaffRoles
      *     example=1
      * )
      *
-     * @var integer
+     * @var int
      */
     public $role_id;
 
@@ -36,6 +36,4 @@ class StaffRoles
      * @var string
      */
     public $name;
-
-
 }

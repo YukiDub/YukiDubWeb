@@ -23,32 +23,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix("v1")->group(function (){
+Route::prefix('v1')->group(function () {
     Route::apiResource('users', UsersApiController::class);
 
-    Route::apiResource("people", PeopleApiController::class)->only(['index', 'show']);
-    Route::apiResource("people", PeopleApiController::class)->only(['store', 'update', 'destroy'])
+    Route::apiResource('people', PeopleApiController::class)->only(['index', 'show']);
+    Route::apiResource('people', PeopleApiController::class)->only(['store', 'update', 'destroy'])
     ->middleware('auth:api');
 
-    Route::get('people/{id}/changes', [PeopleApiController::class, "changes"]);
-    Route::get('people/{id}/works', [PeopleApiController::class, "getWorks"]);
-    Route::get('people/{id}/roles', [PeopleApiController::class, "getRoles"]);
-    Route::get('people/{id}/animes', [PeopleApiController::class, "getAnime"]);
-    Route::get('people/{id}/mangas', [PeopleApiController::class, "getMangas"]);
+    Route::get('people/{id}/changes', [PeopleApiController::class, 'changes']);
+    Route::get('people/{id}/works', [PeopleApiController::class, 'getWorks']);
+    Route::get('people/{id}/roles', [PeopleApiController::class, 'getRoles']);
+    Route::get('people/{id}/animes', [PeopleApiController::class, 'getAnime']);
+    Route::get('people/{id}/mangas', [PeopleApiController::class, 'getMangas']);
     Route::delete('people/{peopleId}/roles/', [PeopleApiController::class, 'removeRole']);
 
-    Route::apiResource("genres", GenresApiController::class)->only(['index', 'show']);
+    Route::apiResource('genres', GenresApiController::class)->only(['index', 'show']);
 
-    Route::apiResource("anime", AnimesApiController::class)->only(['index', 'show']);
-    Route::apiResource("anime", AnimesApiController::class)->only(['store', 'update', 'destroy'])
+    Route::apiResource('anime', AnimesApiController::class)->only(['index', 'show']);
+    Route::apiResource('anime', AnimesApiController::class)->only(['store', 'update', 'destroy'])
     ->middleware('auth:api');
     Route::post('anime/{id}/poster', [AnimesApiController::class, 'updatePoster'])->middleware('auth:api');
     Route::post('anime/{id}/vote', [AnimesApiController::class, 'vote'])->middleware('auth:api');
     Route::post('anime/{id}/score', [AnimesApiController::class, 'getScore']);
 
-    Route::apiResource("roles", RoleController::class);
+    Route::apiResource('roles', RoleController::class);
 
-    Route::prefix('auth')->group(function (){
+    Route::prefix('auth')->group(function () {
         Route::post('register', [RegisterController::class, 'callBack']);
         Route::get('login', [LoginController::class, 'login']);
         Route::post('accessToken', [LoginController::class, 'getAccessToken']);

@@ -24,8 +24,8 @@ class UserIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            "count"=>"integer|min:1|max:100",
-            'role'=>'string'
+            'count'=> 'integer|min:1|max:100',
+            'role' => 'string',
         ];
     }
 }

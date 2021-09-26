@@ -16,23 +16,24 @@ class ImagesService
     protected $disk = 'public';
     protected $previews = [];
 
-    public function upload($image, $name, $path){
+    public function upload($image, $name, $path)
+    {
         $extension = $image->getClientOriginalExtension();
-        if(!$origImage = Storage::disk($this->disk)->putFileAs($path . '/original', $image, $name . '.'. $extension)){
+        if (!$origImage = Storage::disk($this->disk)->putFileAs($path.'/original', $image, $name.'.'.$extension)) {
             throw new ImageException('there was an error loading the image');
         }
 
         $images = [
-            'original'=>$path . $name . '.'. $extension,
+            'original'=> $path.$name.'.'.$extension,
         ];
 
-        if(!empty($this->previews)){
-            foreach ($this->previews as $previewName=>$preview){
+        if (!empty($this->previews)) {
+            foreach ($this->previews as $previewName=>$preview) {
                 $makeImage = Image::make($image->getRealPath());
                 $size = explode('x', $preview);
                 $makeImage = $makeImage->resize($size[0], $size[1]);
 
-                $imagePath =  $path . '/' . $previewName . '/' . $name . '.' . $extension;
+                $imagePath = $path.'/'.$previewName.'/'.$name.'.'.$extension;
                 Storage::disk($this->disk)->put($imagePath, $makeImage->save()->__toString());
 
                 $images[$previewName] = $imagePath;
@@ -42,7 +43,8 @@ class ImagesService
         return $images;
     }
 
-    public function remoteUpload($path, $to){
+    public function remoteUpload($path, $to)
+    {
         $imagePath = explode('/', $path);
         $imageName = end($imagePath);
         $imageName = explode('?', $imageName)[0];
@@ -50,9 +52,10 @@ class ImagesService
         return \Storage::disk($this->disk)->putFileAs($to, $path, $imageName);
     }
 
-    public function remove(...$path){
-        foreach ($path as $item){
-            if (!empty($item)){
+    public function remove(...$path)
+    {
+        foreach ($path as $item) {
+            if (!empty($item)) {
                 Storage::disk($this->disk)->delete($item);
             }
         }
@@ -68,22 +71,25 @@ class ImagesService
 
     /**
      * @param string $disk
+     *
      * @return $this
      */
     public function setDisk(string $disk): ImagesService
     {
         $this->disk = $disk;
+
         return $this;
     }
 
     /**
      * @param array $previews
+     *
      * @return $this
      */
     public function setPreviews(array $previews): ImagesService
     {
         $this->previews = $previews;
+
         return $this;
     }
-
 }

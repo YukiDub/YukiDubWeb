@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'default',
+    'default'        => 'default',
     'documentations' => [
         'default' => [
             'api' => [
@@ -56,9 +56,9 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
             */
             'middleware' => [
-                'api' => [],
-                'asset' => [],
-                'docs' => [],
+                'api'             => [],
+                'asset'           => [],
+                'docs'            => [],
                 'oauth2_callback' => [],
             ],
 
@@ -100,12 +100,14 @@ return [
         'scanOptions' => [
             /**
              * analyser: defaults to \OpenApi\StaticAnalyser .
+             *
              * @see \OpenApi\scan
              */
             'analyser' => null,
 
             /**
              * analysis: defaults to a new \OpenApi\Analysis .
+             *
              * @see \OpenApi\scan
              */
             'analysis' => null,
@@ -122,6 +124,7 @@ return [
 
             /**
              * pattern: string       $pattern File pattern(s) to scan (default: *.php) .
+             *
              * @see \OpenApi\scan
              */
             'pattern' => null,

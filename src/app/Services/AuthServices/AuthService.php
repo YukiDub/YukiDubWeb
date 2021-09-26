@@ -7,9 +7,7 @@
 
 namespace App\Services\AuthServices;
 
-use App\Exceptions\AuthException;
 use App\Models\User;
-use App\Services\AuthServices\External\ExternalAuthInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -38,25 +36,25 @@ class AuthService
     public function register(string $name, string $email, string $password)
     {
         return User::create([
-            'name'=>$name,
-            'email'=>$email,
-            'password'=>bcrypt($password)
+            'name'    => $name,
+            'email'   => $email,
+            'password'=> bcrypt($password),
         ]);
     }
 
-    function login(string $email, string $password)
+    public function login(string $email, string $password)
     {
         $client = DB::table('oauth_clients')
             ->where('password_client', true)
             ->first();
 
         $data = [
-            'grant_type' => 'password',
-            'client_id' => $client->id,
+            'grant_type'    => 'password',
+            'client_id'     => $client->id,
             'client_secret' => $client->secret,
-            'username' => $email,
-            'password' => $password,
-            'scope'=>'*'
+            'username'      => $email,
+            'password'      => $password,
+            'scope'         => '*',
         ];
 
         $request = Request::create('/oauth/token', 'POST', $data);
@@ -67,17 +65,18 @@ class AuthService
         return $this;
     }
 
-    public static function updateAccessToken($refreshToken){
+    public static function updateAccessToken($refreshToken)
+    {
         $client = DB::table('oauth_clients')
             ->where('password_client', true)
             ->first();
 
         $data = [
-            'grant_type' => 'refresh_token',
+            'grant_type'    => 'refresh_token',
             'refresh_token' => $refreshToken,
-            'client_id' => $client->id,
+            'client_id'     => $client->id,
             'client_secret' => $client->secret,
-            'scope'=>''
+            'scope'         => '',
         ];
 
         $response = Http::asForm()->post(config('app.url').'/oauth/token', $data);

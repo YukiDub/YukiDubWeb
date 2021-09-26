@@ -25,9 +25,9 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required|email|unique:users,email', //email:rfc,dns
-            'name'=>'required|string|max:255|unique:users,name',
-            'password'=>['required', 'confirmed', Password::min(8)->letters()]
+            'email'   => 'required|email|unique:users,email', //email:rfc,dns
+            'name'    => 'required|string|max:255|unique:users,name',
+            'password'=> ['required', 'confirmed', Password::min(8)->letters()],
         ];
     }
 }

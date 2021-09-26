@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Genre
+ * App\Models\Genre.
  *
- * @property int $genreId
+ * @property int    $genreId
  * @property string $nameJp
  * @property string $nameEn
  * @property string $nameRu
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Genre newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Genre newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Genre query()
@@ -29,14 +30,14 @@ class Genre extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "genre_id";
+    protected $primaryKey = 'genre_id';
     public $timestamps = false;
 
     protected $hidden = ['pivot'];
 
     protected $fillable = [
-        "nameJp",
-        "nameEn",
-        "nameRu"
+        'nameJp',
+        'nameEn',
+        'nameRu',
     ];
 }
