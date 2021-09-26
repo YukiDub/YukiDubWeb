@@ -7,9 +7,9 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Facades\ImageService;
-use App\Http\Requests\StaffCreateRequest;
 use App\Http\Requests\PeopleAnimesRequest;
 use App\Http\Requests\PeopleIndexRequest;
+use App\Http\Requests\StaffCreateRequest;
 use App\Http\Requests\StaffUpdateRequest;
 use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\AnimeResource;
@@ -81,10 +81,11 @@ class PeopleApiController extends ApiController
      */
     public function index(PeopleIndexRequest $request)
     {
-        $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+        $perPage = $request->get('perPage') ? $request->get('perPage') : 6;
         $staff = (new Staff())::with('roles');
 
-        $staff = $staff->ofRole($request->get("role"))->paginate($perPage);
+        $staff = $staff->ofRole($request->get('role'))->paginate($perPage);
+
         return $this->response->withCollection($staff);
     }
 
@@ -193,24 +194,26 @@ class PeopleApiController extends ApiController
      *         )
      *     )
      * )
+     *
      * @param StaffCreateRequest $request
+     *
      * @return JsonResponse
      */
     public function store(StaffCreateRequest $request): JsonResponse
     {
-        if($request->user()->cannot('create', Staff::class)){
+        if ($request->user()->cannot('create', Staff::class)) {
             return $this->response->withBadRequest('Access denied');
-        };
+        }
 
         $people = new Staff();
         $people->fill($request->validated());
 
-        if($request->hasFile("avatar")){
-            $imageName = $people->nameEn . "_" . \Str::random(20);
+        if ($request->hasFile('avatar')) {
+            $imageName = $people->nameEn.'_'.\Str::random(20);
             $previews = [
-              'preview'=>'154x240',
-              'x96'=>'96x150',
-              'x48'=>'48x75'
+                'preview'=> '154x240',
+                'x96'    => '96x150',
+                'x48'    => '48x75',
             ];
             $images = ImageService::setPreviews($previews)->upload($request->file('avatar'), $imageName, '/images/peoples/');
             $people->avatar_original = $images['original'];
@@ -240,7 +243,9 @@ class PeopleApiController extends ApiController
      *         )
      *     )
      * )
-     * @param  int  $id
+     *
+     * @param int $id
+     *
      * @return JsonResponse
      */
     public function show(int $id)
@@ -283,9 +288,9 @@ class PeopleApiController extends ApiController
      *     )
      * )
      *
-     *
      * @param StaffUpdateRequest $request
-     * @param int $id
+     * @param int                $id
+     *
      * @return JsonResponse
      */
     public function update(StaffUpdateRequest $request, int $id): JsonResponse
@@ -293,11 +298,11 @@ class PeopleApiController extends ApiController
         $people = Staff::findOrFail($id);
         $people->fill($request->all());
 
-        if(!$people->isDirty()){
+        if (!$people->isDirty()) {
             return $this->response->withBadRequest('There were no changes');
         }
 
-        if($request->user()->cannot('update', $people)){
+        if ($request->user()->cannot('update', $people)) {
             $this->historyService->updateAction(
                 'Staff update',
                 'moderate',
@@ -306,16 +311,18 @@ class PeopleApiController extends ApiController
             );
 
             return $this->response->json(['status'=>'Sent for moderation']);
-        };
+        }
 
         $people->update();
+
         return $this->response->withItem($people);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return JsonResponse
      *
      * @OA\Delete  (
@@ -357,8 +364,10 @@ class PeopleApiController extends ApiController
     }
 
     /**
-     * Display a listing changes
+     * Display a listing changes.
+     *
      * @param $id
+     *
      * @return JsonResponse
      * @OA\Get(
      *     path="/people/{id}/changes",
@@ -387,12 +396,15 @@ class PeopleApiController extends ApiController
     public function changes($id)
     {
         $staff = Staff::findOrFail($id);
+
         return $this->response->json($staff->changes);
     }
 
     /**
-     * Display a listing of the work this person
+     * Display a listing of the work this person.
+     *
      * @param $id
+     *
      * @return string
      * @OA\Get(
      *     path="/people/{id}/works",
@@ -418,29 +430,32 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function getWorks(int $id){
+    public function getWorks(int $id)
+    {
         $staff = Staff::findOrFail($id);
         $animeCollection = $this->response->setResource(AnimeResource::class)->withCollection($staff->popularAnimes());
 
         $data = [
-            'animes'=>$animeCollection, //надо будет выводить только самые топовые анимехи (т.е сортировать по рейтингу)
-            'mangas'=>[
-                '..'
+            'animes'=> $animeCollection, //надо будет выводить только самые топовые анимехи (т.е сортировать по рейтингу)
+            'mangas'=> [
+                '..',
             ],
-            'ranobe'=>[
-                '..'
+            'ranobe'=> [
+                '..',
             ],
-            'visual-novel'=>[
-                '...'
-            ]
+            'visual-novel'=> [
+                '...',
+            ],
         ];
 
         return $this->response->json($data);
     }
 
     /**
-     * Display a listing of the anime list this person
+     * Display a listing of the anime list this person.
+     *
      * @param $id
+     *
      * @return \Illuminate\Http\Resources\Json\ResourceCollection
      * @OA\Get(
      *     path="/people/{id}/animes",
@@ -474,18 +489,20 @@ class PeopleApiController extends ApiController
      *     )
      * )
      */
-    public function getAnime(PeopleAnimesRequest $request,int $id)
+    public function getAnime(PeopleAnimesRequest $request, int $id)
     {
         $staff = Staff::findOrFail($id);
-        $perPage = $request->get("perPage") ? $request->get('perPage') : 6;
+        $perPage = $request->get('perPage') ? $request->get('perPage') : 6;
         $data = $staff->animes()->paginate($perPage);
 
         return $this->response->setResource(AnimeResource::class)->withCollection($data);
     }
 
     /**
-     * Display a listing of the manga list this person
+     * Display a listing of the manga list this person.
+     *
      * @param $id
+     *
      * @return AnimeCollection
      * @OA\Get(
      *     path="/people/{id}/mangas",
@@ -517,8 +534,10 @@ class PeopleApiController extends ApiController
     }
 
     /**
-     * Display a listing of the roles this person
+     * Display a listing of the roles this person.
+     *
      * @param $id
+     *
      * @return \Illuminate\Http\Resources\Json\ResourceCollection
      * @OA\Get(
      *     path="/people/{id}/roles",
@@ -547,6 +566,7 @@ class PeopleApiController extends ApiController
     public function getRoles(int $id): \Illuminate\Http\Resources\Json\ResourceCollection
     {
         $staff = Staff::findOrFail($id);
+
         return $this->response->setResource(RoleResource::class)->withCollection($staff->roles);
     }
 }

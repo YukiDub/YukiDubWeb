@@ -25,9 +25,9 @@ class SocialRegRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'email',
-            'name'=>'string',
-            'password'=>['required', 'confirmed', Password::min(8)->letters()]
+            'email'   => 'email',
+            'name'    => 'string',
+            'password'=> ['required', 'confirmed', Password::min(8)->letters()],
         ];
     }
 }

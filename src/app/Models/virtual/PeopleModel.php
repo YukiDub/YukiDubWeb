@@ -13,7 +13,6 @@
  */
 class PeopleModel
 {
-
     /**
      * @OA\Property(
      *     title="staff_id",
@@ -22,7 +21,7 @@ class PeopleModel
      *     example=4
      * )
      *
-     * @var integer
+     * @var int
      */
     public $staff_id;
 
