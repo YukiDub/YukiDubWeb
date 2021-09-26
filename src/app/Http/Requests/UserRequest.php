@@ -24,10 +24,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'',
-            'name'=>'',
-            'role'=>'',
-            'banned'=>''
+            'email' => '',
+            'name'  => '',
+            'role'  => '',
+            'banned'=> '',
         ];
     }
 }

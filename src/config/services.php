@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain'   => env('MAILGUN_DOMAIN'),
+        'secret'   => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
@@ -25,21 +25,21 @@ return [
     ],
 
     'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
+        'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'shikimori'=>[
-        'url'=>env('SHIKIMORI_API_URL'),
-        'client'=>env('SHIKIMORI_CLIENT_ID'),
-        'secret'=>env('SHIKIMORI_SECRET'),
+    'shikimori'=> [
+        'url'   => env('SHIKIMORI_API_URL'),
+        'client'=> env('SHIKIMORI_CLIENT_ID'),
+        'secret'=> env('SHIKIMORI_SECRET'),
     ],
 
-    'google'=>[
-        'redirect'=>env('GOOGLE_API_REDIRECT', 'http://dev.yukidub.fun/auth/google/callback'),
-        'client_id'=>env('GOOGLE_API_CLIENT_ID'),
-        'client_secret'=>env('GOOGLE_API_CLIENT_SECRET'),
-    ]
+    'google'=> [
+        'redirect'     => env('GOOGLE_API_REDIRECT', 'http://dev.yukidub.fun/auth/google/callback'),
+        'client_id'    => env('GOOGLE_API_CLIENT_ID'),
+        'client_secret'=> env('GOOGLE_API_CLIENT_SECRET'),
+    ],
 
 ];

@@ -28,15 +28,16 @@ class ShikimoriCore
      * @return mixed
      * @throws ShikimoriException
      */
-    public function collApi(string $type, $path, array $data = [], &$headers = []){
+    public function collApi(string $type, $path, array $data = [], &$headers = [])
+    {
         $headers['Accept'] = 'application/json';
 
-        $response =  Http::withUserAgent($this->userAgent)->withHeaders($headers)
-            ->$type($this->url . $path, $data);
+        $response = Http::withUserAgent($this->userAgent)->withHeaders($headers)
+            ->$type($this->url.$path, $data);
 
         $data = $response->json();
 
-        if($response->serverError()){
+        if ($response->serverError()) {
             throw new ShikimoriException('Server error');
         }
 

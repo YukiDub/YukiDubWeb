@@ -13,7 +13,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class GenresApiController extends ApiController
 {
-
     protected $genresRep;
 
     public function __construct()
@@ -29,13 +28,13 @@ class GenresApiController extends ApiController
      *          tags = {"Genres"},
      *     @OA\Response(response="default", description="Display a listing of the resource")
      * )
+     *
      * @return AnonymousResourceCollection
      */
     public function index(): AnonymousResourceCollection
     {
         return GenresResource::collection($this->genresRep->getList());
     }
-
 
     /**
      * Display the specified resource.
@@ -54,12 +53,15 @@ class GenresApiController extends ApiController
      *         )
      *     )
      * )
-     * @param  int  $id
+     *
+     * @param int $id
+     *
      * @return GenresResource
      */
     public function show($id): GenresResource
     {
         $this->recordExists($genre = $this->genresRep->getById($id));
+
         return new GenresResource($genre);
     }
 }
