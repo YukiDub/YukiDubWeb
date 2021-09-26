@@ -36,9 +36,10 @@ class ShikimoriService
         if($response->serverError()){
             throw new ShikimoriException('Server error');
         }
-//        if($response->status()){
-//            throw new ShikimoriException('Not found');
-//        }
+
+        if(!empty($response['code']) && $response['code'] == 404){
+            throw new ShikimoriException('Server error');
+        }
 
         return $data;
     }

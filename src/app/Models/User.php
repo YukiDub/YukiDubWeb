@@ -96,6 +96,11 @@ class User extends Authenticatable
         return $this->belongsToMany(UserRole::class, 'user_user_roles_permissions', 'user_id', 'role_id');
     }
 
+    public function oauthLogins(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(OauthUserLogin::class, 'user_id', 'id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */

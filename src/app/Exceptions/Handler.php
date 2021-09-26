@@ -73,5 +73,9 @@ class Handler extends ExceptionHandler
         $this->renderable(function (InvalidStateException $e, $request){
             return abort(403, 'Authorisation Error');
         });
+
+        $this->renderable(function (AuthException $e, $request){
+            return abort(403, $e->getMessage());
+        });
     }
 }

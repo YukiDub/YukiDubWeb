@@ -40,6 +40,12 @@ return [
         'redirect'=>env('GOOGLE_API_REDIRECT', 'http://dev.yukidub.fun/auth/google/callback'),
         'client_id'=>env('GOOGLE_API_CLIENT_ID'),
         'client_secret'=>env('GOOGLE_API_CLIENT_SECRET'),
-    ]
+    ],
+
+    'vkontakte' => [
+        'client_id' => env('VKONTAKTE_CLIENT_ID'),
+        'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
+        'redirect' => env('VKONTAKTE_REDIRECT_URI')
+    ],
 
 ];

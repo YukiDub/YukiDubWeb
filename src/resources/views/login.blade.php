@@ -22,6 +22,7 @@
             </div>
             <div>
                 <a href="{{route('social.login', ['provider'=>'google'])}}">Google</a>
+                <a href="{{route('social.login', ['provider'=>'vkontakte'])}}">Vk</a>
             </div>
 
             <button type="submit" class="btn btn-primary mt-2">Войти</button>

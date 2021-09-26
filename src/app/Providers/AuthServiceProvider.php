@@ -3,12 +3,12 @@
 namespace App\Providers;
 
 use App\Auth\Grants\GoogleGrant;
+use App\Auth\Grants\VkontakteGrant;
 use App\Models\Anime;
 use App\Models\Staff;
 use App\Policies\AnimePolicy;
 use App\Policies\StaffPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Bridge\RefreshTokenRepository;
 use Laravel\Passport\Passport;
 use League\OAuth2\Server\AuthorizationServer;
@@ -36,7 +36,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         app(AuthorizationServer::class)->enableGrantType(
-            $this->makeGoogleGrant(), Passport::tokensExpireIn()
+            $this->makeGoogleGrant(), Passport::tokensExpireIn(),
+        );
+
+        app(AuthorizationServer::class)->enableGrantType(
+            $this->makeVkontakteGrant(), Passport::tokensExpireIn()
         );
 
         Passport::routes();
@@ -60,6 +64,23 @@ class AuthServiceProvider extends ServiceProvider
     protected function makeGoogleGrant()
     {
         $grant = new GoogleGrant(
+            $this->app->make(RefreshTokenRepository::class)
+        );
+
+        $grant->setRefreshTokenTTL(Passport::refreshTokensExpireIn());
+
+        return $grant;
+    }
+
+    /**
+     * Create and configure a Vkontakte grant instance.
+     *
+     * @return VkontakteGrant
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function makeVkontakteGrant()
+    {
+        $grant = new VkontakteGrant(
             $this->app->make(RefreshTokenRepository::class)
         );
 

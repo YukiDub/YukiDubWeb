@@ -7,6 +7,7 @@
 
 namespace App\Services\AuthServices;
 
+use App\Exceptions\AuthException;
 use App\Models\OauthUserLogin;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -15,10 +16,10 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthService
 {
-    protected $provider;
-    protected $accessToken;
-    protected $refreshToken;
-    protected $tokenType = "Bearer";
+    protected string $provider;
+    protected string $accessToken;
+    protected string $refreshToken;
+    protected string $tokenType = "Bearer";
     protected $expiresIn;
     private $user;
     protected $userProviderId;
@@ -30,26 +31,52 @@ class SocialAuthService
     public function setProvider($provider): SocialAuthService
     {
         $this->provider = $provider;
-
         return $this;
     }
 
+    /**
+     * @throws AuthException
+     */
     public function callback() : SocialAuthService
     {
-        $token = Socialite::driver('google');
+        $token = Socialite::driver($this->provider);
         $externalUser = $token->user();
 
         $this->userProviderId = $externalUser->getId();
 
-        $login = OauthUserLogin::where('provider', 'google')
+        $userData = [];
+
+        if(!is_null($externalUser->getEmail())){
+            $login = User::where('email', '=', $externalUser->getEmail())
+                ->first();
+
+            $login = $login ? $login->oauthLogins()->where('provider', '!=', $this->provider)->first() : $login;
+
+            if (!is_null($login)){
+                throw new AuthException('User with this email is already registered');
+            }
+
+            $userData['email'] = $externalUser->getEmail();
+        }
+
+        if(!is_null($externalUser->getNickname())){
+            $login = User::where('name', '=', $externalUser->getNickname())
+                ->first();
+
+            $login = $login ? $login->oauthLogins()->where('provider', '!=', $this->provider)->first() : $login;
+
+            if ($login){
+                $userData['name'] = $externalUser->getNickname();
+                $userData['email_verified_at'] = date("Y-m-d H:i:s");
+            }
+        }
+
+        $login = OauthUserLogin::where('provider', $this->provider)
             ->where('provider_user_id', '=', $externalUser->getId())
             ->first();
 
         if(!$login){
-            $this->user = \App\Models\User::firstOrCreate([
-                'email'=>$externalUser->getEmail(),
-                'email_verified_at'=>date("Y-m-d H:i:s")
-            ]);
+            $this->user = \App\Models\User::firstOrCreate($userData);
 
             OauthUserLogin::create([
                 'user_id'=>$this->user->id,
@@ -78,7 +105,7 @@ class SocialAuthService
             ->first();
 
         $data = [
-            'grant_type' => 'google',
+            'grant_type' => $this->provider,
             'client_id' => $client->id,
             'client_secret' => $client->secret,
             'google_id' => $this->userProviderId,
@@ -102,7 +129,7 @@ class SocialAuthService
 
     public function redirect()
     {
-        return Socialite::driver('google')
+        return Socialite::driver($this->provider)
             ->redirect();
     }
 

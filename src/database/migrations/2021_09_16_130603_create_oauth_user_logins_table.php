@@ -17,7 +17,7 @@ class CreateOauthUserLoginsTable extends Migration
             $table->id('login_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
-            $table->enum('provider', ['google', 'shikimori', 'myanimelist'])->nullable(false);
+            $table->enum('provider', ['google', 'shikimori', 'myanimelist', 'vkontakte'])->nullable(false);
             $table->string('provider_user_id', 255)->nullable(false);
 
         });
