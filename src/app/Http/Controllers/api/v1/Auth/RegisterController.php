@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
-
     protected $authService;
 
     public function __construct()
@@ -20,8 +19,10 @@ class RegisterController extends ApiController
     }
 
     /**
-     * New user registration
+     * New user registration.
+     *
      * @param RegistrationRequest $request
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      *
      * @OA\Post (
@@ -79,9 +80,9 @@ class RegisterController extends ApiController
     public function callBack(RegistrationRequest $request)
     {
         $user = User::create([
-            'name'=>$request->get('name'),
-            'email'=>$request->get('email'),
-            'password'=>bcrypt($request->get('password'))
+            'name'    => $request->get('name'),
+            'email'   => $request->get('email'),
+            'password'=> bcrypt($request->get('password')),
         ]);
 
         return view('Auth/Registration/success');

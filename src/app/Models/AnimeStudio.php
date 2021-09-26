@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\AnimeProducer
+ * App\Models\AnimeProducer.
  *
- * @property int $studio_id
+ * @property int    $studio_id
  * @property string $name
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeStudio newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeStudio newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeStudio query()
@@ -23,13 +24,12 @@ use Illuminate\Database\Eloquent\Model;
 class AnimeStudio extends Model
 {
     use HasFactory;
-    protected $primaryKey = "studio_id";
+    protected $primaryKey = 'studio_id';
     public $timestamps = false;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

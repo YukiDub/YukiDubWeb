@@ -9,5 +9,4 @@ namespace App\Services\Synchronization\Anime;
 
 class Shikimori
 {
-
 }

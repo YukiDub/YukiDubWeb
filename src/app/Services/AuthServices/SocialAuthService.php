@@ -18,13 +18,14 @@ class SocialAuthService
     protected $provider;
     protected $accessToken;
     protected $refreshToken;
-    protected $tokenType = "Bearer";
+    protected $tokenType = 'Bearer';
     protected $expiresIn;
     private $user;
     protected $userProviderId;
 
     /**
      * @param $provider
+     *
      * @return $this
      */
     public function setProvider($provider): SocialAuthService
@@ -34,7 +35,7 @@ class SocialAuthService
         return $this;
     }
 
-    public function callback() : SocialAuthService
+    public function callback(): SocialAuthService
     {
         $token = Socialite::driver('google');
         $externalUser = $token->user();
@@ -45,44 +46,44 @@ class SocialAuthService
             ->where('provider_user_id', '=', $externalUser->getId())
             ->first();
 
-        if(!$login){
+        if (!$login) {
             $this->user = \App\Models\User::firstOrCreate([
-                'email'=>$externalUser->getEmail(),
-                'email_verified_at'=>date("Y-m-d H:i:s")
+                'email'            => $externalUser->getEmail(),
+                'email_verified_at'=> date('Y-m-d H:i:s'),
             ]);
 
             OauthUserLogin::create([
-                'user_id'=>$this->user->id,
-                'provider'=>$this->provider,
-                'provider_user_id'=>$externalUser->getId()
+                'user_id'         => $this->user->id,
+                'provider'        => $this->provider,
+                'provider_user_id'=> $externalUser->getId(),
             ]);
-        }
-        else{
+        } else {
             $this->user = \App\Models\User::find($login->user_id);
         }
 
         return $this;
     }
 
-    public function chekActive(): bool {
+    public function chekActive(): bool
+    {
         return $this->user->active;
     }
 
     /**
      * @throws Exception
      */
-    public function login() : SocialAuthService
+    public function login(): SocialAuthService
     {
         $client = DB::table('oauth_clients')
             ->where('password_client', true)
             ->first();
 
         $data = [
-            'grant_type' => 'google',
-            'client_id' => $client->id,
+            'grant_type'    => 'google',
+            'client_id'     => $client->id,
             'client_secret' => $client->secret,
-            'google_id' => $this->userProviderId,
-            'scope'=>'*'
+            'google_id'     => $this->userProviderId,
+            'scope'         => '*',
         ];
 
         $request = Http::asForm()->post(config('app.url').'/oauth/token', $data);
@@ -96,7 +97,8 @@ class SocialAuthService
         return $this;
     }
 
-    public function getUser(): User{
+    public function getUser(): User
+    {
         return $this->user;
     }
 
@@ -106,19 +108,23 @@ class SocialAuthService
             ->redirect();
     }
 
-    public function getAccessToken(): string{
+    public function getAccessToken(): string
+    {
         return $this->accessToken;
     }
 
-    public function getRefreshToken(): string{
+    public function getRefreshToken(): string
+    {
         return $this->refreshToken;
     }
 
-    public function getTokenType(): string {
+    public function getTokenType(): string
+    {
         return $this->tokenType;
     }
 
-    public function expiresIn(): string {
+    public function expiresIn(): string
+    {
         return $this->expiresIn;
     }
 }

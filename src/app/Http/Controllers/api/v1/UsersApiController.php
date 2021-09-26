@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 
 class UsersApiController extends ApiController
 {
-
     protected $userRepo;
 
     public function __construct()
@@ -27,6 +26,7 @@ class UsersApiController extends ApiController
 
     /**
      * Display a listing of the resource.
+     *
      * @OA\Get(
      *     path="/users",
      *     tags = {"Users"},
@@ -72,7 +72,7 @@ class UsersApiController extends ApiController
 
         $userRepo->setRole($request->get('role'));
 
-        $perPage = $request->get("count") ? $request->get('count') : 6;
+        $perPage = $request->get('count') ? $request->get('count') : 6;
 
         $this->recordExists($users = $userRepo->getListPaginate($perPage));
 
@@ -82,12 +82,12 @@ class UsersApiController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -120,7 +120,9 @@ class UsersApiController extends ApiController
      *         )
      *     )
      * )
-     * @param  int  $id
+     *
+     * @param int $id
+     *
      * @return UserResource
      */
     public function show($id): UserResource
@@ -162,8 +164,9 @@ class UsersApiController extends ApiController
      *     )
      * )
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return UserResource
      */
     public function update(UserRequest $request, $id): UserResource
@@ -175,7 +178,7 @@ class UsersApiController extends ApiController
 
         $user->update();
 
-        $user->roles()->sync($request->get("roles"));
+        $user->roles()->sync($request->get('roles'));
 
         return new UserResource($user);
     }
@@ -183,14 +186,14 @@ class UsersApiController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
-
 
     /**
      * @return UserResource

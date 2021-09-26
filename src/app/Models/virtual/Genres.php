@@ -24,6 +24,4 @@ class Genres
      * @var string
      */
     public $name;
-
-
 }
