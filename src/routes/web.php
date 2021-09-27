@@ -47,11 +47,11 @@ Route::prefix('auth')->group(function () {
     Route::post('complete', [SocialLoginController::class, 'completion'])
         ->name('social.registration.completion');
 
-    Route::get('complete/chek/username/{name}', function ($name){
+    Route::get('complete/chek/username/{name}', function ($name) {
         return response()->json(['status'=>false]);
     });
 
-    Route::get('complete/chek/email/{email}', function ($email){
+    Route::get('complete/chek/email/{email}', function ($email) {
         return response()->json(['status'=>false]);
     });
 });

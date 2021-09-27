@@ -40,7 +40,7 @@ class ShikimoriService
             throw new ShikimoriException('Server error');
         }
 
-        if(!empty($response['code']) && $response['code'] == 404){
+        if (!empty($response['code']) && $response['code'] == 404) {
             throw new ShikimoriException('Server error');
         }
 
