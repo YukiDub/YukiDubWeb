@@ -25,11 +25,15 @@
                 Сайт находится в стадии разработки.
             </span>
             <p>Хочешь принять участие в разработке? Напиши <a class="fs-1" href="https://vk.com/im?media=&sel=-182993484">нам в ЛС</a></p>
+
             <div class="row">
                 <div class="col">
                     <a href="https://vk.com/yukidub"><i class="fa fa-vk" aria-hidden="true"></i></a>
                 </div>
             </div>
+
+            <button class="btn btn-dark mt-4"><a class="text-decoration-none" href="{{route('login')}}">Вход для тестеров</a></button>
+
         </div>
     </div>
 </div>

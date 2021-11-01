@@ -7,6 +7,7 @@
 
 namespace App\Services\AuthServices;
 
+use App\Exceptions\AuthException;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +43,9 @@ class AuthService
         ]);
     }
 
+    /**
+     * @throws AuthException
+     */
     public function login(string $email, string $password)
     {
         $client = DB::table('oauth_clients')
@@ -57,10 +61,15 @@ class AuthService
             'scope'         => '*',
         ];
 
-        $request = Request::create('/oauth/token', 'POST', $data);
-        $data = json_decode(app()->handle($request)->getContent());
-        $this->accessToken = $data->access_token;
-        $this->refreshToken = $data->refresh_token;
+        try{
+            $request = Request::create('/oauth/token', 'POST', $data);
+            $data = json_decode(app()->handle($request)->getContent());
+            $this->accessToken = $data->access_token;
+            $this->refreshToken = $data->refresh_token;
+        }
+        catch (\ErrorException $ex){
+            throw new AuthException();
+        }
 
         return $this;
     }

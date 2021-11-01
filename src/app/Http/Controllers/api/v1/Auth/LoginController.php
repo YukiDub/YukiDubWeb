@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1\Auth;
 
+use App\Exceptions\AuthException;
 use App\Http\Controllers\api\v1\ApiController;
 use App\Http\Requests\LoginRequest;
 use App\Services\AuthServices\AuthService;
@@ -10,9 +11,7 @@ use Illuminate\Http\Request;
 class LoginController extends ApiController
 {
     /**
-     * @throws \Exception
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      *
      * @OA\Get (
      *     path="/auth/login",
@@ -25,12 +24,19 @@ class LoginController extends ApiController
      *     )
      *
      * )
+     *@throws \Exception
+     *
      */
-    public function login(LoginRequest $request): \Symfony\Component\HttpFoundation\Response
+    public function login(Request $request)
     {
-        $user = (new AuthService())->login($request->get('email'), $request->get('password'));
+        try{
+            $user = (new AuthService())->login($request->get('name'), $request->get('password'));
 
-        return redirect('index#access_token='.$user->getAccessToken().'&refresh_token='.$user->getRefreshToken());
+            return redirect(config('app.url') . '/auth/success#access_token='.$user->getAccessToken().'&refresh_token='.$user->getRefreshToken());
+        }
+        catch (AuthException $ex){
+            return view('login', ['error'=>true]);
+        }
     }
 
     /**

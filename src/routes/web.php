@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\api\v1\Auth\ChekController;
+use App\Http\Controllers\api\v1\Auth\LoginController;
 use App\Http\Controllers\api\v1\Auth\RegisterController;
 use App\Http\Controllers\api\v1\Auth\SocialLoginController;
 use Illuminate\Support\Facades\Route;
@@ -31,9 +33,16 @@ Route::get('/test', function () {
 });
 
 Route::prefix('auth')->group(function () {
+    Route::get('registration', [RegisterController::class, 'register'])
+    ->name('auth.register.form');
+
+    Route::post('registration', [RegisterController::class, 'callBack'])->name('auth.register');
+
     Route::get('login', function () {
-        return view('login');
+        return view('login', ['error'=>false]);
     })->name('login');
+
+    Route::post('login', [LoginController::class, 'login']);
 
     Route::get('success', function () {
         return view('Auth.Registration.success');
@@ -47,18 +56,12 @@ Route::prefix('auth')->group(function () {
     Route::post('complete', [SocialLoginController::class, 'completion'])
         ->name('social.registration.completion');
 
-    Route::get('complete/chek/username/{name}', function ($name){
-        return response()->json(['status'=>false]);
-    });
+    Route::get('chek/username/{name}', [ChekController::class, 'userName'])->name('auth.chek.name');
 
-    Route::get('complete/chek/email/{email}', function ($email){
-        return response()->json(['status'=>false]);
-    });
+    Route::get('chek/email/{email}', [ChekController::class, 'email'])->name('auth.chek.email');
 });
 
 Route::get('animes', [AnimeController::class, 'view']);
-
-Route::get('auth/registration', [RegisterController::class, 'register']);
 
 Route::get('auth/login/success', function () {
     return 'ok';

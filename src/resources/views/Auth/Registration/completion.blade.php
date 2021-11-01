@@ -1,21 +1,26 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/auth.css">
+    <title>Регистрация</title>
 
-    <title>Завершение регистрации</title>
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg">
 </head>
-<body>
-<div class="container mt-4">
+<body class="d-flex flex-column h-100">
+<div class="bg-container" id="bg-container">
+    <img src="/assets/images/bag.svg" alt="Landscape" class="bg-landscape">
+</div>
+<div class="auth-form">
     <h3 class="text-center">Завершение регистрации</h3>
-    <div class="alert alert-primary" role="alert">
-        <p class="text-center">Для завершения регистрации Вам необходимо заполнить поля ниже!</p>
+    <div class="text-center">
+        <img src="/assets/images/logo.png" alt="img-fluid" width="40%">
     </div>
 
-    <form class="row g-3 needs-validation" novalidate>
+    <form class="row g-3 needs-validation" novalidate action="{{route('social.registration.completion')}}" method="post">
         @csrf
 
         <div class="col-12 position-relative">
@@ -38,7 +43,7 @@
             </div>
         </div>
 
-        <div class="col-6 position-relative">
+        <div class="col-12 position-relative">
             <label for="password" class="form-label">Пароль</label>
             <div class="input-group has-validation">
                 <input type="password" class="form-control" min="8" name="password" id="password" aria-describedby="passwordPrepend" required>
@@ -48,8 +53,8 @@
             </div>
         </div>
 
-        <div class="col-6 position-relative">
-            <label for="passwordСonfirmation" class="form-label">Повтор пароля</label>
+        <div class="col-12 position-relative">
+            <label for="passwordСonfirmation" class="form-label">Подтверждение пароля</label>
             <div class="input-group has-validation">
                 <input type="password" class="form-control" min="8" name="password_confirmation" id="passwordСonfirmation" aria-describedby="passwordСonfirmationPrepend" required>
                 <div class="invalid-tooltip">
@@ -64,73 +69,95 @@
         <input type="hidden" name="token_type" value="{{ $token_type }}" />
         <input type="hidden" name="expires_in" value="{{ $expires_in }}" />
 
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
-        </div>
-    </form>
-</div>
+        <div class="alert alert-danger d-none" role="alert" id="errorMessage"></div>
 
+        <div class="d-grid gap-2">
+            <button class="yuki-btn" type="submit">Зарегистрироваться</button>
+        </div>
+    </form></div>
+
+@extends('Auth.footer')
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/46f170b3e0.js" crossorigin="anonymous"></script>
 
 <script>
-        (function () {
+    (function () {
         'use strict'
 
         let forms = document.querySelectorAll('.needs-validation')
-
-        let password = document.getElementById('password');
-        let password_confirmation = document.getElementById('passwordСonfirmation');
         let name = document.getElementById('name');
         let email = document.getElementById('email');
+        let InvalidMessage = document.getElementById('errorMessage');
+
+        let emailVerify = false;
+        let nameVerify = false;
+
+        email.addEventListener('change', async function () {
+            let isEmail = await chekEmail(email.value);
+            if (email.value && isEmail) {
+                InvalidMessage.textContent = "Email уже занят"
+                InvalidMessage.classList.remove('d-none');
+                emailVerify = false;
+            }
+            else{
+                emailVerify = true;
+                InvalidMessage.classList.add('d-none');
+            }
+        }, false);
+
+        name.addEventListener('change', async function (event) {
+            let isName = await chekUserName(name.value);
+            if (name.value && isName) {
+                InvalidMessage.textContent = "Имя пользователя уже занято"
+                InvalidMessage.classList.remove('d-none');
+                nameVerify = false;
+            }
+            else{
+                nameVerify = true;
+                InvalidMessage.classList.add('d-none');
+            }
+        }, false);
 
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-                }
+                form.addEventListener('submit', async function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    if(!nameVerify && !name.required){
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    if(!emailVerify && !email.required){
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
 
-                if(password.value != password_confirmation.value){
-                    password_confirmation.classList.add('is-invalid')
-
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                if(!chek('username/' + name.value)){
-                    name.classList.add('is-invalid')
-
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                if(!chek('email/' + email.value)){
-                    email.classList.add('is-invalid')
-
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-
-                form.classList.add('was-validated')
-            }, false)
+                    form.classList.add('was-validated')
+                }, false)
             })
-        })()
+    })()
 
-        function chek(path){
-            fetch('http://dev.yukidub.fun/auth/complete/chek/' + path)
-              .then((response) => {
-                let data = response.json();
-                return data['status']
-              })
-              .then((data) => {
-                  return false;
-                  console.log(data);
-              });
-        }
-    </script>
+    async function chekEmail(email) {
+        let url = 'http://dev.yukidub.fun/auth/chek/email/' + email;
+        let response = await fetch(url);
+        let data = await response.json();
+
+        return Boolean(data.data.status)
+    }
+
+    async function chekUserName(name) {
+        let url = 'http://dev.yukidub.fun/auth/chek/username/' + name;
+        let response = await fetch(url);
+        let data = await response.json();
+
+        return Boolean(data.data.status)
+    }
+
+
+</script>
 
 </body>
 </html>
