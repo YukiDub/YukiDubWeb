@@ -37,13 +37,8 @@ class ShikimoriAnimeParser extends Command
     public function handle()
     {
         $shikiService = new ShikimoriService();
-<<<<<<< HEAD
-        for ($id = 1; $id <= 400; $id++){
-            try{
-=======
-        for ($id = 1; $id <= 50000; $id++) {
+        for ($id = 1; $id <= 400; $id++) {
             try {
->>>>>>> b5ff7be4efed93c02586ea0bcf1623f32daae17e
                 $animeParse = $shikiService->getAnimeById($id);
                 $this->alert('parsing new anime');
                 $score = Score::create();
@@ -93,15 +88,9 @@ class ShikimoriAnimeParser extends Command
             } catch (QueryException $queryException) {
             } catch (ShikimoriException $shikiEx) {
                 Log::emergency($shikiEx);
-<<<<<<< HEAD
-           }
-                $this->alert("sleeping");
-                sleep(rand(20,60));
-=======
             }
             $this->alert('sleeping');
-            sleep(rand(40, 120));
->>>>>>> b5ff7be4efed93c02586ea0bcf1623f32daae17e
+            sleep(rand(20, 60));
         }
     }
 }

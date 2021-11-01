@@ -37,16 +37,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         app(AuthorizationServer::class)->enableGrantType(
-<<<<<<< HEAD
-            $this->makeGoogleGrant(), Passport::tokensExpireIn(),
+            $this->makeGoogleGrant(),
+            Passport::tokensExpireIn(),
         );
 
         app(AuthorizationServer::class)->enableGrantType(
-            $this->makeVkontakteGrant(), Passport::tokensExpireIn()
-=======
-            $this->makeGoogleGrant(),
+            $this->makeVkontakteGrant(),
             Passport::tokensExpireIn()
->>>>>>> b5ff7be4efed93c02586ea0bcf1623f32daae17e
         );
 
         Passport::routes();
@@ -82,8 +79,9 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Create and configure a Vkontakte grant instance.
      *
-     * @return VkontakteGrant
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return VkontakteGrant
      */
     protected function makeVkontakteGrant()
     {

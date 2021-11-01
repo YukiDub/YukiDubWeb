@@ -34,7 +34,7 @@ Route::get('/test', function () {
 
 Route::prefix('auth')->group(function () {
     Route::get('registration', [RegisterController::class, 'register'])
-    ->name('auth.register.form');
+        ->name('auth.register.form');
 
     Route::post('registration', [RegisterController::class, 'callBack'])->name('auth.register');
 

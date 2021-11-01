@@ -29,10 +29,10 @@ class SocialLoginController
     }
 
     public function login($provider){
-       $socialUser = $this->socialAuthService
-           ->setProvider($provider)
-           ->callback()
-           ->login();
+        $socialUser = $this->socialAuthService
+            ->setProvider($provider)
+            ->callback()
+            ->login();
 
         if (!$socialUser->chekActive()){
             \Auth::login($socialUser->getUser());
