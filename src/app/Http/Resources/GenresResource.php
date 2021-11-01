@@ -13,16 +13,17 @@ class GenresResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-          "id"=>$this->genre_id,
-          "nameJp"=>$this->nameJp,
-          "nameEn"=>$this->nameEn,
-          "nameRu"=>$this->nameRu
+            'id'    => $this->genre_id,
+            'nameJp'=> $this->nameJp,
+            'nameEn'=> $this->nameEn,
+            'nameRu'=> $this->nameRu,
         ];
     }
 }

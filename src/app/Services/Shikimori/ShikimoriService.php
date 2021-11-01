@@ -25,19 +25,22 @@ class ShikimoriService
      * @param string $type
      * @param $path
      * @param array $data
-     * @return mixed
+     *
      * @throws ShikimoriException
+     *
+     * @return mixed
      */
-    public function collApi(string $type, $path, array $data = []){
-        $response =  Http::withUserAgent($this->userAgent)
-                ->$type($this->url . $path, $data);
+    public function collApi(string $type, $path, array $data = [])
+    {
+        $response = Http::withUserAgent($this->userAgent)
+                ->$type($this->url.$path, $data);
         $data = $response->json();
 
-        if($response->serverError()){
+        if ($response->serverError()) {
             throw new ShikimoriException('Server error');
         }
 
-        if(!empty($response['code']) && $response['code'] == 404){
+        if (!empty($response['code']) && $response['code'] == 404) {
             throw new ShikimoriException('Server error');
         }
 
@@ -46,50 +49,60 @@ class ShikimoriService
 
     /**
      * @param int $id
-     * @return mixed
+     *
      * @throws ShikimoriException
+     *
+     * @return mixed
      */
-    public function getPeopleById(int $id){
-        try{
-            $path = 'api/people/' . $id;
+    public function getPeopleById(int $id)
+    {
+        try {
+            $path = 'api/people/'.$id;
+
             return $this->collApi('get', $path);
-        }
-        catch (ShikimoriException $ex){
+        } catch (ShikimoriException $ex) {
             throw new ShikimoriException('People not found');
         }
     }
 
     /**
      * @param int $id
-     * @return mixed
+     *
      * @throws ShikimoriException
+     *
+     * @return mixed
      */
-    public function getCharacterById(int $id){
-        try{
-            $path = 'api/characters/' . $id;
+    public function getCharacterById(int $id)
+    {
+        try {
+            $path = 'api/characters/'.$id;
+
             return $this->collApi('get', $path);
-        }
-        catch (ShikimoriException $ex){
+        } catch (ShikimoriException $ex) {
             throw new ShikimoriException('Character not found');
         }
     }
 
     /**
      * @param int $id
-     * @return mixed
+     *
      * @throws ShikimoriException
+     *
+     * @return mixed
      */
-    public function getAnimeById(int $id){
-        try{
-            $path = 'api/animes/' . $id;
+    public function getAnimeById(int $id)
+    {
+        try {
+            $path = 'api/animes/'.$id;
+
             return $this->collApi('get', $path);
-        }
-        catch (ShikimoriException $ex){
+        } catch (ShikimoriException $ex) {
             throw new ShikimoriException('Anime not found');
         }
     }
 
-    public function getUrl(){
+    public function getUrl()
+    {
         return $this->url;
     }
 

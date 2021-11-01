@@ -6,38 +6,37 @@
 namespace App\Models;
 
 use App\Facades\ImageService;
-use App\Services\VoteService;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * App\Models\Anime
+ * App\Models\Anime.
  *
- * @property int $animeId
- * @property string $posterUrl
- * @property string $type
- * @property int $episode
- * @property int $episodesReleased
- * @property string $nextEpisode
- * @property string $episodeDuration
- * @property string $status
- * @property string $startDate
- * @property string $releaseDate
- * @property int $genres
- * @property string $ageRating
- * @property string $nameJp
- * @property string $nameEn
+ * @property int         $animeId
+ * @property string      $posterUrl
+ * @property string      $type
+ * @property int         $episode
+ * @property int         $episodesReleased
+ * @property string      $nextEpisode
+ * @property string      $episodeDuration
+ * @property string      $status
+ * @property string      $startDate
+ * @property string      $releaseDate
+ * @property int         $genres
+ * @property string      $ageRating
+ * @property string      $nameJp
+ * @property string      $nameEn
  * @property string|null $nameRu
- * @property string $descriptionJp
- * @property string $descriptionEn
- * @property string $descriptionRu
- * @property int $staff
- * @property int $characters
- * @property int $score
- * @property int $producer
- * @property int $playerVideos
+ * @property string      $descriptionJp
+ * @property string      $descriptionEn
+ * @property string      $descriptionRu
+ * @property int         $staff
+ * @property int         $characters
+ * @property int         $score
+ * @property int         $producer
+ * @property int         $playerVideos
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Anime newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Anime newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Anime query()
@@ -70,52 +69,51 @@ class Anime extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "anime_id";
+    protected $primaryKey = 'anime_id';
     public $timestamps = true;
 
-    protected $dates =[
-      'aired_on',
-      'released_on'
+    protected $dates = [
+        'aired_on',
+        'released_on',
     ];
 
     protected $relations = ['genres', 'staff', 'characters', 'studios'];
 
-    public $fillable =[
+    public $fillable = [
         'anime_id',
         'mal_id',
         'score',
         'shiki_score',
-        "poster_original",
-        "poster_preview",
-        "poster_x96",
-        "poster_x48",
-        "type",
-        "episodes",
-        "episodes_released",
-        "next_episode_at",
-        "episode_duration",
-        "status",
-        "aired_on",
-        "released_on",
-        "age_rating",
-        "name_jp",
-        "name_en",
-        "name_ru",
-        "description_jp",
-        "description_en",
-        "description_ru",
+        'poster_original',
+        'poster_preview',
+        'poster_x96',
+        'poster_x48',
+        'type',
+        'episodes',
+        'episodes_released',
+        'next_episode_at',
+        'episode_duration',
+        'status',
+        'aired_on',
+        'released_on',
+        'age_rating',
+        'name_jp',
+        'name_en',
+        'name_ru',
+        'description_jp',
+        'description_en',
+        'description_ru',
         'description_jp_author',
         'description_en_author',
         'description_ru_author',
         'description_ru_source',
         'description_en_source',
-        'description_jp_source'
+        'description_jp_source',
     ];
-
 
     protected static function booted()
     {
-        static::creating(function ($anime){
+        static::creating(function ($anime) {
             $score = Score::create();
             $anime->score = 1;
         });
@@ -125,15 +123,15 @@ class Anime extends Model
     public function uploadPoster($file)
     {
         $previews = [
-            'preview'=>'154x240',
-            'x96'=>'96x150',
-            'x48'=>'48x75'
+            'preview'=> '154x240',
+            'x96'    => '96x150',
+            'x48'    => '48x75',
         ];
 
         $images = ImageService::setPreviews($previews)->
         upload(
             $file,
-            $this->name_en . \Str::random(18),
+            $this->name_en.\Str::random(18),
             '/images/animes/'
         );
 
@@ -159,7 +157,6 @@ class Anime extends Model
         return $this->belongsToMany(Staff::class, 'animes_staff', 'anime_id', 'staff_id')
             ->with('roles');
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -191,116 +188,130 @@ class Anime extends Model
     public function scoreVotes()
     {
         $this->append('score_votes');
+
         return $this;
     }
 
-    public function getScoreVotesAttribute(){
+    public function getScoreVotesAttribute()
+    {
         $scores = ScoreVote::where('score_id', '=', $this->score)->get();
         $data = [
-            1 =>[
-                "rating"=>1,
-                "count_votes"=>0,
+            1 => [
+                'rating'     => 1,
+                'count_votes'=> 0,
             ],
             2=> [
-                "rating"=>2,
-                "count_votes"=>0,
+                'rating'     => 2,
+                'count_votes'=> 0,
             ],
             3=> [
-                "rating"=>3,
-                "count_votes"=>0,
+                'rating'     => 3,
+                'count_votes'=> 0,
             ],
             4=> [
-                "rating"=>4,
-                "count_votes"=>0,
+                'rating'     => 4,
+                'count_votes'=> 0,
             ],
             5=> [
-                "rating"=>5,
-                "count_votes"=>0,
+                'rating'     => 5,
+                'count_votes'=> 0,
             ],
             6=> [
-                "rating"=>6,
-                "count_votes"=>0,
+                'rating'     => 6,
+                'count_votes'=> 0,
             ],
             7=> [
-                "rating"=>7,
-                "count_votes"=>0,
+                'rating'     => 7,
+                'count_votes'=> 0,
             ],
             8=> [
-                "rating"=>8,
-                "count_votes"=>0,
+                'rating'     => 8,
+                'count_votes'=> 0,
             ],
             9=> [
-                "rating"=>9,
-                "count_votes"=>0,
+                'rating'     => 9,
+                'count_votes'=> 0,
             ],
             10=> [
-                "rating"=>10,
-                "count_votes"=>0,
+                'rating'     => 10,
+                'count_votes'=> 0,
             ],
         ];
 
-        foreach ($scores as $score){
+        foreach ($scores as $score) {
             $rating = $score->rating;
             $data[$rating]['count_votes'] += 1;
         }
+
         return $data;
     }
 
     /**
      * @param $query
      * @param array $genres
+     *
      * @return mixed
      */
-    public function scopeOfGenres($query, array $genres = []){
-        foreach ($genres as $genre){
+    public function scopeOfGenres($query, array $genres = [])
+    {
+        foreach ($genres as $genre) {
             $query->with('genres')->whereHas('genres', function ($query) use ($genre) {
                 $query->where('nameEn', '=', $genre);
             });
         }
+
         return $query;
     }
 
-    public function scopeOfStudios($query, array $studios = []){
-        foreach ($studios as $studio){
+    public function scopeOfStudios($query, array $studios = [])
+    {
+        foreach ($studios as $studio) {
             $query->with('studios')->whereHas('studios', function ($query) use ($studio) {
                 $query->where('name', '=', $studio);
             });
         }
+
         return $query;
     }
 
-    public function scopeOfStatus($query, string $status = null){
-        if($status){
+    public function scopeOfStatus($query, string $status = null)
+    {
+        if ($status) {
             $query->where('status', '=', $status);
         }
+
         return $query;
     }
 
-    public function scopeOfAgeRating($query, string $rating = null){
-        if($rating){
+    public function scopeOfAgeRating($query, string $rating = null)
+    {
+        if ($rating) {
             $query->where('age_rating', '=', $rating);
         }
+
         return $query;
     }
 
-    public function scopeFields($query, array $fields = ['*']){
+    public function scopeFields($query, array $fields = ['*'])
+    {
         array_push($fields, $this->getKeyName());
+
         return $query->select($fields);
     }
 
-
-    public function scopeOfOrders($query, array $orders = []){
-        foreach ($orders as $name=>$order){
+    public function scopeOfOrders($query, array $orders = [])
+    {
+        foreach ($orders as $name=>$order) {
             $query->orderBy($name, $order);
         }
+
         return $query;
     }
 
     public function changes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(ChangesHistory::class, "anime_changes", "anime_id", "change_id")
+        return $this->belongsToMany(ChangesHistory::class, 'anime_changes', 'anime_id', 'change_id')
             ->join('users', 'users.id', '=', 'changes_histories.user_id')
             ->addSelect(['changes_histories.*', 'users.name as user_name']);
     }
-
 }

@@ -14,6 +14,6 @@ class OauthUserLogin extends Model
     protected $fillable = [
         'user_id',
         'provider',
-        'provider_user_id'
+        'provider_user_id',
     ];
 }

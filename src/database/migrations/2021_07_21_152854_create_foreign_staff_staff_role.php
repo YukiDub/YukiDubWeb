@@ -16,12 +16,11 @@ class CreateForeignStaffStaffRole extends Migration
         Schema::create('staff_role_staff', function (Blueprint $table) {
             $table->id('id');
 
-            $table->unsignedBigInteger("role_id");
-            $table->foreign("role_id")->on("staff_role")->references("role_id")->onDelete("cascade");;
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->on('staff_role')->references('role_id')->onDelete('cascade');
 
-            $table->unsignedBigInteger("staff_id");
-            $table->foreign("staff_id")->on("staff")->references("staff_id")->onDelete("cascade");
-
+            $table->unsignedBigInteger('staff_id');
+            $table->foreign('staff_id')->on('staff')->references('staff_id')->onDelete('cascade');
         });
     }
 
