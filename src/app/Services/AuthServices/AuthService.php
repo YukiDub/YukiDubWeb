@@ -61,13 +61,12 @@ class AuthService
             'scope'         => '*',
         ];
 
-        try{
+        try {
             $request = Request::create('/oauth/token', 'POST', $data);
             $data = json_decode(app()->handle($request)->getContent());
             $this->accessToken = $data->access_token;
             $this->refreshToken = $data->refresh_token;
-        }
-        catch (\ErrorException $ex){
+        } catch (\ErrorException $ex) {
             throw new AuthException();
         }
 
