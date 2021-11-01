@@ -9,12 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Score.
+ * App\Models\Score
  *
  * @property int $scoreId
  * @property int $count
  * @property int $total
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Score newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Score newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Score query()
@@ -29,17 +28,16 @@ class Score extends Model
     protected $primaryKey = 'score_id';
 
     protected $fillable = [
-        'rating',
+      'rating'
     ];
 
     protected $hidden = [
-        'score_id',
+        'score_id'
     ];
 
     public $timestamps = false;
 
-    public function votes()
-    {
+    public function votes(){
         return $this->hasMany(ScoreVote::class, 'score_id', 'score_id');
     }
 }

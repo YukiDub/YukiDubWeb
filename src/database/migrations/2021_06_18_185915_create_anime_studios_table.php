@@ -14,8 +14,8 @@ class CreateAnimeStudiosTable extends Migration
     public function up()
     {
         Schema::create('anime_studios', function (Blueprint $table) {
-            $table->id('studio_id');
-            $table->string('name', 20)->nullable(false)->unique();
+            $table->id("studio_id");
+            $table->string("name", 20)->nullable(false)->unique();
         });
     }
 

@@ -23,9 +23,9 @@ class GenreFactory extends Factory
     public function definition()
     {
         return [
-            'nameJp'=> Str::random('8'),
-            'nameEn'=> Str::random('11'),
-            'nameRu'=> Str::random('17'),
+            'nameJp'=>Str::random('8'),
+            'nameEn'=>Str::random('11'),
+            'nameRu'=>Str::random('17')
         ];
     }
 }

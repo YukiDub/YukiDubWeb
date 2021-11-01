@@ -24,8 +24,8 @@ class RemoveRoleStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'roles'  => 'array',
-            'roles.*'=> 'integer|distinct|exists:staff_role,role_id',
+            "roles"=>"array",
+            "roles.*"=>"integer|distinct|exists:staff_role,role_id",
         ];
     }
 }

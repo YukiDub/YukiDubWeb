@@ -14,14 +14,14 @@ class CreateScoreVotesTable extends Migration
     public function up()
     {
         Schema::create('score_votes', function (Blueprint $table) {
-            $table->id('score_vote_id');
-            $table->bigInteger('user')->unsigned();
-            $table->foreign('user')->on('users')->references('id')->onDelete('cascade');
+            $table->id("score_vote_id");
+            $table->bigInteger("user")->unsigned();
+            $table->foreign("user")->on("users")->references("id")->onDelete("cascade");
             $table->enum('rating', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])->nullable(false);
             $table->timestamps();
 
-            $table->bigInteger('score_id')->unsigned();
-            $table->foreign('score_id')->on('scores')->references('score_id')->onDelete('cascade');
+            $table->bigInteger("score_id")->unsigned();
+            $table->foreign("score_id")->on("scores")->references("score_id")->onDelete("cascade");
         });
     }
 

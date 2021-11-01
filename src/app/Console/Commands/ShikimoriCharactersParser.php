@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Character;
 use App\Services\Shikimori\ShikimoriService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Date;
 
 class ShikimoriCharactersParser extends Command
 {
@@ -32,25 +33,27 @@ class ShikimoriCharactersParser extends Command
         $shikiService = new ShikimoriService();
         $character = new Character();
 
-        try {
-            for ($i = 1; $i <= 1000; $i++) {
+        try{
+            for ($i = 1; $i <= 1000; $i++){
                 $charactersParse = $shikiService->getCharacterById($i);
                 $this->alert('parsing new character');
                 $character->firstOrCreate([
-                    'malId'        => $charactersParse['id'],
-                    'nameJp'       => $charactersParse['japanese'],
-                    'nameEn'       => $charactersParse['name'] ? $charactersParse['name'] : null,
-                    'nameRu'       => $charactersParse['russian'] ? $charactersParse['russian'] : null,
-                    'descriptionJp'=> null,
-                    'descriptionEn'=> null,
-                    'descriptionRu'=> $charactersParse['description'] ? $charactersParse['description'] : null,
+                    'malId'=>$charactersParse['id'],
+                    'nameJp'=>$charactersParse['japanese'],
+                    'nameEn'=>$charactersParse['name'] ? $charactersParse['name'] : null,
+                    'nameRu'=>$charactersParse['russian'] ? $charactersParse['russian'] : null,
+                    'descriptionJp'=>null,
+                    'descriptionEn'=>null,
+                    'descriptionRu'=>$charactersParse['description'] ? $charactersParse['description'] : null,
                 ]);
-                sleep(rand(10, 20));
-                $this->alert('sleeping');
+                sleep(rand(10,20));
+                $this->alert("sleeping");
             }
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex){
+
         }
 
-        return 'Good';
+        return "Good";
     }
 }

@@ -7,7 +7,6 @@
 
 use Illuminate\Http\JsonResponse;
 
-function notFoundRequest(): JsonResponse
-{
+function notFoundRequest(): JsonResponse{
     return response()->json(['status'=>404, 'message'=>'Not found'], 404);
 }

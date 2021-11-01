@@ -32,24 +32,25 @@ class ShikimoriPeopleParser extends Command
         $shikiService = new ShikimoriService();
         $staff = new Staff();
 
-        try {
-            for ($i = 1; $i <= 1000; $i++) {
+        try{
+            for ($i = 1; $i <= 1000; $i++){
                 $peopleParse = $shikiService->getPeopleById($i);
                 $this->alert('parsing new people');
                 $staff->firstOrCreate([
-                    'mal_id'  => $peopleParse['id'],
-                    'name_jp' => $peopleParse['japanese'],
-                    'name_en' => $peopleParse['name'] ? $peopleParse['name'] : null,
-                    'name_ru' => $peopleParse['russian'] ? $peopleParse['russian'] : null,
-                    'birthday'=> $peopleParse['birthday'] ? $peopleParse['birthday'] : null,
-                    'website' => $peopleParse['website'] ? $peopleParse['website'] : null,
+                    'mal_id'=>$peopleParse['id'],
+                    'name_jp'=>$peopleParse['japanese'],
+                    'name_en'=>$peopleParse['name'] ? $peopleParse['name'] : null,
+                    'name_ru'=>$peopleParse['russian'] ? $peopleParse['russian'] : null,
+                    'birthday'=>$peopleParse['birthday'] ? $peopleParse['birthday'] : null,
+                    'website'=>$peopleParse['website'] ? $peopleParse['website'] : null
                 ]);
-                sleep(rand(120, 340));
-                $this->alert('sleeping');
+                sleep(rand(120,340));
+                $this->alert("sleeping");
             }
-        } catch (\Exception $exception) {
         }
+        catch (\Exception $exception){
 
-        return 'Good';
+        }
+        return "Good";
     }
 }

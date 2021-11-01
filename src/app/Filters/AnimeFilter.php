@@ -8,27 +8,25 @@
 namespace App\Filters;
 
 use App\Models\Anime;
+use App\Support\Filter;
 use Illuminate\Database\Eloquent\Model;
 
 class AnimeFilter extends BaseFilter
 {
     /**
-     * Fields list.
-     *
+     * Fields list
      * @var array
      */
     public $fields;
 
     /**
-     * Filters list.
-     *
+     * Filters list
      * @var array
      */
     public $filters;
 
     /**
-     * Relations list.
-     *
+     * Relations list
      * @var string[]
      */
     public $relations = ['studios'=>'name', 'genres'=>'nameEn'];

@@ -7,35 +7,32 @@
 
 namespace App\Filters;
 
+use App\Models\Anime;
 use App\Support\Filter;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseFilter implements FilterInterface
 {
     /**
-     * Fields list.
-     *
+     * Fields list
      * @var array
      */
     public $fields;
 
     /**
-     * Filters list.
-     *
+     * Filters list
      * @var array
      */
     public $filters;
 
     /**
-     * Relations list.
-     *
+     * Relations list
      * @var string[]
      */
     public $relations;
 
     /**
-     * Relations list.
-     *
+     * Relations list
      * @var string[]
      */
     public $order;
@@ -45,46 +42,40 @@ class BaseFilter implements FilterInterface
      */
     public $model;
 
+
     /**
      * @param array $fields
-     *
      * @return FilterInterface
      */
     public function fields(array $fields): FilterInterface
     {
         $this->fields = $fields;
         array_push($fields, $this->model->getKeyName());
-
         return $this;
     }
 
     /**
      * @param array $filters
-     *
      * @return FilterInterface
      */
     public function filters(array $filters): FilterInterface
     {
         $this->filters = $filters;
-
         return $this;
     }
 
     /**
      * @param array $order
-     *
      * @return FilterInterface
      */
     public function orders(array $order): FilterInterface
     {
         $this->order = $order;
-
         return $this;
     }
 
     /**
-     * Builder.
-     *
+     * Builder
      * @return Filter
      */
     public function build(): Filter

@@ -14,8 +14,7 @@ class StaffPolicy extends PolicyBase
     /**
      * Determine whether the user can view any models.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -26,9 +25,8 @@ class StaffPolicy extends PolicyBase
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Policy $policy
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Policy  $policy
      * @return mixed
      */
     public function view(User $user, Policy $policy)
@@ -36,11 +34,11 @@ class StaffPolicy extends PolicyBase
         return true;
     }
 
+
     /**
      * Determine whether the user can create models.
      *
-     * @param \App\Models\User $user
-     *
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -51,9 +49,8 @@ class StaffPolicy extends PolicyBase
     /**
      * Determine whether the user can update the model.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Policy $policy
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Policy  $policy
      * @return mixed
      */
     public function update(User $user, Staff $staff)
@@ -64,9 +61,8 @@ class StaffPolicy extends PolicyBase
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Policy $policy
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Policy  $policy
      * @return mixed
      */
     public function delete(User $user, Policy $policy)
@@ -77,9 +73,8 @@ class StaffPolicy extends PolicyBase
     /**
      * Determine whether the user can restore the model.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Policy $policy
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Policy  $policy
      * @return mixed
      */
     public function restore(User $user, Policy $policy)
@@ -90,9 +85,8 @@ class StaffPolicy extends PolicyBase
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Policy $policy
-     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Policy  $policy
      * @return mixed
      */
     public function forceDelete(User $user, Policy $policy)

@@ -6,6 +6,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+
 /**
  * @OA\Info(
  *     title="YukiDub API documentation",
@@ -75,7 +76,7 @@ class ApiController extends Controller
 
     protected function recordExists($record)
     {
-        if (!$record) {
+        if(!$record){
             abort(404);
         }
     }

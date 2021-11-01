@@ -4,14 +4,13 @@ namespace App\Http\Controllers\api\v1\Auth;
 
 use App\Exceptions\AuthException;
 use App\Http\Controllers\api\v1\ApiController;
+use App\Http\Requests\LoginRequest;
 use App\Services\AuthServices\AuthService;
 use Illuminate\Http\Request;
 
 class LoginController extends ApiController
 {
     /**
-     *@throws \Exception
-     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      *
      * @OA\Get (
@@ -25,14 +24,17 @@ class LoginController extends ApiController
      *     )
      *
      * )
+     *@throws \Exception
+     *
      */
     public function login(Request $request)
     {
-        try {
+        try{
             $user = (new AuthService())->login($request->get('name'), $request->get('password'));
 
-            return redirect(config('app.url').'/auth/success#access_token='.$user->getAccessToken().'&refresh_token='.$user->getRefreshToken());
-        } catch (AuthException $ex) {
+            return redirect(config('app.url') . '/auth/success#access_token='.$user->getAccessToken().'&refresh_token='.$user->getRefreshToken());
+        }
+        catch (AuthException $ex){
             return view('login', ['error'=>true]);
         }
     }

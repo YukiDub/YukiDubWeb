@@ -66,3 +66,7 @@ Route::get('animes', [AnimeController::class, 'view']);
 Route::get('auth/login/success', function () {
     return 'ok';
 })->name('login.success');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,6 +8,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Resources\RoleCollection;
 use App\Http\Resources\RoleResource;
+use App\Models\Role;
 use App\Repositories\GenresRepository;
 use Illuminate\Http\Request;
 
@@ -48,8 +49,7 @@ class RoleController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,8 +60,7 @@ class RoleController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return RoleResource
      */
     public function show($id): RoleResource
@@ -72,9 +71,8 @@ class RoleController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -85,8 +83,7 @@ class RoleController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

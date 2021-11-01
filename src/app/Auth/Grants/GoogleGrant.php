@@ -8,8 +8,8 @@
 namespace App\Auth\Grants;
 
 use App\Models\OauthUserLogin;
-use App\Models\User as UserModel;
 use Laravel\Passport\Bridge\User;
+use App\Models\User as UserModel;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -21,25 +21,25 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class GoogleGrant extends AbstractGrant
 {
+
     /**
      * @param RefreshTokenRepositoryInterface $refreshTokenRepository
      */
-    public function __construct(RefreshTokenRepositoryInterface $refreshTokenRepository)
-    {
+    public function __construct(RefreshTokenRepositoryInterface $refreshTokenRepository) {
         $this->setRefreshTokenRepository($refreshTokenRepository);
         $this->refreshTokenTTL = new \DateInterval('P1M');
     }
 
     /**
      * {@inheritdoc}
-     *
      * @throws \League\OAuth2\Server\Exception\OAuthServerException
      */
     public function respondToAccessTokenRequest(
         ServerRequestInterface $request,
         ResponseTypeInterface $responseType,
         \DateInterval $accessTokenTTL
-    ): ResponseTypeInterface {
+    ): ResponseTypeInterface
+    {
         // Validate request
         $client = $this->validateClient($request);
         $scopes = $this->validateScopes($this->getRequestParameter('scope', $request));
@@ -62,9 +62,8 @@ class GoogleGrant extends AbstractGrant
     /**
      * @param ServerRequestInterface $request
      *
-     * @throws OAuthServerException
-     *
      * @return UserEntityInterface
+     * @throws OAuthServerException
      */
     protected function validateUser(ServerRequestInterface $request, ClientEntityInterface $client): UserEntityInterface
     {
@@ -79,6 +78,7 @@ class GoogleGrant extends AbstractGrant
             $client
         );
 
+
         if ($user instanceof UserEntityInterface === false) {
             $this->getEmitter()->emit(new RequestEvent(RequestEvent::USER_AUTHENTICATION_FAILED, $request));
 
@@ -91,21 +91,20 @@ class GoogleGrant extends AbstractGrant
     /**
      *  Retrieve a user by the given Facebook id.
      *
-     * @param string                                               $facebookId
-     * @param string                                               $email
-     * @param string                                               $grantType
-     * @param \League\OAuth2\Server\Entities\ClientEntityInterface $clientEntity
-     *
-     * @throws \League\OAuth2\Server\Exception\OAuthServerException
+     * @param string  $facebookId
+     * @param string  $email
+     * @param string  $grantType
+     * @param \League\OAuth2\Server\Entities\ClientEntityInterface  $clientEntity
      *
      * @return \Laravel\Passport\Bridge\User|null
+     * @throws \League\OAuth2\Server\Exception\OAuthServerException
      */
     private function getUserEntityByGoogleId($googleId, $grantType, ClientEntityInterface $clientEntity)
     {
         $login = OauthUserLogin::where('provider_user_id', '=', $googleId)
             ->where('provider', '=', 'google')->first();
 
-        if (is_null($login)) {
+        if(is_null($login)){
             return;
         }
 

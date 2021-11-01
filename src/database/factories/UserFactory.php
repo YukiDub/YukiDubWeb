@@ -23,11 +23,11 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name'              => $this->faker->name(),
-            'email'             => Str::random().'@gmail.com',
+            'name' => $this->faker->name(),
+            'email' => Str::random() . "@gmail.com",
             'email_verified_at' => now(),
-            'password'          => bcrypt('Test12345678'), // password
-            'remember_token'    => Str::random(10),
+            'password' => bcrypt('Test12345678'), // password
+            'remember_token' => Str::random(10)
         ];
     }
 

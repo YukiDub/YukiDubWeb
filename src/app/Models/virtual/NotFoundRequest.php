@@ -21,7 +21,7 @@ class NotFoundRequest
      *     example=404
      * )
      *
-     * @var int
+     * @var integer
      */
     public $status;
 

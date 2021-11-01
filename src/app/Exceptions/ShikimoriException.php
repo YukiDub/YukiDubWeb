@@ -9,4 +9,5 @@ namespace App\Exceptions;
 
 class ShikimoriException extends \Exception
 {
+
 }

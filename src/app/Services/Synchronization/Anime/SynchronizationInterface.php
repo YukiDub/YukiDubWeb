@@ -9,4 +9,5 @@ namespace App\Services\Synchronization\Anime;
 
 interface SynchronizationInterface
 {
+
 }

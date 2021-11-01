@@ -12,43 +12,41 @@ use Illuminate\Database\Eloquent\Model;
 
 interface FilterInterface
 {
+
     /**
-     * @var array
+     * @var array $fields
      */
 
     /**
-     * @var array
+     * @var array $filters
      */
 
     /**
-     * @var array
+     * @var array $relations
      */
 
     /**
-     * @var array
+     * @var array $order
      */
 
     /**
-     * @var Model
+     * @var $model Model
      */
 
     /**
      * @param array $fields
-     *
      * @return FilterInterface
      */
     public function fields(array $fields): FilterInterface;
 
     /**
      * @param array $filters
-     *
      * @return FilterInterface
      */
     public function filters(array $filters): FilterInterface;
 
     /**
      * @param array $order
-     *
      * @return FilterInterface
      */
     public function orders(array $order): FilterInterface;

@@ -6,20 +6,21 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 /**
- * App\Models\User.
+ * App\Models\User
  *
- * @property int                             $id
- * @property string                          $name
- * @property string                          $email
+ * @property int $id
+ * @property string $name
+ * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string                          $password
- * @property string|null                     $remember_token
+ * @property string $password
+ * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
@@ -30,7 +31,6 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read int|null $tokens_count
- *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -47,9 +47,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasFactory;
-    use Notifiable;
-    use HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -62,12 +60,12 @@ class User extends Authenticatable
         'password',
         'shikimori_id',
         'email_verified_at',
-        'active',
+        'active'
     ];
 
     protected $attributes = [
-        'active'           => false,
-        'email_verified_at'=> null,
+        'active'=>false,
+        'email_verified_at'=>null,
     ];
 
     protected $appends = ['roles'];
@@ -80,7 +78,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'pivot',
+        'pivot'
     ];
 
     /**
@@ -91,6 +89,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {

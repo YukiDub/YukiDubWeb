@@ -18,6 +18,7 @@ use Illuminate\Http\JsonResponse;
 
 class AnimesApiController extends ApiController
 {
+
     public function __construct()
     {
         $this->resource = AnimeResource::class;
@@ -90,16 +91,16 @@ class AnimesApiController extends ApiController
      */
     public function index(AnimeRequest $request): \Illuminate\Http\Resources\Json\ResourceCollection
     {
-        $relations = $request->get('relations') ?? ['studios', 'genres'];
-        $perPage = $request->get('perPage') ?? 6;
+        $relations = $request->get("relations") ?? ['studios', 'genres'];
+        $perPage = $request->get("perPage") ?? 6;
 
         $anime = Anime::with($relations)
-            ->ofGenres($request->get('genres') ?? [])
-            ->ofStudios($request->get('studios') ?? [])
-            ->fields($request->get('fields') ?? ['*'])
-            ->ofOrders($request->get('orders') ?? [])
-            ->ofStatus($request->get('status'))
-            ->ofAgeRating($request->get('rating'));
+            ->ofGenres($request->get("genres") ?? [])
+            ->ofStudios($request->get("studios") ?? [])
+            ->fields($request->get("fields") ?? ['*'])
+            ->ofOrders($request->get("orders") ?? [])
+            ->ofStatus($request->get("status"))
+            ->ofAgeRating($request->get("rating"));
 
         return $this->response->withCollection($anime->paginate($perPage));
     }
@@ -108,18 +109,17 @@ class AnimesApiController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param CreateAnimeRequest $request
-     *
      * @return JsonResponse
      */
     public function store(CreateAnimeRequest $request): JsonResponse
     {
-        if ($request->user()->cannot('create', Anime::class)) {
+        if($request->user()->cannot('create', Anime::class)){
             return $this->response->withForbidden();
         }
 
         $anime = (new Anime())->fill($request->validated());
 
-        if ($request->hasFile('poster')) {
+        if ($request->hasFile('poster')){
             $anime->uploadPoster($request->file('poster'));
         }
 
@@ -129,7 +129,7 @@ class AnimesApiController extends ApiController
 
         return $this->response->withCreated(
             [
-                'anime_id'=> $anime->getKey(),
+                'anime_id'=>$anime->getKey()
             ]
         );
 
@@ -175,8 +175,7 @@ class AnimesApiController extends ApiController
      *     )
      * )
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return JsonResponse
      */
     public function show($id)
@@ -221,9 +220,8 @@ class AnimesApiController extends ApiController
      *     )
      * )
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return JsonResponse
      */
     public function update(AnimeRequest $request, $id)
@@ -231,23 +229,21 @@ class AnimesApiController extends ApiController
         $anime = Anime::findOrFail($id);
         $anime->fill($request->validated());
 
-        if (!$anime->isDirty()) {
+        if(!$anime->isDirty()){
             return $this->response->noChanges();
         }
 
-        if ($request->user()->cannot('update', Anime::class)) {
+        if($request->user()->cannot('update', Anime::class)){
             $historyService = new HistoryService();
             $historyService->updateAction('update anime', 'moderate', \Auth::user()->id, $anime);
-
             return $this->response->moderatedStatus();
         }
 
-        if ($request->hasFile('poster')) {
+        if ($request->hasFile('poster')){
             $anime->uploadPoster($request->file('poster'));
         }
 
         $anime->update();
-
         return $this->response->acceptedStatus();
     }
 
@@ -292,7 +288,7 @@ class AnimesApiController extends ApiController
      *         )
      *     )
      * )
-     **/
+    **/
     public function updatePoster(AnimeRequest $request, $id): JsonResponse
     {
         $anime = Anime::findOrFail($id);
@@ -300,7 +296,7 @@ class AnimesApiController extends ApiController
         $image = ImageService::upload($request->file('poster'), $anime->nameEn, '/animes/moderate');
         $anime->poster_original = $image['original'];
 
-        if (!$request->user()->cannot('update', Anime::class)) {
+        if(!$request->user()->cannot('update', Anime::class)){
             $historyService = new HistoryService();
             $historyService->updateAction('update anime poster', 'moderate', \Auth::user()->id, $anime);
 
@@ -309,7 +305,6 @@ class AnimesApiController extends ApiController
 
         $anime->uploadPoster($request->file('poster'));
         $anime->save();
-
         return $this->response->acceptedStatus();
     }
 
@@ -346,8 +341,7 @@ class AnimesApiController extends ApiController
      *     )
      * )
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return JsonResponse
      */
     public function destroy($id): JsonResponse
@@ -358,9 +352,8 @@ class AnimesApiController extends ApiController
         return $this->response->withNoContent();
     }
 
-    /**
-     * Sending vote.
-     *
+
+    /** Sending vote
      *  @OA\Post  (
      *  path="/anime/{id}/vote",
      *  tags = {"Anime"},
@@ -400,19 +393,16 @@ class AnimesApiController extends ApiController
      *  )
      * )
      * Sending vote
-     *
      * @param $id
      * @param SendVoteRequest $request
-     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|JsonResponse|\Illuminate\Http\Response
      */
-    public function vote($id, SendVoteRequest $request)
-    {
+    public function vote($id, SendVoteRequest $request){
         $anime = Anime::findOrFail($id);
 
-        if ($request->user()->cannot('createVote', $anime)) {
+        if($request->user()->cannot('createVote', $anime)){
             return $this->response->withForbidden(['Access denied']);
-        }
+        };
 
         $voteService = new VoteService();
         $status = $voteService->createVote(Auth()->user()->id, $request->get('vote'), $anime->score);

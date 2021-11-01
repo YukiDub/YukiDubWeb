@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Staff;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GenresSeeder::class,
             StaffRoleSeeder::class,
-            UsersRolesSeeder::class,
+            UsersRolesSeeder::class
         ]);
 
         User::factory(10)->create();

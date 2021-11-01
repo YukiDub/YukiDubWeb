@@ -19,27 +19,25 @@ class SocialAuthService
     protected string $provider;
     protected string $accessToken;
     protected string $refreshToken;
-    protected string $tokenType = 'Bearer';
+    protected string $tokenType = "Bearer";
     protected $expiresIn;
     private $user;
     protected $userProviderId;
 
     /**
      * @param $provider
-     *
      * @return $this
      */
     public function setProvider($provider): SocialAuthService
     {
         $this->provider = $provider;
-
         return $this;
     }
 
     /**
      * @throws AuthException
      */
-    public function callback(): SocialAuthService
+    public function callback() : SocialAuthService
     {
         $token = Socialite::driver($this->provider);
         $externalUser = $token->user();
@@ -48,28 +46,28 @@ class SocialAuthService
 
         $userData = [];
 
-        if (!is_null($externalUser->getEmail())) {
+        if(!is_null($externalUser->getEmail())){
             $login = User::where('email', '=', $externalUser->getEmail())
                 ->first();
 
             $login = $login ? $login->oauthLogins()->where('provider', '!=', $this->provider)->first() : $login;
 
-            if (!is_null($login)) {
+            if (!is_null($login)){
                 throw new AuthException('User with this email is already registered');
             }
 
             $userData['email'] = $externalUser->getEmail();
         }
 
-        if (!is_null($externalUser->getNickname())) {
+        if(!is_null($externalUser->getNickname())){
             $login = User::where('name', '=', $externalUser->getNickname())
                 ->first();
 
             $login = $login ? $login->oauthLogins()->where('provider', '!=', $this->provider)->first() : $login;
 
-            if ($login) {
+            if ($login){
                 $userData['name'] = $externalUser->getNickname();
-                $userData['email_verified_at'] = date('Y-m-d H:i:s');
+                $userData['email_verified_at'] = date("Y-m-d H:i:s");
             }
         }
 
@@ -77,41 +75,41 @@ class SocialAuthService
             ->where('provider_user_id', '=', $externalUser->getId())
             ->first();
 
-        if (!$login) {
+        if(!$login){
             $this->user = \App\Models\User::firstOrCreate($userData);
 
             OauthUserLogin::create([
-                'user_id'         => $this->user->id,
-                'provider'        => $this->provider,
-                'provider_user_id'=> $externalUser->getId(),
+                'user_id'=>$this->user->id,
+                'provider'=>$this->provider,
+                'provider_user_id'=>$externalUser->getId()
             ]);
-        } else {
+        }
+        else{
             $this->user = \App\Models\User::find($login->user_id);
         }
 
         return $this;
     }
 
-    public function chekActive(): bool
-    {
+    public function chekActive(): bool {
         return $this->user->active;
     }
 
     /**
      * @throws Exception
      */
-    public function login(): SocialAuthService
+    public function login() : SocialAuthService
     {
         $client = DB::table('oauth_clients')
             ->where('password_client', true)
             ->first();
 
         $data = [
-            'grant_type'    => $this->provider,
-            'client_id'     => $client->id,
+            'grant_type' => $this->provider,
+            'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'google_id'     => $this->userProviderId,
-            'scope'         => '*',
+            'google_id' => $this->userProviderId,
+            'scope'=>'*'
         ];
 
         $request = Http::asForm()->post(config('app.url').'/oauth/token', $data);
@@ -125,8 +123,7 @@ class SocialAuthService
         return $this;
     }
 
-    public function getUser(): User
-    {
+    public function getUser(): User{
         return $this->user;
     }
 
@@ -136,23 +133,19 @@ class SocialAuthService
             ->redirect();
     }
 
-    public function getAccessToken(): string
-    {
+    public function getAccessToken(): string{
         return $this->accessToken;
     }
 
-    public function getRefreshToken(): string
-    {
+    public function getRefreshToken(): string{
         return $this->refreshToken;
     }
 
-    public function getTokenType(): string
-    {
+    public function getTokenType(): string {
         return $this->tokenType;
     }
 
-    public function expiresIn(): string
-    {
+    public function expiresIn(): string {
         return $this->expiresIn;
     }
 }

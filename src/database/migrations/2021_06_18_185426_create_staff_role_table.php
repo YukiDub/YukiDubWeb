@@ -14,8 +14,8 @@ class CreateStaffRoleTable extends Migration
     public function up()
     {
         Schema::create('staff_role', function (Blueprint $table) {
-            $table->id('role_id');
-            $table->string('name')->nullable(false);
+            $table->id("role_id");
+            $table->string("name")->nullable(false);
         });
     }
 
