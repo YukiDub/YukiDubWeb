@@ -7,27 +7,26 @@
 
 namespace App\Support;
 
-use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\Resources\Json\ResourceCollection as Collection;
+use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class Response
 {
     /**
-     * Http response
+     * Http response.
      *
      * @var \Illuminate\Contracts\Routing\ResponseFactory
      */
     private $response;
 
     /**
-     * Collection
-     *
+     * Collection.
      */
     private $resource;
 
     /**
-     * Http status code
+     * Http status code.
      *
      * @var int
      */
@@ -46,7 +45,8 @@ class Response
 
     /**
      * @param array|Collection $data
-     * @param array $headers
+     * @param array            $headers
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function json($data = [], array $headers = []): \Illuminate\Http\JsonResponse
@@ -59,12 +59,12 @@ class Response
      */
     public function withCollection($data): Collection
     {
-        return ($this->resource::collection($data));
+        return $this->resource::collection($data);
     }
-
 
     /**
      * @param null $resource
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function withCreated($resource = null): \Illuminate\Http\JsonResponse
@@ -74,6 +74,7 @@ class Response
         if (is_null($resource)) {
             return $this->json();
         }
+
         return $this->json($resource);
     }
 
@@ -135,6 +136,7 @@ class Response
      * Make a JSON response with the transformed items.
      *
      * @param $data
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function withItem($data): \Illuminate\Http\JsonResponse
@@ -152,7 +154,7 @@ class Response
     public function withError($message): \Illuminate\Http\JsonResponse
     {
         return $this->response->json([
-            'messages' => is_array($message) ? $message : [$message]
+            'messages' => is_array($message) ? $message : [$message],
         ]);
     }
 
@@ -163,7 +165,7 @@ class Response
     {
         return $this->json(
             [
-                'status'=>'accepted'
+                'status'=> 'accepted',
             ]
         );
     }
@@ -175,7 +177,7 @@ class Response
     {
         return $this->json(
             [
-                'status'=>'moderated'
+                'status'=> 'moderated',
             ]
         );
     }
@@ -191,7 +193,7 @@ class Response
     }
 
     /**
-     * Get status code
+     * Get status code.
      *
      * @return int
      */
@@ -201,23 +203,28 @@ class Response
     }
 
     /**
-     * Set status code
+     * Set status code.
      *
      * @param int $statusCode
+     *
      * @return Response
      */
     public function setStatusCode(int $statusCode): Response
     {
         $this->statusCode = $statusCode;
+
         return $this;
     }
 
-    /** Set collection class
+    /**
+     * Set collection class.
+     *
      * @param mixed $resource
      */
     public function setResource($resource): Response
     {
         $this->resource = $resource;
+
         return $this;
     }
 }

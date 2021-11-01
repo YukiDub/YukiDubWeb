@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\AnimeCharacter
+ * App\Models\AnimeCharacter.
  *
  * @property int $animeCharactersId
  * @property int $character
  * @property int $main
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeCharacter newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeCharacter newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeCharacter query()
@@ -25,8 +26,8 @@ use Illuminate\Database\Eloquent\Model;
 class AnimeCharacter extends Model
 {
     use HasFactory;
-    protected $primaryKey = "animeCharactersId";
+    protected $primaryKey = 'animeCharactersId';
     public $timestamps = false;
 
-    protected $fillable = ["character", "main"];
+    protected $fillable = ['character', 'main'];
 }

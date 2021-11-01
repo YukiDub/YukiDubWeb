@@ -12,20 +12,22 @@ use App\Models\User;
 
 class ChekController extends ApiController
 {
-    function userName($name){
+    public function userName($name)
+    {
         $user = User::where('name', '=', $name)->first();
 
-        if(is_null($user)){
+        if (is_null($user)) {
             return $this->response->json(['status'=>false]);
         }
 
         return $this->response->json(['status'=>true]);
     }
 
-    function email($email){
+    public function email($email)
+    {
         $user = User::where('email', '=', $email)->first();
 
-        if(is_null($user)){
+        if (is_null($user)) {
             return $this->response->json(['status'=>false]);
         }
 

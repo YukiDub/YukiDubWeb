@@ -6,16 +6,15 @@
 
 namespace App\Models;
 
-use App\Observers\StaffObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * App\Models\Staff
+ * App\Models\Staff.
  *
- * @property int $staff_id
- * @property string $nameJp
+ * @property int         $staff_id
+ * @property string      $nameJp
  * @property string|null $nameEn
  * @property string|null $nameRu
  * @property string|null $birthday
@@ -23,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string|null $avatarExtention
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Staff newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Staff newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Staff query()
@@ -40,7 +40,7 @@ class Staff extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $primaryKey = "staff_id";
+    public $primaryKey = 'staff_id';
 
     protected $hidden = ['pivot'];
 
@@ -54,7 +54,7 @@ class Staff extends Model
         'avatar_preview',
         'avatar_x96',
         'avatar_x48',
-        'mal_id'
+        'mal_id',
     ];
 
     /**
@@ -62,16 +62,15 @@ class Staff extends Model
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, "animes_staff", "staff_id", "role_id");
+        return $this->belongsToMany(Role::class, 'animes_staff', 'staff_id', 'role_id');
     }
-
 
     /**
      * @return BelongsToMany
      */
     public function animes(): BelongsToMany
     {
-        return $this->belongsToMany(Anime::class, "animes_staff", "staff_id", "anime_id");
+        return $this->belongsToMany(Anime::class, 'animes_staff', 'staff_id', 'anime_id');
     }
 
     /**
@@ -79,41 +78,43 @@ class Staff extends Model
      */
     public function changes(): BelongsToMany
     {
-        return $this->belongsToMany(ChangesHistory::class, "staff_changes", "staff_id", "change_id")
+        return $this->belongsToMany(ChangesHistory::class, 'staff_changes', 'staff_id', 'change_id')
             ->join('users', 'users.id', '=', 'changes_histories.user_id')
             ->addSelect(['changes_histories.*', 'users.name as user_name']);
     }
 
     /**
      * @param int $count
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function popularAnimes(int $count = 4): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->belongsToMany(Anime::class, "animes_staff", "staff_id", "anime_id")
+        return $this->belongsToMany(Anime::class, 'animes_staff', 'staff_id', 'anime_id')
             ->join('scores', 'animes.score', '=', 'scores.score_id')
             // ->orderBy('scores.total', 'DESC')
             ->limit($count)
             ->get();
     }
 
-
     public function getChanges(): \Illuminate\Database\Eloquent\Builder
     {
-        return $this->with(['changes'=>function($query){
+        return $this->with(['changes'=> function ($query) {
             $query
                 ->join('users', 'users.id', '=', 'changes_histories.user_id')
                 ->addSelect(['changes_histories.*', 'users.name as user_name']);
-            }]);
-            //->find($id);
+        }]);
+        //->find($id);
     }
 
-   public function scopeOfRole($query, string $roleName = null){
-        if($roleName){
+    public function scopeOfRole($query, string $roleName = null)
+    {
+        if ($roleName) {
             $query->with('roles')->whereHas('roles', function ($q) use ($roleName) {
-                $q->where("name", "=", $roleName);
+                $q->where('name', '=', $roleName);
             });
         }
-       return $query;
-   }
+
+        return $query;
+    }
 }

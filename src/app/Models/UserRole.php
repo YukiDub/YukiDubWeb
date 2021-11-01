@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\UserRole
+ * App\Models\UserRole.
  *
- * @property int $id
+ * @property int    $id
  * @property string $name
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole query()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole whereName($value)
  * @mixin \Eloquent
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
  */
@@ -30,7 +32,7 @@ class UserRole extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    function permissions()
+    public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'user_roles_permissions', 'role_id', 'permission_id');
     }
@@ -42,5 +44,4 @@ class UserRole extends Model
     {
         return $this->permissions()->get();
     }
-
 }
