@@ -141,7 +141,7 @@
     })()
 
     async function chekEmail(email) {
-        let url = 'http://dev.yukidub.fun/auth/chek/email/' + email;
+        let url = location.origin + '/auth/chek/email/' + email;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -149,7 +149,7 @@
     }
 
     async function chekUserName(name) {
-        let url = 'http://dev.yukidub.fun/auth/chek/username/' + name;
+        let url = location.origin + '/auth/chek/username/' + name;
         let response = await fetch(url);
         let data = await response.json();
 
