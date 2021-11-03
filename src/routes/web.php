@@ -39,7 +39,7 @@ Route::prefix('auth')->group(function () {
     Route::post('registration', [RegisterController::class, 'callBack'])->name('auth.register');
 
     Route::get('login', function () {
-        return view('login', ['error'=>false]);
+        return view('auth.login', ['error'=>false]);
     })->name('login');
 
     Route::post('login', [LoginController::class, 'login']);
@@ -66,7 +66,3 @@ Route::get('animes', [AnimeController::class, 'view']);
 Route::get('auth/login/success', function () {
     return 'ok';
 })->name('login.success');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
