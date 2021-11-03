@@ -1,73 +1,87 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="ru" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/auth.css">
+    <title>Авторизация</title>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg">
+</head>
+<body class="d-flex flex-column h-100">
+<div class="bg-container" id="bg-container">
+    <img src="/assets/images/bag.svg" alt="Landscape" class="bg-landscape">
+</div>
+<div class="auth-form">
+    <h3 class="text-center">Авторизация</h3>
+    <div class="text-center">
+        <img src="/assets/images/logo.png" alt="img-fluid" width="40%">
+    </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    <form action="{{"/auth/login"}}" method="post" class="row g-3 needs-validation @if($error) was-validated @endif" novalidate>
+        @csrf
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+        <div class="col-12 position-relative">
+            <label for="name" class="form-label">Email</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" minlength="1" maxlength="255" name="name" id="name" aria-describedby="namePrepend" required>
+                <div class="invalid-tooltip">
+                    Вы ввели не верный логин либо пароль
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-12 position-relative">
+            <label for="password" class="form-label">Пароль</label>
+            <input type="password" class="form-control" minlength="1" maxlength="255" name="password" id="password" aria-describedby="namePrepend" required>
+        </div>
+
+        <div class="text-center">
+            <p>Войти через социальные сети</p>
+            <a href="{{route('social.login', ['provider'=>'vkontakte'])}}" ><i class="fa fa-vk" aria-hidden="true"></i></a></i>
+            <a href="{{route('social.login', ['provider'=>'google'])}}" ><i class="fa fa-google" aria-hidden="true"></i></a></i>
+            <a href="{{route('social.login', ['provider'=>'shikimori'])}}"> <img src="/assets/images/shikimori.svg" class="img-fluid" alt="" width="32"></a>
+            <a href="{{route('social.login', ['provider'=>'myanimelist'])}}"> <img src="/assets/images/mal.svg" class="img-fluid" alt="" width="32"></a>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="yuki-btn mb-3" type="submit">Войти</button>
+        </div>
+
+        <div class="text-center">
+            <p>У вас ещё нет аккаунута? Тогда вы можете <a href="{{route('auth.register.form')}}">зарегистрироваться</a></p>
+        </div>
+
+    </form>
 </div>
-@endsection
+
+@extends('Auth.footer')
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/46f170b3e0.js" crossorigin="anonymous"></script>
+
+<script>
+    (function () {
+        'use strict'
+
+        let forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+</body>
+</html>
