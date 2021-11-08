@@ -11,10 +11,11 @@ class AnimeCollection extends ResourceCollection
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return array
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function toArray($request)
+    public function toArray($request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return $this->collection->toArray();
+        return AnimeResource::collection($this->collection);
+
     }
 }

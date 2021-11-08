@@ -23,16 +23,25 @@ class AnimeResource extends JsonResource
             'id'         => $this->anime_id,
             'name_jp'    => $this->when($this->name_jp, $this->name_jp),
             'name_en'    => $this->when($this->name_en, $this->name_en),
-            'name_ru'    => $this->when($this->name_ru, $this->name_ru),
+            'name_ru'    => $this->name_ru,
             'mal_id'     => $this->when($this->mal_id, $this->mal_id),
             'shiki_score'=> $this->when($this->shiki_score, $this->shiki_score),
             'poster'     => [
-                'original'=> $this->poster_original,
-                'preview' => $this->poster_preview,
-                'x96'     => $this->poster_x96,
-                'x48'     => $this->poster_x48,
+                'original'=> '/storage/' . $this->poster_original,
+                'preview' => '/storage/' . $this->poster_preview,
+                'x96'     => '/storage/' . $this->poster_x96,
+                'x48'     => '/storage/' . $this->poster_x48,
             ],
-            'type'                    => $this->when($this->type, $this->type),
+            'type'                    => [
+                [
+                    'name'=>'anime',
+                    'url'=>'/animes',
+                ],
+                [
+                    'name'=>$this->type,
+                    'url'=>'/animes?type=' . $this->type,
+                ]
+            ],
             'episodes'                => $this->when($this->episodes, $this->episodes),
             'episodes_released'       => $this->when($this->episodes_released, $this->episodes_released),
             'next_episode_at'         => $this->when($this->next_episode_at, $this->next_episode_at),
