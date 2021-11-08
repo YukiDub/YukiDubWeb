@@ -21,9 +21,10 @@ class GenresResource extends JsonResource
     {
         return [
             'id'    => $this->genre_id,
-            'nameJp'=> $this->nameJp,
-            'nameEn'=> $this->nameEn,
-            'nameRu'=> $this->nameRu,
+            'name_jp'=> $this->nameJp,
+            'name_en'=> $this->nameEn,
+            'name_ru'=> $this->nameRu,
+            'url'=>'/'
         ];
     }
 }
