@@ -18,20 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('{any}', function () {
-//    return view('index');
-//})->where('any', '.*');
-
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/test', function () {
-    $user = \App\Models\User::find(1);
-
-    return $user;
-});
-
 Route::prefix('auth')->group(function () {
     Route::get('registration', [RegisterController::class, 'register'])
         ->name('auth.register.form');
@@ -60,9 +46,10 @@ Route::prefix('auth')->group(function () {
 
     Route::get('chek/email/{email}', [ChekController::class, 'email'])->name('auth.chek.email');
 });
-
-Route::get('animes', [AnimeController::class, 'view']);
-
 Route::get('auth/login/success', function () {
     return 'ok';
 })->name('login.success');
+
+Route::get('{any}', function () {
+    return view('vue');
+})->where('any', '.*');

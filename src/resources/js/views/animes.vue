@@ -1,0 +1,116 @@
+<!--
+  - Copyright (c) YukiDub. Author: M9snikFeed <m9snikfeed@gmail.com>.
+  -
+  - 23.7.2021
+  -->
+
+<template>
+  <div class="row">
+    <div class="col order-1">
+      <div class="row mb-2 mt-sm-4 mt-md-0">
+        <div class="col-auto me-auto">
+          <h6 class="p-title">Аниме - страница {{page}}</h6>
+        </div>
+        <div class="col-auto">
+          <div class="btn" v-on:click="page = page > 1 ? page - 1 : 1"> < </div>
+          <div class="btn" v-on:click="page = page + 1"> > </div>
+        </div>
+      </div>
+      <div class="entry-list ps-4 pe-4 pb-2">
+        <div v-if="loading" class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-5 g-3 mt-0 pt-1">
+          <catalog-entry
+              v-for=       "anime in animeList"
+              v-bind:key=  "anime.id"
+              :id=         "anime.id"
+              :name=       "anime.name_ru"
+              :type=       "anime.type"
+              :genres=     "anime.genres"
+              :poster_url= "anime.poster.preview"
+              :status=     "anime.status"
+              :studios=    "anime.studios"
+          ></catalog-entry>
+        </div>
+        <loading v-else></loading>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-3 order-2 order-md-1">
+      <h6 class="p-title mb-3">Фильтры</h6>
+      <div class="col-12">
+        <animeFilter>
+
+        </animeFilter>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import {mapGetters, mapActions} from 'vuex';
+import animeFilter from '../components/AnimeFilterComponent';
+
+export default {
+  name: "index",
+
+  components: {
+    animeFilter,
+  },
+
+  computed: mapGetters(['animeList', 'animePagination']),
+
+  mounted() {
+    this.loadAnimesList(this.page, 30);
+    // this.bodyParams.genres = [];
+    // console.log(this.bodyParams)
+    // Array.observe(this.genresFilter, function(changes) {
+    //   console.log(changes);
+    // });
+  },
+
+  data(){
+    return {
+      loading:      false,
+      page:         1,
+      genresFilter: [],
+      statusFilter: [],
+      bodyParams:   {
+        'genres': [
+            'josei'
+        ]
+      },
+    }
+  },
+
+  watch: {
+    page: {
+      handler(){
+        this.loading = false;
+        this.loadAnimesList(this.page, 30);
+      },
+      deep: true
+    },
+    animeList: {
+      handler(){
+        this.loading = true;
+      },
+      deep:true
+    }
+  },
+
+  methods: mapActions(["loadAnimesList"])
+  // methods: {
+  //   loadPage(){
+  //     let params = this.$route.query;
+  //
+  //     if(params.genres) this.genresFilter = params.genres.split(',');
+  //     if(params.status) this.statusFilter = params.status.split(',');
+  //
+  //     console.log(this.genresFilter);
+  //   },
+  // },
+
+}
+</script>
+
+<style scoped>
+
+</style>

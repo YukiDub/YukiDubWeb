@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[26],{2026:(e,t,n)=>{n.r(t),n.d(t,{default:()=>c});const s={name:"index",mounted:function(){},watch:{},methods:{}};const c=(0,n(1900).Z)(s,(function(){var e=this,t=e.$createElement;return(e._self._c||t)("p",{staticClass:"text-center"},[e._v("будущая страница с аниме")])}),[],!1,null,"a3dc900a",null).exports}}]);
