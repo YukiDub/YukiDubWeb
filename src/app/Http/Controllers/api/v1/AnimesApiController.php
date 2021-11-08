@@ -91,7 +91,7 @@ class AnimesApiController extends ApiController
     public function index(AnimeRequest $request): \Illuminate\Http\Resources\Json\ResourceCollection
     {
         $relations = $request->get('relations') ?? ['studios', 'genres'];
-        $perPage = $request->get('perPage') ?? 6;
+        $perPage = $request->get('perPage') ?? 8;
 
         $anime = Anime::with($relations)
             ->ofGenres($request->get('genres') ?? [])
@@ -182,6 +182,7 @@ class AnimesApiController extends ApiController
     public function show($id)
     {
         $anime = Anime::with(['genres', 'studios', 'staff', 'scoreInfo', 'characters'])
+            ->fields(request()->get('fields') ?? ['*'])
             ->findOrFail($id)
             ->scoreVotes();
 
