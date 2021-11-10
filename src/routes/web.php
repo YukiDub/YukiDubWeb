@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\api\v1\Auth\ChekController;
 use App\Http\Controllers\api\v1\Auth\LoginController;
 use App\Http\Controllers\api\v1\Auth\RegisterController;
@@ -50,6 +49,6 @@ Route::get('auth/login/success', function () {
     return 'ok';
 })->name('login.success');
 
-Route::get('{any}', function () {
+Route::get('/{any}', function () {
     return view('vue');
 })->where('any', '.*');

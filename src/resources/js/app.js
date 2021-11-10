@@ -41,5 +41,5 @@ Vue.component('loading', require('./components/LoadingComponent').default);
 const app = new Vue({
     store,
     el: '#app',
-    router: router,
+    router: router
 });

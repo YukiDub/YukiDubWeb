@@ -11,7 +11,8 @@ Vue.use(VueRouter)
 
 const indexView = () => import("./views/index")
 const notFound = () => import("./views/notFound")
-const animesView = () => import("./views/animes")
+const animes = () => import("./views/animes")
+const anime = () => import("./views/anime")
 
 
 const routes = [
@@ -23,8 +24,14 @@ const routes = [
     },
     {
         path: '/animes',
-        component: animesView,
+        component: animes,
         name: 'animes',
+        meta: {'title': "Аниме", 'headerName': 'Аниме'}
+    },
+    {
+        path: '/animes/:id',
+        component: anime,
+        name: 'anime',
         meta: {'title': "Аниме", 'headerName': 'Аниме'}
     },
     {

@@ -23,14 +23,16 @@
             <page-header login={{false}}></page-header>
 
             <div class="container mt-4 mb-5">
-                <router-view></router-view>
+                <transition name="slide-fade">
+                    <router-view></router-view>
+                </transition>
             </div>
             <footer-component></footer-component>
         </div>
     </div>
 
 </div>
-<script src="./js/app.js"></script>
+<script src="../js/app.js"></script>
 
 <script>
     window.onload = function () {

@@ -11,7 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _vueRouter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../vueRouter */ "./resources/js/vueRouter.js");
 //
 //
 //
@@ -218,7 +217,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AnimeFilterComponent",
   data: function data() {
@@ -842,6 +855,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    close: function close() {
+      this.$emit('close');
+    },
     updateFiler: function updateFiler() {
       this.$router.replace({
         query: {
@@ -879,6 +895,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_AnimeFilterComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/AnimeFilterComponent */ "./resources/js/components/AnimeFilterComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
 //
 //
 //
@@ -942,6 +967,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      openFilter: false,
       loading: false,
       page: 1,
       genresFilter: [],
@@ -966,7 +992,19 @@ __webpack_require__.r(__webpack_exports__);
       deep: true
     }
   },
-  methods: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(["loadAnimesList"]) // methods: {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(["loadAnimesList"])), {}, {
+    filterOnClick: function filterOnClick() {
+      var filter = document.getElementById("filter-block");
+
+      if (this.openFilter) {
+        this.openFilter = false;
+        filter.classList.add('d-none');
+      } else {
+        this.openFilter = true;
+        filter.classList.remove('d-none');
+      }
+    }
+  }) // methods: {
   //   loadPage(){
   //     let params = this.$route.query;
   //
@@ -997,7 +1035,30 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.filter[data-v-7b3df9bc]{\n    background: #424755;\n    border-radius: 14px;\n    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n    padding: .8rem;\n}\n.filter > .selector-block[data-v-7b3df9bc]{\n    box-sizing: border-box;\n    margin-bottom: 20px;\n}\n.selector > .chek-box-list > ul > li[data-v-7b3df9bc]:hover {\n    background: #3490dc;\n    border-radius: 0.4rem;\n}\n.selector-block > .selector > .placeholder[data-v-7b3df9bc]{\n    cursor: inherit;\n    box-sizing: border-box;\n    padding: 10px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    justify-content: space-between;\n    display: flex;\n    align-items: center;\n    background: #424755;\n}\n.selector-block > .selector.cursor-drop > .placeholder[data-v-7b3df9bc]{\n    cursor: pointer;\n}\n.selector-block > .selector > .placeholder >.selected[data-v-7b3df9bc]{\n    color: #FFFFFF;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    flex: 0 0 6px;\n    margin-right: 6.5px;\n    transition: transform .2s;\n    transform: rotate(270deg);\n}\n.selector-block > .selector.open > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    transform: rotate(179deg);\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon > svg[data-v-7b3df9bc]{\n    color: black;\n}\n.selector-block > .selector > .drop-options[data-v-7b3df9bc]{\n    display: none;\n    font-size: 14px;\n    box-sizing: border-box;\n    left: 0;\n    position: inherit;\n    background-color: #424755;\n    width: 100%;\n    z-index: 20;\n    overflow-y: auto;\n    max-height: 200px;\n    border-radius: 0 0 14px 14px;\n    transform: scale(1);\n}\n.selector-block > .selector.open > .drop-options[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block > .selector > .drop-options > .item[data-v-7b3df9bc]{\n    font-size: 14px;\n    box-sizing: border-box;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-bottom: 1px solid rgba(61,64,74,.4);\n    padding: 12px 15px;\n    color: #fff;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 20.34px;\n  margin: 1px 0 2px;\n  padding: 1px 3px 0;\n}\n.selector-block .selector .chek-box-list ul li label[data-v-7b3df9bc]{\n  width: 100%;\n}\n.selector-block .selector .chek-box-list ul[data-v-7b3df9bc]{\n  margin-left: 2px;\n  padding-left: 2px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.filter[data-v-7b3df9bc]{\n    background: #424755;\n    border-radius: 14px;\n    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n    padding: .8rem;\n}\n.filter > .selector-block[data-v-7b3df9bc]{\n    box-sizing: border-box;\n    margin-bottom: 20px;\n}\n.selector > .chek-box-list > ul > li.selected[data-v-7b3df9bc] {\n    background: #3490dc;\n    border-radius: 0.4rem;\n}\n.selector-block > .selector > .placeholder[data-v-7b3df9bc]{\n    cursor: inherit;\n    box-sizing: border-box;\n    padding: 10px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    justify-content: space-between;\n    display: flex;\n    align-items: center;\n    background: #424755;\n}\n.selector-block > .selector.cursor-drop > .placeholder[data-v-7b3df9bc]{\n    cursor: pointer;\n}\n.selector-block > .selector > .placeholder >.selected[data-v-7b3df9bc]{\n    color: #FFFFFF;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    flex: 0 0 6px;\n    margin-right: 6.5px;\n    transition: transform .2s;\n    transform: rotate(270deg);\n}\n.selector-block > .selector.open > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    transform: rotate(179deg);\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon > svg[data-v-7b3df9bc]{\n    color: black;\n}\n.selector-block > .selector > .drop-options[data-v-7b3df9bc]{\n    display: none;\n    font-size: 14px;\n    box-sizing: border-box;\n    left: 0;\n    position: inherit;\n    background-color: #424755;\n    width: 100%;\n    z-index: 20;\n    overflow-y: auto;\n    max-height: 200px;\n    border-radius: 0 0 14px 14px;\n    transform: scale(1);\n}\n.selector-block > .selector.open > .drop-options[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block > .selector > .drop-options > .item[data-v-7b3df9bc]{\n    font-size: 14px;\n    box-sizing: border-box;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-bottom: 1px solid rgba(61,64,74,.4);\n    padding: 12px 15px;\n    color: #fff;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 20.34px;\n  margin: 1px 0 2px;\n  padding: 1px 3px 0;\n}\n.selector-block .selector .chek-box-list ul li label[data-v-7b3df9bc]{\n  width: 100%;\n}\n.selector-block .selector .chek-box-list ul[data-v-7b3df9bc]{\n  margin-left: 2px;\n  padding-left: 2px;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n  background: #009BEB;\n  height: 7vh;\n  display: none;\n}\n.filter-block > .filter > .footer[data-v-7b3df9bc]{\n  display: none;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n  padding-left: 1rem;\n  padding-right: 1rem;\n  padding-top: 1.6vh;\n}\n.filter-block > .body > .row > .col-auto > .button[data-v-7b3df9bc]{\n  height: 100%;\n  background: #dfdfe0;\n  border-radius: 7px;\n  padding: 0.2rem;\n}\n/* Small devices (landscape phones, 991px and up) */\n@media (max-width: 991px) {\n.filter-block .filter[data-v-7b3df9bc] {\n    border-radius: 0;\n    height: 100vh;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding: 0;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n    display: block;\n}\n.filter-block > .filter > .footer[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block .selector .chek-box-list[data-v-7b3df9bc]{\n    overflow-x: auto;\n    overflow-y: hidden;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n    font-size: 17px;\n    white-space: pre;\n    overflow: inherit;\n    display: inline;\n    padding-top: 19px;\n    margin: 8px;\n    text-align:center;\n}\n.selector > .chek-box-list > ul > li > label > input[data-v-7b3df9bc] {\n    display: none;\n}\n.selector > .chek-box-list > ul[data-v-7b3df9bc]{\n    display:flex;\n    list-style:none;\n}\n.filter-block[data-v-7b3df9bc]{\n    position: fixed;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 1000;\n}\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-filter[data-v-591f14be]{\r\n  position: fixed;\r\n  width: 7rem;\r\n  bottom: 3.5rem;\r\n  right: -0.2rem;\r\n  filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 2.25));\n}\n.btn-filter > i[data-v-591f14be]{\r\n  font-size: 4.5rem;\r\n  color: aliceblue;\n}\r\n\r\n/*!* Small devices (landscape phones, 576px and up) *!*/\r\n/*@media (max-width: 991px) {*/\r\n/*  .filter-btn{*/\r\n/*    display: block;*/\r\n/*  }*/\r\n/*}*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1030,6 +1091,35 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeFilterComponent_vue_vue_type_style_index_0_id_7b3df9bc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_animes_vue_vue_type_style_index_0_id_591f14be_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_animes_vue_vue_type_style_index_0_id_591f14be_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_animes_vue_vue_type_style_index_0_id_591f14be_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -1085,15 +1175,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _animes_vue_vue_type_template_id_591f14be_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./animes.vue?vue&type=template&id=591f14be&scoped=true& */ "./resources/js/views/animes.vue?vue&type=template&id=591f14be&scoped=true&");
 /* harmony import */ var _animes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./animes.vue?vue&type=script&lang=js& */ "./resources/js/views/animes.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _animes_vue_vue_type_style_index_0_id_591f14be_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css& */ "./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _animes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _animes_vue_vue_type_template_id_591f14be_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _animes_vue_vue_type_template_id_591f14be_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -1153,6 +1245,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_animes_vue_vue_type_style_index_0_id_591f14be_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/animes.vue?vue&type=style&index=0&id=591f14be&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/AnimeFilterComponent.vue?vue&type=template&id=7b3df9bc&scoped=true&":
 /*!*****************************************************************************************************!*\
   !*** ./resources/js/components/AnimeFilterComponent.vue?vue&type=template&id=7b3df9bc&scoped=true& ***!
@@ -1200,480 +1304,543 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "filter" }, [
-    _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
+  return _c("div", { staticClass: "filter-block" }, [
+    _c("div", { staticClass: "body" }, [
+      _c("div", { staticClass: "row" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
+        _c("div", { staticClass: "col-auto" }, [
           _c(
-            "ul",
-            _vm._l(_vm.status, function (statusItem) {
-              return _c(
-                "li",
-                {
-                  key: statusItem.status_id,
-                  attrs: { title: statusItem.nameRu },
+            "div",
+            {
+              staticClass: "button",
+              on: {
+                click: function ($event) {
+                  return _vm.close()
                 },
-                [
-                  _c("label", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: statusItem.selected,
-                          expression: "statusItem.selected",
-                        },
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(statusItem.selected)
-                          ? _vm._i(statusItem.selected, null) > -1
-                          : statusItem.selected,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = statusItem.selected,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  statusItem,
-                                  "selected",
-                                  $$a.concat([$$v])
-                                )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  statusItem,
-                                  "selected",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(statusItem, "selected", $$c)
-                          }
-                        },
-                      },
-                    }),
-                    _vm._v("  " + _vm._s(statusItem.nameRu) + "\n            "),
-                  ]),
-                ]
-              )
-            }),
-            0
+              },
+            },
+            [_vm._v(" Применить ")]
           ),
         ]),
       ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c(
-            "ul",
-            _vm._l(_vm.types, function (type) {
-              return _c("li", { key: type.id, attrs: { title: type.nameEn } }, [
-                _c("label", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: type.selected,
-                        expression: "type.selected",
-                      },
-                    ],
-                    attrs: { type: "checkbox" },
-                    domProps: {
-                      checked: Array.isArray(type.selected)
-                        ? _vm._i(type.selected, null) > -1
-                        : type.selected,
-                    },
-                    on: {
-                      change: function ($event) {
-                        var $$a = type.selected,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(type, "selected", $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                type,
-                                "selected",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
-                          }
-                        } else {
-                          _vm.$set(type, "selected", $$c)
-                        }
-                      },
-                    },
-                  }),
-                  _vm._v("  " + _vm._s(type.nameRu) + "\n            "),
-                ]),
-              ])
-            }),
-            0
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c(
-            "ul",
-            _vm._l(_vm.genres, function (genre) {
-              return _c(
-                "li",
-                {
-                  key: genre.genre_id,
-                  attrs: {
-                    "data-field": "status",
-                    "data-value": "#",
-                    title: genre.title,
+    _c("div", { staticClass: "filter" }, [
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.status, function (statusItem) {
+                return _c(
+                  "li",
+                  {
+                    key: statusItem.status_id,
+                    class: { selected: statusItem.selected },
+                    attrs: { title: statusItem.nameRu },
                   },
-                },
-                [
-                  _c("label", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: genre.selected,
-                          expression: "genre.selected",
+                  [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: statusItem.selected,
+                            expression: "statusItem.selected",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(statusItem.selected)
+                            ? _vm._i(statusItem.selected, null) > -1
+                            : statusItem.selected,
                         },
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(genre.selected)
-                          ? _vm._i(genre.selected, null) > -1
-                          : genre.selected,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = genre.selected,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(genre, "selected", $$a.concat([$$v]))
+                        on: {
+                          change: function ($event) {
+                            var $$a = statusItem.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    statusItem,
+                                    "selected",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    statusItem,
+                                    "selected",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
                             } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  genre,
-                                  "selected",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
+                              _vm.$set(statusItem, "selected", $$c)
                             }
-                          } else {
-                            _vm.$set(genre, "selected", $$c)
-                          }
+                          },
                         },
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "name_en" }, [
+                      }),
                       _vm._v(
-                        "\n              " +
-                          _vm._s(genre.nameEn) +
-                          "\n              "
+                        "  " + _vm._s(statusItem.nameRu) + "\n              "
                       ),
                     ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "name_ru" }, [
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.types, function (type) {
+                return _c(
+                  "li",
+                  {
+                    key: type.id,
+                    class: { selected: type.selected },
+                    attrs: { title: type.nameEn },
+                  },
+                  [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: type.selected,
+                            expression: "type.selected",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(type.selected)
+                            ? _vm._i(type.selected, null) > -1
+                            : type.selected,
+                        },
+                        on: {
+                          change: function ($event) {
+                            var $$a = type.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(type, "selected", $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    type,
+                                    "selected",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(type, "selected", $$c)
+                            }
+                          },
+                        },
+                      }),
+                      _vm._v("  " + _vm._s(type.nameRu) + "\n              "),
+                    ]),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.genres, function (genre) {
+                return _c(
+                  "li",
+                  {
+                    key: genre.genre_id,
+                    class: { selected: genre.selected },
+                    attrs: { "data-value": "#", title: genre.title },
+                  },
+                  [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: genre.selected,
+                            expression: "genre.selected",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(genre.selected)
+                            ? _vm._i(genre.selected, null) > -1
+                            : genre.selected,
+                        },
+                        on: {
+                          change: function ($event) {
+                            var $$a = genre.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(genre, "selected", $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    genre,
+                                    "selected",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(genre, "selected", $$c)
+                            }
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "name_en" }, [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(genre.nameEn) +
+                            "\n              "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "name_ru" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(genre.nameRu) +
+                            "\n              "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "name_jp" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(genre.nameJp) +
+                            "\n              "
+                        ),
+                      ]),
+                    ]),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.ratings, function (rating) {
+                return _c(
+                  "li",
+                  {
+                    key: rating.rating_id,
+                    class: { selected: rating.selected },
+                    attrs: { title: rating.title },
+                  },
+                  [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: rating.selected,
+                            expression: "rating.selected",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(rating.selected)
+                            ? _vm._i(rating.selected, null) > -1
+                            : rating.selected,
+                        },
+                        on: {
+                          change: function ($event) {
+                            var $$a = rating.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    rating,
+                                    "selected",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    rating,
+                                    "selected",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(rating, "selected", $$c)
+                            }
+                          },
+                        },
+                      }),
+                      _vm._v("  " + _vm._s(rating.name) + "\n              "),
+                    ]),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.durations, function (duration) {
+                return _c(
+                  "li",
+                  {
+                    key: duration.duration_id,
+                    class: { selected: duration.selected },
+                    attrs: { title: duration.title },
+                  },
+                  [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: duration.selected,
+                            expression: "duration.selected",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(duration.selected)
+                            ? _vm._i(duration.selected, null) > -1
+                            : duration.selected,
+                        },
+                        on: {
+                          change: function ($event) {
+                            var $$a = duration.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    duration,
+                                    "selected",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    duration,
+                                    "selected",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(duration, "selected", $$c)
+                            }
+                          },
+                        },
+                      }),
                       _vm._v(
-                        "\n                " +
-                          _vm._s(genre.nameRu) +
-                          "\n              "
+                        "  " + _vm._s(duration.nameRu) + "\n              "
                       ),
                     ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "name_jp" }, [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(genre.nameJp) +
-                          "\n              "
-                      ),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.seasons, function (season) {
+                return _c(
+                  "li",
+                  {
+                    key: season.season_id,
+                    class: { selected: season.selected },
+                    attrs: { title: season.nameRu },
+                  },
+                  [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: season.selected,
+                            expression: "season.selected",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(season.selected)
+                            ? _vm._i(season.selected, null) > -1
+                            : season.selected,
+                        },
+                        on: {
+                          change: function ($event) {
+                            var $$a = season.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    season,
+                                    "selected",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    season,
+                                    "selected",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(season, "selected", $$c)
+                            }
+                          },
+                        },
+                      }),
+                      _vm._v("  " + _vm._s(season.nameRu) + "\n              "),
                     ]),
-                  ]),
-                ]
-              )
-            }),
-            0
-          ),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
         ]),
       ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c(
-            "ul",
-            _vm._l(_vm.ratings, function (rating) {
-              return _c(
-                "li",
-                { key: rating.rating_id, attrs: { title: rating.title } },
-                [
-                  _c("label", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: rating.selected,
-                          expression: "rating.selected",
-                        },
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(rating.selected)
-                          ? _vm._i(rating.selected, null) > -1
-                          : rating.selected,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = rating.selected,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(rating, "selected", $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  rating,
-                                  "selected",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(rating, "selected", $$c)
-                          }
-                        },
-                      },
-                    }),
-                    _vm._v("  " + _vm._s(rating.name) + "\n            "),
-                  ]),
-                ]
-              )
-            }),
-            0
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _vm._m(4),
-        _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c(
-            "ul",
-            _vm._l(_vm.durations, function (duration) {
-              return _c(
-                "li",
-                { key: duration.duration_id, attrs: { title: duration.title } },
-                [
-                  _c("label", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: duration.selected,
-                          expression: "duration.selected",
-                        },
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(duration.selected)
-                          ? _vm._i(duration.selected, null) > -1
-                          : duration.selected,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = duration.selected,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  duration,
-                                  "selected",
-                                  $$a.concat([$$v])
-                                )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  duration,
-                                  "selected",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(duration, "selected", $$c)
-                          }
-                        },
-                      },
-                    }),
-                    _vm._v("  " + _vm._s(duration.nameRu) + "\n            "),
-                  ]),
-                ]
-              )
-            }),
-            0
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _vm._m(5),
-        _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c(
-            "ul",
-            _vm._l(_vm.seasons, function (season) {
-              return _c(
-                "li",
-                { key: season.season_id, attrs: { title: season.nameRu } },
-                [
-                  _c("label", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: season.selected,
-                          expression: "season.selected",
-                        },
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(season.selected)
-                          ? _vm._i(season.selected, null) > -1
-                          : season.selected,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = season.selected,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(season, "selected", $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  season,
-                                  "selected",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(season, "selected", $$c)
-                          }
-                        },
-                      },
-                    }),
-                    _vm._v("  " + _vm._s(season.nameRu) + "\n            "),
-                  ]),
-                ]
-              )
-            }),
-            0
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _vm._m(6),
-    _vm._v(" "),
-    _vm._m(7),
-    _vm._v(" "),
-    _c("div", { staticClass: "selector-block" }, [
-      _c(
-        "div",
-        {
-          staticClass: "selector sort cursor-drop",
-          on: {
-            click: function ($event) {
-              return _vm.openSort()
+      _vm._v(" "),
+      _vm._m(7),
+      _vm._v(" "),
+      _vm._m(8),
+      _vm._v(" "),
+      _c("div", { staticClass: "selector-block" }, [
+        _c(
+          "div",
+          {
+            staticClass: "selector sort cursor-drop",
+            on: {
+              click: function ($event) {
+                return _vm.openSort()
+              },
             },
           },
-        },
-        [
-          _c("div", { staticClass: "placeholder" }, [
-            _vm._m(8),
-            _vm._v(" "),
-            _c("div", { staticClass: "icon-inline dropdown-icon" }, [
-              _c(
-                "svg",
-                {
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "10",
-                    height: "6",
-                    viewBox: "0 0 10 6",
-                  },
-                },
-                [
-                  _c("path", {
+          [
+            _c("div", { staticClass: "placeholder" }, [
+              _vm._m(9),
+              _vm._v(" "),
+              _c("div", { staticClass: "icon-inline dropdown-icon" }, [
+                _c(
+                  "svg",
+                  {
                     attrs: {
-                      fill: "#FFF",
-                      "fill-rule": "nonzero",
-                      d: "M8.618 5.772l.003.003c.35.336.873.29 1.174-.102a1.04 1.04 0 0 0-.078-1.334L5.55.233a.765.765 0 0 0-1.1 0L.28 4.342c-.342.345-.375.94-.075 1.331.301.393.825.438 1.177.099L5 2.207l3.618 3.565z",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "10",
+                      height: "6",
+                      viewBox: "0 0 10 6",
                     },
-                  }),
-                ]
-              ),
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        fill: "#FFF",
+                        "fill-rule": "nonzero",
+                        d: "M8.618 5.772l.003.003c.35.336.873.29 1.174-.102a1.04 1.04 0 0 0-.078-1.334L5.55.233a.765.765 0 0 0-1.1 0L.28 4.342c-.342.345-.375.94-.075 1.331.301.393.825.438 1.177.099L5 2.207l3.618 3.565z",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
             ]),
-          ]),
-          _vm._v(" "),
-          _vm._m(9),
-        ]
-      ),
+            _vm._v(" "),
+            _vm._m(10),
+          ]
+        ),
+      ]),
+      _vm._v(" "),
+      _vm._m(11),
+      _vm._v(" "),
+      _c("div", { staticClass: "footer" }),
     ]),
-    _vm._v(" "),
-    _vm._m(10),
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto me-auto" }, [
+      _c("h6", { staticClass: "p-title" }, [_vm._v("Фильтры")]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -1745,7 +1912,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v(" 8+\n          "),
+                _vm._v(" 8+\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1756,7 +1923,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  7+\n          "),
+                _vm._v("  7+\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1767,7 +1934,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  6+\n          "),
+                _vm._v("  6+\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1778,7 +1945,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  5+\n          "),
+                _vm._v("  5+\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1789,7 +1956,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  <5\n          "),
+                _vm._v("  <5\n            "),
               ]
             ),
           ]),
@@ -1818,7 +1985,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v(" Просмотрено\n          "),
+                _vm._v(" Просмотрено\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1829,7 +1996,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  В планах\n          "),
+                _vm._v("  В планах\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1840,7 +2007,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  Брошено\n          "),
+                _vm._v("  Брошено\n            "),
               ]
             ),
             _vm._v(" "),
@@ -1851,7 +2018,7 @@ var staticRenderFns = [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  Отложено\n          "),
+                _vm._v("  Отложено\n            "),
               ]
             ),
           ]),
@@ -1873,19 +2040,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "drop-options" }, [
       _c("div", { staticClass: "item" }, [
-        _vm._v("\n          По алфавиту\n        "),
+        _vm._v("\n            По алфавиту\n          "),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "item" }, [
-        _vm._v("\n          По рейтингу\n        "),
+        _vm._v("\n            По рейтингу\n          "),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "item" }, [
-        _vm._v("\n          По дате премьеры\n        "),
+        _vm._v("\n            По дате премьеры\n          "),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "item" }, [
-        _vm._v("\n          По дате выхода\n        "),
+        _vm._v("\n            По дате выхода\n          "),
       ]),
     ])
   },
@@ -1968,7 +2135,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-5 g-3 mt-0 pt-1",
+                    "row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3 mt-0 pt-1",
                 },
                 _vm._l(_vm.animeList, function (anime) {
                   return _c("catalog-entry", {
@@ -1992,11 +2159,44 @@ var render = function () {
       ),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-xs-12 col-md-3 order-2 order-md-1" }, [
-      _c("h6", { staticClass: "p-title mb-3" }, [_vm._v("Фильтры")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12" }, [_c("animeFilter")], 1),
-    ]),
+    _c(
+      "div",
+      {
+        staticClass: "col-xs-12 col-md-3 order-2 d-none d-lg-block",
+        attrs: { id: "filter-block" },
+      },
+      [
+        _c("h6", { staticClass: "p-title mb-3" }, [_vm._v("Фильтры")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("animeFilter", {
+              on: {
+                close: function ($event) {
+                  return _vm.filterOnClick()
+                },
+              },
+            }),
+          ],
+          1
+        ),
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "btn-filter d-block d-lg-none",
+        on: {
+          click: function ($event) {
+            return _vm.filterOnClick()
+          },
+        },
+      },
+      [_c("i", { staticClass: "bi bi-filter-circle-fill" })]
+    ),
   ])
 }
 var staticRenderFns = []

@@ -43,6 +43,7 @@
                :poster_url= "anime.poster.preview"
                :status=     "anime.status"
                :studios=    "anime.studios"
+               :link=       "{name: 'anime', params: { id: anime.id }}"
            ></catalog-entry>
          </div>
          <loading v-else></loading>

@@ -12,7 +12,7 @@
         {{genres ? "Жанры:" : ""}} <router-link v-if="genres" class="tags" v-for="genre in genres" v-bind:key="genre.id" :to="genre.url">{{genre.name_en}} </router-link>
       </p>
       <div class="d-grid gap-2 button-block mx-0">
-        <router-link class="btn" type="button" :to="'/anime/' + id">Подробнее</router-link>
+        <router-link class="btn" type="button" :to="'/animes/' + id">Подробнее</router-link>
       </div>
     </div>
   </div>
@@ -32,18 +32,22 @@
 
       props: {
         "id":         Number,
+        "link":       {
+          type: [Object, undefined],
+          default: null
+        },
         "name":       String,
         "status":     String,
         "type":       Array,
         "genres":     Array,
         "poster_url": String,
         "studios":    {
-          type: [Array, null],
-          default: null
+          type: [Array, undefined],
+          default: undefined
         },
         "rating":     {
-          type: [Array, null],
-          default: null
+          type: [Array, undefined],
+          default: undefined
         }
       },
 
