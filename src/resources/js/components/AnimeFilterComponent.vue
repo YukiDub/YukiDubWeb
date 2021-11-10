@@ -1,54 +1,65 @@
 <template>
-  <div class="filter">
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Статус</span>
-          </div>
+  <div class="filter-block">
+    <div class="body">
+      <div class="row">
+        <div class="col-auto me-auto">
+          <h6 class="p-title">Фильтры</h6>
         </div>
-        <div class="chek-box-list">
-          <ul>
-            <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu">
-              <label>
-                <input type="checkbox" v-model="statusItem.selected">  {{statusItem.nameRu}}
-              </label>
-            </li>
-          </ul>
+        <div class="col-auto">
+          <div class="button" v-on:click="close()"> Применить </div>
         </div>
       </div>
     </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Тип</span>
+    <div class="filter">
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Статус</span>
+            </div>
           </div>
-        </div>
-        <div class="chek-box-list">
-          <ul>
-            <li v-for="type in types" :key="type.id" :title="type.nameEn">
-              <label>
-                <input type="checkbox" v-model="type.selected">  {{type.nameRu}}
-              </label>
-            </li>
-          </ul>
+          <div class="chek-box-list">
+            <ul>
+              <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu" v-bind:class="{selected: statusItem.selected }">
+                <label>
+                  <input type="checkbox" v-model="statusItem.selected">  {{statusItem.nameRu}}
+                </label>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Жанры</span>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Тип</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li v-for="type in types" :key="type.id" :title="type.nameEn" v-bind:class="{selected: type.selected }">
+                <label>
+                  <input type="checkbox" v-model="type.selected">  {{type.nameRu}}
+                </label>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="chek-box-list">
-          <ul>
-            <li data-field="status" data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title">
-              <label>
-                <input type="checkbox" v-model="genre.selected">
-                <span class="name_en">
+      </div>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Жанры</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title" v-bind:class="{selected: genre.selected }">
+                <label>
+                  <input type="checkbox" v-model="genre.selected">
+                  <span class="name_en">
                 {{genre.nameEn}}
                 </span>
                   <span class="name_ru">
@@ -57,156 +68,158 @@
                   <span class="name_jp">
                   {{genre.nameJp}}
                 </span>
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Рейтинг</span>
-          </div>
-        </div>
-        <div class="chek-box-list">
-          <ul>
-            <li v-for="rating in ratings" :key="rating.rating_id" :title="rating.title">
-              <label>
-                <input type="checkbox" v-model="rating.selected">  {{rating.name}}
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Продолжительность эпизода</span>
-          </div>
-        </div>
-        <div class="chek-box-list">
-          <ul>
-            <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title">
-              <label>
-                <input type="checkbox" v-model="duration.selected">  {{duration.nameRu}}
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Сезон</span>
-          </div>
-        </div>
-        <div class="chek-box-list">
-          <ul>
-            <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu">
-              <label>
-                <input type="checkbox" v-model="season.selected">  {{season.nameRu}}
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Оценка</span>
-          </div>
-        </div>
-        <div class="chek-box-list">
-          <ul>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox"> 8+
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  7+
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  6+
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  5+
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  <5
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Мой список</span>
-          </div>
-        </div>
-        <div class="chek-box-list">
-          <ul>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox"> Просмотрено
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  В планах
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  Брошено
-            </li>
-            <li data-field="status" data-value="anons">
-              <input autocomplete="off" type="checkbox">  Отложено
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="selector-block">
-      <div class="selector sort cursor-drop" v-on:click="openSort()">
-        <div class="placeholder">
-          <div class="selected">
-            <span>Сортировка</span>
-          </div>
-          <div class="icon-inline dropdown-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
-              <path fill="#FFF" fill-rule="nonzero" d="M8.618 5.772l.003.003c.35.336.873.29 1.174-.102a1.04 1.04 0 0 0-.078-1.334L5.55.233a.765.765 0 0 0-1.1 0L.28 4.342c-.342.345-.375.94-.075 1.331.301.393.825.438 1.177.099L5 2.207l3.618 3.565z"></path>
-            </svg>
-          </div>
-        </div>
-        <div class="drop-options">
-          <div class="item">
-            По алфавиту
-          </div>
-          <div class="item">
-            По рейтингу
-          </div>
-          <div class="item">
-            По дате премьеры
-          </div>
-          <div class="item">
-            По дате выхода
+                </label>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-    <div class="d-grid gap-2 button-block mx-0">
-      <div class="btn" type="button">Сбросить фильтр</div>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Рейтинг</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li v-for="rating in ratings" :key="rating.rating_id" :title="rating.title" v-bind:class="{selected: rating.selected }">
+                <label>
+                  <input type="checkbox" v-model="rating.selected">  {{rating.name}}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Продолжительность эпизода</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title" v-bind:class="{selected: duration.selected }">
+                <label>
+                  <input type="checkbox" v-model="duration.selected">  {{duration.nameRu}}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Сезон</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu" v-bind:class="{selected: season.selected }">
+                <label>
+                  <input type="checkbox" v-model="season.selected">  {{season.nameRu}}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Оценка</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox"> 8+
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  7+
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  6+
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  5+
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  <5
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="selector-block">
+        <div class="selector">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Мой список</span>
+            </div>
+          </div>
+          <div class="chek-box-list">
+            <ul>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox"> Просмотрено
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  В планах
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  Брошено
+              </li>
+              <li data-field="status" data-value="anons">
+                <input autocomplete="off" type="checkbox">  Отложено
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="selector-block">
+        <div class="selector sort cursor-drop" v-on:click="openSort()">
+          <div class="placeholder">
+            <div class="selected">
+              <span>Сортировка</span>
+            </div>
+            <div class="icon-inline dropdown-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
+                <path fill="#FFF" fill-rule="nonzero" d="M8.618 5.772l.003.003c.35.336.873.29 1.174-.102a1.04 1.04 0 0 0-.078-1.334L5.55.233a.765.765 0 0 0-1.1 0L.28 4.342c-.342.345-.375.94-.075 1.331.301.393.825.438 1.177.099L5 2.207l3.618 3.565z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="drop-options">
+            <div class="item">
+              По алфавиту
+            </div>
+            <div class="item">
+              По рейтингу
+            </div>
+            <div class="item">
+              По дате премьеры
+            </div>
+            <div class="item">
+              По дате выхода
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 button-block mx-0">
+        <div class="btn" type="button">Сбросить фильтр</div>
+      </div>
+      <div class="footer">
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import router from "../vueRouter";
-
 export default {
   name: "AnimeFilterComponent",
   data: function (){
@@ -904,7 +917,11 @@ export default {
       deep: true
     },
   },
+
   methods: {
+    close() {
+      this.$emit('close');
+    },
     updateFiler(){
       this.$router.replace({
         query:{
@@ -940,7 +957,7 @@ export default {
     box-sizing: border-box;
     margin-bottom: 20px;
   }
-  .selector > .chek-box-list > ul > li:hover {
+  .selector > .chek-box-list > ul > li.selected {
     background: #3490dc;
     border-radius: 0.4rem;
   }
@@ -1042,6 +1059,68 @@ export default {
   margin-left: 2px;
   padding-left: 2px;
 }
-
+.filter-block > .body{
+  background: #009BEB;
+  height: 7vh;
+  display: none;
+}
+.filter-block > .filter > .footer{
+  display: none;
+}
+.filter-block > .body{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.6vh;
+}
+.filter-block > .body > .row > .col-auto > .button{
+  height: 100%;
+  background: #dfdfe0;
+  border-radius: 7px;
+  padding: 0.2rem;
+}
+/* Small devices (landscape phones, 991px and up) */
+@media (max-width: 991px) {
+  .filter-block .filter {
+    border-radius: 0;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+  }
+  .filter-block > .body{
+    display: block;
+  }
+  .filter-block > .filter > .footer{
+    display: block;
+  }
+  .selector-block .selector .chek-box-list{
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .selector-block .selector .chek-box-list ul li{
+    font-size: 17px;
+    white-space: pre;
+    overflow: inherit;
+    display: inline;
+    padding-top: 19px;
+    margin: 8px;
+    text-align:center;
+  }
+  .selector > .chek-box-list > ul > li > label > input {
+    display: none;
+  }
+  .selector > .chek-box-list > ul{
+    display:flex;
+    list-style:none;
+  }
+  .filter-block{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
+}
 
 </style>

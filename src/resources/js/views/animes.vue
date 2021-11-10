@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="entry-list ps-4 pe-4 pb-2">
-        <div v-if="loading" class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-5 g-3 mt-0 pt-1">
+        <div v-if="loading" class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3 mt-0 pt-1">
           <catalog-entry
               v-for=       "anime in animeList"
               v-bind:key=  "anime.id"
@@ -33,13 +33,16 @@
         <loading v-else></loading>
       </div>
     </div>
-    <div class="col-xs-12 col-md-3 order-2 order-md-1">
+    <div id="filter-block" class="col-xs-12 col-md-3 order-2 d-none d-lg-block">
       <h6 class="p-title mb-3">Фильтры</h6>
       <div class="col-12">
-        <animeFilter>
+        <animeFilter @close="filterOnClick()">
 
         </animeFilter>
       </div>
+    </div>
+    <div class="btn-filter d-block d-lg-none" v-on:click="filterOnClick()">
+      <i class="bi bi-filter-circle-fill"></i>
     </div>
   </div>
 </template>
@@ -68,6 +71,7 @@ export default {
 
   data(){
     return {
+      openFilter: false,
       loading:      false,
       page:         1,
       genresFilter: [],
@@ -96,7 +100,20 @@ export default {
     }
   },
 
-  methods: mapActions(["loadAnimesList"])
+  methods: {
+    ...mapActions(["loadAnimesList"]),
+    filterOnClick(){
+      let filter = document.getElementById("filter-block")
+      if(this.openFilter){
+        this.openFilter = false;
+        filter.classList.add('d-none')
+      }
+      else{
+        this.openFilter = true;
+        filter.classList.remove('d-none')
+      }
+    }
+  }
   // methods: {
   //   loadPage(){
   //     let params = this.$route.query;
@@ -113,4 +130,23 @@ export default {
 
 <style scoped>
 
+.btn-filter{
+  position: fixed;
+  width: 7rem;
+  bottom: 3.5rem;
+  right: -0.2rem;
+  filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 2.25));
+}
+
+.btn-filter > i{
+  font-size: 4.5rem;
+  color: aliceblue;
+}
+
+/*!* Small devices (landscape phones, 576px and up) *!*/
+/*@media (max-width: 991px) {*/
+/*  .filter-btn{*/
+/*    display: block;*/
+/*  }*/
+/*}*/
 </style>
