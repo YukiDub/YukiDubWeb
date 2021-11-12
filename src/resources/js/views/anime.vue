@@ -22,16 +22,16 @@
                     Тип: <a href="#" v-for="typeItem in animeItem.type">{{typeItem.name}} </a><br/>
                     Статус: <a href="#"></a>{{animeItem.status}}<br>
                     <span v-if="animeItem.studios">Студия: <a href="#" v-for="studioItem in animeItem.studios">{{studioItem.name}} </a> <br/></span>
-                    <span v-if="animeItem.episodes_released">Эпизоды: <span v-if="animeItem.episodes">{{animeItem.episodes}}\</span> {{animeItem.episodes_released}} <br></span>
+                    <span v-if="animeItem.episodes_released">Эпизоды: <span v-if="animeItem.episodes">{{animeItem.episodes}} \</span> {{animeItem.episodes_released}} <br></span>
                     <span v-if="animeItem.episode_duration">Продолжительность эпизода: {{animeItem.episode_duration}}<br></span>
                     <span v-if="animeItem.genres">
                       Жанры:
-                      <router-link v-for="genreItem in animeItem.genres" :key="genreItem.id" :to="{name: 'animes', query: {genres: genreItem.name_en}}">{{genreItem.name_ru}}</router-link>
+                      <router-link v-bind:class="'tags'" v-for="genreItem in animeItem.genres" :key="genreItem.id" :to="{name: 'animes', query: {genres: genreItem.name_en}}">{{genreItem.name_ru}}</router-link>
                       <br/>
                     </span>
                     <span v-if="animeItem.age_rating">Возрастной рейтинг: {{animeItem.age_rating}} <br/></span>
-                    <span v-if="animeItem.aired_on">Дата начала премьеры: {{animeItem.aired_on}}<br/></span>
-                    <span v-if="animeItem.released_on">Дата выхода: {{animeItem.released_on}}<br/></span>
+                    <span v-if="animeItem.aired_on">Дата начала премьеры: {{new Date(animeItem.aired_on).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric'})}}<br/></span>
+                    <span v-if="animeItem.released_on">Дата выхода: {{new Date(animeItem.released_on).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric'})}}<br/></span>
                     <span v-if="animeItem.shiki_score">Оценка на MyAnimeList: {{animeItem.shiki_score}} <br/></span>
                   </p>
               </div>

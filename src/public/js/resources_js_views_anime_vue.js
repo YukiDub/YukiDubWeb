@@ -353,7 +353,7 @@ var render = function () {
                               _vm.animeItem.episodes
                                 ? _c("span", [
                                     _vm._v(
-                                      _vm._s(_vm.animeItem.episodes) + "\\"
+                                      _vm._s(_vm.animeItem.episodes) + " \\"
                                     ),
                                   ])
                                 : _vm._e(),
@@ -390,6 +390,7 @@ var render = function () {
                                       "router-link",
                                       {
                                         key: genreItem.id,
+                                        class: "tags",
                                         attrs: {
                                           to: {
                                             name: "animes",
@@ -425,7 +426,15 @@ var render = function () {
                           ? _c("span", [
                               _vm._v(
                                 "Дата начала премьеры: " +
-                                  _vm._s(_vm.animeItem.aired_on)
+                                  _vm._s(
+                                    new Date(
+                                      _vm.animeItem.aired_on
+                                    ).toLocaleString("default", {
+                                      year: "numeric",
+                                      month: "long",
+                                      day: "numeric",
+                                    })
+                                  )
                               ),
                               _c("br"),
                             ])
@@ -435,7 +444,15 @@ var render = function () {
                           ? _c("span", [
                               _vm._v(
                                 "Дата выхода: " +
-                                  _vm._s(_vm.animeItem.released_on)
+                                  _vm._s(
+                                    new Date(
+                                      _vm.animeItem.released_on
+                                    ).toLocaleString("default", {
+                                      year: "numeric",
+                                      month: "long",
+                                      day: "numeric",
+                                    })
+                                  )
                               ),
                               _c("br"),
                             ])

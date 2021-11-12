@@ -904,3 +904,10 @@ p {
     padding-left: 10px;
     opacity: 0;
 }
+
+.tags + .tags::before {
+    content: ", ";
+}
+.tags::before:after {
+    content: ", ";
+}
