@@ -43,7 +43,7 @@
         }, 500);
     }
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('resized', function() {
         let nav = document.getElementsByClassName("navigation")[0];
 
         if(document.documentElement.clientWidth > 575){
@@ -54,7 +54,6 @@
             nav.style.top = "calc(100vh - 4rem)";
             nav.style.height = "4rem";
             nav.overflow = 'hidden'
-            // document.body.style.overflow = 'hidden'
         }
     });
 
