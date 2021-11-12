@@ -43,7 +43,14 @@
         }, 500);
     }
 
-    window.addEventListener('resized', function() {
+    window.addEventListener('scroll', function() {
+        navbarResize()
+    });
+    window.addEventListener('resize', function() {
+        navbarResize()
+    });
+
+    function navbarResize(){
         let nav = document.getElementsByClassName("navigation")[0];
 
         if(document.documentElement.clientWidth > 575){
@@ -55,7 +62,7 @@
             nav.style.height = "4rem";
             nav.overflow = 'hidden'
         }
-    });
+    }
 
 </script>
 </body>
