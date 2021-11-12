@@ -1070,7 +1070,7 @@ export default {
 .filter-block > .body{
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-top: 1.6vh;
+  padding-top: 2.2vh;
 }
 .filter-block > .body > .row > .col-auto > .button{
   height: 100%;
