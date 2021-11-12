@@ -5243,6 +5243,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     this.normalizeName();
@@ -5809,7 +5811,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loadAnimesList: function loadAnimesList(_ref) {
       var _arguments = arguments;
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var commit, page, perPage, filters, url, animes;
+        var commit, page, perPage, filters, url, animeData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -5825,10 +5827,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 7:
-                animes = _context.sent;
-                commit('updateAnimesList', animes);
+                animeData = _context.sent;
+                animeData.data.forEach(function (anime) {
+                  anime.studios.forEach(function (studio) {
+                    studio.url = '/animes?studio=' + studio.name;
+                  });
+                  anime.genres.forEach(function (genre) {
+                    genre.url = '/animes?genre=' + genre.name_en;
+                  });
+                  anime.type.forEach(function (type) {
+                    type.url = '/animes?genre=' + type.name;
+                  });
+                });
+                commit('updateAnimesList', animeData);
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -11044,7 +11057,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.catalog-entry .hover .title {\n  font-size: medium;\n  font-weight: bold;\n  color: #FFFFFF;\n}\n.catalog-entry img {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  border-radius: 8px;\n  height: 272px;\n}\n.catalog-entry {\n  position:relative;\n}\n.catalog-entry .hover {\n  display:none;\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  padding: .8rem;\n  background: linear-gradient(to bottom, #101217, #1F232E);\n  opacity: 0.95;\n  box-shadow:0 5px 5px rgba(0,0,0,0.3);\n  font-size: small;\n  border-radius: 2.8%;\n}\n.catalog-entry:hover .hover{\n  display:block;\n}\n/* Small devices (landscape phones, 576px and up) */\n@media (max-width: 1300px) {\n.catalog-entry img {\n    height: auto;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.catalog-entry .hover .title {\n  font-size: medium;\n  font-weight: bold;\n  color: #FFFFFF;\n  margin-bottom: 0.8vh;\n}\n.catalog-entry img {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  border-radius: 8px;\n  height: 272px;\n}\n.catalog-entry {\n  position:relative;\n}\n.catalog-entry .hover {\n  display:none;\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  padding: .8rem;\n  background: linear-gradient(to bottom, #101217, #1F232E);\n  opacity: 0.95;\n  box-shadow:0 5px 5px rgba(0,0,0,0.3);\n  font-size: small;\n  border-radius: 2.8%;\n}\n.catalog-entry:hover .hover{\n  display:block;\n}\n/* Small devices (landscape phones, 576px and up) */\n@media (max-width: 1300px) {\n.catalog-entry img {\n    height: auto;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30400,57 +30413,70 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "hover" }, [
-      _c("p", { staticClass: "title", attrs: { title: _vm.fullName } }, [
-        _vm._v(_vm._s(_vm.slicedName)),
-      ]),
-      _vm._v(" "),
       _c(
-        "p",
+        "div",
+        {
+          staticClass: "d-flex align-items-start flex-column",
+          staticStyle: { height: "200px" },
+        },
         [
-          _vm._v("\n      Тип: "),
-          _vm._l(_vm.type, function (type) {
-            return _c(
-              "router-link",
-              { key: type.id, staticClass: "tags", attrs: { to: type.url } },
-              [_vm._v(_vm._s(type.name) + " ")]
-            )
-          }),
+          _c("p", { staticClass: "title", attrs: { title: _vm.fullName } }, [
+            _vm._v(_vm._s(_vm.slicedName)),
+          ]),
           _vm._v(" "),
-          _c("br"),
-          _vm._v("\n      " + _vm._s(_vm.studios ? "Студия:" : "") + " "),
-          _vm._l(_vm.studios, function (studio) {
-            return _c(
-              "router-link",
-              { key: studio.id, staticClass: "tags", attrs: { to: "#" } },
-              [_vm._v(_vm._s(studio.name) + " ")]
-            )
-          }),
-          _vm._v(" "),
-          _vm.studios ? _c("br") : _vm._e(),
-          _vm._v("\n      Статус: "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(_vm.status))]),
-          _c("br"),
-          _vm._v("\n      " + _vm._s(_vm.genres ? "Жанры:" : "") + " "),
-          _vm._l(_vm.genres, function (genre) {
-            return _vm.genres
-              ? _c(
+          _c(
+            "p",
+            [
+              _vm._v("\n        Тип: "),
+              _vm._l(_vm.type, function (type) {
+                return _c(
                   "router-link",
                   {
-                    key: genre.id,
+                    key: type.id,
                     staticClass: "tags",
-                    attrs: { to: genre.url },
+                    attrs: { to: type.url },
                   },
-                  [_vm._v(_vm._s(genre.name_en) + " ")]
+                  [_vm._v(_vm._s(type.name) + " ")]
                 )
-              : _vm._e()
-          }),
-        ],
-        2
+              }),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v("\n        " + _vm._s(_vm.studios ? "Студия:" : "") + " "),
+              _vm._l(_vm.studios, function (studio) {
+                return _c(
+                  "router-link",
+                  { key: studio.id, staticClass: "tags", attrs: { to: "#" } },
+                  [_vm._v(_vm._s(studio.name) + " ")]
+                )
+              }),
+              _vm._v(" "),
+              _vm.studios ? _c("br") : _vm._e(),
+              _vm._v("\n        Статус: "),
+              _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(_vm.status))]),
+              _c("br"),
+              _vm._v("\n        " + _vm._s(_vm.genres ? "Жанры:" : "") + " "),
+              _vm._l(_vm.genres, function (genre) {
+                return _vm.genres
+                  ? _c(
+                      "router-link",
+                      {
+                        key: genre.id,
+                        staticClass: "tags",
+                        attrs: { to: genre.url },
+                      },
+                      [_vm._v(_vm._s(genre.name_en) + " ")]
+                    )
+                  : _vm._e()
+              }),
+            ],
+            2
+          ),
+        ]
       ),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "d-grid gap-2 button-block mx-0" },
+        { staticClass: "d-flex flex-column", staticStyle: { height: "200px" } },
         [
           _c(
             "router-link",

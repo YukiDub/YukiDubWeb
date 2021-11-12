@@ -24,7 +24,6 @@ class GenresResource extends JsonResource
             'name_jp'=> $this->nameJp,
             'name_en'=> $this->nameEn,
             'name_ru'=> $this->nameRu,
-            'url'=>'/'
         ];
     }
 }

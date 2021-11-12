@@ -3,11 +3,23 @@ export default {
         async loadAnimesList({commit}, page = 1, perPage = 30, filters = []) {
             let url = '/api/v1/anime?perPage=' + perPage + '&page=' + page;
 
-            let animes = await axios.get(url).then(data => {
+            let animeData = await axios.get(url).then(data => {
                 return data.data;
             });
 
-            commit('updateAnimesList', animes)
+            animeData.data.forEach(anime=>{
+                anime.studios.forEach(studio=> {
+                    studio.url = '/animes?studio=' + studio.name
+                })
+                anime.genres.forEach(genre=> {
+                    genre.url = '/animes?genre=' + genre.name_en
+                })
+                anime.type.forEach(type=> {
+                    type.url = '/animes?genre=' + type.name
+                })
+            })
+
+            commit('updateAnimesList', animeData)
         },
         async loadAnime(ctx, id) {
             let url = '/api/v1/anime/' + id;

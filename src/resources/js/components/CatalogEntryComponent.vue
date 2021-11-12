@@ -4,14 +4,16 @@
       <img class="img-fluid" :src="poster_url" width="224px" alt="poster">
     </div>
     <div class="hover">
-      <p class="title" :title="fullName">{{slicedName}}</p>
-      <p>
-        Тип: <router-link class="tags" v-for="type in type" v-bind:key="type.id" :to="type.url">{{type.name}} </router-link> <br/>
-        {{studios ? "Студия:" : ""}} <router-link class="tags" v-for="studio in studios" v-bind:key="studio.id" to="#">{{studio.name}} </router-link> <br v-if="studios"/>
-        Статус: <a href="#">{{status}}</a><br/>
-        {{genres ? "Жанры:" : ""}} <router-link v-if="genres" class="tags" v-for="genre in genres" v-bind:key="genre.id" :to="genre.url">{{genre.name_en}} </router-link>
-      </p>
-      <div class="d-grid gap-2 button-block mx-0">
+      <div class="d-flex align-items-start flex-column" style="height: 200px;">
+        <p class="title" :title="fullName">{{slicedName}}</p>
+        <p>
+          Тип: <router-link class="tags" v-for="type in type" v-bind:key="type.id" :to="type.url">{{type.name}} </router-link> <br/>
+          {{studios ? "Студия:" : ""}} <router-link class="tags" v-for="studio in studios" v-bind:key="studio.id" to="#">{{studio.name}} </router-link> <br v-if="studios"/>
+          Статус: <a href="#">{{status}}</a><br/>
+          {{genres ? "Жанры:" : ""}} <router-link v-if="genres" class="tags" v-for="genre in genres" v-bind:key="genre.id" :to="genre.url">{{genre.name_en}} </router-link>
+        </p>
+      </div>
+      <div class="d-flex flex-column" style="height: 200px;">
         <router-link class="btn" type="button" :to="'/animes/' + id">Подробнее</router-link>
       </div>
     </div>
@@ -70,6 +72,7 @@
     font-size: medium;
     font-weight: bold;
     color: #FFFFFF;
+    margin-bottom: 0.8vh;
   }
   .catalog-entry img {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
