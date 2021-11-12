@@ -61,7 +61,7 @@ export default {
   computed: mapGetters(['animeList', 'animePagination']),
 
   mounted() {
-    this.loadAnimesList(this.page, 30);
+    this.loadComponent();
     // this.bodyParams.genres = [];
     // console.log(this.bodyParams)
     // Array.observe(this.genresFilter, function(changes) {
@@ -73,7 +73,7 @@ export default {
     return {
       openFilter: false,
       loading:      false,
-      page:         1,
+      page:         this.$route.query.page ? Number(this.$route.query.page) : 1,
       genresFilter: [],
       statusFilter: [],
       bodyParams:   {
@@ -89,6 +89,8 @@ export default {
       handler(){
         this.loading = false;
         this.loadAnimesList(this.page, 30);
+        this.$router.replace({query: {page: String(this.page)}})
+            .catch(ex => {})
       },
       deep: true
     },
@@ -101,6 +103,14 @@ export default {
   },
 
   methods: {
+    loadComponent(){
+      if(this.animePagination && Number(this.animePagination.current_page) === this.page){
+        this.loading = true;
+      }
+      else{
+        this.loadAnimesList(this.page, 30);
+      }
+    },
     ...mapActions(["loadAnimesList"]),
     filterOnClick(){
       let filter = document.getElementById("filter-block")

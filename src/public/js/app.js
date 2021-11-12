@@ -5806,33 +5806,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   actions: {
-    loadAnimesList: function loadAnimesList(ctx) {
+    loadAnimesList: function loadAnimesList(_ref) {
       var _arguments = arguments;
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var page, perPage, filters, url, animes;
+        var commit, page, perPage, filters, url, animes;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                commit = _ref.commit;
                 page = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 1;
                 perPage = _arguments.length > 2 && _arguments[2] !== undefined ? _arguments[2] : 30;
                 filters = _arguments.length > 3 && _arguments[3] !== undefined ? _arguments[3] : [];
-                url = '/api/v1/anime?perPage=' + perPage + '&page=' + page; // if(filters){
-                //     filters.forEach(filter => {
-                //
-                //     })
-                // }
-
-                _context.next = 6;
+                url = '/api/v1/anime?perPage=' + perPage + '&page=' + page;
+                _context.next = 7;
                 return axios.get(url).then(function (data) {
                   return data.data;
                 });
 
-              case 6:
+              case 7:
                 animes = _context.sent;
-                ctx.commit('updateAnimesList', animes);
+                commit('updateAnimesList', animes);
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }

@@ -959,7 +959,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['animeList', 'animePagination']),
   mounted: function mounted() {
-    this.loadAnimesList(this.page, 30); // this.bodyParams.genres = [];
+    this.loadComponent(); // this.bodyParams.genres = [];
     // console.log(this.bodyParams)
     // Array.observe(this.genresFilter, function(changes) {
     //   console.log(changes);
@@ -969,7 +969,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       openFilter: false,
       loading: false,
-      page: 1,
+      page: this.$route.query.page ? Number(this.$route.query.page) : 1,
       genresFilter: [],
       statusFilter: [],
       bodyParams: {
@@ -982,6 +982,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler() {
         this.loading = false;
         this.loadAnimesList(this.page, 30);
+        this.$router.replace({
+          query: {
+            page: String(this.page)
+          }
+        })["catch"](function (ex) {});
       },
       deep: true
     },
@@ -992,7 +997,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       deep: true
     }
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(["loadAnimesList"])), {}, {
+  methods: _objectSpread(_objectSpread({
+    loadComponent: function loadComponent() {
+      if (this.animePagination && Number(this.animePagination.current_page) === this.page) {
+        this.loading = true;
+      } else {
+        this.loadAnimesList(this.page, 30);
+      }
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(["loadAnimesList"])), {}, {
     filterOnClick: function filterOnClick() {
       var filter = document.getElementById("filter-block");
 

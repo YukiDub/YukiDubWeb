@@ -1,19 +1,13 @@
 export default {
     actions: {
-        async loadAnimesList(ctx, page = 1, perPage = 30, filters = []) {
+        async loadAnimesList({commit}, page = 1, perPage = 30, filters = []) {
             let url = '/api/v1/anime?perPage=' + perPage + '&page=' + page;
-
-            // if(filters){
-            //     filters.forEach(filter => {
-            //
-            //     })
-            // }
 
             let animes = await axios.get(url).then(data => {
                 return data.data;
             });
 
-            ctx.commit('updateAnimesList', animes)
+            commit('updateAnimesList', animes)
         },
         async loadAnime(ctx, id) {
             let url = '/api/v1/anime/' + id;
