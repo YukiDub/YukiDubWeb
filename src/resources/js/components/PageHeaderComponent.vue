@@ -47,7 +47,7 @@
         </div>
         <div class="header-drop user-drop">
           <a href="#" class="avatar">
-            <img src="/images/avatars/1.png" alt="" srcset="">
+            <img src="/images/avatars/1.png" alt="profile">
           </a>
           <div class="header-user-menu drop-menu">
             <a href="#" class="line">

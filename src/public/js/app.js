@@ -31098,9 +31098,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "header-drop user-drop" }, [
       _c("a", { staticClass: "avatar", attrs: { href: "#" } }, [
-        _c("img", {
-          attrs: { src: "/images/avatars/1.png", alt: "", srcset: "" },
-        }),
+        _c("img", { attrs: { src: "/images/avatars/1.png", alt: "profile" } }),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "header-user-menu drop-menu" }, [
