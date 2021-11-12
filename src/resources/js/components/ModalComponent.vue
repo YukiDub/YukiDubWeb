@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -55,7 +55,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 .modal {
   background: #353944;
   box-shadow: 2px 2px 20px 1px;
@@ -66,40 +65,29 @@ export default {
   height: 60%;
   position: initial;
 }
-
 .modal-header,
 .modal-footer {
   padding: 15px;
   display: flex;
 }
-
 .modal-header {
   position: relative;
-  color: black;
   justify-content: space-between;
+  background: #339beb;
+  color: #ffff;
+  border: none;
 }
-
 .modal-footer {
   flex-direction: column;
   justify-content: flex-end;
+  background: #353944;
+  color: #ffff;
+  border: none;
 }
-
 .modal-body {
   color: #FFFFFF;
   position: relative;
   padding: 20px 10px;
-}
-
-.btn-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  font-size: 20px;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: transparent;
+  background: #353944;
 }
 </style>

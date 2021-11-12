@@ -64,6 +64,157 @@ import modal from '../components/ModalComponent.vue';
 </script>
 
 <style>
+  .navigation {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+    box-shadow: 1px -12px 20px rgb(28 28 28);
+  }
+  .navigation {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 62px;
+    flex: 0 0 62px;
+    background-color: #424755;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+  }
+  .nav-icon {
+    padding-top: 1.4rem;
+  }
+  .navigation i {
+    color: #797c84;
+    font-size: 1.4rem;
+  }
+  .navigation>.logo {
+    -ms-flex: 0 0 70.3px;
+    flex: 0 0 70.3px;
+    height: 69px;
+    border-bottom: 1px solid #282828;
+    margin-top: .1rem;
+  }
+  .navigation>.logo>.icon-inline>svg {
+    width: 22px;
+    height: 24px
+  }
+  .navigation>.logo.activeTabs path,
+  .navigation>.logo.router-link-exact-active path {
+    fill: #fff
+  }
+  .navigation>.menu-buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    padding-top: 7px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    overflow: hidden
+  }
+  .navigation>.menu-buttons>.main-buttons {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none
+  }
+  .navigation>.menu-buttons>.main-buttons::-webkit-scrollbar {
+    width: 0
+  }
+  .navigation>.menu-buttons>.main-buttons>a .wrapper-news {
+    position: relative
+  }
+  .navigation>.menu-buttons>.main-buttons>a .wrapper-news>.new {
+    border: 1px solid #272c38;
+    height: 12px;
+    width: 12px;
+    top: 18px;
+    right: 17.5px;
+    position: absolute;
+    background: linear-gradient(103deg, #5cc8ff, #009beb);
+    border-radius: 50%
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link {
+    height: 68px;
+    width: 62px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.play {
+    padding: 24.25px 15px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.play i {
+    font-size: 2rem;
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.manga {
+    padding: 24.25px 16px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.manga i {
+    font-size: 1.2rem;
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.about {
+    padding: 25px 26px 25px 18px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.about svg {
+    width: 26px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.communities {
+    padding: 26px 18px;
+    position: relative
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.communities svg {
+    width: 26px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.friends {
+    padding: 24px 21.5px;
+    position: relative
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.friends svg {
+    width: 19px
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.matcha {
+    padding: 24px 21.5px;
+    position: relative
+  }
+  .navigation>.menu-buttons>.main-buttons>a .button-link.matcha svg {
+    width: 19px
+  }
+  .navigation>.menu-buttons>.main-buttons>a.activeTabs path,
+  .navigation>.menu-buttons>.main-buttons>a.router-link-active path {
+    fill: #fff
+  }
+  .navigation>.menu-buttons>.other-buttons .button {
+    height: 68px;
+    width: 62px;
+    padding: 24px 20px;
+    cursor: pointer
+  }
+  .navigation>.menu-buttons>.other-buttons .button>.settings svg {
+    height: 19px;
+    width: 22px
+  }
+  .navigation>.menu-buttons>.other-buttons .button>.information svg {
+    height: 20px;
+    width: 22px
+  }
+  .navigation>.menu-buttons>.other-buttons .button path {
+    fill: #797c84
+  }
+  .navigation>.menu-buttons>.other-buttons .button:hover path,
+  .navigation>.menu-buttons>.other-buttons a.router-link-active path {
+    fill: #fff
+  }
   .router-link-exact-active.router-link-active > i{
     color: #3490dc;
   }

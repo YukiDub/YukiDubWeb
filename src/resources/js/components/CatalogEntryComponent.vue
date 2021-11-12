@@ -4,7 +4,7 @@
       <img class="img-fluid" :src="poster_url" width="224px" alt="poster">
     </div>
     <div class="hover">
-      <div class="d-flex align-items-start flex-column" style="height: 200px;">
+      <div class="d-flex align-items-start flex-column" style="height: 212px;">
         <p class="title" :title="fullName">{{slicedName}}</p>
         <p>
           Тип: <router-link class="tags" v-for="type in type" v-bind:key="type.id" :to="type.url">{{type.name}} </router-link> <br/>
@@ -13,7 +13,7 @@
           {{genres ? "Жанры:" : ""}} <router-link v-if="genres" class="tags" v-for="genre in genres" v-bind:key="genre.id" :to="genre.url">{{genre.name_en}} </router-link>
         </p>
       </div>
-      <div class="d-flex flex-column" style="height: 200px;">
+      <div class="d-flex flex-column">
         <router-link class="btn" type="button" :to="'/animes/' + id">Подробнее</router-link>
       </div>
     </div>
@@ -97,8 +97,10 @@
     box-shadow:0 5px 5px rgba(0,0,0,0.3);
     font-size: small;
     border-radius: 2.8%;
+    pointer-events: none;
   }
   .catalog-entry:hover .hover{
+    pointer-events: all;
     display:block;
   }
   /* Small devices (landscape phones, 576px and up) */
