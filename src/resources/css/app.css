@@ -71,7 +71,7 @@ a:hover{
 }
 .wrapper {
     width: 100%;
-    margin-left: auto;
+    margin-left: 4rem;
     margin-right: auto;
 }
 p {
@@ -102,7 +102,7 @@ p {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    position: relative;
+    position: fixed;
     line-height: 16px;
     display: flex;
     height: 100vh;
@@ -284,6 +284,9 @@ p {
         -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
+    }
+    .wrapper{
+        margin-left: auto;
     }
     .navbar {
         width: 100%;

@@ -186,7 +186,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -240,7 +239,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n  position: absolute;\r\n  /*width: 100%;*/\r\n  /*height: 718px;*/\r\n  opacity: 0.1;\r\n  left: 62px;\r\n  top: 72px;\n}\n@media (max-width: 575px) {\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n    left: 0;\n}\n}\n.anime>.content-header>.row-container[data-v-44d22d05] {\r\n  min-height: 598px;\r\n  margin: 0 auto;\r\n  max-width: 1224px;\n}\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n  display: flex;\r\n  position: relative;\r\n  z-index: 1\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n    flex-direction: column;\r\n    align-items: center\n}\n}\n.anime>.content-header>.row-container>.row-information>.right-block[data-v-44d22d05]{\r\n  width: 100%;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star[data-v-44d22d05]{\r\n  font-size: 4rem;\r\n  color: #FFFFFF;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star[data-v-44d22d05]:hover{\r\n  cursor: pointer;\r\n  color: #36b5f7;\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  margin-right: 40px;\r\n  flex: 0 0 276px;\n}\n.anime-container-btn[data-v-44d22d05] {\r\n  width: 100%;\r\n  height: 2.4rem;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n    margin-right: 0;\n}\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background-position: 50%;\r\n  background-size: cover;\r\n  border-radius: 4px;\r\n  margin-bottom: 15px;\r\n  cursor: pointer;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05]{\r\n    width: 349px;\r\n    height: 500px;\n}\n}\n.anime .description .text[data-v-44d22d05] {\r\n  height: 154px;\r\n  overflow-x: hidden;\r\n  overflow-y: scroll;\n}\n.anime>.content-header.loading > .row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background: #363944;\r\n  box-shadow: 0 -200px 100px -120px #1f2631 inset;\r\n  border-radius: 4px;\r\n  -webkit-animation: background-data-v-44d22d05 3s infinite alternate;\r\n          animation: background-data-v-44d22d05 3s infinite alternate;\n}\n#anime-tab > button[data-v-44d22d05] {\r\n  background: none;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  font-size: 1.2rem;\r\n  font-weight: 600;\r\n  margin-right: 14px;\n}\n#anime-tab > button.active[data-v-44d22d05]::after {\r\n  content: \"\";\r\n  display: block;\r\n  background: #009BEB;\r\n  border-radius: 6px 5px 0px 0px;\r\n  width: 108px;\r\n  height: 4px;\n}\n@-webkit-keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\n@keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n  position: absolute;\r\n  width: 97vw;\r\n  height: 630px;\r\n  opacity: 0.1;\r\n  left: 62px;\r\n  top: 72px;\r\n  filter: drop-shadow(0px 4px 52px rgba(0, 0, 0, 0.25));\n}\n@media (max-width: 1399px) {\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n    display: none;\n}\n}\n.anime>.content-header>.row-container[data-v-44d22d05] {\r\n  min-height: 598px;\r\n  margin: 0 auto;\r\n  max-width: 1224px;\n}\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n  display: flex;\r\n  position: relative;\r\n  z-index: 1\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n    flex-direction: column;\r\n    align-items: center\n}\n}\n.anime>.content-header>.row-container>.row-information>.right-block[data-v-44d22d05]{\r\n  width: 100%;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input[data-v-44d22d05] {\r\n  display: none;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked + .star[data-v-44d22d05]:hover,\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked + .star:hover ~ .star[data-v-44d22d05],\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked ~ .star[data-v-44d22d05]:hover,\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked ~ .star:hover ~ .star[data-v-44d22d05],\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > label:hover ~ .star:checked ~ .star[data-v-44d22d05] {\r\n  color: #36b5f7;\r\n  text-shadow: 1px 1px #36b5f7;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected + .star[data-v-44d22d05],\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected + .star ~ .star[data-v-44d22d05],\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected ~ .star[data-v-44d22d05],\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected ~ .star ~ .star[data-v-44d22d05],\r\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > label:hover ~ .star ~ .star[data-v-44d22d05] {\r\n  color: #36b5f7;\r\n  text-shadow: 1px 1px #36b5f7;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star[data-v-44d22d05]{\r\n  font-size: 4rem;\r\n  color: #FFFFFF;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star[data-v-44d22d05]:hover{\r\n  cursor: pointer;\r\n  color: #36b5f7;\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  margin-right: 40px;\r\n  flex: 0 0 276px;\n}\n.anime-container-btn[data-v-44d22d05] {\r\n  width: 100%;\r\n  height: 2.4rem;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n    margin-right: 0;\n}\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05] {\r\n  width: 300px;\r\n  height: 429px;\r\n  background-position: 50%;\r\n  background-size: cover;\r\n  border-radius: 4px;\r\n  margin-bottom: 15px;\r\n  cursor: pointer;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05]{\r\n    width: 349px;\r\n    height: 500px;\n}\n}\n.anime .description .text[data-v-44d22d05] {\r\n  height: 154px;\r\n  overflow-x: hidden;\r\n  overflow-y: scroll;\n}\n#anime-tab > button[data-v-44d22d05] {\r\n  background: none;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  font-size: 1.2rem;\r\n  font-weight: 600;\r\n  margin-right: 14px;\n}\n#anime-tab > button.active[data-v-44d22d05]::after {\r\n  content: \"\";\r\n  display: block;\r\n  background: #009BEB;\r\n  border-radius: 6px 5px 0px 0px;\r\n  width: 108px;\r\n  height: 4px;\n}\n.anime>.content-header.loading > .row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background: #363944;\r\n  box-shadow: 0 -200px 100px -120px #1f2631 inset;\r\n  border-radius: 4px;\r\n  -webkit-animation: background-data-v-44d22d05 3s infinite alternate;\r\n          animation: background-data-v-44d22d05 3s infinite alternate;\n}\n@-webkit-keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\n@keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -474,14 +473,13 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "anime" }, [
-    !_vm.loading
-      ? _c("div", { staticClass: "content-header mb-4" }, [
+  return !_vm.loading
+    ? _c("div", { staticClass: "anime" }, [
+        _c("div", { staticClass: "content-header mb-4" }, [
           _c("div", {
             staticClass: "cover",
             style: {
-              "background-image":
-                "url(" + "/storage/images/animes/original/8.jpg" + ")",
+              "background-image": "url(" + _vm.animeItem.poster.original + ")",
             },
           }),
           _vm._v(" "),
@@ -489,10 +487,10 @@ var render = function () {
             _c("div", { staticClass: "row-information" }, [
               _c("div", { staticClass: "warp-poster" }, [
                 _c("div", {
-                  staticClass: "poster",
+                  staticClass: "poster mx-auto",
                   style: {
                     "background-image":
-                      "url(" + "/storage/images/animes/original/8.jpg" + ")",
+                      "url(" + _vm.animeItem.poster.original + ")",
                   },
                 }),
                 _vm._v(" "),
@@ -513,7 +511,7 @@ var render = function () {
                     _c(
                       "p",
                       [
-                        _vm._v("\n                    Тип: "),
+                        _vm._v("\n                  Тип: "),
                         _vm._l(_vm.animeItem.type, function (typeItem) {
                           return _c(
                             "a",
@@ -522,7 +520,7 @@ var render = function () {
                           )
                         }),
                         _c("br"),
-                        _vm._v("\n                    Статус: "),
+                        _vm._v("\n                  Статус: "),
                         _c("a", { attrs: { href: "#" } }),
                         _vm._v(_vm._s(_vm.animeItem.status)),
                         _c("br"),
@@ -581,7 +579,7 @@ var render = function () {
                               "span",
                               [
                                 _vm._v(
-                                  "\n                      Жанры:\n                      "
+                                  "\n                    Жанры:\n                    "
                                 ),
                                 _vm._l(
                                   _vm.animeItem.genres,
@@ -704,9 +702,24 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("p", [
-                            _vm._v(
-                              "Автор: " +
-                                _vm._s(_vm.animeItem.description_ru_source)
+                            _vm._v("Автор: "),
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: _vm.animeItem.description_ru_source,
+                                  target: "»_blank",
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.animeItem.description_ru_source.split(
+                                      "/"
+                                    )[2]
+                                  )
+                                ),
+                              ]
                             ),
                           ]),
                         ]
@@ -727,12 +740,7 @@ var render = function () {
                             _vm._v(_vm._s(_vm.animeItem.description_en)),
                           ]),
                           _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "Автор: " +
-                                _vm._s(_vm.animeItem.description_en_source)
-                            ),
-                          ]),
+                          _vm._m(3),
                         ]
                       ),
                     ]
@@ -741,116 +749,119 @@ var render = function () {
               ]),
             ]),
           ]),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "content-footer" }, [
-      _c("div", { staticClass: "tabs" }, [
-        _vm._m(3),
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tab-content", attrs: { id: "anime-tabContent" } },
-          [
+        _c("div", { staticClass: "content-footer" }, [
+          _c("div", { staticClass: "tabs" }, [
+            _vm._m(4),
+            _vm._v(" "),
             _c(
               "div",
-              {
-                staticClass: "tab-pane show active",
-                attrs: {
-                  id: "nav-characters",
-                  role: "tabpanel",
-                  "aria-labelledby": "nav-characters-tab",
-                },
-              },
+              { staticClass: "tab-content", attrs: { id: "anime-tabContent" } },
               [
-                _c("div", { staticClass: "characters pl-4" }, [
-                  _c("h1", { staticClass: "text-left pb-3 pt-4" }, [
-                    _vm._v("ГЛАВНЫЕ ГЕРОИ"),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3 mx-auto",
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane show active",
+                    attrs: {
+                      id: "nav-characters",
+                      role: "tabpanel",
+                      "aria-labelledby": "nav-characters-tab",
                     },
-                    _vm._l(_vm.animeItem.characters, function (character) {
-                      return _c("character-entry-component", {
-                        key: character.id,
-                        attrs: {
-                          name: character.name_ru,
-                          poster_url: "/storage/images/animes/preview/1.jpg",
+                  },
+                  [
+                    _c("div", { staticClass: "characters pl-4" }, [
+                      _c(
+                        "h4",
+                        { staticClass: "text-center text-md-start pb-3 pt-4" },
+                        [_vm._v("ГЛАВНЫЕ ГЕРОИ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
                         },
-                      })
-                    }),
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("h1", { staticClass: "text-left pb-3 pt-4" }, [
-                    _vm._v("ДРУГИЕ ПЕРСОНАЖИ"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass:
-                      "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3 mx-auto",
-                  }),
-                ]),
+                        _vm._l(_vm.animeItem.characters, function (character) {
+                          return _c("character-entry-component", {
+                            key: character.id,
+                            attrs: {
+                              name: character.name_ru,
+                              poster_url:
+                                "/storage/images/animes/preview/1.jpg",
+                            },
+                          })
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "h4",
+                        { staticClass: "text-center text-md-start pb-3 pt-4" },
+                        [_vm._v("ДРУГИЕ ПЕРСОНАЖИ")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticClass:
+                          "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
+                      }),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane",
+                    attrs: {
+                      id: "nav-staff",
+                      role: "tabpanel",
+                      "aria-labelledby": "nav-staff-tab",
+                    },
+                  },
+                  [_vm._v("\n          авторы\n        ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane",
+                    attrs: {
+                      id: "nav-review",
+                      role: "tabpanel",
+                      "aria-labelledby": "nav-review-tab",
+                    },
+                  },
+                  [_vm._v("\n          отзыввы\n        ")]
+                ),
               ]
             ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "tab-pane",
-                attrs: {
-                  id: "nav-staff",
-                  role: "tabpanel",
-                  "aria-labelledby": "nav-staff-tab",
-                },
-              },
-              [_vm._v("\n            авторы\n          ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "tab-pane",
-                attrs: {
-                  id: "nav-review",
-                  role: "tabpanel",
-                  "aria-labelledby": "nav-review-tab",
-                },
-              },
-              [_vm._v("\n            отзыввы\n          ")]
-            ),
-          ]
-        ),
-      ]),
-    ]),
-  ])
+          ]),
+        ]),
+      ])
+    : _c("div", { staticClass: "anime" }, [_vm._m(5)])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row nav-button g-5" }, [
-      _c("div", { staticClass: "col-3 settings" }, [
+    return _c(
+      "div",
+      { staticClass: "gap-2 d-flex justify-content-center pb-2" },
+      [
         _c("div", { staticClass: "btn" }, [
           _c("i", { staticClass: "bi bi-gear-fill" }),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 bookmark" }, [
+        _vm._v(" "),
         _c("div", { staticClass: "btn" }, [
           _c("i", { staticClass: "bi bi-bookmark-star-fill" }),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 play" }, [
+        _vm._v(" "),
         _c("div", { staticClass: "btn" }, [_vm._v("Смотреть")]),
-      ]),
-    ])
+      ]
+    )
   },
   function () {
     var _vm = this
@@ -859,15 +870,50 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-auto rating mx-auto my-auto" }, [
       _c("p", { staticClass: "text-center" }, [_vm._v("Рейтинг")]),
       _vm._v(" "),
-      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _c("input", {
+        attrs: { type: "radio", id: "star-1", name: "rating", value: "1" },
+      }),
       _vm._v(" "),
-      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _c("label", {
+        staticClass: "star bi bi-star-fill",
+        attrs: { for: "star-1", title: "Оценка «1»" },
+      }),
       _vm._v(" "),
-      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _c("input", {
+        attrs: { type: "radio", id: "star-2", name: "rating", value: "2" },
+      }),
       _vm._v(" "),
-      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _c("label", {
+        staticClass: "star bi bi-star-fill",
+        attrs: { for: "star-2", title: "Оценка «2»" },
+      }),
       _vm._v(" "),
-      _c("i", { staticClass: "star bi bi-star-half" }),
+      _c("input", {
+        attrs: { type: "radio", id: "star-3", name: "rating", value: "3" },
+      }),
+      _vm._v(" "),
+      _c("label", {
+        staticClass: "star bi bi-star-fill",
+        attrs: { for: "star-3", title: "Оценка «3»" },
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "radio", id: "star-4", name: "rating", value: "4" },
+      }),
+      _vm._v(" "),
+      _c("label", {
+        staticClass: "star bi bi-star-fill",
+        attrs: { for: "star-4", title: "Оценка «4»" },
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "radio", id: "star-5", name: "rating", value: "5" },
+      }),
+      _vm._v(" "),
+      _c("label", {
+        staticClass: "star bi bi-star-fill",
+        attrs: { for: "star-5", title: "Оценка «5»" },
+      }),
     ])
   },
   function () {
@@ -920,6 +966,15 @@ var staticRenderFns = [
         ]),
       ]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v("Автор: "),
+      _c("a", { attrs: { href: "#" } }, [_vm._v("none")]),
+    ])
   },
   function () {
     var _vm = this
@@ -982,6 +1037,32 @@ var staticRenderFns = [
         ),
       ]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header loading" }, [
+      _c("div", { staticClass: "row-container" }, [
+        _c("div", { staticClass: "row-information" }, [
+          _c("div", { staticClass: "warp-poster" }, [
+            _c("div", { staticClass: "poster" }),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn anime-container-btn" }, [
+              _vm._v("Смотреть"),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("h1", { staticClass: "pt-3 text-sm-start" }, [
+              _vm._v("Идет загрузка"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-lg-7" }, [_c("p")]),
+          ]),
+        ]),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
