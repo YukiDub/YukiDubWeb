@@ -5,23 +5,17 @@
   -->
 
 <template>
-  <div class="anime">
-    <div class="content-header mb-4" v-if="!loading">
-      <div class="cover" v-bind:style="{ 'background-image': 'url(' + '/storage/images/animes/original/8.jpg' + ')' }"></div>
+  <div class="anime" v-if="!loading">
+    <div class="content-header mb-4">
+      <div class="cover" v-bind:style="{ 'background-image': 'url(' + animeItem.poster.original + ')' }"></div>
       <div class="row-container">
         <div class="row-information">
           <div class="warp-poster">
-            <div class="poster" v-bind:style="{ 'background-image': 'url(' + '/storage/images/animes/original/8.jpg' + ')' }"></div>
-            <div class="row nav-button g-5">
-              <div class="col-3 settings">
-                <div class="btn"><i class="bi bi-gear-fill"></i></div>
-              </div>
-              <div class="col-3 bookmark">
-                <div class="btn"><i class="bi bi-bookmark-star-fill"></i></div>
-              </div>
-              <div class="col-6 play">
-                <div class="btn">Смотреть</div>
-              </div>
+            <div class="poster mx-auto" v-bind:style="{ 'background-image': 'url(' + animeItem.poster.original + ')' }"></div>
+            <div class="gap-2 d-flex justify-content-center pb-2">
+              <div class="btn"><i class="bi bi-gear-fill"></i></div>
+              <div class="btn"><i class="bi bi-bookmark-star-fill"></i></div>
+              <div class="btn">Смотреть</div>
             </div>
           </div>
           <div class="right-block">
@@ -47,11 +41,16 @@
               </div>
               <div class="col-auto rating mx-auto my-auto">
                 <p class="text-center">Рейтинг</p>
-                <i class="star bi bi-star-fill"></i>
-                <i class="star bi bi-star-fill"></i>
-                <i class="star bi bi-star-fill"></i>
-                <i class="star bi bi-star-fill"></i>
-                <i class="star bi bi-star-half"></i>
+                <input type="radio" id="star-1" name="rating" value="1">
+                <label for="star-1" title="Оценка «1»" class="star bi bi-star-fill"></label>
+                <input type="radio" id="star-2" name="rating" value="2">
+                <label for="star-2" title="Оценка «2»" class="star bi bi-star-fill"></label>
+                <input type="radio" id="star-3" name="rating"  value="3">
+                <label for="star-3" title="Оценка «3»" class="star bi bi-star-fill"></label>
+                <input type="radio" id="star-4" name="rating"  value="4">
+                <label for="star-4" title="Оценка «4»" class="star bi bi-star-fill"></label>
+                <input type="radio" id="star-5" name="rating" value="5">
+                <label for="star-5" title="Оценка «5»" class="star bi bi-star-fill"></label>
               </div>
             </div>
 
@@ -68,11 +67,11 @@
               <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                   <p class="text">{{animeItem.description_ru}}</p>
-                  <p>Автор: {{animeItem.description_ru_source}}</p>
+                  <p>Автор: <a :href="animeItem.description_ru_source" target=»_blank>{{animeItem.description_ru_source.split('/')[2]}}</a></p>
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <p class="text">{{animeItem.description_en}}</p>
-                  <p>Автор: {{animeItem.description_en_source}}</p>
+                  <p>Автор: <a href="#">none</a></p>
                 </div>
               </div>
             </div>
@@ -91,8 +90,8 @@
         <div class="tab-content" id="anime-tabContent">
           <div class="tab-pane show active" id="nav-characters" role="tabpanel" aria-labelledby="nav-characters-tab">
             <div class="characters pl-4">
-              <h1 class="text-left pb-3 pt-4">ГЛАВНЫЕ ГЕРОИ</h1>
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3 mx-auto">
+              <h4 class="text-center text-md-start pb-3 pt-4">ГЛАВНЫЕ ГЕРОИ</h4>
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3">
                 <character-entry-component
                     v-for="character in animeItem.characters"
                     :key="character.id"
@@ -101,8 +100,8 @@
                 />
               </div>
 
-              <h1 class="text-left pb-3 pt-4">ДРУГИЕ ПЕРСОНАЖИ</h1>
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3 mx-auto">
+              <h4 class="text-center text-md-start pb-3 pt-4">ДРУГИЕ ПЕРСОНАЖИ</h4>
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3">
 
               </div>
             </div>
@@ -116,27 +115,27 @@
         </div>
       </div>
     </div>
-<!--    <div class="content-header loading" v-else>-->
-<!--      <div class="cover" v-bind:style="{ 'background-image': 'url(' + '/storage/images/animes/original/8.jpg' + ')' }"></div>-->
-<!--      <div class="row-container">-->
-<!--        <div class="row-information">-->
-<!--          <div class="warp-poster">-->
-<!--            <div class="poster"></div>-->
-<!--            <button class="btn anime-container-btn">Смотреть</button>-->
-<!--          </div>-->
-
-<!--          <div class="row">-->
-<!--            <h1 class="pt-3 text-sm-start">Идет загрузка</h1>-->
-<!--            <div class="col-12 col-lg-7">-->
-<!--              <p>-->
-<!--              </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
   </div>
+  <div class="anime" v-else>
+    <div class="content-header loading">
+      <div class="row-container">
+        <div class="row-information">
+          <div class="warp-poster">
+            <div class="poster"></div>
+            <button class="btn anime-container-btn">Смотреть</button>
+          </div>
 
+          <div class="row">
+            <h1 class="pt-3 text-sm-start">Идет загрузка</h1>
+            <div class="col-12 col-lg-7">
+              <p>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -185,15 +184,16 @@ export default {
 <style scoped>
 .anime>.content-header>.cover {
   position: absolute;
-  /*width: 100%;*/
-  /*height: 718px;*/
+  width: 97vw;
+  height: 630px;
   opacity: 0.1;
   left: 62px;
   top: 72px;
+  filter: drop-shadow(0px 4px 52px rgba(0, 0, 0, 0.25));
 }
-@media (max-width: 575px) {
+@media (max-width: 1399px) {
   .anime>.content-header>.cover {
-    left: 0;
+    display: none;
   }
 }
 .anime>.content-header>.row-container {
@@ -222,6 +222,25 @@ export default {
 .anime>.content-header>.row-container>.row-information>.right-block{
   width: 100%;
 }
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input {
+  display: none;
+}
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked + .star:hover,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked + .star:hover ~ .star,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked ~ .star:hover,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input:checked ~ .star:hover ~ .star,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > label:hover ~ .star:checked ~ .star {
+  color: #36b5f7;
+  text-shadow: 1px 1px #36b5f7;
+}
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected + .star,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected + .star ~ .star,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected ~ .star,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > input.selected ~ .star ~ .star,
+.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > label:hover ~ .star ~ .star {
+  color: #36b5f7;
+  text-shadow: 1px 1px #36b5f7;
+}
 .anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star{
   font-size: 4rem;
   color: #FFFFFF;
@@ -246,8 +265,8 @@ export default {
   }
 }
 .anime>.content-header>.row-container>.row-information>.warp-poster>.poster {
-  width: 276px;
-  height: 398px;
+  width: 300px;
+  height: 429px;
   background-position: 50%;
   background-size: cover;
   border-radius: 4px;
@@ -265,14 +284,6 @@ export default {
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.anime>.content-header.loading > .row-container>.row-information>.warp-poster {
-  width: 276px;
-  height: 398px;
-  background: #363944;
-  box-shadow: 0 -200px 100px -120px #1f2631 inset;
-  border-radius: 4px;
-  animation: background 3s infinite alternate;
-}
 #anime-tab > button {
   background: none;
   border: none;
@@ -288,6 +299,14 @@ export default {
   border-radius: 6px 5px 0px 0px;
   width: 108px;
   height: 4px;
+}
+.anime>.content-header.loading > .row-container>.row-information>.warp-poster {
+  width: 276px;
+  height: 398px;
+  background: #363944;
+  box-shadow: 0 -200px 100px -120px #1f2631 inset;
+  border-radius: 4px;
+  animation: background 3s infinite alternate;
 }
 @keyframes background {
   50% {
