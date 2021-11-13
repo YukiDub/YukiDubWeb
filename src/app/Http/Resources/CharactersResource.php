@@ -17,12 +17,12 @@ class CharactersResource extends JsonResource
     {
         return [
             'id'           => $this->character_id,
-            'nameJp'       => $this->nameJp,
-            'nameEn'       => $this->nameEn,
-            'nameRu'       => $this->nameRu,
-            'descriptionJp'=> $this->descriptionJp,
-            'descriptionEn'=> $this->descriptionEn,
-            'descriptionRu'=> $this->descriptionRu,
+            'name_jp'       => $this->nameJp,
+            'name_en'       => $this->nameEn,
+            'name_ru'       => $this->nameRu,
+            'description_jp'=> $this->descriptionJp,
+            'description_en'=> $this->descriptionEn,
+            'description_ru'=> $this->descriptionRu,
             'created_at'   => $this->created_at,
             'updated_at'   => $this->updated_at,
         ];
