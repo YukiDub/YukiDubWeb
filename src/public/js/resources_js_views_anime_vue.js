@@ -1,6 +1,33 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_anime_vue"],{
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/СharacterEntryComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/СharacterEntryComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "CharacterEntryComponent",
+  props: {
+    name: String,
+    poster_url: String
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/anime.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/anime.vue?vue&type=script&lang=js& ***!
@@ -11,7 +38,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_haracterEntryComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/СharacterEntryComponent */ "./resources/js/components/СharacterEntryComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -101,25 +188,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
+  components: {
+    CharacterEntryComponent: _components_haracterEntryComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       loading: true
     };
   },
   mounted: function mounted() {
-    this.loadAnime(this.$route.params.id);
+    this.loadView();
   },
   watch: {
     animeItem: function animeItem(_animeItem) {
       if (_animeItem) {
         this.loading = false;
+        this.$route.meta.title = _animeItem.name_ru;
       }
     }
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['animeItem']),
-  methods: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['loadAnime'])
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['animeItem']),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['loadAnime'])), {}, {
+    loadView: function loadView() {
+      if (this.animeItem.id === Number(this.$route.params.id)) {
+        this.loading = false;
+      } else {
+        this.loadAnime(this.$route.params.id);
+      }
+    }
+  })
 });
 
 /***/ }),
@@ -140,7 +240,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n  position: absolute;\r\n  /*width: 100%;*/\r\n  /*height: 718px;*/\r\n  opacity: 0.1;\r\n  left: 62px;\r\n  top: 72px;\n}\n@media (max-width: 575px) {\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n    left: 0;\n}\n}\n.anime>.content-header>.row-container[data-v-44d22d05] {\r\n  min-height: 598px;\r\n  margin: 0 auto;\r\n  max-width: 1224px;\n}\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n  display: flex;\r\n  position: relative;\r\n  z-index: 1\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n    flex-direction: column;\r\n    align-items: center\n}\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  margin-right: 40px;\r\n  flex: 0 0 276px;\n}\n.anime-container-btn[data-v-44d22d05] {\r\n  width: 100%;\r\n  height: 2.4rem;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n    margin-right: 0\n}\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background-position: 50%;\r\n  background-size: cover;\r\n  border-radius: 4px;\r\n  margin-bottom: 15px;\r\n  cursor: pointer;\n}\n.anime>.content-header.loading > .row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background: #363944;\r\n  box-shadow: 0 -200px 100px -120px #1f2631 inset;\r\n  border-radius: 4px;\r\n  -webkit-animation: background-data-v-44d22d05 3s infinite alternate;\r\n          animation: background-data-v-44d22d05 3s infinite alternate;\n}\n@-webkit-keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\n@keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n  position: absolute;\r\n  /*width: 100%;*/\r\n  /*height: 718px;*/\r\n  opacity: 0.1;\r\n  left: 62px;\r\n  top: 72px;\n}\n@media (max-width: 575px) {\n.anime>.content-header>.cover[data-v-44d22d05] {\r\n    left: 0;\n}\n}\n.anime>.content-header>.row-container[data-v-44d22d05] {\r\n  min-height: 598px;\r\n  margin: 0 auto;\r\n  max-width: 1224px;\n}\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n  display: flex;\r\n  position: relative;\r\n  z-index: 1\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information[data-v-44d22d05] {\r\n    flex-direction: column;\r\n    align-items: center\n}\n}\n.anime>.content-header>.row-container>.row-information>.right-block[data-v-44d22d05]{\r\n  width: 100%;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star[data-v-44d22d05]{\r\n  font-size: 4rem;\r\n  color: #FFFFFF;\n}\n.anime>.content-header>.row-container>.row-information>.right-block .row > .rating > .star[data-v-44d22d05]:hover{\r\n  cursor: pointer;\r\n  color: #36b5f7;\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  margin-right: 40px;\r\n  flex: 0 0 276px;\n}\n.anime-container-btn[data-v-44d22d05] {\r\n  width: 100%;\r\n  height: 2.4rem;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n    margin-right: 0;\n}\n}\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background-position: 50%;\r\n  background-size: cover;\r\n  border-radius: 4px;\r\n  margin-bottom: 15px;\r\n  cursor: pointer;\n}\n@media(max-width:769.98px) {\n.anime>.content-header>.row-container>.row-information>.warp-poster>.poster[data-v-44d22d05]{\r\n    width: 349px;\r\n    height: 500px;\n}\n}\n.anime .description .text[data-v-44d22d05] {\r\n  height: 154px;\r\n  overflow-x: hidden;\r\n  overflow-y: scroll;\n}\n.anime>.content-header.loading > .row-container>.row-information>.warp-poster[data-v-44d22d05] {\r\n  width: 276px;\r\n  height: 398px;\r\n  background: #363944;\r\n  box-shadow: 0 -200px 100px -120px #1f2631 inset;\r\n  border-radius: 4px;\r\n  -webkit-animation: background-data-v-44d22d05 3s infinite alternate;\r\n          animation: background-data-v-44d22d05 3s infinite alternate;\n}\n#anime-tab > button[data-v-44d22d05] {\r\n  background: none;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  font-size: 1.2rem;\r\n  font-weight: 600;\r\n  margin-right: 14px;\n}\n#anime-tab > button.active[data-v-44d22d05]::after {\r\n  content: \"\";\r\n  display: block;\r\n  background: #009BEB;\r\n  border-radius: 6px 5px 0px 0px;\r\n  width: 108px;\r\n  height: 4px;\n}\n@-webkit-keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\n@keyframes background-data-v-44d22d05 {\n50% {\r\n    background: #1f2631;\r\n    box-shadow: 0 -200px 100px -100px #363944 inset;\n}\n100% {\r\n    background: #363944;\r\n    box-shadow: 0 -200px 100px -100px #1f2631 inset;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -173,6 +273,44 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_anime_vue_vue_type_style_index_0_id_44d22d05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/СharacterEntryComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/СharacterEntryComponent.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _haracterEntryComponent_vue_vue_type_template_id_726b4012_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true& */ "./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true&");
+/* harmony import */ var _haracterEntryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./СharacterEntryComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/СharacterEntryComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _haracterEntryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _haracterEntryComponent_vue_vue_type_template_id_726b4012_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _haracterEntryComponent_vue_vue_type_template_id_726b4012_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "726b4012",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/СharacterEntryComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
@@ -216,6 +354,21 @@ component.options.__file = "resources/js/views/anime.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/СharacterEntryComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/СharacterEntryComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_haracterEntryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./СharacterEntryComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/СharacterEntryComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_haracterEntryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/views/anime.vue?vue&type=script&lang=js&":
 /*!***************************************************************!*\
   !*** ./resources/js/views/anime.vue?vue&type=script&lang=js& ***!
@@ -243,6 +396,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true& ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_haracterEntryComponent_vue_vue_type_template_id_726b4012_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_haracterEntryComponent_vue_vue_type_template_id_726b4012_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_haracterEntryComponent_vue_vue_type_template_id_726b4012_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/views/anime.vue?vue&type=template&id=44d22d05&scoped=true&":
 /*!*********************************************************************************!*\
   !*** ./resources/js/views/anime.vue?vue&type=template&id=44d22d05&scoped=true& ***!
@@ -255,6 +424,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_anime_vue_vue_type_template_id_44d22d05_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_anime_vue_vue_type_template_id_44d22d05_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./anime.vue?vue&type=template&id=44d22d05&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/anime.vue?vue&type=template&id=44d22d05&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col ps-4 pe-4" }, [
+    _c("img", {
+      staticClass: "img-thumbnail w-100",
+      attrs: { src: _vm.poster_url, alt: "Постер к аниме ..." },
+    }),
+    _vm._v(" "),
+    _c("p", { staticClass: "text-center" }, [_vm._v(_vm._s(_vm.name))]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
 
 
 /***/ }),
@@ -276,7 +476,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "anime" }, [
     !_vm.loading
-      ? _c("div", { staticClass: "content-header" }, [
+      ? _c("div", { staticClass: "content-header mb-4" }, [
           _c("div", {
             staticClass: "cover",
             style: {
@@ -296,12 +496,10 @@ var render = function () {
                   },
                 }),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn anime-container-btn" }, [
-                  _vm._v("Смотреть"),
-                ]),
+                _vm._m(0),
               ]),
               _vm._v(" "),
-              _c("div", [
+              _c("div", { staticClass: "right-block" }, [
                 _c("h1", { staticClass: "text-sm-start" }, [
                   _vm._v(
                     _vm._s(_vm.animeItem.name_en) +
@@ -311,18 +509,20 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row mb-2 mt-sm-4 mt-md-0" }, [
-                  _c("div", { staticClass: "col-auto me-auto" }, [
+                  _c("div", { staticClass: "col-auto" }, [
                     _c(
                       "p",
                       [
-                        _vm._v("\n                  Тип: "),
+                        _vm._v("\n                    Тип: "),
                         _vm._l(_vm.animeItem.type, function (typeItem) {
-                          return _c("a", { attrs: { href: "#" } }, [
-                            _vm._v(_vm._s(typeItem.name) + " "),
-                          ])
+                          return _c(
+                            "a",
+                            { class: "tags", attrs: { href: "#" } },
+                            [_vm._v(_vm._s(typeItem.name) + " ")]
+                          )
                         }),
                         _c("br"),
-                        _vm._v("\n                  Статус: "),
+                        _vm._v("\n                    Статус: "),
                         _c("a", { attrs: { href: "#" } }),
                         _vm._v(_vm._s(_vm.animeItem.status)),
                         _c("br"),
@@ -381,7 +581,7 @@ var render = function () {
                               "span",
                               [
                                 _vm._v(
-                                  "\n                    Жанры:\n                    "
+                                  "\n                      Жанры:\n                      "
                                 ),
                                 _vm._l(
                                   _vm.animeItem.genres,
@@ -473,80 +673,160 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _vm._m(1),
                 ]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Описание:")]),
-                _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "tab-content",
-                    attrs: { id: "pills-tabContent" },
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade show active",
-                        attrs: {
-                          id: "pills-home",
-                          role: "tabpanel",
-                          "aria-labelledby": "pills-home-tab",
+                _c("div", { staticClass: "description" }, [
+                  _c("p", [_vm._v("Описание:")]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-content",
+                      attrs: { id: "pills-tabContent" },
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade show active",
+                          attrs: {
+                            id: "pills-home",
+                            role: "tabpanel",
+                            "aria-labelledby": "pills-home-tab",
+                          },
                         },
-                      },
-                      [
-                        _c("p", [_vm._v(_vm._s(_vm.animeItem.description_ru))]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "text-right" }, [
-                          _vm._v(
-                            "Автор: " +
-                              _vm._s(_vm.animeItem.description_ru_source)
-                          ),
-                        ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade",
-                        attrs: {
-                          id: "pills-profile",
-                          role: "tabpanel",
-                          "aria-labelledby": "pills-profile-tab",
+                        [
+                          _c("p", { staticClass: "text" }, [
+                            _vm._v(_vm._s(_vm.animeItem.description_ru)),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Автор: " +
+                                _vm._s(_vm.animeItem.description_ru_source)
+                            ),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade",
+                          attrs: {
+                            id: "pills-profile",
+                            role: "tabpanel",
+                            "aria-labelledby": "pills-profile-tab",
+                          },
                         },
-                      },
-                      [
-                        _c("p", [_vm._v(_vm._s(_vm.animeItem.description_en))]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "text-right" }, [
-                          _vm._v(
-                            "Автор: " +
-                              _vm._s(_vm.animeItem.description_en_source)
-                          ),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
+                        [
+                          _c("p", { staticClass: "text" }, [
+                            _vm._v(_vm._s(_vm.animeItem.description_en)),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Автор: " +
+                                _vm._s(_vm.animeItem.description_en_source)
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
               ]),
             ]),
           ]),
         ])
-      : _c("div", { staticClass: "content-header loading" }, [
-          _c("div", {
-            staticClass: "cover",
-            style: {
-              "background-image":
-                "url(" + "/storage/images/animes/original/8.jpg" + ")",
-            },
-          }),
-          _vm._v(" "),
-          _vm._m(2),
-        ]),
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "content-footer" }, [
+      _c("div", { staticClass: "tabs" }, [
+        _vm._m(3),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tab-content", attrs: { id: "anime-tabContent" } },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane show active",
+                attrs: {
+                  id: "nav-characters",
+                  role: "tabpanel",
+                  "aria-labelledby": "nav-characters-tab",
+                },
+              },
+              [
+                _c("div", { staticClass: "characters pl-4" }, [
+                  _c("h1", { staticClass: "text-left pb-3 pt-4" }, [
+                    _vm._v("ГЛАВНЫЕ ГЕРОИ"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3 mx-auto",
+                    },
+                    _vm._l(_vm.animeItem.characters, function (character) {
+                      return _c("character-entry-component", {
+                        key: character.id,
+                        attrs: {
+                          name: character.name_ru,
+                          poster_url: "/storage/images/animes/preview/1.jpg",
+                        },
+                      })
+                    }),
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("h1", { staticClass: "text-left pb-3 pt-4" }, [
+                    _vm._v("ДРУГИЕ ПЕРСОНАЖИ"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass:
+                      "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3 mx-auto",
+                  }),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane",
+                attrs: {
+                  id: "nav-staff",
+                  role: "tabpanel",
+                  "aria-labelledby": "nav-staff-tab",
+                },
+              },
+              [_vm._v("\n            авторы\n          ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane",
+                attrs: {
+                  id: "nav-review",
+                  role: "tabpanel",
+                  "aria-labelledby": "nav-review-tab",
+                },
+              },
+              [_vm._v("\n            отзыввы\n          ")]
+            ),
+          ]
+        ),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -554,7 +834,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto" }, [_c("p", [_vm._v("asd")])])
+    return _c("div", { staticClass: "row nav-button g-5" }, [
+      _c("div", { staticClass: "col-3 settings" }, [
+        _c("div", { staticClass: "btn" }, [
+          _c("i", { staticClass: "bi bi-gear-fill" }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3 bookmark" }, [
+        _c("div", { staticClass: "btn" }, [
+          _c("i", { staticClass: "bi bi-bookmark-star-fill" }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 play" }, [
+        _c("div", { staticClass: "btn" }, [_vm._v("Смотреть")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto rating mx-auto my-auto" }, [
+      _c("p", { staticClass: "text-center" }, [_vm._v("Рейтинг")]),
+      _vm._v(" "),
+      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "star bi bi-star-fill" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "star bi bi-star-half" }),
+    ])
   },
   function () {
     var _vm = this
@@ -611,25 +925,63 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row-container" }, [
-      _c("div", { staticClass: "row-information" }, [
-        _c("div", { staticClass: "warp-poster" }, [
-          _c("div", { staticClass: "poster" }),
-          _vm._v(" "),
-          _c("button", { staticClass: "btn anime-container-btn" }, [
-            _vm._v("Смотреть"),
-          ]),
-        ]),
+    return _c(
+      "div",
+      {
+        staticClass: "nav justify-content-center",
+        attrs: { id: "anime-tab", role: "tablist" },
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: " active",
+            attrs: {
+              id: "nav-characters-tab",
+              "data-bs-toggle": "tab",
+              "data-bs-target": "#nav-characters",
+              type: "button",
+              role: "tab",
+              "aria-controls": "nav-home",
+              "aria-selected": "true",
+            },
+          },
+          [_vm._v("Персонажи")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("h1", { staticClass: "pt-3 text-sm-start" }, [
-            _vm._v("Идет загрузка"),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-7" }, [_c("p")]),
-        ]),
-      ]),
-    ])
+        _c(
+          "button",
+          {
+            attrs: {
+              id: "nav-staff-tab",
+              "data-bs-toggle": "tab",
+              "data-bs-target": "#nav-staff",
+              type: "button",
+              role: "tab",
+              "aria-controls": "nav-profile",
+              "aria-selected": "false",
+            },
+          },
+          [_vm._v("Авторы")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: {
+              id: "nav-review-tab",
+              "data-bs-toggle": "tab",
+              "data-bs-target": "#nav-review",
+              type: "button",
+              role: "tab",
+              "aria-controls": "nav-contact",
+              "aria-selected": "false",
+            },
+          },
+          [_vm._v("Отзывы")]
+        ),
+      ]
+    )
   },
 ]
 render._withStripped = true
