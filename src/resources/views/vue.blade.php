@@ -42,6 +42,17 @@
         }, 500);
     }
 
+
+    let vh = document.documentElement.scrollHeight;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    // Мы прослушиваем событие resize
+    window.addEventListener('resize', () => {
+        // Выполняем тот же скрипт, что и раньше
+        let vh = document.documentElement.scrollHeight;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+
 </script>
 </body>
 </html>
