@@ -16,8 +16,8 @@
           <div class="btn" v-on:click="page = page + 1"> > </div>
         </div>
       </div>
-      <div class="entry-list ps-4 pe-4 pb-2">
-        <div v-if="loading" class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3 mt-0 pt-1">
+      <div class="entry-list">
+        <div v-if="loading" class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 pt-1 ms-1 me-1 pb-4 g-3">
           <catalog-entry
               v-for=       "anime in animeList"
               v-bind:key=  "anime.id"
@@ -28,6 +28,7 @@
               :poster_url= "anime.poster.preview"
               :status=     "anime.status"
               :studios=    "anime.studios"
+              :route=      "{name: 'anime', params:{id: anime.id}}"
           ></catalog-entry>
         </div>
         <loading v-else></loading>
@@ -145,6 +146,7 @@ export default {
   width: 7rem;
   bottom: 3.5rem;
   right: -0.2rem;
+  z-index: 4;
   filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 2.25));
 }
 
@@ -152,11 +154,4 @@ export default {
   font-size: 4.5rem;
   color: aliceblue;
 }
-
-/*!* Small devices (landscape phones, 576px and up) *!*/
-/*@media (max-width: 991px) {*/
-/*  .filter-btn{*/
-/*    display: block;*/
-/*  }*/
-/*}*/
 </style>

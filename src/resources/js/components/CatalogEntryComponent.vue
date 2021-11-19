@@ -1,7 +1,7 @@
 <template>
-  <div class="col catalog-entry">
-    <div>
-      <img class="img-fluid" :src="poster_url" width="224px" alt="poster">
+  <div class="col catalog-entry" v-on:click="active = !active" v-bind:class="{active: active}">
+    <div class="poster-container">
+      <img class="poster" :src="poster_url" alt="poster">
     </div>
     <div class="hover">
       <div class="d-flex align-items-start flex-column" style="height: 212px;">
@@ -14,7 +14,7 @@
         </p>
       </div>
       <div class="d-flex flex-column">
-        <router-link class="btn" type="button" :to="'/animes/' + id">Подробнее</router-link>
+        <router-link class="btn" type="button" :to="route">Подробнее</router-link>
       </div>
     </div>
   </div>
@@ -23,18 +23,19 @@
 <script>
     export default {
       mounted() {
-        this.normalizeName()
+        this.normalizeName();
       },
       data(){
         return {
           fullName: "",
           slicedName: "",
+          active: false,
         }
       },
 
       props: {
         "id":         Number,
-        "link":       {
+        "route":       {
           type: [Object, undefined],
           default: null
         },
@@ -74,10 +75,22 @@
     color: #FFFFFF;
     margin-bottom: 0.8vh;
   }
-  .catalog-entry img {
+  .catalog-entry > .poster-container{
+    position: relative;
+    padding-bottom: 157.25%;
+    height: 0;
+    overflow: hidden;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 8px;
-    height: 272px;
+  }
+  .catalog-entry > .poster-container> .poster{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-width: 0;
+    outline-width: 0;
   }
   .catalog-entry {
     position:relative;
@@ -97,16 +110,13 @@
     box-shadow:0 5px 5px rgba(0,0,0,0.3);
     font-size: small;
     border-radius: 2.8%;
-    pointer-events: none;
+  }
+  @media (max-width: 575px) {
+    .catalog-entry:not(.active) .hover {
+      pointer-events: none;
+    }
   }
   .catalog-entry:hover .hover{
-    pointer-events: all;
     display:block;
-  }
-  /* Small devices (landscape phones, 576px and up) */
-  @media (max-width: 1300px) {
-    .catalog-entry img {
-      height: auto;
-    }
   }
 </style>

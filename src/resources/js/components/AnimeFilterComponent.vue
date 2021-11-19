@@ -1083,9 +1083,10 @@ export default {
   .filter-block .filter {
     border-radius: 0;
     height: 100vh;
+    height: 95%;
+    padding-bottom: 2rem;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0;
   }
   .filter-block > .body{
     display: block;

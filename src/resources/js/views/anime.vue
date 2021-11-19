@@ -184,10 +184,10 @@ export default {
 <style scoped>
 .anime>.content-header>.cover {
   position: absolute;
-  width: 97vw;
+  width: 100%;
   height: 630px;
   opacity: 0.1;
-  left: 62px;
+  left: 0;
   top: 72px;
   filter: drop-shadow(0px 4px 52px rgba(0, 0, 0, 0.25));
 }

@@ -5252,12 +5252,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fullName: "",
-      slicedName: ""
+      slicedName: "",
+      active: false
     };
   },
   props: {
     "id": Number,
-    "link": {
+    "route": {
       type: [Object, undefined],
       "default": null
     },
@@ -11093,7 +11094,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.catalog-entry .hover .title {\n  font-size: medium;\n  font-weight: bold;\n  color: #FFFFFF;\n  margin-bottom: 0.8vh;\n}\n.catalog-entry img {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  border-radius: 8px;\n  height: 272px;\n}\n.catalog-entry {\n  position:relative;\n}\n.catalog-entry .hover {\n  display:none;\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  padding: .8rem;\n  background: linear-gradient(to bottom, #101217, #1F232E);\n  opacity: 0.95;\n  box-shadow:0 5px 5px rgba(0,0,0,0.3);\n  font-size: small;\n  border-radius: 2.8%;\n  pointer-events: none;\n}\n.catalog-entry:hover .hover{\n  pointer-events: all;\n  display:block;\n}\n/* Small devices (landscape phones, 576px and up) */\n@media (max-width: 1300px) {\n.catalog-entry img {\n    height: auto;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.catalog-entry .hover .title {\n  font-size: medium;\n  font-weight: bold;\n  color: #FFFFFF;\n  margin-bottom: 0.8vh;\n}\n.catalog-entry > .poster-container{\n  position: relative;\n  padding-bottom: 157.25%;\n  height: 0;\n  overflow: hidden;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  border-radius: 8px;\n}\n.catalog-entry > .poster-container> .poster{\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-width: 0;\n  outline-width: 0;\n}\n.catalog-entry {\n  position:relative;\n}\n.catalog-entry .hover {\n  display:none;\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  padding: .8rem;\n  background: linear-gradient(to bottom, #101217, #1F232E);\n  opacity: 0.95;\n  box-shadow:0 5px 5px rgba(0,0,0,0.3);\n  font-size: small;\n  border-radius: 2.8%;\n}\n@media (max-width: 575px) {\n.catalog-entry:not(.active) .hover {\n    pointer-events: none;\n}\n}\n.catalog-entry:hover .hover{\n  display:block;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30544,93 +30545,104 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col catalog-entry" }, [
-    _c("div", [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: _vm.poster_url, width: "224px", alt: "poster" },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "hover" }, [
-      _c(
-        "div",
-        {
-          staticClass: "d-flex align-items-start flex-column",
-          staticStyle: { height: "212px" },
+  return _c(
+    "div",
+    {
+      staticClass: "col catalog-entry",
+      class: { active: _vm.active },
+      on: {
+        click: function ($event) {
+          _vm.active = !_vm.active
         },
-        [
-          _c("p", { staticClass: "title", attrs: { title: _vm.fullName } }, [
-            _vm._v(_vm._s(_vm.slicedName)),
-          ]),
-          _vm._v(" "),
-          _c(
-            "p",
-            [
-              _vm._v("\n        Тип: "),
-              _vm._l(_vm.type, function (type) {
-                return _c(
-                  "router-link",
-                  {
-                    key: type.id,
-                    staticClass: "tags",
-                    attrs: { to: type.url },
-                  },
-                  [_vm._v(_vm._s(type.name) + " ")]
-                )
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v("\n        " + _vm._s(_vm.studios ? "Студия:" : "") + " "),
-              _vm._l(_vm.studios, function (studio) {
-                return _c(
-                  "router-link",
-                  { key: studio.id, staticClass: "tags", attrs: { to: "#" } },
-                  [_vm._v(_vm._s(studio.name) + " ")]
-                )
-              }),
-              _vm._v(" "),
-              _vm.studios ? _c("br") : _vm._e(),
-              _vm._v("\n        Статус: "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(_vm.status))]),
-              _c("br"),
-              _vm._v("\n        " + _vm._s(_vm.genres ? "Жанры:" : "") + " "),
-              _vm._l(_vm.genres, function (genre) {
-                return _vm.genres
-                  ? _c(
-                      "router-link",
-                      {
-                        key: genre.id,
-                        staticClass: "tags",
-                        attrs: { to: genre.url },
-                      },
-                      [_vm._v(_vm._s(genre.name_en) + " ")]
-                    )
-                  : _vm._e()
-              }),
-            ],
-            2
-          ),
-        ]
-      ),
+      },
+    },
+    [
+      _c("div", { staticClass: "poster-container" }, [
+        _c("img", {
+          staticClass: "poster",
+          attrs: { src: _vm.poster_url, alt: "poster" },
+        }),
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "d-flex flex-column" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn",
-              attrs: { type: "button", to: "/animes/" + _vm.id },
-            },
-            [_vm._v("Подробнее")]
-          ),
-        ],
-        1
-      ),
-    ]),
-  ])
+      _c("div", { staticClass: "hover" }, [
+        _c(
+          "div",
+          {
+            staticClass: "d-flex align-items-start flex-column",
+            staticStyle: { height: "212px" },
+          },
+          [
+            _c("p", { staticClass: "title", attrs: { title: _vm.fullName } }, [
+              _vm._v(_vm._s(_vm.slicedName)),
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              [
+                _vm._v("\n        Тип: "),
+                _vm._l(_vm.type, function (type) {
+                  return _c(
+                    "router-link",
+                    {
+                      key: type.id,
+                      staticClass: "tags",
+                      attrs: { to: type.url },
+                    },
+                    [_vm._v(_vm._s(type.name) + " ")]
+                  )
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(
+                  "\n        " + _vm._s(_vm.studios ? "Студия:" : "") + " "
+                ),
+                _vm._l(_vm.studios, function (studio) {
+                  return _c(
+                    "router-link",
+                    { key: studio.id, staticClass: "tags", attrs: { to: "#" } },
+                    [_vm._v(_vm._s(studio.name) + " ")]
+                  )
+                }),
+                _vm._v(" "),
+                _vm.studios ? _c("br") : _vm._e(),
+                _vm._v("\n        Статус: "),
+                _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(_vm.status))]),
+                _c("br"),
+                _vm._v("\n        " + _vm._s(_vm.genres ? "Жанры:" : "") + " "),
+                _vm._l(_vm.genres, function (genre) {
+                  return _vm.genres
+                    ? _c(
+                        "router-link",
+                        {
+                          key: genre.id,
+                          staticClass: "tags",
+                          attrs: { to: genre.url },
+                        },
+                        [_vm._v(_vm._s(genre.name_en) + " ")]
+                      )
+                    : _vm._e()
+                }),
+              ],
+              2
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-flex flex-column" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "btn", attrs: { type: "button", to: _vm.route } },
+              [_vm._v("Подробнее")]
+            ),
+          ],
+          1
+        ),
+      ]),
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
