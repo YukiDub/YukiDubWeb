@@ -12,7 +12,7 @@
     </div>
 
     <div class="user-wrapper">
-      <div v-if="login" class="header-user-panel">
+      <div v-if="isAuth" class="header-user-panel">
         <div class="header-drop xs-drop">
           <div class="icon-inline">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -46,25 +46,33 @@
           </div>
         </div>
         <div class="header-drop user-drop">
-          <a href="#" class="avatar">
-            <img src="/images/avatars/1.png" alt="profile">
+          <a class="avatar">
+            <img src="/assets/images/avatars/default.png" :alt="getUserLogin.name">
           </a>
           <div class="header-user-menu drop-menu">
+            <router-link class="line" :to='{name: "userProfile", params: {name: getUserLogin.name}}'>Мой профиль</router-link>
             <a href="#" class="line">
               Друзья
             </a>
             <a href="#" class="line">
-              Почта
+              Сообщения
             </a>
             <a href="#" class="line">
               Настройки
+            </a>
+            <a href="#" class="line">
+              Модерация
+            </a>
+            <a v-on:click="logout()" class="line">
+              Выйти
             </a>
           </div>
         </div>
         <div class="backdrop"></div>
         <div class="substrate"></div>
       </div>
-      <a v-else class="button-auth" href="/auth/login"><span>Авторизация</span>
+      <a v-else class="button-auth" v-on:click="auth()">
+        <span>Авторизация</span>
         <div class="icon-inline">
           <svg width="17px" height="18px" viewBox="0 0 17 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -78,20 +86,36 @@
 </template>
 
 <script>
-    import router from "../vueRouter";
-
+import {mapGetters, mapActions} from 'vuex'
     export default {
       name: "PageHeaderComponent",
-      props: {
-          "login": false,
-      },
       data() {
         return {
-          "title":"ГЛАВНАЯ"
+          title:"ГЛАВНАЯ",
+          user: {
+
+          }
         }
       },
+      computed: mapGetters(['getUserLogin', 'isAuth']),
       mounted() {
 
+      },
+      methods: {
+        ...mapActions(['login', 'logout']),
+        auth(){
+          let popup = window.open('/auth/login', 'Авторизация');
+          popup.addEventListener("message", (e)=>{
+            setTimeout(()=>{
+              popup.addEventListener("message", (e)=>{
+                this.login({
+                  access_token: e.data.access,
+                  refresh_token: e.data.refresh
+                })
+              })
+            }, 20000)
+          })
+        }
       },
       watch: {
         $route(to, from) {

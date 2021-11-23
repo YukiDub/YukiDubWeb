@@ -13,6 +13,7 @@ const indexView = () => import("./views/index")
 const notFound = () => import("./views/notFound")
 const animes = () => import("./views/animes")
 const anime = () => import("./views/anime")
+const userProfile = () => import("./views/userProfile")
 
 
 const routes = [
@@ -33,6 +34,12 @@ const routes = [
         component: anime,
         name: 'anime',
         meta: {'title': "Аниме", 'headerName': 'Аниме'}
+    },
+    {
+        path: '/users/:name',
+        component: userProfile,
+        name: 'userProfile',
+        meta: {'title': "Пользователи", 'headerName': 'Пользователи'}
     },
     {
         path: '/404',

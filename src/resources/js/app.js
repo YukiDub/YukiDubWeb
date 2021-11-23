@@ -29,7 +29,6 @@ Vue.component('page-header', require('./components/PageHeaderComponent').default
 Vue.component('catalog-entry', require('./components/CatalogEntryComponent').default);
 Vue.component('card-item', require('./components/ItemCardComponent').default);
 Vue.component('loading', require('./components/LoadingComponent').default);
-// Vue.component('anime-filter', require('./components/AnimeFilterComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -75,9 +75,10 @@
                         event.stopPropagation()
                     }
 
-
-
                     form.classList.add('was-validated')
+
+                    window.postMessage('auth',
+                        "http://192.168.1.94")
                 }, false)
             })
     })()

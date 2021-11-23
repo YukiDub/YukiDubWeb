@@ -5560,7 +5560,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _vueRouter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../vueRouter */ "./resources/js/vueRouter.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5643,15 +5657,31 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PageHeaderComponent",
-  props: {
-    "login": false
-  },
   data: function data() {
     return {
-      "title": "ГЛАВНАЯ"
+      title: "ГЛАВНАЯ",
+      user: {}
     };
   },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getUserLogin', 'isAuth']),
   mounted: function mounted() {},
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['login', 'logout'])), {}, {
+    auth: function auth() {
+      var _this = this;
+
+      var popup = window.open('/auth/login', 'Авторизация');
+      popup.addEventListener("message", function (e) {
+        setTimeout(function () {
+          popup.addEventListener("message", function (e) {
+            _this.login({
+              access_token: e.data.access,
+              refresh_token: e.data.refresh
+            });
+          });
+        }, 20000);
+      });
+    }
+  }),
   watch: {
     $route: function $route(to, from) {
       this.title = to.meta.headerName.toUpperCase();
@@ -5701,8 +5731,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('footer-component', __webp
 vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('page-header', __webpack_require__(/*! ./components/PageHeaderComponent */ "./resources/js/components/PageHeaderComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('catalog-entry', __webpack_require__(/*! ./components/CatalogEntryComponent */ "./resources/js/components/CatalogEntryComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('card-item', __webpack_require__(/*! ./components/ItemCardComponent */ "./resources/js/components/ItemCardComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('loading', __webpack_require__(/*! ./components/LoadingComponent */ "./resources/js/components/LoadingComponent.vue")["default"]); // Vue.component('anime-filter', require('./components/AnimeFilterComponent').default);
-
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('loading', __webpack_require__(/*! ./components/LoadingComponent */ "./resources/js/components/LoadingComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -5776,16 +5805,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store_modules_anime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/modules/anime */ "./resources/js/store/modules/anime.js");
+/* harmony import */ var _store_modules_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/modules/user */ "./resources/js/store/modules/user.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
   modules: {
-    anime: _store_modules_anime__WEBPACK_IMPORTED_MODULE_0__["default"]
+    anime: _store_modules_anime__WEBPACK_IMPORTED_MODULE_0__["default"],
+    user: _store_modules_user__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 }));
 
@@ -5906,6 +5938,104 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/user.js":
+/*!********************************************!*\
+  !*** ./resources/js/store/modules/user.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  actions: {
+    login: function login(_ref, tokens) {
+      var commit = _ref.commit,
+          dispatch = _ref.dispatch,
+          state = _ref.state;
+      localStorage.setItem('access_token', tokens.access_token);
+      localStorage.setItem('refresh_token', tokens.refresh_token);
+      commit('updateAccessToken', tokens.access_token);
+      commit('updateRefreshToken', tokens.refresh_token);
+      dispatch('getProfile');
+    },
+    getProfile: function getProfile(_ref2) {
+      var commit = _ref2.commit,
+          getters = _ref2.getters;
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + getters.getAccessToken;
+      axios.get('/api/v1/auth/profile').then(function (_ref3) {
+        var data = _ref3.data;
+        localStorage.setItem('user', JSON.stringify(data.data));
+        commit('updateUserLogin', data.data);
+        commit('updateAuthStatus', true);
+      })["catch"](function (_ref4) {
+        var response = _ref4.response;
+
+        if (response.status === 401 || 403) {
+          commit('updateAuthStatus', false);
+        }
+      });
+    },
+    updateRefreshToken: function updateRefreshToken() {
+      var data = {// Доделать бэк
+      };
+      axios.post('/oauth/token', data).then(function (_ref5) {
+        var data = _ref5.data;
+      })["catch"](function (_ref6) {
+        var response = _ref6.response;
+      });
+    },
+    logout: function logout(_ref7) {
+      var commit = _ref7.commit;
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('user');
+      commit('updateAccessToken', null);
+      commit('updateRefreshToken', null);
+      commit('updateUserLogin', null);
+      commit('updateAuthStatus', false);
+    }
+  },
+  mutations: {
+    updateAccessToken: function updateAccessToken(state, token) {
+      state.access_token = token;
+    },
+    updateRefreshToken: function updateRefreshToken(state, token) {
+      state.refresh_token = token;
+    },
+    updateUserLogin: function updateUserLogin(state, user) {
+      state.user = user;
+    },
+    updateAuthStatus: function updateAuthStatus(state, status) {
+      state.isAuth = status;
+    }
+  },
+  state: {
+    user: JSON.parse(localStorage.getItem('user')),
+    access_token: localStorage.getItem('access_token'),
+    refresh_token: localStorage.getItem('refresh_token'),
+    isAuth: !!localStorage.getItem('user')
+  },
+  getters: {
+    getRefreshToken: function getRefreshToken(state) {
+      return state.refresh_token;
+    },
+    getAccessToken: function getAccessToken(state) {
+      return state.access_token;
+    },
+    getUserLogin: function getUserLogin(state) {
+      return state.user;
+    },
+    isAuth: function isAuth(state) {
+      return state.isAuth;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/vueRouter.js":
 /*!***********************************!*\
   !*** ./resources/js/vueRouter.js ***!
@@ -5944,6 +6074,10 @@ var anime = function anime() {
   return __webpack_require__.e(/*! import() */ "resources_js_views_anime_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/anime */ "./resources/js/views/anime.vue"));
 };
 
+var userProfile = function userProfile() {
+  return __webpack_require__.e(/*! import() */ "resources_js_views_userProfile_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/userProfile */ "./resources/js/views/userProfile.vue"));
+};
+
 var routes = [{
   path: '/',
   component: indexView,
@@ -5967,6 +6101,14 @@ var routes = [{
   meta: {
     'title': "Аниме",
     'headerName': 'Аниме'
+  }
+}, {
+  path: '/users/:name',
+  component: userProfile,
+  name: 'userProfile',
+  meta: {
+    'title': "Пользователи",
+    'headerName': 'Пользователи'
   }
 }, {
   path: '/404',
@@ -31091,7 +31233,7 @@ var render = function () {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "user-wrapper" }, [
-      _vm.login
+      _vm.isAuth
         ? _c("div", { staticClass: "header-user-panel" }, [
             _c("div", { staticClass: "header-drop xs-drop" }, [
               _c("div", { staticClass: "icon-inline" }, [
@@ -31146,7 +31288,66 @@ var render = function () {
               _vm._m(2),
             ]),
             _vm._v(" "),
-            _vm._m(3),
+            _c("div", { staticClass: "header-drop user-drop" }, [
+              _c("a", { staticClass: "avatar" }, [
+                _c("img", {
+                  attrs: {
+                    src: "/assets/images/avatars/default.png",
+                    alt: _vm.getUserLogin.name,
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "header-user-menu drop-menu" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "line",
+                      attrs: {
+                        to: {
+                          name: "userProfile",
+                          params: { name: _vm.getUserLogin.name },
+                        },
+                      },
+                    },
+                    [_vm._v("Мой профиль")]
+                  ),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "line", attrs: { href: "#" } }, [
+                    _vm._v("\n            Друзья\n          "),
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "line", attrs: { href: "#" } }, [
+                    _vm._v("\n            Сообщения\n          "),
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "line", attrs: { href: "#" } }, [
+                    _vm._v("\n            Настройки\n          "),
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "line", attrs: { href: "#" } }, [
+                    _vm._v("\n            Модерация\n          "),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "line",
+                      on: {
+                        click: function ($event) {
+                          return _vm.logout()
+                        },
+                      },
+                    },
+                    [_vm._v("\n            Выйти\n          ")]
+                  ),
+                ],
+                1
+              ),
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "backdrop" }),
             _vm._v(" "),
@@ -31154,7 +31355,14 @@ var render = function () {
           ])
         : _c(
             "a",
-            { staticClass: "button-auth", attrs: { href: "/auth/login" } },
+            {
+              staticClass: "button-auth",
+              on: {
+                click: function ($event) {
+                  return _vm.auth()
+                },
+              },
+            },
             [
               _c("span", [_vm._v("Авторизация")]),
               _vm._v(" "),
@@ -31241,30 +31449,6 @@ var staticRenderFns = [
         _c("div", { staticClass: "header" }, [_vm._v("Уведомления")]),
         _vm._v(" "),
         _c("div", { staticClass: "body" }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "header-drop user-drop" }, [
-      _c("a", { staticClass: "avatar", attrs: { href: "#" } }, [
-        _c("img", { attrs: { src: "/images/avatars/1.png", alt: "profile" } }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "header-user-menu drop-menu" }, [
-        _c("a", { staticClass: "line", attrs: { href: "#" } }, [
-          _vm._v("\n            Друзья\n          "),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "line", attrs: { href: "#" } }, [
-          _vm._v("\n            Почта\n          "),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "line", attrs: { href: "#" } }, [
-          _vm._v("\n            Настройки\n          "),
-        ]),
       ]),
     ])
   },
@@ -47983,7 +48167,7 @@ module.exports = JSON.parse('{"_from":"axios@^0.21.4","_id":"axios@0.21.4","_inB
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_index_vue":1,"resources_js_views_notFound_vue":1,"resources_js_views_animes_vue":1,"resources_js_views_anime_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_index_vue":1,"resources_js_views_notFound_vue":1,"resources_js_views_animes_vue":1,"resources_js_views_anime_vue":1,"resources_js_views_userProfile_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

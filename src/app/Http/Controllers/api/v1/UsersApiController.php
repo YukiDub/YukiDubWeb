@@ -11,19 +11,11 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Repositories\UserRepository;
 use Auth;
 use Illuminate\Http\Request;
 
 class UsersApiController extends ApiController
 {
-    protected $userRepo;
-
-    public function __construct()
-    {
-        $this->userRepo = new UserRepository();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -66,17 +58,17 @@ class UsersApiController extends ApiController
      *     )
      * )
      */
-    public function index(UserIndexRequest $request): UserCollection
+    public function index(UserIndexRequest $request)
     {
-        $userRepo = $this->userRepo;
-
-        $userRepo->setRole($request->get('role'));
-
-        $perPage = $request->get('count') ? $request->get('count') : 6;
-
-        $this->recordExists($users = $userRepo->getListPaginate($perPage));
-
-        return new UserCollection($users);
+//        $userRepo = $this->userRepo;
+//
+//        $userRepo->setRole($request->get('role'));
+//
+//        $perPage = $request->get('count') ? $request->get('count') : 6;
+//
+//        $this->recordExists($users = $userRepo->getListPaginate($perPage));
+//
+//        return new UserCollection($users);
     }
 
     /**
@@ -125,12 +117,12 @@ class UsersApiController extends ApiController
      *
      * @return UserResource
      */
-    public function show($id): UserResource
+    public function show($id)
     {
-        $userRepo = $this->userRepo;
-        $this->recordExists($user = $userRepo->getById($id));
-
-        return new UserResource($user);
+//        $userRepo = $this->userRepo;
+//        $this->recordExists($user = $userRepo->getById($id));
+//
+//        return new UserResource($user);
     }
 
     /**
@@ -169,18 +161,18 @@ class UsersApiController extends ApiController
      *
      * @return UserResource
      */
-    public function update(UserRequest $request, $id): UserResource
+    public function update(UserRequest $request, $id)
     {
-        $userRepository = $this->userRepo;
-
-        $this->recordExists($user = User::find($id));
-        $user->fill($request->all());
-
-        $user->update();
-
-        $user->roles()->sync($request->get('roles'));
-
-        return new UserResource($user);
+//        $userRepository = $this->userRepo;
+//
+//        $this->recordExists($user = User::find($id));
+//        $user->fill($request->all());
+//
+//        $user->update();
+//
+//        $user->roles()->sync($request->get('roles'));
+//
+//        return new UserResource($user);
     }
 
     /**
