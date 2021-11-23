@@ -75,6 +75,9 @@ a:hover{
     height: var(--vh);
     position: relative;
 }
+.layout>.wrapper>.container {
+    min-height: calc(100vh - 72px);
+}
 p {
     color: #EEECF1;
 }
