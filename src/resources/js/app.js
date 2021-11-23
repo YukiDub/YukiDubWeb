@@ -36,6 +36,22 @@ Vue.component('loading', require('./components/LoadingComponent').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+/**
+ * 404 not found redirect
+ */
+axios.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    (error) => {
+        if (error.response.status === 404) {
+            router.push({name: '404'})
+        } else {
+            return Promise.reject(error)
+        }
+    }
+)
+
 const app = new Vue({
     store,
     el: '#app',

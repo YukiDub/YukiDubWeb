@@ -186,6 +186,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -770,43 +774,66 @@ var render = function () {
                     },
                   },
                   [
-                    _c("div", { staticClass: "characters pl-4" }, [
-                      _c(
-                        "h4",
-                        { staticClass: "text-center text-md-start pb-3 pt-4" },
-                        [_vm._v("ГЛАВНЫЕ ГЕРОИ")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
-                        },
-                        _vm._l(_vm.animeItem.characters, function (character) {
-                          return _c("character-entry-component", {
-                            key: character.id,
-                            attrs: {
-                              name: character.name_ru,
-                              poster_url:
-                                "/storage/images/animes/preview/1.jpg",
+                    _vm.animeItem.characters.length !== 0
+                      ? _c("div", { staticClass: "characters pl-4" }, [
+                          _c(
+                            "h4",
+                            {
+                              staticClass:
+                                "text-center text-md-start pb-3 pt-4",
                             },
-                          })
-                        }),
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "h4",
-                        { staticClass: "text-center text-md-start pb-3 pt-4" },
-                        [_vm._v("ДРУГИЕ ПЕРСОНАЖИ")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", {
-                        staticClass:
-                          "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
-                      }),
-                    ]),
+                            [_vm._v("ГЛАВНЫЕ ГЕРОИ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
+                            },
+                            _vm._l(
+                              _vm.animeItem.characters,
+                              function (character) {
+                                return _c("character-entry-component", {
+                                  key: character.id,
+                                  attrs: {
+                                    name: character.name_ru,
+                                    poster_url:
+                                      "/storage/images/animes/preview/1.jpg",
+                                  },
+                                })
+                              }
+                            ),
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "h4",
+                            {
+                              staticClass:
+                                "text-center text-md-start pb-3 pt-4",
+                            },
+                            [_vm._v("ДРУГИЕ ПЕРСОНАЖИ")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass:
+                              "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
+                          }),
+                        ])
+                      : _c("div", { staticClass: "characters pl-4" }, [
+                          _c("p", { staticClass: "text-center mt-4" }, [
+                            _vm._v("Персонажи для данного аниме не найдены"),
+                          ]),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "img-fluid w-25 mx-auto d-block",
+                            attrs: {
+                              src: "/assets/images/nya404.webp",
+                              alt: "nya 404",
+                            },
+                          }),
+                        ]),
                   ]
                 ),
                 _vm._v(" "),

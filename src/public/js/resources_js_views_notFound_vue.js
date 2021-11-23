@@ -23,6 +23,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
   mounted: function mounted() {},
@@ -115,18 +118,31 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "not-found" },
+    [
+      _c("img", {
+        staticClass: "img-fluid w-25 mb-4 mx-auto d-block",
+        attrs: { src: "/assets/images/nya404.webp", alt: "nya 404" },
+      }),
+      _vm._v(" "),
+      _c("h1", [_vm._v("Ошибка 404")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-center" }, [
+        _vm._v(
+          "Упс... Страница, которую вы запрашиваете, не существует. Возможно был введен неверный адрес."
+        ),
+      ]),
+      _vm._v(" "),
+      _c("router-link", { staticClass: "btn d-block", attrs: { to: "/" } }, [
+        _vm._v("Вернуться на главную страницу"),
+      ]),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "text-center" }, [_vm._v("СТРАНИЦА НЕ НАЙДЕНА")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

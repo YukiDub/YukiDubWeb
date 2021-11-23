@@ -89,7 +89,7 @@
          </div>
         <div class="tab-content" id="anime-tabContent">
           <div class="tab-pane show active" id="nav-characters" role="tabpanel" aria-labelledby="nav-characters-tab">
-            <div class="characters pl-4">
+            <div class="characters pl-4" v-if="animeItem.characters.length !== 0">
               <h4 class="text-center text-md-start pb-3 pt-4">ГЛАВНЫЕ ГЕРОИ</h4>
               <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3">
                 <character-entry-component
@@ -104,6 +104,10 @@
               <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3">
 
               </div>
+            </div>
+            <div v-else class="characters pl-4">
+              <p class="text-center mt-4">Персонажи для данного аниме не найдены</p>
+              <img src="/assets/images/nya404.webp" alt="nya 404" class="img-fluid w-25 mx-auto d-block">
             </div>
           </div>
           <div class="tab-pane" id="nav-staff" role="tabpanel" aria-labelledby="nav-staff-tab">
