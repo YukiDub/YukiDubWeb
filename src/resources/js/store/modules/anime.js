@@ -19,6 +19,7 @@ export default {
                 })
             })
 
+            commit('updateAnimePagination', animeData.meta)
             commit('updateAnimesList', animeData)
         },
         async loadAnime(ctx, id) {
@@ -37,10 +38,14 @@ export default {
         },
         updateAnime(state, anime){
             state.animeItem = anime;
+        },
+        updateAnimePagination(state, pagination){
+            state.animePagination = pagination;
         }
     },
     state: {
         animes: [],
+        animePagination: [],
         animeItem: []
     },
     getters: {
@@ -48,7 +53,7 @@ export default {
             return state.animes.data;
         },
         animePagination(state){
-            return state.animes.meta;
+            return state.animePagination;
         },
         animeItem(state){
             return state.animeItem;

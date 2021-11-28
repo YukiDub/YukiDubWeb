@@ -9,11 +9,11 @@
     <div class="col order-1">
       <div class="row mb-2 mt-sm-4 mt-md-0">
         <div class="col-auto me-auto">
-          <h6 class="p-title">Аниме - страница {{page}}</h6>
+          <h6 class="p-title">{{$t('anime')}} - {{$tc('message.page', 1, { page: page, count: animePagination.last_page })}}</h6>
         </div>
         <div class="col-auto">
           <div class="btn" v-on:click="page = page > 1 ? page - 1 : 1"> < </div>
-          <div class="btn" v-on:click="page = page + 1"> > </div>
+          <div class="btn" v-on:click="page = page < animePagination.last_page ? page + 1 : page"> > </div>
         </div>
       </div>
       <div class="entry-list">
@@ -22,7 +22,7 @@
               v-for=       "anime in animeList"
               v-bind:key=  "anime.id"
               :id=         "anime.id"
-              :name=       "anime.name_ru"
+              :name=       "anime['name_' + getLocale]"
               :type=       "anime.type"
               :genres=     "anime.genres"
               :poster_url= "anime.poster.preview"
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div id="filter-block" class="col-xs-12 col-md-3 order-2 d-none d-lg-block">
-      <h6 class="p-title mb-3">Фильтры</h6>
+      <h6 class="p-title mb-3">{{$tc('filter', 2)}}</h6>
       <div class="col-12">
         <animeFilter @close="filterOnClick()">
 
@@ -59,7 +59,7 @@ export default {
     animeFilter,
   },
 
-  computed: mapGetters(['animeList', 'animePagination']),
+  computed: mapGetters(['animeList', 'animePagination', 'getLocale']),
 
   mounted() {
     this.loadComponent();

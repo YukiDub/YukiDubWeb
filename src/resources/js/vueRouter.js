@@ -21,25 +21,25 @@ const routes = [
         path: '/',
         component: indexView,
         name: 'home',
-        meta: {'title': "Главная", 'headerName': 'Главная'}
+        meta: {'title': 'Главная', 'headerName': 'home'}
     },
     {
         path: '/animes',
         component: animes,
         name: 'animes',
-        meta: {'title': "Аниме", 'headerName': 'Аниме'}
+        meta: {'title': "Аниме", 'headerName': 'anime'}
     },
     {
         path: '/animes/:id',
         component: anime,
         name: 'anime',
-        meta: {'title': "Аниме", 'headerName': 'Аниме'}
+        meta: {'title': "Аниме", 'headerName': 'anime'}
     },
     {
         path: '/users/:name',
         component: userProfile,
         name: 'userProfile',
-        meta: {'title': "Пользователи", 'headerName': 'Пользователи'}
+        meta: {'title': "Пользователи", 'headerName': 'users'}
     },
     {
         path: '/404',

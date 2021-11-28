@@ -7,28 +7,28 @@
 <template>
    <div class="row">
      <div class="col-xs-12 col-md-4 order-2 order-md-1">
-       <h6 class="p-title mb-4">Последняя активность</h6>
+       <h6 class="p-title mb-4">{{$tc('recent actions', activity.length)}}</h6>
        <div class="col-12">
          <card-item
              v-for=     "activityItem in activity"
              v-bind:key= "activityItem.id"
-             :title=     "activityItem.title"
+             :title=     "$t(activityItem.title)"
              :text=      "activityItem.text"
              :users=     "activityItem.users"
          >
          </card-item>
          <div class="card ">
-           <a href="#">Вся активность</a>
+           <a href="#">{{$t('all activity')}}</a>
          </div>
        </div>
      </div>
      <div class="col order-1">
        <div class="row mb-2 mt-sm-4 mt-md-0">
          <div class="col-auto me-auto">
-           <h6 class="p-title">Аниме с самыми высокими оценками</h6>
+           <h6 class="p-title">{{$t('anime') + " " + $t('with high rating')}}</h6>
          </div>
          <div class="col-auto">
-           <router-link to="/animes?=что-то_там" class="btn" type="button">Подробнее</router-link>
+           <router-link to="/animes?=что-то_там" class="btn" type="button">{{$t('view more')}}</router-link>
          </div>
        </div>
        <div class="entry-list ps-4 pe-4 pb-2">
@@ -78,7 +78,7 @@ export default {
       loading: true,
       "activity": [
         {
-          "title": "Написали комментарии",
+          "title": "wrote comments",
           "text":  "Re:Zero. Жизнь с нуля в альтернативном мире",
           "users":[
             {
@@ -94,7 +94,7 @@ export default {
           ]
         },
         {
-          "title": "Посмотрели аниме",
+          "title": "watched anime",
           "text":  "ToraDora!",
           "users":[
             {
@@ -120,7 +120,6 @@ export default {
 
   methods: mapActions(['loadAnimesList']),
   computed: mapGetters(['animeList'])
-
 }
 </script>
 

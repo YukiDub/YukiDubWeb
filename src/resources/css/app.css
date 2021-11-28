@@ -91,6 +91,7 @@ p {
 }
 .p-title{
     font-family: IBM Plex Sans;
+    text-transform: uppercase;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;

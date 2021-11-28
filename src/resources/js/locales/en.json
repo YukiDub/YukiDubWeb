@@ -1,0 +1,51 @@
+{
+  "message": {
+    "404": {
+      "title": "Error 404",
+      "text": "Oops... The page you are requesting does not exist. Possibly wrong address was entered."
+    },
+    "page": "page {page} of {count}"
+  },
+  "back home": "back home",
+  "apply": "apply",
+  "ru": "russian",
+  "en": "english",
+  "jp": "japanese",
+  "basic site settings": "basic site settings",
+  "close": "close",
+  "anime": "anime",
+  "last story": "last story",
+  "recent actions": "no actions | last action | recent actions",
+  "with high rating": "with high rating",
+  "view more": "view more",
+  "home": "home",
+  "users": "пользователи",
+  "search": "search",
+  "authorize": "Authorize",
+  "type": "Type",
+  "studios": "Studios",
+  "status": "Status",
+  "status_list": {
+    "announced": "announced",
+    "ongoing": "ongoing",
+    "released": "released"
+  },
+  "rating": "Rating",
+  "genres": "Genres",
+  "season": "Season",
+  "score":  "Score",
+  "my list": "My list",
+  "completed": "Completed",
+  "plan to watch": "Plan to watch",
+  "dropped": "Dropped",
+  "on-hold": "On-Hold",
+  "sorted by": "Sorted by",
+  "reset filter": "Reset filter",
+  "page": "page",
+  "episode duration": "Episode duration",
+  "filter": "filter | filters",
+  "all activity": "All activity",
+  "wrote comments": "Wrote comments",
+  "watched anime": "Watched anime",
+  "watch": "watch"
+}

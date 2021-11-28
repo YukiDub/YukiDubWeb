@@ -2,12 +2,12 @@
   <div class="page-header">
     <div class="logo ms-4 d-none d-xl-flex">
       <router-link :to="{name: 'home'}" aria-current="page">
-        {{title}}
+        {{($t(title.toLowerCase())).toUpperCase()}}
       </router-link>
     </div>
     <div class="header-search ml-2">
       <label class="search-line">
-        <input placeholder="ПОИСК" type="search" class="text-center search-box">
+        <input :placeholder="$t('search')" type="search" class="text-center search-box">
       </label>
     </div>
 
@@ -72,7 +72,7 @@
         <div class="substrate"></div>
       </div>
       <a v-else class="button-auth" v-on:click="auth()">
-        <span>Авторизация</span>
+        <span>{{$t('authorize')}}</span>
         <div class="icon-inline">
           <svg width="17px" height="18px" viewBox="0 0 17 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -91,7 +91,7 @@ import {mapGetters, mapActions} from 'vuex'
       name: "PageHeaderComponent",
       data() {
         return {
-          title:"ГЛАВНАЯ",
+          title:"home",
           user: {
 
           }

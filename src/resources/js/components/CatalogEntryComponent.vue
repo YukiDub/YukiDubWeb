@@ -7,20 +7,21 @@
       <div class="d-flex align-items-start flex-column" style="height: 212px;">
         <p class="title" :title="fullName">{{slicedName}}</p>
         <p>
-          Тип: <router-link class="tags" v-for="type in type" v-bind:key="type.id" :to="type.url">{{type.name}} </router-link> <br/>
-          {{studios ? "Студия:" : ""}} <router-link class="tags" v-for="studio in studios" v-bind:key="studio.id" to="#">{{studio.name}} </router-link> <br v-if="studios"/>
-          Статус: <a href="#">{{status}}</a><br/>
-          {{genres ? "Жанры:" : ""}} <router-link v-if="genres" class="tags" v-for="genre in genres" v-bind:key="genre.id" :to="genre.url">{{genre.name_en}} </router-link>
+          {{$t('type')}} : <router-link class="tags" v-for="type in type" v-bind:key="type.id" :to="type.url">{{type.name}} </router-link> <br/>
+          {{studios ? $t('studios') + ": " : ""}} <router-link class="tags" v-for="studio in studios" v-bind:key="studio.id" to="#">{{studio.name}} </router-link> <br v-if="studios"/>
+          {{$t('status')}} : <a href="#">{{$t('status_list.' + status)}}</a><br/>
+          {{genres ? $t('genres') + ":" : ""}} <router-link v-if="genres" class="tags" v-for="genre in genres" v-bind:key="genre.id" :to="genre.url">{{genre['name_' + getLocale]}} </router-link>
         </p>
       </div>
       <div class="d-flex flex-column">
-        <router-link class="btn" type="button" :to="route">Подробнее</router-link>
+        <router-link class="btn" type="button" :to="route">{{$t('view more')}}</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
     export default {
       mounted() {
         this.normalizeName();
@@ -33,6 +34,15 @@
         }
       },
 
+      computed: mapGetters(['getLocale']),
+      watch: {
+        name:{
+          handler(){
+            this.normalizeName()
+          },
+          deep: true
+        }
+      },
       props: {
         "id":         Number,
         "route":       {

@@ -11,6 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -224,545 +225,546 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AnimeFilterComponent",
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getLocale']),
   data: function data() {
     return {
       status: [{
         "status_id": 1,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Announced",
-        "nameRu": "Анонсировано"
+        "name_jp": "",
+        "name_en": "Announced",
+        "name_ru": "Анонсировано"
       }, {
         "status_id": 2,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Ongoing",
-        "nameRu": "Выходит"
+        "name_jp": "",
+        "name_en": "Ongoing",
+        "name_ru": "Выходит"
       }, {
         "status_id": 3,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Released",
-        "nameRu": "Вышло"
+        "name_jp": "",
+        "name_en": "Released",
+        "name_ru": "Вышло"
       }],
       types: [{
         "type_id": 1,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Tv serial",
-        "nameRu": "Tv сериал"
+        "name_jp": "",
+        "name_en": "Tv serial",
+        "name_ru": "Tv сериал"
       }, {
         "type_id": 2,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Film",
-        "nameRu": "Фильм"
+        "name_jp": "",
+        "name_en": "Film",
+        "name_ru": "Фильм"
       }, {
         "type_id": 3,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "OVA",
-        "nameRu": "OVA"
+        "name_jp": "",
+        "name_en": "OVA",
+        "name_ru": "OVA"
       }, {
         "type_id": 4,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "ONA",
-        "nameRu": "ONA"
+        "name_jp": "",
+        "name_en": "ONA",
+        "name_ru": "ONA"
       }, {
         "type_id": 5,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Special",
-        "nameRu": "Спешл"
+        "name_jp": "",
+        "name_en": "Special",
+        "name_ru": "Спешл"
       }, {
         "type_id": 6,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "Clip",
-        "nameRu": "Клип"
+        "name_jp": "",
+        "name_en": "Clip",
+        "name_ru": "Клип"
       }],
       genres: [{
         "genre_id": 1,
         "selected": false,
-        "nameJp": "少年",
-        "nameEn": "Shounen",
-        "nameRu": "Сёнен",
+        "name_jp": "少年",
+        "name_en": "Shounen",
+        "name_ru": "Сёнен",
         "title": "Аниме, манга и ранобэ, рассчитанные на особую целевую аудиторию — мальчиков и юношей в возрасте от 12 до 18 лет. Манга этого типа публикуется в специализированных журналах (аудиторию определяют сами издатели), занимающих 38,4% рынка"
       }, {
         "genre_id": 2,
         "selected": false,
-        "nameJp": "少年愛",
-        "nameEn": "Shounen Ai",
-        "nameRu": "Сёнен-ай",
+        "name_jp": "少年愛",
+        "name_en": "Shounen Ai",
+        "name_ru": "Сёнен-ай",
         "title": "Разновидность аниме и манги, поджанр сёдзё, посвящённый идеализированной любви между юношами или мужчинами, для которого целевой аудиторией являются женщины. Фокусируется на романтических отношениях, а не сексуальных."
       }, {
         "genre_id": 3,
         "selected": false,
-        "nameJp": "青年",
-        "nameEn": "Seinen",
-        "nameRu": "Сейнен",
+        "name_jp": "青年",
+        "name_en": "Seinen",
+        "name_ru": "Сейнен",
         "title": "Аниме и манга, рассчитанные на особую целевую аудиторию — молодых мужчин от 18 лет и старше. Манга этого типа публикуется в специализированных сэйнэн-журналах (аудиторию определяют сами издатели). В редких случаях произведение в жанре сэйнэн нацелено на категорию бизнесменов в возрасте до 40 лет."
       }, {
         "genre_id": 4,
         "selected": false,
-        "nameJp": "少女",
-        "nameEn": "Shoujo",
-        "nameRu": "Сёдзё",
+        "name_jp": "少女",
+        "name_en": "Shoujo",
+        "name_ru": "Сёдзё",
         "title": ""
       }, {
         "genre_id": 5,
         "selected": false,
-        "nameJp": "少女愛",
-        "nameEn": "Shoujo Ai",
-        "nameRu": "Сёдзё-ай",
+        "name_jp": "少女愛",
+        "name_en": "Shoujo Ai",
+        "name_ru": "Сёдзё-ай",
         "title": ""
       }, {
         "genre_id": 6,
         "selected": false,
-        "nameJp": "女性",
-        "nameEn": "Josei",
-        "nameRu": "Дзёсей",
+        "name_jp": "女性",
+        "name_en": "Josei",
+        "name_ru": "Дзёсей",
         "title": ""
       }, {
         "genre_id": 7,
         "selected": false,
-        "nameJp": "ジェンダーベンダー",
-        "nameEn": "Gender Bender",
-        "nameRu": "Смена пола",
+        "name_jp": "ジェンダーベンダー",
+        "name_en": "Gender Bender",
+        "name_ru": "Смена пола",
         "title": ""
       }, {
         "genre_id": 8,
         "selected": false,
-        "nameJp": "コメディ",
-        "nameEn": "Comedy",
-        "nameRu": "Комедия",
+        "name_jp": "コメディ",
+        "name_en": "Comedy",
+        "name_ru": "Комедия",
         "title": ""
       }, {
         "genre_id": 9,
         "selected": false,
-        "nameJp": "ロマンス",
-        "nameEn": "Romance",
-        "nameRu": "Романтика",
+        "name_jp": "ロマンス",
+        "name_en": "Romance",
+        "name_ru": "Романтика",
         "title": ""
       }, {
         "genre_id": 10,
         "selected": false,
-        "nameJp": "学校",
-        "nameEn": "School",
-        "nameRu": "Школа",
+        "name_jp": "学校",
+        "name_en": "School",
+        "name_ru": "Школа",
         "title": ""
       }, {
         "genre_id": 11,
         "selected": false,
-        "nameJp": "アクション",
-        "nameEn": "Action",
-        "nameRu": "Экшен",
+        "name_jp": "アクション",
+        "name_en": "Action",
+        "name_ru": "Экшен",
         "title": ""
       }, {
         "genre_id": 12,
         "selected": false,
-        "nameJp": "冒険",
-        "nameEn": "Adventure",
-        "nameRu": "Приключения",
+        "name_jp": "冒険",
+        "name_en": "Adventure",
+        "name_ru": "Приключения",
         "title": ""
       }, {
         "genre_id": 13,
         "selected": false,
-        "nameJp": "車",
-        "nameEn": "Cars",
-        "nameRu": "Машины",
+        "name_jp": "車",
+        "name_en": "Cars",
+        "name_ru": "Машины",
         "title": ""
       }, {
         "genre_id": 14,
         "selected": false,
-        "nameJp": "狂気",
-        "nameEn": "Dementia",
-        "nameRu": "Безумие",
+        "name_jp": "狂気",
+        "name_en": "Dementia",
+        "name_ru": "Безумие",
         "title": ""
       }, {
         "genre_id": 15,
         "selected": false,
-        "nameJp": "悪魔",
-        "nameEn": "Demons",
-        "nameRu": "Демоны",
+        "name_jp": "悪魔",
+        "name_en": "Demons",
+        "name_ru": "Демоны",
         "title": ""
       }, {
         "genre_id": 16,
         "selected": false,
-        "nameJp": "ドラマ",
-        "nameEn": "Drama",
-        "nameRu": "Драма",
+        "name_jp": "ドラマ",
+        "name_en": "Drama",
+        "name_ru": "Драма",
         "title": ""
       }, {
         "genre_id": 17,
         "selected": false,
-        "nameJp": "エッチ",
-        "nameEn": "Ecchi",
-        "nameRu": "Эччи",
+        "name_jp": "エッチ",
+        "name_en": "Ecchi",
+        "name_ru": "Эччи",
         "title": ""
       }, {
         "genre_id": 18,
         "selected": false,
-        "nameJp": "素晴らしい",
-        "nameEn": "Fantasy",
-        "nameRu": "Фантастика",
+        "name_jp": "素晴らしい",
+        "name_en": "Fantasy",
+        "name_ru": "Фантастика",
         "title": ""
       }, {
         "genre_id": 19,
         "selected": false,
-        "nameJp": "ゲーム",
-        "nameEn": "Game",
-        "nameRu": "Игры",
+        "name_jp": "ゲーム",
+        "name_en": "Game",
+        "name_ru": "Игры",
         "title": ""
       }, {
         "genre_id": 20,
         "selected": false,
-        "nameJp": "ハーレム",
-        "nameEn": "Harem",
-        "nameRu": "Гарем",
+        "name_jp": "ハーレム",
+        "name_en": "Harem",
+        "name_ru": "Гарем",
         "title": ""
       }, {
         "genre_id": 21,
         "selected": false,
-        "nameJp": "歴史的",
-        "nameEn": "Historical",
-        "nameRu": "Историческое",
+        "name_jp": "歴史的",
+        "name_en": "Historical",
+        "name_ru": "Историческое",
         "title": ""
       }, {
         "genre_id": 22,
         "selected": false,
-        "nameJp": "ホラー",
-        "nameEn": "Horror",
-        "nameRu": "Ужасы",
+        "name_jp": "ホラー",
+        "name_en": "Horror",
+        "name_ru": "Ужасы",
         "title": ""
       }, {
         "genre_id": 23,
         "selected": false,
-        "nameJp": "赤ちゃん",
-        "nameEn": "Kids",
-        "nameRu": "Детское",
+        "name_jp": "赤ちゃん",
+        "name_en": "Kids",
+        "name_ru": "Детское",
         "title": ""
       }, {
         "genre_id": 24,
         "selected": false,
-        "nameJp": "魔法",
-        "nameEn": "Magic",
-        "nameRu": "Магия",
+        "name_jp": "魔法",
+        "name_en": "Magic",
+        "name_ru": "Магия",
         "title": ""
       }, {
         "genre_id": 25,
         "selected": false,
-        "nameJp": "武道",
-        "nameEn": "Martial Arts",
-        "nameRu": "Боевые искусства",
+        "name_jp": "武道",
+        "name_en": "Martial Arts",
+        "name_ru": "Боевые искусства",
         "title": ""
       }, {
         "genre_id": 26,
         "selected": false,
-        "nameJp": "毛皮",
-        "nameEn": "Mecha",
-        "nameRu": "Меха",
+        "name_jp": "毛皮",
+        "name_en": "Mecha",
+        "name_ru": "Меха",
         "title": ""
       }, {
         "genre_id": 27,
         "selected": false,
-        "nameJp": "軍隊",
-        "nameEn": "Military",
-        "nameRu": "Военное",
+        "name_jp": "軍隊",
+        "name_en": "Military",
+        "name_ru": "Военное",
         "title": ""
       }, {
         "genre_id": 28,
         "selected": false,
-        "nameJp": "音楽",
-        "nameEn": "Music",
-        "nameRu": "Музыка",
+        "name_jp": "音楽",
+        "name_en": "Music",
+        "name_ru": "Музыка",
         "title": ""
       }, {
         "genre_id": 29,
         "selected": false,
-        "nameJp": "探偵",
-        "nameEn": "Mystery",
-        "nameRu": "Детектив",
+        "name_jp": "探偵",
+        "name_en": "Mystery",
+        "name_ru": "Детектив",
         "title": ""
       }, {
         "genre_id": 30,
         "selected": false,
-        "nameJp": "パロディー",
-        "nameEn": "Parody",
-        "nameRu": "Пародия",
+        "name_jp": "パロディー",
+        "name_en": "Parody",
+        "name_ru": "Пародия",
         "title": ""
       }, {
         "genre_id": 31,
         "selected": false,
-        "nameJp": "警察",
-        "nameEn": "Police",
-        "nameRu": "Полиция",
+        "name_jp": "警察",
+        "name_en": "Police",
+        "name_ru": "Полиция",
         "title": ""
       }, {
         "genre_id": 32,
         "selected": false,
-        "nameJp": "心理学",
-        "nameEn": "Psychological",
-        "nameRu": "Психологическое",
+        "name_jp": "心理学",
+        "name_en": "Psychological",
+        "name_ru": "Психологическое",
         "title": ""
       }, {
         "genre_id": 33,
         "selected": false,
-        "nameJp": "武士",
-        "nameEn": "Samurai",
-        "nameRu": "Самураи",
+        "name_jp": "武士",
+        "name_en": "Samurai",
+        "name_ru": "Самураи",
         "title": ""
       }, {
         "genre_id": 34,
         "selected": false,
-        "nameJp": "素晴らしい",
-        "nameEn": "Sci-Fi",
-        "nameRu": "Фантастика",
+        "name_jp": "素晴らしい",
+        "name_en": "Sci-Fi",
+        "name_ru": "Фантастика",
         "title": ""
       }, {
         "genre_id": 35,
         "selected": false,
-        "nameJp": "日常生活",
-        "nameEn": "Slice of Life",
-        "nameRu": "Повседневность",
+        "name_jp": "日常生活",
+        "name_en": "Slice of Life",
+        "name_ru": "Повседневность",
         "title": ""
       }, {
         "genre_id": 36,
         "selected": false,
-        "nameJp": "スペース",
-        "nameEn": "Space",
-        "nameRu": "Космос",
+        "name_jp": "スペース",
+        "name_en": "Space",
+        "name_ru": "Космос",
         "title": ""
       }, {
         "genre_id": 37,
         "selected": false,
-        "nameJp": "スポーツ",
-        "nameEn": "Sports",
-        "nameRu": "Спорт",
+        "name_jp": "スポーツ",
+        "name_en": "Sports",
+        "name_ru": "Спорт",
         "title": ""
       }, {
         "genre_id": 38,
         "selected": false,
-        "nameJp": "スーパーパワー",
-        "nameEn": "Super Power",
-        "nameRu": "Супер силы",
+        "name_jp": "スーパーパワー",
+        "name_en": "Super Power",
+        "name_ru": "Супер силы",
         "title": ""
       }, {
         "genre_id": 39,
         "selected": false,
-        "nameJp": "超自然的",
-        "nameEn": "Supernatural",
-        "nameRu": "Сверхъестественное",
+        "name_jp": "超自然的",
+        "name_en": "Supernatural",
+        "name_ru": "Сверхъестественное",
         "title": ""
       }, {
         "genre_id": 40,
         "selected": false,
-        "nameJp": "吸血鬼",
-        "nameEn": "Vampire",
-        "nameRu": "Вампиры",
+        "name_jp": "吸血鬼",
+        "name_en": "Vampire",
+        "name_ru": "Вампиры",
         "title": ""
       }, {
         "genre_id": 41,
         "selected": false,
-        "nameJp": "スリラー",
-        "nameEn": "Thriller",
-        "nameRu": "Триллер",
+        "name_jp": "スリラー",
+        "name_en": "Thriller",
+        "name_ru": "Триллер",
         "title": ""
       }, {
         "genre_id": 42,
         "selected": false,
-        "nameJp": "変態",
-        "nameEn": "Hentai",
-        "nameRu": "Хентай",
+        "name_jp": "変態",
+        "name_en": "Hentai",
+        "name_ru": "Хентай",
         "title": ""
       }, {
         "genre_id": 43,
         "selected": false,
-        "nameJp": "やおい",
-        "nameEn": "Yaoi",
-        "nameRu": "Яой",
+        "name_jp": "やおい",
+        "name_en": "Yaoi",
+        "name_ru": "Яой",
         "title": ""
       }, {
         "genre_id": 44,
         "selected": false,
-        "nameJp": "百合",
-        "nameEn": "Yuri",
-        "nameRu": "Юри",
+        "name_jp": "百合",
+        "name_en": "Yuri",
+        "name_ru": "Юри",
         "title": ""
       }, {
         "genre_id": 45,
         "selected": false,
-        "nameJp": "ショタコン",
-        "nameEn": "Shotacon",
-        "nameRu": "Сётакон",
+        "name_jp": "ショタコン",
+        "name_en": "Shotacon",
+        "name_ru": "Сётакон",
         "title": ""
       }, {
         "genre_id": 46,
         "selected": false,
-        "nameJp": "特撮",
-        "nameEn": "Tokusatsu",
-        "nameRu": "Токусацу",
+        "name_jp": "特撮",
+        "name_en": "Tokusatsu",
+        "name_ru": "Токусацу",
         "title": ""
       }, {
         "genre_id": 47,
         "selected": false,
-        "nameJp": "黙示録を投稿する",
-        "nameEn": "Post apocalyptic",
-        "nameRu": "Пост апокалипсис",
+        "name_jp": "黙示録を投稿する",
+        "name_en": "Post apocalyptic",
+        "name_ru": "Пост апокалипсис",
         "title": ""
       }, {
         "genre_id": 48,
         "selected": false,
-        "nameJp": "スチームパンク",
-        "nameEn": "Steampunk",
-        "nameRu": "Стимпанк",
+        "name_jp": "スチームパンク",
+        "name_en": "Steampunk",
+        "name_ru": "Стимпанк",
         "title": ""
       }, {
         "genre_id": 49,
         "selected": false,
-        "nameJp": "オタク",
-        "nameEn": "Otaku",
-        "nameRu": "Откаку",
+        "name_jp": "オタク",
+        "name_en": "Otaku",
+        "name_ru": "Откаку",
         "title": ""
       }, {
         "genre_id": 50,
         "selected": false,
-        "nameJp": "魔法少女",
-        "nameEn": "Makho-shodze",
-        "nameRu": "Махо-сёдзе",
+        "name_jp": "魔法少女",
+        "name_en": "Makho-shodze",
+        "name_ru": "Махо-сёдзе",
         "title": ""
       }, {
         "genre_id": 51,
         "selected": false,
-        "nameJp": "サイバーパンク",
-        "nameEn": "Cyberpunk",
-        "nameRu": "Кибербанк",
+        "name_jp": "サイバーパンク",
+        "name_en": "Cyberpunk",
+        "name_ru": "Кибербанк",
         "title": ""
       }, {
         "genre_id": 52,
         "selected": false,
-        "nameJp": "幻の泥棒",
-        "nameEn": "Phantom thieves",
-        "nameRu": "Кайто",
+        "name_jp": "幻の泥棒",
+        "name_en": "Phantom thieves",
+        "name_ru": "Кайто",
         "title": ""
       }, {
         "genre_id": 53,
         "selected": false,
-        "nameJp": "郁二",
-        "nameEn": "Ikuji",
-        "nameRu": "Икудзи",
+        "name_jp": "郁二",
+        "name_en": "Ikuji",
+        "name_ru": "Икудзи",
         "title": ""
       }, {
         "genre_id": 54,
         "selected": false,
-        "nameJp": "アイドル",
-        "nameEn": "idol",
-        "nameRu": "Айдолы",
+        "name_jp": "アイドル",
+        "name_en": "idol",
+        "name_ru": "Айдолы",
         "title": ""
       }, {
         "genre_id": 55,
         "selected": false,
-        "nameJp": "女性 ",
-        "nameEn": "Josei",
-        "nameRu": "Дзёсэй",
+        "name_jp": "女性 ",
+        "name_en": "Josei",
+        "name_ru": "Дзёсэй",
         "title": ""
       }],
       ratings: [{
         "rating_id": 1,
         "selected": false,
         "name": "G",
-        "title": "Нет возрастных ограничений"
+        "title_jp": "年齢制限なし",
+        "title_en": "No age restrictions",
+        "title_ru": "Нет возрастных ограничений"
       }, {
         "rating_id": 2,
         "selected": false,
         "name": "PG",
-        "title": ""
+        "title_jp": "年齢制限はありませんが、両親の立ち会いをお勧めします",
+        "title_en": "There is no age limit, but the presence of parents is recommended",
+        "title_ru": "Нет возрастных ограничений, но рекомендуется присутствие родителей"
       }, {
         "rating_id": 3,
         "selected": false,
         "name": "PG-13",
-        "title": ""
-      }, {
-        "rating_id": 4,
-        "selected": false,
-        "name": "PG-13",
-        "title": ""
+        "title_jp": "13 歳未満の子供には視聴は望ましくありません",
+        "title_en": "Viewing is not desirable for children under 13",
+        "title_ru": "Детям до 13 лет просмотр не желателен"
       }, {
         "rating_id": 5,
         "selected": false,
         "name": "R-17",
-        "title": ""
+        "title_jp": "17 歳未満の方はご両親とのみ視聴できます",
+        "title_en": "Persons under the age of 17 are allowed to watch only with their parents",
+        "title_ru": "Лицам не достигшим 17 летия разрешен просмотр только с родителями"
       }, {
         "rating_id": 6,
         "selected": false,
         "name": "R+",
-        "title": ""
+        "title_jp": "17 歳未満の方は閲覧を禁止されています",
+        "title_en": "Persons under the age of 17 are prohibited from viewing",
+        "title_ru": "Лицам не достигшим 17 летия просмотр запрещен"
       }, {
         "rating_id": 7,
         "selected": false,
         "name": "RX",
-        "title": ""
+        "title_jp": "",
+        "title_en": "18+ content",
+        "title_ru": "18+ контент"
       }],
       durations: [{
         "duration_id": 1,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "до 6 минут"
+        "name_jp": "最大6分",
+        "name_en": "Up to 6 minutes",
+        "name_ru": "До 6 минут"
       }, {
         "duration_id": 2,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "до 14 минут"
+        "name_jp": "最大14分",
+        "name_en": "Up to 14 minutes",
+        "name_ru": "До 14 минут"
       }, {
         "duration_id": 3,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "до 30 минут"
+        "name_jp": "最大30分",
+        "name_en": "Up to 30 minutes",
+        "name_ru": "До 30 минут"
       }, {
         "duration_id": 4,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "более 30 минут"
+        "name_jp": "30分以上\n",
+        "name_en": "More than 30 minutes",
+        "name_ru": "Более 30 минут"
       }],
       seasons: [{
         "season_id": 1,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "Зима"
+        "name_jp": "冬",
+        "name_en": "Winter",
+        "name_ru": "Зима"
       }, {
         "season_id": 2,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "Весна"
+        "name_jp": "バネ",
+        "name_en": "Spring",
+        "name_ru": "Весна"
       }, {
         "season_id": 3,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "Лето"
+        "name_jp": "夏",
+        "name_en": "Summer",
+        "name_ru": "Лето"
       }, {
         "season_id": 4,
         "selected": false,
-        "nameJp": "",
-        "nameEn": "",
-        "nameRu": "Осень"
+        "name_jp": "秋",
+        "name_en": "Autumn",
+        "name_ru": "Осень"
       }],
       selectedStatus: "",
       selectedGenres: "",
@@ -958,7 +960,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     animeFilter: _components_AnimeFilterComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['animeList', 'animePagination']),
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['animeList', 'animePagination', 'getLocale']),
   mounted: function mounted() {
     this.loadComponent(); // this.bodyParams.genres = [];
     // console.log(this.bodyParams)
@@ -1321,7 +1323,11 @@ var render = function () {
   return _c("div", { staticClass: "filter-block" }, [
     _c("div", { staticClass: "body" }, [
       _c("div", { staticClass: "row" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "col-auto me-auto" }, [
+          _c("h6", { staticClass: "p-title" }, [
+            _vm._v(_vm._s(_vm.$tc("filter", 2))),
+          ]),
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-auto" }, [
           _c(
@@ -1334,7 +1340,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v(" Применить ")]
+            [_vm._v(" " + _vm._s(_vm.$t("apply")) + " ")]
           ),
         ]),
       ]),
@@ -1343,7 +1349,11 @@ var render = function () {
     _c("div", { staticClass: "filter" }, [
       _c("div", { staticClass: "selector-block" }, [
         _c("div", { staticClass: "selector" }, [
-          _vm._m(1),
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("status")))]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "chek-box-list" }, [
             _c(
@@ -1403,7 +1413,9 @@ var render = function () {
                         },
                       }),
                       _vm._v(
-                        "  " + _vm._s(statusItem.nameRu) + "\n              "
+                        "  " +
+                          _vm._s(statusItem["name_" + _vm.getLocale]) +
+                          "\n              "
                       ),
                     ]),
                   ]
@@ -1417,7 +1429,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "selector-block" }, [
         _c("div", { staticClass: "selector" }, [
-          _vm._m(2),
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("type")))]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "chek-box-list" }, [
             _c(
@@ -1472,7 +1488,11 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v("  " + _vm._s(type.nameRu) + "\n              "),
+                      _vm._v(
+                        "  " +
+                          _vm._s(type["name_" + _vm.getLocale]) +
+                          "\n              "
+                      ),
                     ]),
                   ]
                 )
@@ -1485,7 +1505,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "selector-block" }, [
         _c("div", { staticClass: "selector" }, [
-          _vm._m(3),
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("genres")))]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "chek-box-list" }, [
             _c(
@@ -1540,30 +1564,11 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "name_en" }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(genre.nameEn) +
-                            "\n              "
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "name_ru" }, [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(genre.nameRu) +
-                            "\n              "
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "name_jp" }, [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(genre.nameJp) +
-                            "\n              "
-                        ),
-                      ]),
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(genre["name_" + _vm.getLocale]) +
+                          "\n              "
+                      ),
                     ]),
                   ]
                 )
@@ -1576,7 +1581,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "selector-block" }, [
         _c("div", { staticClass: "selector" }, [
-          _vm._m(4),
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("rating")))]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "chek-box-list" }, [
             _c(
@@ -1587,7 +1596,7 @@ var render = function () {
                   {
                     key: rating.rating_id,
                     class: { selected: rating.selected },
-                    attrs: { title: rating.title },
+                    attrs: { title: rating["title_" + _vm.getLocale] },
                   },
                   [
                     _c("label", [
@@ -1648,7 +1657,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "selector-block" }, [
         _c("div", { staticClass: "selector" }, [
-          _vm._m(5),
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("episode duration")))]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "chek-box-list" }, [
             _c(
@@ -1708,7 +1721,9 @@ var render = function () {
                         },
                       }),
                       _vm._v(
-                        "  " + _vm._s(duration.nameRu) + "\n              "
+                        "  " +
+                          _vm._s(duration["name_" + _vm.getLocale]) +
+                          "\n              "
                       ),
                     ]),
                   ]
@@ -1722,7 +1737,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "selector-block" }, [
         _c("div", { staticClass: "selector" }, [
-          _vm._m(6),
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("season")))]),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "chek-box-list" }, [
             _c(
@@ -1781,7 +1800,11 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v("  " + _vm._s(season.nameRu) + "\n              "),
+                      _vm._v(
+                        "  " +
+                          _vm._s(season["name_" + _vm.getLocale]) +
+                          "\n              "
+                      ),
                     ]),
                   ]
                 )
@@ -1792,9 +1815,61 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(7),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("score")))]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
+      ]),
       _vm._v(" "),
-      _vm._m(8),
+      _c("div", { staticClass: "selector-block" }, [
+        _c("div", { staticClass: "selector" }, [
+          _c("div", { staticClass: "placeholder" }, [
+            _c("div", { staticClass: "selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.$t("my list")))]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "chek-box-list" }, [
+            _c("ul", [
+              _c("li", { attrs: { "data-field": "status" } }, [
+                _c("input", {
+                  attrs: { autocomplete: "off", type: "checkbox" },
+                }),
+                _vm._v(" " + _vm._s(_vm.$t("completed")) + "\n            "),
+              ]),
+              _vm._v(" "),
+              _c("li", { attrs: { "data-field": "status" } }, [
+                _c("input", {
+                  attrs: { autocomplete: "off", type: "checkbox" },
+                }),
+                _vm._v(
+                  "  " + _vm._s(_vm.$t("plan to watch")) + "\n            "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { attrs: { "data-field": "status" } }, [
+                _c("input", {
+                  attrs: { autocomplete: "off", type: "checkbox" },
+                }),
+                _vm._v("  " + _vm._s(_vm.$t("dropped")) + "\n            "),
+              ]),
+              _vm._v(" "),
+              _c("li", { attrs: { "data-field": "status" } }, [
+                _c("input", {
+                  attrs: { autocomplete: "off", type: "checkbox" },
+                }),
+                _vm._v("  " + _vm._s(_vm.$t("on-hold")) + "\n            "),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "selector-block" }, [
         _c(
@@ -1809,7 +1884,9 @@ var render = function () {
           },
           [
             _c("div", { staticClass: "placeholder" }, [
-              _vm._m(9),
+              _c("div", { staticClass: "selected" }, [
+                _c("span", [_vm._v(_vm._s(_vm.$t("sorted by")))]),
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "icon-inline dropdown-icon" }, [
                 _c(
@@ -1835,12 +1912,16 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _vm._m(10),
+            _vm._m(1),
           ]
         ),
       ]),
       _vm._v(" "),
-      _vm._m(11),
+      _c("div", { staticClass: "d-grid gap-2 button-block mx-0" }, [
+        _c("div", { staticClass: "btn", attrs: { type: "button" } }, [
+          _vm._v(_vm._s(_vm.$t("reset filter"))),
+        ]),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "footer" }),
     ]),
@@ -1851,201 +1932,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto me-auto" }, [
-      _c("h6", { staticClass: "p-title" }, [_vm._v("Фильтры")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "placeholder" }, [
-      _c("div", { staticClass: "selected" }, [_c("span", [_vm._v("Статус")])]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "placeholder" }, [
-      _c("div", { staticClass: "selected" }, [_c("span", [_vm._v("Тип")])]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "placeholder" }, [
-      _c("div", { staticClass: "selected" }, [_c("span", [_vm._v("Жанры")])]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "placeholder" }, [
-      _c("div", { staticClass: "selected" }, [_c("span", [_vm._v("Рейтинг")])]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "placeholder" }, [
-      _c("div", { staticClass: "selected" }, [
-        _c("span", [_vm._v("Продолжительность эпизода")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "placeholder" }, [
-      _c("div", { staticClass: "selected" }, [_c("span", [_vm._v("Сезон")])]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _c("div", { staticClass: "placeholder" }, [
-          _c("div", { staticClass: "selected" }, [
-            _c("span", [_vm._v("Оценка")]),
-          ]),
+    return _c("div", { staticClass: "chek-box-list" }, [
+      _c("ul", [
+        _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
+          _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
+          _vm._v(" 8+\n            "),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c("ul", [
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v(" 8+\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  7+\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  6+\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  5+\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  <5\n            "),
-              ]
-            ),
-          ]),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "selector-block" }, [
-      _c("div", { staticClass: "selector" }, [
-        _c("div", { staticClass: "placeholder" }, [
-          _c("div", { staticClass: "selected" }, [
-            _c("span", [_vm._v("Мой список")]),
-          ]),
+        _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
+          _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
+          _vm._v("  7+\n            "),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "chek-box-list" }, [
-          _c("ul", [
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v(" Просмотрено\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  В планах\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  Брошено\n            "),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { attrs: { "data-field": "status", "data-value": "anons" } },
-              [
-                _c("input", {
-                  attrs: { autocomplete: "off", type: "checkbox" },
-                }),
-                _vm._v("  Отложено\n            "),
-              ]
-            ),
-          ]),
+        _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
+          _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
+          _vm._v("  6+\n            "),
+        ]),
+        _vm._v(" "),
+        _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
+          _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
+          _vm._v("  5+\n            "),
+        ]),
+        _vm._v(" "),
+        _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
+          _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
+          _vm._v("  <5\n            "),
         ]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "selected" }, [
-      _c("span", [_vm._v("Сортировка")]),
     ])
   },
   function () {
@@ -2067,16 +1980,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "item" }, [
         _vm._v("\n            По дате выхода\n          "),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-grid gap-2 button-block mx-0" }, [
-      _c("div", { staticClass: "btn", attrs: { type: "button" } }, [
-        _vm._v("Сбросить фильтр"),
       ]),
     ])
   },
@@ -2107,7 +2010,16 @@ var render = function () {
       _c("div", { staticClass: "row mb-2 mt-sm-4 mt-md-0" }, [
         _c("div", { staticClass: "col-auto me-auto" }, [
           _c("h6", { staticClass: "p-title" }, [
-            _vm._v("Аниме - страница " + _vm._s(_vm.page)),
+            _vm._v(
+              _vm._s(_vm.$t("anime")) +
+                " - " +
+                _vm._s(
+                  _vm.$tc("message.page", 1, {
+                    page: _vm.page,
+                    count: _vm.animePagination.last_page,
+                  })
+                )
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -2131,7 +2043,10 @@ var render = function () {
               staticClass: "btn",
               on: {
                 click: function ($event) {
-                  _vm.page = _vm.page + 1
+                  _vm.page =
+                    _vm.page < _vm.animePagination.last_page
+                      ? _vm.page + 1
+                      : _vm.page
                 },
               },
             },
@@ -2156,7 +2071,7 @@ var render = function () {
                     key: anime.id,
                     attrs: {
                       id: anime.id,
-                      name: anime.name_ru,
+                      name: anime["name_" + _vm.getLocale],
                       type: anime.type,
                       genres: anime.genres,
                       poster_url: anime.poster.preview,
@@ -2181,7 +2096,9 @@ var render = function () {
         attrs: { id: "filter-block" },
       },
       [
-        _c("h6", { staticClass: "p-title mb-3" }, [_vm._v("Фильтры")]),
+        _c("h6", { staticClass: "p-title mb-3" }, [
+          _vm._v(_vm._s(_vm.$tc("filter", 2))),
+        ]),
         _vm._v(" "),
         _c(
           "div",

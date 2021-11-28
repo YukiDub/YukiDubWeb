@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loading: true,
       "activity": [{
-        "title": "Написали комментарии",
+        "title": "wrote comments",
         "text": "Re:Zero. Жизнь с нуля в альтернативном мире",
         "users": [{
           "id": 1,
@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
           "avatar_ul": "/assets/images/avatars/default.png"
         }]
       }, {
-        "title": "Посмотрели аниме",
+        "title": "watched anime",
         "text": "ToraDora!",
         "users": [{
           "id": 1,
@@ -213,7 +213,7 @@ var render = function () {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-xs-12 col-md-4 order-2 order-md-1" }, [
       _c("h6", { staticClass: "p-title mb-4" }, [
-        _vm._v("Последняя активность"),
+        _vm._v(_vm._s(_vm.$tc("recent actions", _vm.activity.length))),
       ]),
       _vm._v(" "),
       _c(
@@ -224,14 +224,18 @@ var render = function () {
             return _c("card-item", {
               key: activityItem.id,
               attrs: {
-                title: activityItem.title,
+                title: _vm.$t(activityItem.title),
                 text: activityItem.text,
                 users: activityItem.users,
               },
             })
           }),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "card " }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(_vm._s(_vm.$t("all activity"))),
+            ]),
+          ]),
         ],
         2
       ),
@@ -239,7 +243,11 @@ var render = function () {
     _vm._v(" "),
     _c("div", { staticClass: "col order-1" }, [
       _c("div", { staticClass: "row mb-2 mt-sm-4 mt-md-0" }, [
-        _vm._m(1),
+        _c("div", { staticClass: "col-auto me-auto" }, [
+          _c("h6", { staticClass: "p-title" }, [
+            _vm._v(_vm._s(_vm.$t("anime") + " " + _vm.$t("with high rating"))),
+          ]),
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -251,7 +259,7 @@ var render = function () {
                 staticClass: "btn",
                 attrs: { to: "/animes?=что-то_там", type: "button" },
               },
-              [_vm._v("Подробнее")]
+              [_vm._v(_vm._s(_vm.$t("view more")))]
             ),
           ],
           1
@@ -291,31 +299,13 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(0),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(1),
     ]),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card " }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Вся активность")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto me-auto" }, [
-      _c("h6", { staticClass: "p-title" }, [
-        _vm._v("Аниме с самыми высокими оценками"),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

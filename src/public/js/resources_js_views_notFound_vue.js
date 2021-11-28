@@ -127,16 +127,14 @@ var render = function () {
         attrs: { src: "/assets/images/nya404.webp", alt: "nya 404" },
       }),
       _vm._v(" "),
-      _c("h1", [_vm._v("Ошибка 404")]),
+      _c("h1", [_vm._v(_vm._s(_vm.$t("message.404.title")))]),
       _vm._v(" "),
       _c("p", { staticClass: "text-center" }, [
-        _vm._v(
-          "Упс... Страница, которую вы запрашиваете, не существует. Возможно был введен неверный адрес."
-        ),
+        _vm._v(_vm._s(_vm.$t("message.404.text"))),
       ]),
       _vm._v(" "),
       _c("router-link", { staticClass: "btn d-block", attrs: { to: "/" } }, [
-        _vm._v("Вернуться на главную страницу"),
+        _vm._v(_vm._s(_vm.$t("back home"))),
       ]),
     ],
     1

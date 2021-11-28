@@ -22,7 +22,7 @@
             class="btn"
             @click="close"
         >
-          Закрыть
+          {{$t('close')}}
         </button>
       </footer>
     </div>

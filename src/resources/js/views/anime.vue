@@ -13,9 +13,9 @@
           <div class="warp-poster">
             <div class="poster mx-auto" v-bind:style="{ 'background-image': 'url(' + animeItem.poster.original + ')' }"></div>
             <div class="gap-2 d-flex justify-content-center pb-2">
-              <div class="btn"><i class="bi bi-gear-fill"></i></div>
-              <div class="btn"><i class="bi bi-bookmark-star-fill"></i></div>
-              <div class="btn">Смотреть</div>
+              <div class="btn" title="редактировать" v-on:click="selectedComponent = editorComponent"><i class="bi bi-gear-fill"></i></div>
+              <div class="btn" title="добавить в избранное"><i class="bi bi-bookmark-star-fill"></i></div>
+              <div class="btn">{{$t('watch')}}</div>
             </div>
           </div>
           <div class="right-block">
@@ -23,14 +23,14 @@
             <div class="row mb-2 mt-sm-4 mt-md-0">
               <div class="col-auto">
                   <p>
-                    Тип: <a href="#" v-for="typeItem in animeItem.type" v-bind:class="'tags'">{{typeItem.name}} </a><br/>
-                    Статус: <a href="#"></a>{{animeItem.status}}<br>
+                    {{$t('type')}}: <a href="#" v-for="typeItem in animeItem.type" v-bind:class="'tags'">{{typeItem.name}} </a><br/>
+                    {{$t('status')}}: <a href="#"></a>{{$t('status_list.' + animeItem.status)}}<br>
                     <span v-if="animeItem.studios">Студия: <a href="#" v-for="studioItem in animeItem.studios">{{studioItem.name}} </a> <br/></span>
                     <span v-if="animeItem.episodes_released">Эпизоды: <span v-if="animeItem.episodes">{{animeItem.episodes}} \</span> {{animeItem.episodes_released}} <br></span>
                     <span v-if="animeItem.episode_duration">Продолжительность эпизода: {{animeItem.episode_duration}}<br></span>
                     <span v-if="animeItem.genres">
-                      Жанры:
-                      <router-link v-bind:class="'tags'" v-for="genreItem in animeItem.genres" :key="genreItem.id" :to="{name: 'animes', query: {genres: genreItem.name_en}}">{{genreItem.name_ru}}</router-link>
+                      {{$t('genres')}}:
+                      <router-link v-bind:class="'tags'" v-for="genreItem in animeItem.genres" :key="genreItem.id" :to="{name: 'animes', query: {genres: genreItem.name_en}}">{{genreItem['name_' + getLocale]}}</router-link>
                       <br/>
                     </span>
                     <span v-if="animeItem.age_rating">Возрастной рейтинг: {{animeItem.age_rating}} <br/></span>
@@ -81,43 +81,7 @@
       </div>
     </div>
     <div class="content-footer">
-      <div class="tabs">
-         <div class="nav justify-content-center" id="anime-tab" role="tablist">
-           <button class=" active" id="nav-characters-tab" data-bs-toggle="tab" data-bs-target="#nav-characters" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Персонажи</button>
-           <button class="" id="nav-staff-tab" data-bs-toggle="tab" data-bs-target="#nav-staff" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Авторы</button>
-           <button class="" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Отзывы</button>
-         </div>
-        <div class="tab-content" id="anime-tabContent">
-          <div class="tab-pane show active" id="nav-characters" role="tabpanel" aria-labelledby="nav-characters-tab">
-            <div class="characters pl-4" v-if="animeItem.characters.length !== 0">
-              <h4 class="text-center text-md-start pb-3 pt-4">ГЛАВНЫЕ ГЕРОИ</h4>
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3">
-                <character-entry-component
-                    v-for="character in animeItem.characters"
-                    :key="character.id"
-                    :name="character.name_ru"
-                    :poster_url="'/storage/images/animes/preview/1.jpg'"
-                />
-              </div>
-
-              <h4 class="text-center text-md-start pb-3 pt-4">ДРУГИЕ ПЕРСОНАЖИ</h4>
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3">
-
-              </div>
-            </div>
-            <div v-else class="characters pl-4">
-              <p class="text-center mt-4">Персонажи для данного аниме не найдены</p>
-              <img src="/assets/images/nya404.webp" alt="nya 404" class="img-fluid w-25 mx-auto d-block">
-            </div>
-          </div>
-          <div class="tab-pane" id="nav-staff" role="tabpanel" aria-labelledby="nav-staff-tab">
-            авторы
-          </div>
-          <div class="tab-pane" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            отзыввы
-          </div>
-        </div>
-      </div>
+      <component v-bind:is="selectedComponent" :anime="animeItem"/>
     </div>
   </div>
   <div class="anime" v-else>
@@ -126,9 +90,8 @@
         <div class="row-information">
           <div class="warp-poster">
             <div class="poster"></div>
-            <button class="btn anime-container-btn">Смотреть</button>
+            <button class="btn anime-container-btn">{{$t('watch')}}</button>
           </div>
-
           <div class="row">
             <h1 class="pt-3 text-sm-start">Идет загрузка</h1>
             <div class="col-12 col-lg-7">
@@ -145,15 +108,21 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import CharacterEntryComponent from "../components/СharacterEntryComponent";
+import MainComponent from "../components/anime/AnimeMainComponent";
+import EditorComponent from "../components/anime/AnimeEditorComponent";
 export default {
   name: "index",
   components: {
     CharacterEntryComponent,
+    MainComponent,
+    EditorComponent
   },
 
   data(){
     return {
       loading: true,
+      selectedComponent: MainComponent,
+      editorComponent: EditorComponent
     }
   },
   mounted() {
@@ -169,7 +138,7 @@ export default {
     }
   },
 
-  computed: mapGetters(['animeItem']),
+  computed: mapGetters(['animeItem', 'getLocale']),
   methods: {
     ...mapActions(['loadAnime']),
     loadView(){
@@ -287,22 +256,6 @@ export default {
   height: 154px;
   overflow-x: hidden;
   overflow-y: scroll;
-}
-#anime-tab > button {
-  background: none;
-  border: none;
-  color: #FFFFFF;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-right: 14px;
-}
-#anime-tab > button.active::after {
-  content: "";
-  display: block;
-  background: #009BEB;
-  border-radius: 6px 5px 0px 0px;
-  width: 108px;
-  height: 4px;
 }
 .anime>.content-header.loading > .row-container>.row-information>.warp-poster {
   width: 276px;

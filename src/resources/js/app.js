@@ -8,6 +8,7 @@ import Vue from "vue";
 
 require('./bootstrap');
 require('../css/app.css');
+import i18n from "./helpers/i18n.js"
 import router from "./vueRouter";
 import store from './store';
 
@@ -55,5 +56,6 @@ axios.interceptors.response.use(
 const app = new Vue({
     store,
     el: '#app',
-    router: router
+    router: router,
+    i18n,
 });

@@ -3,10 +3,10 @@
     <div class="body">
       <div class="row">
         <div class="col-auto me-auto">
-          <h6 class="p-title">Фильтры</h6>
+          <h6 class="p-title">{{$tc('filter', 2)}}</h6>
         </div>
         <div class="col-auto">
-          <div class="button" v-on:click="close()"> Применить </div>
+          <div class="button" v-on:click="close()"> {{$t('apply')}} </div>
         </div>
       </div>
     </div>
@@ -15,14 +15,14 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Статус</span>
+              <span>{{$t('status')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
             <ul>
               <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu" v-bind:class="{selected: statusItem.selected }">
                 <label>
-                  <input type="checkbox" v-model="statusItem.selected">  {{statusItem.nameRu}}
+                  <input type="checkbox" v-model="statusItem.selected">  {{statusItem['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
@@ -33,14 +33,14 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Тип</span>
+              <span>{{$t('type')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
             <ul>
               <li v-for="type in types" :key="type.id" :title="type.nameEn" v-bind:class="{selected: type.selected }">
                 <label>
-                  <input type="checkbox" v-model="type.selected">  {{type.nameRu}}
+                  <input type="checkbox" v-model="type.selected">  {{type['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
@@ -51,7 +51,7 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Жанры</span>
+              <span>{{$t('genres')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
@@ -59,15 +59,7 @@
               <li data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title" v-bind:class="{selected: genre.selected }">
                 <label>
                   <input type="checkbox" v-model="genre.selected">
-                  <span class="name_en">
-                {{genre.nameEn}}
-                </span>
-                  <span class="name_ru">
-                  {{genre.nameRu}}
-                </span>
-                  <span class="name_jp">
-                  {{genre.nameJp}}
-                </span>
+                  {{genre['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
@@ -78,12 +70,12 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Рейтинг</span>
+              <span>{{$t('rating')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
             <ul>
-              <li v-for="rating in ratings" :key="rating.rating_id" :title="rating.title" v-bind:class="{selected: rating.selected }">
+              <li v-for="rating in ratings" :key="rating.rating_id" :title="rating['title_' + getLocale]" v-bind:class="{selected: rating.selected }">
                 <label>
                   <input type="checkbox" v-model="rating.selected">  {{rating.name}}
                 </label>
@@ -96,14 +88,14 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Продолжительность эпизода</span>
+              <span>{{$t('episode duration')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
             <ul>
               <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title" v-bind:class="{selected: duration.selected }">
                 <label>
-                  <input type="checkbox" v-model="duration.selected">  {{duration.nameRu}}
+                  <input type="checkbox" v-model="duration.selected">  {{duration['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
@@ -114,14 +106,14 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Сезон</span>
+              <span>{{$t('season')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
             <ul>
               <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu" v-bind:class="{selected: season.selected }">
                 <label>
-                  <input type="checkbox" v-model="season.selected">  {{season.nameRu}}
+                  <input type="checkbox" v-model="season.selected">  {{season['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
@@ -132,7 +124,7 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Оценка</span>
+              <span>{{$t('score')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
@@ -160,22 +152,22 @@
         <div class="selector">
           <div class="placeholder">
             <div class="selected">
-              <span>Мой список</span>
+              <span>{{$t('my list')}}</span>
             </div>
           </div>
           <div class="chek-box-list">
             <ul>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"> Просмотрено
+              <li data-field="status">
+                <input autocomplete="off" type="checkbox"> {{$t('completed')}}
               </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  В планах
+              <li data-field="status">
+                <input autocomplete="off" type="checkbox">  {{$t('plan to watch')}}
               </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  Брошено
+              <li data-field="status">
+                <input autocomplete="off" type="checkbox">  {{$t('dropped')}}
               </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  Отложено
+              <li data-field="status">
+                <input autocomplete="off" type="checkbox">  {{$t('on-hold')}}
               </li>
             </ul>
           </div>
@@ -185,7 +177,7 @@
         <div class="selector sort cursor-drop" v-on:click="openSort()">
           <div class="placeholder">
             <div class="selected">
-              <span>Сортировка</span>
+              <span>{{$t('sorted by')}}</span>
             </div>
             <div class="icon-inline dropdown-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
@@ -210,7 +202,7 @@
         </div>
       </div>
       <div class="d-grid gap-2 button-block mx-0">
-        <div class="btn" type="button">Сбросить фильтр</div>
+        <div class="btn" type="button">{{$t('reset filter')}}</div>
       </div>
       <div class="footer">
 
@@ -220,621 +212,631 @@
 </template>
 
 <script>
+
+import {mapGetters} from "vuex";
+
 export default {
   name: "AnimeFilterComponent",
+  computed: mapGetters(['getLocale']),
   data: function (){
     return {
       status: [
         {
           "status_id": 1,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Announced",
-          "nameRu":    "Анонсировано"
+          "name_jp":    "",
+          "name_en":    "Announced",
+          "name_ru":    "Анонсировано"
         },
         {
           "status_id": 2,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Ongoing",
-          "nameRu":    "Выходит"
+          "name_jp":    "",
+          "name_en":    "Ongoing",
+          "name_ru":    "Выходит"
         },
         {
           "status_id": 3,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Released",
-          "nameRu":    "Вышло"
+          "name_jp":    "",
+          "name_en":    "Released",
+          "name_ru":    "Вышло"
         },
       ],
       types:  [
         {
           "type_id": 1,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Tv serial",
-          "nameRu":    "Tv сериал"
+          "name_jp":    "",
+          "name_en":    "Tv serial",
+          "name_ru":    "Tv сериал"
         },
         {
           "type_id":   2,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Film",
-          "nameRu":    "Фильм"
+          "name_jp":    "",
+          "name_en":    "Film",
+          "name_ru":    "Фильм"
         },
         {
           "type_id":   3,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "OVA",
-          "nameRu":    "OVA"
+          "name_jp":    "",
+          "name_en":    "OVA",
+          "name_ru":    "OVA"
         },
         {
           "type_id":   4,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "ONA",
-          "nameRu":    "ONA"
+          "name_jp":    "",
+          "name_en":    "ONA",
+          "name_ru":    "ONA"
         },
         {
           "type_id":   5,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Special",
-          "nameRu":    "Спешл"
+          "name_jp":    "",
+          "name_en":    "Special",
+          "name_ru":    "Спешл"
         },
         {
           "type_id":   6,
           "selected":  false,
-          "nameJp":    "",
-          "nameEn":    "Clip",
-          "nameRu":    "Клип"
+          "name_jp":    "",
+          "name_en":    "Clip",
+          "name_ru":    "Клип"
         },
       ],
       genres: [
         {
           "genre_id": 1,
           "selected": false,
-          "nameJp":  "少年",
-          "nameEn":  "Shounen",
-          "nameRu":  "Сёнен",
+          "name_jp":  "少年",
+          "name_en":  "Shounen",
+          "name_ru":  "Сёнен",
           "title":   "Аниме, манга и ранобэ, рассчитанные на особую целевую аудиторию — мальчиков и юношей в возрасте от 12 до 18 лет. Манга этого типа публикуется в специализированных журналах (аудиторию определяют сами издатели), занимающих 38,4% рынка"
         },
         {
           "genre_id": 2,
           "selected": false,
-          "nameJp": "少年愛",
-          "nameEn": "Shounen Ai",
-          "nameRu": "Сёнен-ай",
+          "name_jp": "少年愛",
+          "name_en": "Shounen Ai",
+          "name_ru": "Сёнен-ай",
           "title":  "Разновидность аниме и манги, поджанр сёдзё, посвящённый идеализированной любви между юношами или мужчинами, для которого целевой аудиторией являются женщины. Фокусируется на романтических отношениях, а не сексуальных.",
         },
         {
           "genre_id": 3,
           "selected": false,
-          "nameJp": "青年",
-          "nameEn": "Seinen",
-          "nameRu": "Сейнен",
+          "name_jp": "青年",
+          "name_en": "Seinen",
+          "name_ru": "Сейнен",
           "title":  "Аниме и манга, рассчитанные на особую целевую аудиторию — молодых мужчин от 18 лет и старше. Манга этого типа публикуется в специализированных сэйнэн-журналах (аудиторию определяют сами издатели). В редких случаях произведение в жанре сэйнэн нацелено на категорию бизнесменов в возрасте до 40 лет."
         },
         {
           "genre_id": 4,
           "selected": false,
-          "nameJp": "少女",
-          "nameEn": "Shoujo",
-          "nameRu": "Сёдзё",
+          "name_jp": "少女",
+          "name_en": "Shoujo",
+          "name_ru": "Сёдзё",
           "title":  "",
         },
         {
           "genre_id": 5,
           "selected": false,
-          "nameJp": "少女愛",
-          "nameEn": "Shoujo Ai",
-          "nameRu": "Сёдзё-ай",
+          "name_jp": "少女愛",
+          "name_en": "Shoujo Ai",
+          "name_ru": "Сёдзё-ай",
           "title":  "",
         },
         {
           "genre_id": 6,
           "selected": false,
-          "nameJp": "女性",
-          "nameEn": "Josei",
-          "nameRu": "Дзёсей",
+          "name_jp": "女性",
+          "name_en": "Josei",
+          "name_ru": "Дзёсей",
           "title":  "",
         },
         {
           "genre_id": 7,
           "selected": false,
-          "nameJp": "ジェンダーベンダー",
-          "nameEn": "Gender Bender",
-          "nameRu": "Смена пола",
+          "name_jp": "ジェンダーベンダー",
+          "name_en": "Gender Bender",
+          "name_ru": "Смена пола",
           "title":  "",
         },
         {
           "genre_id": 8,
           "selected": false,
-          "nameJp": "コメディ",
-          "nameEn": "Comedy",
-          "nameRu": "Комедия",
+          "name_jp": "コメディ",
+          "name_en": "Comedy",
+          "name_ru": "Комедия",
           "title":  "",
         },
         {
           "genre_id": 9,
           "selected": false,
-          "nameJp": "ロマンス",
-          "nameEn": "Romance",
-          "nameRu": "Романтика",
+          "name_jp": "ロマンス",
+          "name_en": "Romance",
+          "name_ru": "Романтика",
           "title":  "",
         },
         {
           "genre_id": 10,
           "selected": false,
-          "nameJp": "学校",
-          "nameEn": "School",
-          "nameRu": "Школа",
+          "name_jp": "学校",
+          "name_en": "School",
+          "name_ru": "Школа",
           "title":  "",
         },
         {
           "genre_id": 11,
           "selected": false,
-          "nameJp": "アクション",
-          "nameEn": "Action",
-          "nameRu": "Экшен",
+          "name_jp": "アクション",
+          "name_en": "Action",
+          "name_ru": "Экшен",
           "title":  "",
         },
         {
           "genre_id": 12,
           "selected": false,
-          "nameJp": "冒険",
-          "nameEn": "Adventure",
-          "nameRu": "Приключения",
+          "name_jp": "冒険",
+          "name_en": "Adventure",
+          "name_ru": "Приключения",
           "title":  "",
         },
         {
           "genre_id": 13,
           "selected": false,
-          "nameJp": "車",
-          "nameEn": "Cars",
-          "nameRu": "Машины",
+          "name_jp": "車",
+          "name_en": "Cars",
+          "name_ru": "Машины",
           "title":  "",
         },
         {
           "genre_id": 14,
           "selected": false,
-          "nameJp": "狂気",
-          "nameEn": "Dementia",
-          "nameRu": "Безумие",
+          "name_jp": "狂気",
+          "name_en": "Dementia",
+          "name_ru": "Безумие",
           "title":  "",
         },
         {
           "genre_id": 15,
           "selected": false,
-          "nameJp": "悪魔",
-          "nameEn": "Demons",
-          "nameRu": "Демоны",
+          "name_jp": "悪魔",
+          "name_en": "Demons",
+          "name_ru": "Демоны",
           "title":  "",
         },
         {
           "genre_id": 16,
           "selected": false,
-          "nameJp": "ドラマ",
-          "nameEn": "Drama",
-          "nameRu": "Драма",
+          "name_jp": "ドラマ",
+          "name_en": "Drama",
+          "name_ru": "Драма",
           "title":  "",
         },
         {
           "genre_id": 17,
           "selected": false,
-          "nameJp": "エッチ",
-          "nameEn": "Ecchi",
-          "nameRu": "Эччи",
+          "name_jp": "エッチ",
+          "name_en": "Ecchi",
+          "name_ru": "Эччи",
           "title":  "",
         },
         {
           "genre_id": 18,
           "selected": false,
-          "nameJp": "素晴らしい",
-          "nameEn": "Fantasy",
-          "nameRu": "Фантастика",
+          "name_jp": "素晴らしい",
+          "name_en": "Fantasy",
+          "name_ru": "Фантастика",
           "title":  "",
         },
         {
           "genre_id": 19,
           "selected": false,
-          "nameJp": "ゲーム",
-          "nameEn": "Game",
-          "nameRu": "Игры",
+          "name_jp": "ゲーム",
+          "name_en": "Game",
+          "name_ru": "Игры",
           "title":  "",
         },
         {
           "genre_id": 20,
           "selected": false,
-          "nameJp": "ハーレム",
-          "nameEn": "Harem",
-          "nameRu": "Гарем",
+          "name_jp": "ハーレム",
+          "name_en": "Harem",
+          "name_ru": "Гарем",
           "title":  "",
         },
         {
           "genre_id": 21,
           "selected": false,
-          "nameJp": "歴史的",
-          "nameEn": "Historical",
-          "nameRu": "Историческое",
+          "name_jp": "歴史的",
+          "name_en": "Historical",
+          "name_ru": "Историческое",
           "title":  "",
         },
         {
           "genre_id": 22,
           "selected": false,
-          "nameJp": "ホラー",
-          "nameEn": "Horror",
-          "nameRu": "Ужасы",
+          "name_jp": "ホラー",
+          "name_en": "Horror",
+          "name_ru": "Ужасы",
           "title":  "",
         },
         {
           "genre_id": 23,
           "selected": false,
-          "nameJp": "赤ちゃん",
-          "nameEn": "Kids",
-          "nameRu": "Детское",
+          "name_jp": "赤ちゃん",
+          "name_en": "Kids",
+          "name_ru": "Детское",
           "title":  "",
         },
         {
           "genre_id": 24,
           "selected": false,
-          "nameJp": "魔法",
-          "nameEn": "Magic",
-          "nameRu": "Магия",
+          "name_jp": "魔法",
+          "name_en": "Magic",
+          "name_ru": "Магия",
           "title":  "",
         },
         {
           "genre_id": 25,
           "selected": false,
-          "nameJp": "武道",
-          "nameEn": "Martial Arts",
-          "nameRu": "Боевые искусства",
+          "name_jp": "武道",
+          "name_en": "Martial Arts",
+          "name_ru": "Боевые искусства",
           "title":  "",
         },
         {
           "genre_id": 26,
           "selected": false,
-          "nameJp": "毛皮",
-          "nameEn": "Mecha",
-          "nameRu": "Меха",
+          "name_jp": "毛皮",
+          "name_en": "Mecha",
+          "name_ru": "Меха",
           "title":  "",
         },
         {
           "genre_id": 27,
           "selected": false,
-          "nameJp": "軍隊",
-          "nameEn": "Military",
-          "nameRu": "Военное",
+          "name_jp": "軍隊",
+          "name_en": "Military",
+          "name_ru": "Военное",
           "title":  "",
         },
         {
           "genre_id": 28,
           "selected": false,
-          "nameJp": "音楽",
-          "nameEn": "Music",
-          "nameRu": "Музыка",
+          "name_jp": "音楽",
+          "name_en": "Music",
+          "name_ru": "Музыка",
           "title":  "",
         },
         {
           "genre_id": 29,
           "selected": false,
-          "nameJp": "探偵",
-          "nameEn": "Mystery",
-          "nameRu": "Детектив",
+          "name_jp": "探偵",
+          "name_en": "Mystery",
+          "name_ru": "Детектив",
           "title":  "",
         },
         {
           "genre_id": 30,
           "selected": false,
-          "nameJp": "パロディー",
-          "nameEn": "Parody",
-          "nameRu": "Пародия",
+          "name_jp": "パロディー",
+          "name_en": "Parody",
+          "name_ru": "Пародия",
           "title":  "",
         },
         {
           "genre_id": 31,
           "selected": false,
-          "nameJp": "警察",
-          "nameEn": "Police",
-          "nameRu": "Полиция",
+          "name_jp": "警察",
+          "name_en": "Police",
+          "name_ru": "Полиция",
           "title":  "",
         },
         {
           "genre_id": 32,
           "selected": false,
-          "nameJp": "心理学",
-          "nameEn": "Psychological",
-          "nameRu": "Психологическое",
+          "name_jp": "心理学",
+          "name_en": "Psychological",
+          "name_ru": "Психологическое",
           "title":  "",
         },
         {
           "genre_id": 33,
           "selected": false,
-          "nameJp": "武士",
-          "nameEn": "Samurai",
-          "nameRu": "Самураи",
+          "name_jp": "武士",
+          "name_en": "Samurai",
+          "name_ru": "Самураи",
           "title":  "",
         },
         {
           "genre_id": 34,
           "selected": false,
-          "nameJp": "素晴らしい",
-          "nameEn": "Sci-Fi",
-          "nameRu": "Фантастика",
+          "name_jp": "素晴らしい",
+          "name_en": "Sci-Fi",
+          "name_ru": "Фантастика",
           "title":  "",
         },
         {
           "genre_id": 35,
           "selected": false,
-          "nameJp": "日常生活",
-          "nameEn": "Slice of Life",
-          "nameRu": "Повседневность",
+          "name_jp": "日常生活",
+          "name_en": "Slice of Life",
+          "name_ru": "Повседневность",
           "title":  "",
         },
         {
           "genre_id": 36,
           "selected": false,
-          "nameJp": "スペース",
-          "nameEn": "Space",
-          "nameRu": "Космос",
+          "name_jp": "スペース",
+          "name_en": "Space",
+          "name_ru": "Космос",
           "title":  "",
         },
         {
           "genre_id": 37,
           "selected": false,
-          "nameJp": "スポーツ",
-          "nameEn": "Sports",
-          "nameRu": "Спорт",
+          "name_jp": "スポーツ",
+          "name_en": "Sports",
+          "name_ru": "Спорт",
           "title":  "",
         },
         {
           "genre_id": 38,
           "selected": false,
-          "nameJp": "スーパーパワー",
-          "nameEn": "Super Power",
-          "nameRu": "Супер силы",
+          "name_jp": "スーパーパワー",
+          "name_en": "Super Power",
+          "name_ru": "Супер силы",
           "title":  "",
         },
         {
           "genre_id": 39,
           "selected": false,
-          "nameJp": "超自然的",
-          "nameEn": "Supernatural",
-          "nameRu": "Сверхъестественное",
+          "name_jp": "超自然的",
+          "name_en": "Supernatural",
+          "name_ru": "Сверхъестественное",
           "title":  "",
         },
         {
           "genre_id": 40,
           "selected": false,
-          "nameJp": "吸血鬼",
-          "nameEn": "Vampire",
-          "nameRu": "Вампиры",
+          "name_jp": "吸血鬼",
+          "name_en": "Vampire",
+          "name_ru": "Вампиры",
           "title":  "",
         },
         {
           "genre_id": 41,
           "selected": false,
-          "nameJp": "スリラー",
-          "nameEn": "Thriller",
-          "nameRu": "Триллер",
+          "name_jp": "スリラー",
+          "name_en": "Thriller",
+          "name_ru": "Триллер",
           "title":  "",
         },
         {
           "genre_id": 42,
           "selected": false,
-          "nameJp": "変態",
-          "nameEn": "Hentai",
-          "nameRu": "Хентай",
+          "name_jp": "変態",
+          "name_en": "Hentai",
+          "name_ru": "Хентай",
           "title":  "",
         },
         {
           "genre_id": 43,
           "selected": false,
-          "nameJp": "やおい",
-          "nameEn": "Yaoi",
-          "nameRu": "Яой",
+          "name_jp": "やおい",
+          "name_en": "Yaoi",
+          "name_ru": "Яой",
           "title":  "",
         },
         {
           "genre_id": 44,
           "selected": false,
-          "nameJp": "百合",
-          "nameEn": "Yuri",
-          "nameRu": "Юри",
+          "name_jp": "百合",
+          "name_en": "Yuri",
+          "name_ru": "Юри",
           "title":  "",
         },
         {
           "genre_id": 45,
           "selected": false,
-          "nameJp": "ショタコン",
-          "nameEn": "Shotacon",
-          "nameRu": "Сётакон",
+          "name_jp": "ショタコン",
+          "name_en": "Shotacon",
+          "name_ru": "Сётакон",
           "title":  "",
         },
         {
           "genre_id": 46,
           "selected": false,
-          "nameJp": "特撮",
-          "nameEn": "Tokusatsu",
-          "nameRu": "Токусацу",
+          "name_jp": "特撮",
+          "name_en": "Tokusatsu",
+          "name_ru": "Токусацу",
           "title":  "",
         },
         {
           "genre_id": 47,
           "selected": false,
-          "nameJp": "黙示録を投稿する",
-          "nameEn": "Post apocalyptic",
-          "nameRu": "Пост апокалипсис",
+          "name_jp": "黙示録を投稿する",
+          "name_en": "Post apocalyptic",
+          "name_ru": "Пост апокалипсис",
           "title":  "",
         },
         {
           "genre_id": 48,
           "selected": false,
-          "nameJp": "スチームパンク",
-          "nameEn": "Steampunk",
-          "nameRu": "Стимпанк",
+          "name_jp": "スチームパンク",
+          "name_en": "Steampunk",
+          "name_ru": "Стимпанк",
           "title":  "",
         },
         {
           "genre_id": 49,
           "selected": false,
-          "nameJp": "オタク",
-          "nameEn": "Otaku",
-          "nameRu": "Откаку",
+          "name_jp": "オタク",
+          "name_en": "Otaku",
+          "name_ru": "Откаку",
           "title":  "",
         },
         {
           "genre_id": 50,
           "selected": false,
-          "nameJp": "魔法少女",
-          "nameEn": "Makho-shodze",
-          "nameRu": "Махо-сёдзе",
+          "name_jp": "魔法少女",
+          "name_en": "Makho-shodze",
+          "name_ru": "Махо-сёдзе",
           "title":  "",
         },
         {
           "genre_id": 51,
           "selected": false,
-          "nameJp": "サイバーパンク",
-          "nameEn": "Cyberpunk",
-          "nameRu": "Кибербанк",
+          "name_jp": "サイバーパンク",
+          "name_en": "Cyberpunk",
+          "name_ru": "Кибербанк",
           "title":  "",
         },
         {
           "genre_id": 52,
           "selected": false,
-          "nameJp": "幻の泥棒",
-          "nameEn": "Phantom thieves",
-          "nameRu": "Кайто",
+          "name_jp": "幻の泥棒",
+          "name_en": "Phantom thieves",
+          "name_ru": "Кайто",
           "title":  "",
         },
         {
           "genre_id": 53,
           "selected": false,
-          "nameJp": "郁二",
-          "nameEn": "Ikuji",
-          "nameRu": "Икудзи",
+          "name_jp": "郁二",
+          "name_en": "Ikuji",
+          "name_ru": "Икудзи",
           "title":  "",
         },
         {
           "genre_id": 54,
           "selected": false,
-          "nameJp": "アイドル",
-          "nameEn": "idol",
-          "nameRu": "Айдолы",
+          "name_jp": "アイドル",
+          "name_en": "idol",
+          "name_ru": "Айдолы",
           "title":  "",
         },
         {
           "genre_id": 55,
           "selected": false,
-          "nameJp": "女性 ",
-          "nameEn": "Josei",
-          "nameRu": "Дзёсэй",
+          "name_jp": "女性 ",
+          "name_en": "Josei",
+          "name_ru": "Дзёсэй",
           "title":  "",
         }
       ],
       ratings: [
         {
-          "rating_id": 1,
-          "selected":  false,
-          "name":      "G",
-          "title":     "Нет возрастных ограничений"
+          "rating_id":    1,
+          "selected":     false,
+          "name":         "G",
+          "title_jp":     "年齢制限なし",
+          "title_en":     "No age restrictions",
+          "title_ru":     "Нет возрастных ограничений",
         },
         {
-          "rating_id": 2,
-          "selected":  false,
-          "name":      "PG",
-          "title":     ""
+          "rating_id":    2,
+          "selected":     false,
+          "name":         "PG",
+          "title_jp":     "年齢制限はありませんが、両親の立ち会いをお勧めします",
+          "title_en":     "There is no age limit, but the presence of parents is recommended",
+          "title_ru":     "Нет возрастных ограничений, но рекомендуется присутствие родителей",
         },
         {
-          "rating_id": 3,
-          "selected":  false,
-          "name":      "PG-13",
-          "title":     ""
+          "rating_id":    3,
+          "selected":     false,
+          "name":         "PG-13",
+          "title_jp":     "13 歳未満の子供には視聴は望ましくありません",
+          "title_en":     "Viewing is not desirable for children under 13",
+          "title_ru":     "Детям до 13 лет просмотр не желателен",
         },
         {
-          "rating_id": 4,
-          "selected":  false,
-          "name":      "PG-13",
-          "title":     ""
+          "rating_id":   5,
+          "selected":    false,
+          "name":        "R-17",
+          "title_jp":     "17 歳未満の方はご両親とのみ視聴できます",
+          "title_en":     "Persons under the age of 17 are allowed to watch only with their parents",
+          "title_ru":     "Лицам не достигшим 17 летия разрешен просмотр только с родителями",
         },
         {
-          "rating_id": 5,
-          "selected":  false,
-          "name":      "R-17",
-          "title":     ""
+          "rating_id":    6,
+          "selected":     false,
+          "name":         "R+",
+          "title_jp":     "17 歳未満の方は閲覧を禁止されています",
+          "title_en":     "Persons under the age of 17 are prohibited from viewing",
+          "title_ru":     "Лицам не достигшим 17 летия просмотр запрещен",
         },
         {
-          "rating_id": 6,
-          "selected":  false,
-          "name":      "R+",
-          "title":     ""
-        },
-        {
-          "rating_id": 7,
-          "selected":  false,
-          "name":      "RX",
-          "title":     ""
+          "rating_id":   7,
+          "selected":    false,
+          "name":        "RX",
+          "title_jp":     "",
+          "title_en":     "18+ content",
+          "title_ru":     "18+ контент",
         },
       ],
       durations: [
         {
           "duration_id": 1,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "до 6 минут",
+          "name_jp":  "最大6分",
+          "name_en":  "Up to 6 minutes",
+          "name_ru":  "До 6 минут",
         },
         {
           "duration_id": 2,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "до 14 минут",
+          "name_jp":  "最大14分",
+          "name_en":  "Up to 14 minutes",
+          "name_ru":  "До 14 минут",
         },
         {
           "duration_id": 3,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "до 30 минут",
+          "name_jp":  "最大30分",
+          "name_en":  "Up to 30 minutes",
+          "name_ru":  "До 30 минут",
         },
         {
           "duration_id": 4,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "более 30 минут",
+          "name_jp":  "30分以上\n",
+          "name_en":  "More than 30 minutes",
+          "name_ru":  "Более 30 минут",
         },
       ],
       seasons:   [
         {
           "season_id": 1,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "Зима",
+          "name_jp":  "冬",
+          "name_en":  "Winter",
+          "name_ru":  "Зима",
         },
         {
           "season_id": 2,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "Весна",
+          "name_jp":  "バネ",
+          "name_en":  "Spring",
+          "name_ru":  "Весна",
         },
         {
           "season_id": 3,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "Лето",
+          "name_jp":  "夏",
+          "name_en":  "Summer",
+          "name_ru":  "Лето",
         },
         {
           "season_id": 4,
           "selected": false,
-          "nameJp":  "",
-          "nameEn":  "",
-          "nameRu":  "Осень",
+          "name_jp":  "秋",
+          "name_en":  "Autumn",
+          "name_ru":  "Осень",
         },
       ],
       selectedStatus:    "",
