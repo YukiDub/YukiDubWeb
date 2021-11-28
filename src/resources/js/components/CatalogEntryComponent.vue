@@ -2,6 +2,9 @@
   <div class="col catalog-entry" v-on:click="active = !active" v-bind:class="{active: active}">
     <div class="poster-container">
       <img class="poster" :src="poster_url" alt="poster">
+      <span class="score">
+        {{score}} <i class="bi bi-star-fill"></i>
+      </span>
     </div>
     <div class="hover">
       <div class="d-flex align-items-start flex-column" style="height: 212px;">
@@ -58,7 +61,7 @@ import {mapGetters} from 'vuex'
           type: [Array, undefined],
           default: undefined
         },
-        "rating":     {
+        "score":     {
           type: [Array, undefined],
           default: undefined
         }
@@ -128,5 +131,15 @@ import {mapGetters} from 'vuex'
   }
   .catalog-entry:hover .hover{
     display:block;
+  }
+  .catalog-entry > .poster-container> .score{
+    z-index: 99999;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: aliceblue;
+    padding: 0 2px 0 4px;
+    background: #1f2631;
+    font-size: 1rem;
   }
 </style>

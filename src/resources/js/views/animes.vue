@@ -29,6 +29,7 @@
               :status=     "anime.status"
               :studios=    "anime.studios"
               :route=      "{name: 'anime', params:{id: anime.id}}"
+              :score=      "anime.shiki_score"
           ></catalog-entry>
         </div>
         <loading v-else></loading>

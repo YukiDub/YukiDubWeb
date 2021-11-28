@@ -953,6 +953,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2078,6 +2079,7 @@ var render = function () {
                       status: anime.status,
                       studios: anime.studios,
                       route: { name: "anime", params: { id: anime.id } },
+                      score: anime.shiki_score,
                     },
                   })
                 }),

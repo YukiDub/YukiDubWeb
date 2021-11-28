@@ -79,6 +79,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
@@ -289,6 +290,7 @@ var render = function () {
                       status: anime.status,
                       studios: anime.studios,
                       route: { name: "anime", params: { id: anime.id } },
+                      score: anime.shiki_score,
                     },
                   })
                 }),
