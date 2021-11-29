@@ -41,7 +41,7 @@
            <h6 class="p-title"> Самая популярная выходящая манга</h6>
          </div>
          <div class="col-auto">
-           <button class="btn" type="button">Подробнее</button>
+           <button class="btn" type="button">{{$t('view more')}}</button>
          </div>
        </div>
        <div class="entry-list mb-4" style="height: 108px;">
@@ -55,7 +55,7 @@
            <h6 class="p-title"> Самое популярное выходящее ранобэ</h6>
          </div>
          <div class="col-auto">
-           <button class="btn" type="button">Подробнее</button>
+           <button class="btn" type="button">{{$t('view more')}}</button>
          </div>
        </div>
        <div class="entry-list mb-4" style="height: 108px;">
@@ -73,16 +73,19 @@
        <div class="col-3">
          <h6 class="p-title mb-4">Недавно вышедшие</h6>
          <div class="col-12">
-           <card-item
-               v-for=     "activityItem in activity"
-               v-bind:key= "activityItem.id"
-               :title=     "$t(activityItem.title)"
-               :text=      "activityItem.text"
-               :users=     "activityItem.users"
-           >
-           </card-item>
+           <card v-for="item in recentlyReleased" :key="item.id">
+             <template v-slot:header>
+               <p class="title">{{item.title}}</p>
+               <p class="font-weight-bold ">{{item.released}}</p>
+             </template>
+             <template v-slot:footer>
+               <a :href="item.url" class="title">
+                 Смотреть
+               </a>
+             </template>
+           </card>
            <div class="card ">
-             <a href="#">{{$t('all activity')}}</a>
+             <a href="#">{{$t('view more')}}</a>
            </div>
          </div>
        </div>
@@ -93,10 +96,12 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import slider from '../components/SliderComponent';
+import card from '../components/ItemCardComponent';
 export default {
   name: "index",
   components:{
-    slider
+    slider,
+    card
   },
 
   mounted() {
@@ -105,34 +110,13 @@ export default {
   data(){
     return {
       loading: true,
-      "activity": [
+      "recentlyReleased": [
         {
-          "title": "wrote comments",
-          "text":  "Re:Zero. Жизнь с нуля в альтернативном мире",
-          "users":[
-            {
-              "id": 1,
-              "name": "Admin",
-              "avatar_ul": "/assets/images/avatars/default.png"
-            },
-            {
-              "id": 2,
-              "name": "Test",
-              "avatar_ul": "/assets/images/avatars/default.png"
-            },
-          ]
-        },
-        {
-          "title": "watched anime",
-          "text":  "ToraDora!",
-          "users":[
-            {
-              "id": 1,
-              "name": "Admin",
-              "avatar_ul": "/assets/images/avatars/default.png"
-            },
-          ]
-        },
+          url: "#",
+          id:   2,
+          title: 'Обновление аниме: "Девочка, которая видит это"',
+          released: "Вышли новые эпизоды: 1, 2"
+        }
       ],
     }
   },

@@ -28,7 +28,6 @@ Vue.component('nav-bar', require('./components/NavigationBarComponent.vue').defa
 Vue.component('footer-component', require('./components/FooterComponent').default);
 Vue.component('page-header', require('./components/PageHeaderComponent').default);
 Vue.component('catalog-entry', require('./components/CatalogEntryComponent').default);
-Vue.component('card-item', require('./components/ItemCardComponent').default);
 Vue.component('loading', require('./components/LoadingComponent').default);
 
 /**
