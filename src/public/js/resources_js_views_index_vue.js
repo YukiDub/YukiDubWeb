@@ -48,10 +48,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SliderComponent",
   props: {
     animeList: Object
+  },
+  methods: {
+    scrollSliderLeft: function scrollSliderLeft(e) {
+      var slider = e.target.parentNode.parentNode;
+      slider.scrollLeft -= 1130;
+    },
+    scrollSliderRight: function scrollSliderRight(e) {
+      var slider = e.target.parentNode.parentNode;
+      slider.scrollLeft += 1130;
+    }
   }
 });
 
@@ -185,6 +203,11 @@ __webpack_require__.r(__webpack_exports__);
         id: 2,
         title: 'Обновление аниме: "Девочка, которая видит это"',
         released: "Вышли новые эпизоды: 1, 2"
+      }, {
+        url: "#",
+        id: 3,
+        title: 'Обновление аниме: "Восемьдесят шесть 2"',
+        released: "Вышли новые эпизоды: 9,10"
       }]
     };
   },
@@ -242,7 +265,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.slider{\n  display: flex;\n  justify-content: flex-start;\n  overflow-y: hidden;\n  gap: 12px;\n  padding-top: 8px;\n  padding-bottom: 16px;\n  white-space: nowrap;\n}\n.slider>.catalog-entry{\n  width: 12%;\n  flex: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.slider{\n  display: flex;\n  justify-content: flex-start;\n  overflow-y: hidden;\n  scroll-behavior: smooth;\n  gap: 12px;\n  padding-top: 8px;\n  padding-bottom: 16px;\n  white-space: nowrap;\n}\n.slider>.buttons{\n  font-size: 4rem;\n  color: aliceblue;\n}\n.slider>.buttons>div{\n  position: absolute;\n  background: rgb(66 71 85 / 80%);\n  border-radius: 50%;\n  top: 25%;\n  cursor: pointer;\n}\n.slider>.buttons>.left{\n  left: 0;\n}\n.slider>.buttons>.right{\n  right: 0;\n}\n.slider::-webkit-scrollbar {\n  height: 1.2em\n}\n.slider>.catalog-entry{\n  flex: none;\n}\n@media (max-width: 390px) {\n.slider>.catalog-entry{\n    width: 56%;\n}\n}\n@media (min-width: 391px) {\n.slider>.catalog-entry{\n    width: 35%;\n}\n}\n@media (min-width: 768px) {\n.slider>.catalog-entry{\n    width: 25%;\n}\n}\n@media (min-width: 992px) {\n.slider>.catalog-entry{\n    width: 18%;\n}\n}\n@media (min-width: 1200px) {\n.slider>.catalog-entry{\n    width: 12%;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -587,7 +610,28 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "slider" }, [_vm._t("items")], 2)
+  return _c(
+    "div",
+    { staticClass: "slider" },
+    [
+      _vm._t("items"),
+      _vm._v(" "),
+      _c("div", { staticClass: "buttons" }, [
+        _c(
+          "div",
+          { staticClass: "left", on: { click: _vm.scrollSliderLeft } },
+          [_vm._v("\n      <\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "right", on: { click: _vm.scrollSliderRight } },
+          [_vm._v("\n      >\n    ")]
+        ),
+      ]),
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
