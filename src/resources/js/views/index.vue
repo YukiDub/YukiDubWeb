@@ -62,15 +62,13 @@
          <p class="text-center">РАЗДЕЛ НАХОДИТСЯ В РАЗРАБОТКЕ</p>
        </div>
      </div>
-
-     <div class="row news">
-       <div class="col-9">
+     <div class="row">
+       <div class="col-12 col-lg-9 mb-4 mb-lg-0 news">
          <p class="p-title">Новости</p>
          <div class="entry-list" style="height: 400px">
-
          </div>
        </div>
-       <div class="col-3">
+       <div class="col-12 col-lg-3 order-1 order-lg-0 ">
          <h6 class="p-title mb-4">Недавно вышедшие</h6>
          <div class="col-12">
            <card v-for="item in recentlyReleased" :key="item.id">

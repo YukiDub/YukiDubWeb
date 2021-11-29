@@ -181,8 +181,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -745,10 +743,10 @@ var render = function () {
       _vm._m(4),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row news" }, [
+    _c("div", { staticClass: "row" }, [
       _vm._m(5),
       _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "col-12 col-lg-3 order-1 order-lg-0 " }, [
         _c("h6", { staticClass: "p-title mb-4" }, [_vm._v("Недавно вышедшие")]),
         _vm._v(" "),
         _c(
@@ -868,7 +866,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-9" }, [
+    return _c("div", { staticClass: "col-12 col-lg-9 mb-4 mb-lg-0 news" }, [
       _c("p", { staticClass: "p-title" }, [_vm._v("Новости")]),
       _vm._v(" "),
       _c("div", {
