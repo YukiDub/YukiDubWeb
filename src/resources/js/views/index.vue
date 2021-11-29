@@ -5,34 +5,18 @@
   -->
 
 <template>
-   <div class="row">
-     <div class="col-xs-12 col-md-4 order-2 order-md-1">
-       <h6 class="p-title mb-4">{{$tc('recent actions', activity.length)}}</h6>
-       <div class="col-12">
-         <card-item
-             v-for=     "activityItem in activity"
-             v-bind:key= "activityItem.id"
-             :title=     "$t(activityItem.title)"
-             :text=      "activityItem.text"
-             :users=     "activityItem.users"
-         >
-         </card-item>
-         <div class="card ">
-           <a href="#">{{$t('all activity')}}</a>
-         </div>
+   <div>
+     <div class="row mb-2 mt-sm-4 mt-md-0">
+       <div class="col-auto me-auto">
+         <h6 class="p-title">Сейчас на экранах</h6>
+       </div>
+       <div class="col-auto">
+         <router-link to="/animes?=что-то_там" class="btn" type="button">{{$t('view more')}}</router-link>
        </div>
      </div>
-     <div class="col order-1">
-       <div class="row mb-2 mt-sm-4 mt-md-0">
-         <div class="col-auto me-auto">
-           <h6 class="p-title">{{$t('anime') + " " + $t('with high rating')}}</h6>
-         </div>
-         <div class="col-auto">
-           <router-link to="/animes?=что-то_там" class="btn" type="button">{{$t('view more')}}</router-link>
-         </div>
-       </div>
-       <div class="entry-list ps-4 pe-4 pb-2">
-         <div v-if="!loading" class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3 mt-0">
+     <div class="entry-list ps-4 pe-4 pb-2">
+       <slider v-if="!loading">
+         <template v-slot:items>
            <catalog-entry
                v-for=       "anime in animeList"
                v-bind:key=  "anime.id"
@@ -45,31 +29,75 @@
                :studios=    "anime.studios"
                :route=      "{name: 'anime', params:{id: anime.id}}"
                :score=      "anime.shiki_score"
-           ></catalog-entry>
-         </div>
-         <loading v-else></loading>
-       </div>
+           />
+         </template>
+       </slider>
+       <loading v-else></loading>
+     </div>
 
+     <div class="manga-slider">
        <div class="row mb-2 mt-4">
          <div class="col-auto me-auto">
-           <h6 class="p-title"> Манга с самыми высокими оценками</h6>
+           <h6 class="p-title"> Самая популярная выходящая манга</h6>
          </div>
          <div class="col-auto">
            <button class="btn" type="button">Подробнее</button>
          </div>
        </div>
-       <div class="entry-list mb-2" style="height: 494px;">
+       <div class="entry-list mb-4" style="height: 108px;">
          <p class="text-center">РАЗДЕЛ НАХОДИТСЯ В РАЗРАБОТКЕ</p>
        </div>
+     </div>
 
+     <div class="ranobe-slider">
+       <div class="row mb-2 mt-4">
+         <div class="col-auto me-auto">
+           <h6 class="p-title"> Самое популярное выходящее ранобэ</h6>
+         </div>
+         <div class="col-auto">
+           <button class="btn" type="button">Подробнее</button>
+         </div>
+       </div>
+       <div class="entry-list mb-4" style="height: 108px;">
+         <p class="text-center">РАЗДЕЛ НАХОДИТСЯ В РАЗРАБОТКЕ</p>
+       </div>
+     </div>
+
+     <div class="row news">
+       <div class="col-9">
+         <p class="p-title">Новости</p>
+         <div class="entry-list" style="height: 400px">
+
+         </div>
+       </div>
+       <div class="col-3">
+         <h6 class="p-title mb-4">Недавно вышедшие</h6>
+         <div class="col-12">
+           <card-item
+               v-for=     "activityItem in activity"
+               v-bind:key= "activityItem.id"
+               :title=     "$t(activityItem.title)"
+               :text=      "activityItem.text"
+               :users=     "activityItem.users"
+           >
+           </card-item>
+           <div class="card ">
+             <a href="#">{{$t('all activity')}}</a>
+           </div>
+         </div>
+       </div>
      </div>
    </div>
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
+import slider from '../components/SliderComponent';
 export default {
   name: "index",
+  components:{
+    slider
+  },
 
   mounted() {
     this.loadAnimesList(1, 12)

@@ -52,6 +52,12 @@
           <div class="header-user-menu drop-menu">
             <router-link class="line" :to='{name: "userProfile", params: {name: getUserLogin.name}}'>Мой профиль</router-link>
             <a href="#" class="line">
+              Список аниме
+            </a>
+            <a href="#" class="line">
+              Список манги
+            </a>
+            <a href="#" class="line">
               Друзья
             </a>
             <a href="#" class="line">

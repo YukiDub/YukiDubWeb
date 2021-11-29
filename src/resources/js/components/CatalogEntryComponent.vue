@@ -7,7 +7,7 @@
       </span>
     </div>
     <div class="hover">
-      <div class="d-flex align-items-start flex-column" style="height: 212px;">
+      <div class="d-flex align-items-start flex-column">
         <p class="title" :title="fullName">{{slicedName}}</p>
         <p>
           {{$t('type')}} : <router-link class="tags" v-for="type in type" v-bind:key="type.id" :to="type.url">{{type.name}} </router-link> <br/>
@@ -62,7 +62,7 @@ import {mapGetters} from 'vuex'
           default: undefined
         },
         "score":     {
-          type: [Array, undefined],
+          type: [Number, undefined],
           default: undefined
         }
       },
@@ -95,6 +95,14 @@ import {mapGetters} from 'vuex'
     overflow: hidden;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 8px;
+  }
+  .catalog-entry >.hover>div>p{
+    white-space: initial;
+  }
+  .catalog-entry >.hover>.d-flex.align-items-start.flex-column{
+    height: 81%;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .catalog-entry > .poster-container> .poster{
     position: absolute;

@@ -5286,7 +5286,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": undefined
     },
     "score": {
-      type: [Array, undefined],
+      type: [Number, undefined],
       "default": undefined
     }
   },
@@ -5597,6 +5597,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11397,7 +11403,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.catalog-entry .hover .title {\n  font-size: medium;\n  font-weight: bold;\n  color: #FFFFFF;\n  margin-bottom: 0.8vh;\n}\n.catalog-entry > .poster-container{\n  position: relative;\n  padding-bottom: 157.25%;\n  height: 0;\n  overflow: hidden;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  border-radius: 8px;\n}\n.catalog-entry > .poster-container> .poster{\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-width: 0;\n  outline-width: 0;\n}\n.catalog-entry {\n  position:relative;\n}\n.catalog-entry .hover {\n  display:none;\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  padding: .8rem;\n  background: linear-gradient(to bottom, #101217, #1F232E);\n  opacity: 0.95;\n  box-shadow:0 5px 5px rgba(0,0,0,0.3);\n  font-size: small;\n  border-radius: 2.8%;\n}\n@media (max-width: 575px) {\n.catalog-entry:not(.active) .hover {\n    pointer-events: none;\n}\n}\n.catalog-entry:hover .hover{\n  display:block;\n}\n.catalog-entry > .poster-container> .score{\n  z-index: 99999;\n  position: absolute;\n  right: 0;\n  top: 0;\n  color: aliceblue;\n  padding: 0 2px 0 4px;\n  background: #1f2631;\n  font-size: 1rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.catalog-entry .hover .title {\n  font-size: medium;\n  font-weight: bold;\n  color: #FFFFFF;\n  margin-bottom: 0.8vh;\n}\n.catalog-entry > .poster-container{\n  position: relative;\n  padding-bottom: 157.25%;\n  height: 0;\n  overflow: hidden;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  border-radius: 8px;\n}\n.catalog-entry >.hover>div>p{\n  white-space: initial;\n}\n.catalog-entry >.hover>.d-flex.align-items-start.flex-column{\n  height: 81%;\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.catalog-entry > .poster-container> .poster{\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-width: 0;\n  outline-width: 0;\n}\n.catalog-entry {\n  position:relative;\n}\n.catalog-entry .hover {\n  display:none;\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  padding: .8rem;\n  background: linear-gradient(to bottom, #101217, #1F232E);\n  opacity: 0.95;\n  box-shadow:0 5px 5px rgba(0,0,0,0.3);\n  font-size: small;\n  border-radius: 2.8%;\n}\n@media (max-width: 575px) {\n.catalog-entry:not(.active) .hover {\n    pointer-events: none;\n}\n}\n.catalog-entry:hover .hover{\n  display:block;\n}\n.catalog-entry > .poster-container> .score{\n  z-index: 99999;\n  position: absolute;\n  right: 0;\n  top: 0;\n  color: aliceblue;\n  padding: 0 2px 0 4px;\n  background: #1f2631;\n  font-size: 1rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33150,76 +33156,69 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "hover" }, [
-        _c(
-          "div",
-          {
-            staticClass: "d-flex align-items-start flex-column",
-            staticStyle: { height: "212px" },
-          },
-          [
-            _c("p", { staticClass: "title", attrs: { title: _vm.fullName } }, [
-              _vm._v(_vm._s(_vm.slicedName)),
-            ]),
-            _vm._v(" "),
-            _c(
-              "p",
-              [
-                _vm._v("\n        " + _vm._s(_vm.$t("type")) + " : "),
-                _vm._l(_vm.type, function (type) {
-                  return _c(
-                    "router-link",
-                    {
-                      key: type.id,
-                      staticClass: "tags",
-                      attrs: { to: type.url },
-                    },
-                    [_vm._v(_vm._s(type.name) + " ")]
-                  )
-                }),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.studios ? _vm.$t("studios") + ": " : "") +
-                    " "
-                ),
-                _vm._l(_vm.studios, function (studio) {
-                  return _c(
-                    "router-link",
-                    { key: studio.id, staticClass: "tags", attrs: { to: "#" } },
-                    [_vm._v(_vm._s(studio.name) + " ")]
-                  )
-                }),
-                _vm._v(" "),
-                _vm.studios ? _c("br") : _vm._e(),
-                _vm._v("\n        " + _vm._s(_vm.$t("status")) + " : "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v(_vm._s(_vm.$t("status_list." + _vm.status))),
-                ]),
-                _c("br"),
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.genres ? _vm.$t("genres") + ":" : "") +
-                    " "
-                ),
-                _vm._l(_vm.genres, function (genre) {
-                  return _vm.genres
-                    ? _c(
-                        "router-link",
-                        {
-                          key: genre.id,
-                          staticClass: "tags",
-                          attrs: { to: genre.url },
-                        },
-                        [_vm._v(_vm._s(genre["name_" + _vm.getLocale]) + " ")]
-                      )
-                    : _vm._e()
-                }),
-              ],
-              2
-            ),
-          ]
-        ),
+        _c("div", { staticClass: "d-flex align-items-start flex-column" }, [
+          _c("p", { staticClass: "title", attrs: { title: _vm.fullName } }, [
+            _vm._v(_vm._s(_vm.slicedName)),
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            [
+              _vm._v("\n        " + _vm._s(_vm.$t("type")) + " : "),
+              _vm._l(_vm.type, function (type) {
+                return _c(
+                  "router-link",
+                  {
+                    key: type.id,
+                    staticClass: "tags",
+                    attrs: { to: type.url },
+                  },
+                  [_vm._v(_vm._s(type.name) + " ")]
+                )
+              }),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.studios ? _vm.$t("studios") + ": " : "") +
+                  " "
+              ),
+              _vm._l(_vm.studios, function (studio) {
+                return _c(
+                  "router-link",
+                  { key: studio.id, staticClass: "tags", attrs: { to: "#" } },
+                  [_vm._v(_vm._s(studio.name) + " ")]
+                )
+              }),
+              _vm._v(" "),
+              _vm.studios ? _c("br") : _vm._e(),
+              _vm._v("\n        " + _vm._s(_vm.$t("status")) + " : "),
+              _c("a", { attrs: { href: "#" } }, [
+                _vm._v(_vm._s(_vm.$t("status_list." + _vm.status))),
+              ]),
+              _c("br"),
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.genres ? _vm.$t("genres") + ":" : "") +
+                  " "
+              ),
+              _vm._l(_vm.genres, function (genre) {
+                return _vm.genres
+                  ? _c(
+                      "router-link",
+                      {
+                        key: genre.id,
+                        staticClass: "tags",
+                        attrs: { to: genre.url },
+                      },
+                      [_vm._v(_vm._s(genre["name_" + _vm.getLocale]) + " ")]
+                    )
+                  : _vm._e()
+              }),
+            ],
+            2
+          ),
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -33822,6 +33821,14 @@ var render = function () {
                     },
                     [_vm._v("Мой профиль")]
                   ),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "line", attrs: { href: "#" } }, [
+                    _vm._v("\n            Список аниме\n          "),
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "line", attrs: { href: "#" } }, [
+                    _vm._v("\n            Список манги\n          "),
+                  ]),
                   _vm._v(" "),
                   _c("a", { staticClass: "line", attrs: { href: "#" } }, [
                     _vm._v("\n            Друзья\n          "),
