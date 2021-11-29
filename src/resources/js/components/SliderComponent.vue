@@ -54,6 +54,9 @@ export default {
     border-radius: 50%;
     top: 25%;
     cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
   .slider>.buttons>.left{
     left: 0;
