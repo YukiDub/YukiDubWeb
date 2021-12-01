@@ -1,61 +1,61 @@
 <template>
-  <div class="profile" v-if="!loading">
-    <div class="row">
-      <div class="order-last order-lg-0 col-12 col-lg-2 header">
-        <div class="friends mb-3">
-          <div class="box-background">
-            <p class="text-center">Друзья</p>
+  <div class="profile">
+    <div class="header" v-if="!loading">
+      <div class="row">
+        <div class="order-last order-lg-0 col-12 col-lg-2 header">
+          <div class="friends mb-3">
+            <div class="box-background">
+              <p class="text-center">Друзья</p>
+            </div>
+            <div class="list empty" v-if="friends.length === 0">
+              <p>У пользователя пока что нет друзей</p>
+              <p><i class="bi bi-person-x-fill"></i></p>
+            </div>
+            <div v-else class="list">
+              <div class="friend" v-for="friend in friends.slice(0, 20)" :key="friend.id" :title="friend.name">
+                <img class="avatar" src="/assets/images/avatars/default.png" :alt="friend.name">
+                <div class="hover">
+                  <router-link :to="{name: 'userProfile', params: {name: friend.name}}" class="text">подробнее</router-link>
+                </div>
+              </div>
+            </div>
           </div>
-           <div class="list empty" v-if="friends.length === 0">
-             <p>У пользователя пока что нет друзей</p>
-             <p><i class="bi bi-person-x-fill"></i></p>
-           </div>
-           <div v-else class="list">
-             <div class="friend" v-for="friend in friends.slice(0, 20)" :key="friend.id" :title="friend.name">
-               <img class="avatar" src="/assets/images/avatars/default.png" :alt="friend.name">
-               <div class="hover">
-                 <router-link :to="{name: 'userProfile', params: {name: friend.name}}" class="text">подробнее</router-link>
-               </div>
-             </div>
-           </div>
+          <div class="communities mb-3">
+            <div class="box-background">
+              <p class="text-center">Сообщества</p>
+            </div>
+            <div class="list empty" v-if="community.length === 0">
+              <p>Пользователь ещё не вступал ни в одно из сообществ</p>
+              <p><i class="bi bi-x-lg"></i></p>
+            </div>
+          </div>
         </div>
-        <div class="communities mb-3">
-          <div class="box-background">
-            <p class="text-center">Сообщества</p>
-          </div>
-          <div class="list empty" v-if="community.length === 0">
-            <p>Пользователь ещё не вступал ни в одно из сообществ</p>
-            <p><i class="bi bi-x-lg"></i></p>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-12 col-lg-7 footer mb-4 mb-lg-0">
-        <div class="row">
-          <img :src="user.avatar_url" :alt="user.name" class="img-fluid avatar mx-auto mb-4">
-          <h1 class="user-name">{{user.name}}</h1>
-          <div class="status-block">
-            <p class="text-center m-0">Сейчас в сети </p>
-          </div>
-          <div class="buttons">
-            <a href="#" title="Друзья">
-              <i class="bi bi-people-fill"></i>
-            </a>
-            <a href="#" title="Сообщения">
-              <i class="bi bi-envelope"></i>
-            </a>
-            <a href="#" title="Настройки">
-              <i class="bi bi-gear-fill"></i>
-            </a>
+        <div class="col-12 col-lg-7 footer mb-4 mb-lg-0">
+          <div class="row">
+            <img :src="user.avatar_url" :alt="user.name" class="img-fluid avatar mx-auto mb-4">
+            <h1 class="user-name">{{user.name}}</h1>
+            <div class="status-block">
+              <p class="text-center m-0">Сейчас в сети </p>
+            </div>
+            <div class="buttons">
+              <a href="#" title="Друзья">
+                <i class="bi bi-people-fill"></i>
+              </a>
+              <a href="#" title="Сообщения">
+                <i class="bi bi-envelope"></i>
+              </a>
+              <a href="#" title="Настройки">
+                <i class="bi bi-gear-fill"></i>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-12 col-lg-3 history mb-4 mb-lg-0">
-        <div class="box-background">
-          <p class="text-center">История</p>
-        </div>
-        <div class="history-item" v-for="historyItem in history" :key="historyItem.id">
+        <div class="col-12 col-lg-3 history mb-4 mb-lg-0">
+          <div class="box-background">
+            <p class="text-center">История</p>
+          </div>
+          <div class="history-item" v-for="historyItem in history" :key="historyItem.id">
             <div class="col-3">
               <img :src="historyItem.image_url" :alt="historyItem.title">
             </div>
@@ -63,55 +63,66 @@
               <p class="title"> {{historyItem.title}} </p>
               <p class="action"> {{ historyItem.action }} </p>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="profile loading" v-else>
-    <div class="row">
-      <div class="order-last order-lg-0 col-12 col-lg-2 header">
-        <div class="friends mb-3">
-          <div class="box-background">
-            <p class="text-center">Друзья</p>
-          </div>
-          <div class="list">
-            <div class="friend" v-for="n in 22">
-              <div class="avatar"></div>
+    <div class="header loading" v-else>
+      <div class="row">
+        <div class="order-last order-lg-0 col-12 col-lg-2 header">
+          <div class="friends mb-3">
+            <div class="box-background">
+              <p class="text-center">Друзья</p>
             </div>
+            <div class="list">
+              <div class="friend" v-for="n in 22">
+                <div class="avatar"></div>
+              </div>
+
+            </div>
+          </div>
+          <div class="communities mb-3">
+            <div class="box-background">
+              <p class="text-center">Сообщества</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-7 footer mb-4 mb-lg-0">
+          <div class="row">
+            <div class="mx-auto mb-4 avatar"></div>
+            <h1 class="user-name">идет загрузка</h1>
+            <p class="text-center">идет загрузка <i class="bi bi-check"></i></p>
+            <div class="buttons">
+              <a href="#" title="Друзья">
+                <i class="bi bi-people-fill"></i>
+              </a>
+              <a href="#" title="Сообщения">
+                <i class="bi bi-envelope"></i>
+              </a>
+              <a href="#" title="Настройки">
+                <i class="bi bi-gear-fill"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3 history mb-4 mb-lg-0">
+          <div class="box-background">
+            <p class="text-center">История</p>
+          </div>
+          <div class="history-item" v-for="i in 3"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="stats row">
+        <div class="col-7">
+          <div class="graph">
 
           </div>
         </div>
-        <div class="communities mb-3">
-          <div class="box-background">
-            <p class="text-center">Сообщества</p>
-          </div>
-        </div>
       </div>
-      <div class="col-12 col-lg-7 footer mb-4 mb-lg-0">
-        <div class="row">
-          <div class="mx-auto mb-4 avatar"></div>
-          <h1 class="user-name">идет загрузка</h1>
-          <p class="text-center">идет загрузка <i class="bi bi-check"></i></p>
-          <div class="buttons">
-            <a href="#" title="Друзья">
-              <i class="bi bi-people-fill"></i>
-            </a>
-            <a href="#" title="Сообщения">
-              <i class="bi bi-envelope"></i>
-            </a>
-            <a href="#" title="Настройки">
-              <i class="bi bi-gear-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-3 history mb-4 mb-lg-0">
-        <div class="box-background">
-          <p class="text-center">История</p>
-        </div>
-        <div class="history-item" v-for="i in 3"></div>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -271,35 +282,48 @@ export default {
 </script>
 
 <style scoped>
-.profile{
+.graph>.background>.line{
+  height: 0.1rem;
+  width: 100%;
+  background: aliceblue;
+  margin-bottom: 2rem;
+  text-align: end;
+}
+.graph>.lines{
+  position: relative;
+  left: -10px;
+  top: -160px;
+}
+.profile>.header{
   background: #424755;
   border-radius: 24px;
   padding: 2rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.21);
+  margin-bottom: 2.6rem;
 }
-.profile>.row>.header>.friends>.list.empty,
-.profile>.row>.header>.communities>.list.empty{
+.profile>.header>.row>.header>.friends>.list.empty,
+.profile>.header>.row>.header>.communities>.list.empty{
   text-align: center;
 }
-.profile>.row>.header>.friends>.list{
+.profile>.header>.row>.header>.friends>.list{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   height: 8rem;
   overflow: hidden;
 }
-.profile>.row>.header>.friends>.list > .friend > .avatar{
+.profile>.header>.row>.header>.friends>.list > .friend > .avatar{
   flex: 1 1 auto;
   margin: 0 1px 2px 2px;
   width: 3.66rem;
 }
-.profile>.row>.header>.friends>.list > .friend{
+.profile>.header>.row>.header>.friends>.list > .friend{
   position: relative;
 }
-.profile>.row>.header>.friends>.list > .friend:hover .hover{
+.profile>.header>.row>.header>.friends>.list > .friend:hover .hover{
   display: block;
 }
-.profile>.row>.header>.friends>.list > .friend > .hover{
+.profile>.header>.row>.header>.friends>.list > .friend > .hover{
   display: none;
   position: absolute;
   left: 1px;
@@ -313,18 +337,18 @@ export default {
   border-radius: 70%;
   opacity: 86%;
 }
-.profile>.row>.header>.friends>.list > .friend > .hover > .text{
+.profile>.header>.row>.header>.friends>.list > .friend > .hover > .text{
   text-align: center;
   color: #FFFFFF;
   position: relative;
   top: 38%;
   left: 8%;
 }
-.profile>.row>.footer>.row>.avatar{
+.profile>.header>.row>.footer>.row>.avatar{
   height: 112px;
   width: 132px;
 }
-.profile>.row>.footer>.row>.status-block{
+.profile>.header>.row>.footer>.row>.status-block{
   width: 32%;
   margin-left: 34%;
   margin-bottom: 1.4rem;
@@ -333,22 +357,22 @@ export default {
   background: #353944;
   border-radius: 76px;
 }
-.profile>.row>.footer>.row>.buttons{
+.profile>.header>.row>.footer>.row>.buttons{
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.profile>.row>.footer>.row>.buttons > a{
+.profile>.header>.row>.footer>.row>.buttons > a{
   margin-right: 1rem;
 }
-.profile>.row>.footer>.row>.buttons > a > i{
+.profile>.header>.row>.footer>.row>.buttons > a > i{
   font-size: 1.6rem;
   color: #afafaf;
 }
-.profile>.row>.footer>.row>.buttons > a > i:hover{
+.profile>.header>.row>.footer>.row>.buttons > a > i:hover{
   color: #22acf2;
 }
-.profile>.row>.footer>.row>.user-name{
+.profile>.header>.row>.footer>.row>.user-name{
   text-align: center;
   font-style: normal;
   font-weight: bold;
@@ -380,7 +404,7 @@ export default {
   font-weight: 600;
   margin: 0;
 }
-.profile.loading>.row>.header>.friends>.list>.friend>.avatar{
+.profile>.header.loading>.row>.header>.friends>.list>.friend>.avatar{
   background: #363944;
   box-shadow: 0 -200px 100px -120px #1f2631 inset;
   border-radius: 50%;
@@ -388,7 +412,7 @@ export default {
   height: 62px;
   width: 62px;
 }
-.profile.loading>.row>.footer>.row>.avatar{
+.profile>.header.loading>.row>.footer>.row>.avatar{
   background: #363944;
   box-shadow: 0 -200px 100px -120px #1f2631 inset;
   border-radius: 50%;
@@ -396,7 +420,7 @@ export default {
   height: 107px;
   width: 107px;
 }
-.profile.loading>.row>.history>.history-item{
+.profile>.header.loading>.row>.history>.history-item{
   background: #363944;
   box-shadow: 0 -200px 100px -120px #1f2631 inset;
   animation: loading 3s infinite alternate;

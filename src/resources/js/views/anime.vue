@@ -12,10 +12,10 @@
         <div class="row-information">
           <div class="warp-poster">
             <div class="poster mx-auto" v-bind:style="{ 'background-image': 'url(' + animeItem.poster.original + ')' }"></div>
-            <div class="gap-2 d-flex justify-content-center pb-2">
-              <div class="btn" title="редактировать" v-on:click="selectedComponent = editorComponent"><i class="bi bi-gear-fill"></i></div>
-              <div class="btn" title="добавить в избранное"><i class="bi bi-bookmark-star-fill"></i></div>
-              <div class="btn">{{$t('watch')}}</div>
+            <div class="buttons gap-2 d-flex justify-content-center pb-2">
+              <div class="btn edit" title="редактировать" v-on:click="selectedComponent = editorComponent"><i class="bi bi-gear-fill"></i></div>
+              <div class="btn favoured" v-bind:class="{selected: animeItem.anime_favoured}" title="добавить в избранное"><i class="bi bi-bookmark-star-fill"></i></div>
+              <div class="btn watch">{{$t('watch')}}</div>
             </div>
           </div>
           <div class="right-block">
@@ -23,6 +23,7 @@
             <div class="row mb-2 mt-sm-4 mt-md-0">
               <div class="col-auto">
                   <p>
+                    <span>Японское название: {{animeItem.name_jp}} <br/></span>
                     {{$t('type')}}: <a href="#" v-for="typeItem in animeItem.type" v-bind:class="'tags'">{{typeItem.name}} </a><br/>
                     {{$t('status')}}: <a href="#"></a>{{$t('status_list.' + animeItem.status)}}<br>
                     <span v-if="animeItem.studios">Студия: <a href="#" v-for="studioItem in animeItem.studios">{{studioItem.name}} </a> <br/></span>
@@ -37,6 +38,7 @@
                     <span v-if="animeItem.aired_on">Дата начала премьеры: {{new Date(animeItem.aired_on).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric'})}}<br/></span>
                     <span v-if="animeItem.released_on">Дата выхода: {{new Date(animeItem.released_on).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric'})}}<br/></span>
                     <span v-if="animeItem.shiki_score">Оценка на MyAnimeList: {{animeItem.shiki_score}} <br/></span>
+                    <span>Оценка на Yuki: {{animeItem.score_info.rating}} <br/></span>
                   </p>
               </div>
               <div class="col-auto rating mx-auto my-auto">
@@ -158,7 +160,7 @@ export default {
 .anime>.content-header>.cover {
   position: absolute;
   width: 100%;
-  height: 630px;
+  height: 688px;
   opacity: 0.1;
   left: 0;
   top: 72px;
@@ -245,6 +247,9 @@ export default {
   border-radius: 4px;
   margin-bottom: 15px;
   cursor: pointer;
+}
+.anime>.content-header>.row-container>.row-information>.warp-poster>.buttons>.btn.favoured.selected{
+  color: #3490dc;
 }
 @media(max-width:769.98px) {
   .anime>.content-header>.row-container>.row-information>.warp-poster>.poster{

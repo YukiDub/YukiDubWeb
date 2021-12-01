@@ -54,6 +54,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 .modal {
   background: #353944;
@@ -89,5 +90,6 @@ export default {
   position: relative;
   padding: 20px 10px;
   background: #353944;
+  height: 80%;
 }
 </style>

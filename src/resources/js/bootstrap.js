@@ -7,9 +7,7 @@ require('bootstrap-icons/font/bootstrap-icons.scss')
  */
 
 try {
-    window.Popper = require('@popperjs/core').default;
-
-    require('bootstrap');
+    require('./bootstrap5/index.esm');
 } catch (e) {}
 
 /**
