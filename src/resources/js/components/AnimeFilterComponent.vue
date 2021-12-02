@@ -21,7 +21,9 @@
           <div class="chek-box-list">
             <ul>
               <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu" v-bind:class="{selected: statusItem.selected }">
-                <label><input type="checkbox" v-model="statusItem.selected">{{statusItem['name_' + getLocale]}}</label>
+                <label>
+                  <input type="checkbox" v-model="statusItem.selected"><span>{{statusItem['name_' + getLocale]}}</span>
+                </label>
               </li>
             </ul>
           </div>
@@ -37,7 +39,7 @@
           <div class="chek-box-list">
             <ul>
               <li v-for="type in types" :key="type.id" :title="type.nameEn" v-bind:class="{selected: type.selected }">
-                <label><input type="checkbox" v-model="type.selected">{{type['name_' + getLocale]}}</label>
+                <label><input type="checkbox" v-model="type.selected"><span>{{type['name_' + getLocale]}}</span></label>
               </li>
             </ul>
           </div>
@@ -53,7 +55,7 @@
           <div class="chek-box-list">
             <ul>
               <li data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title" v-bind:class="{selected: genre.selected }">
-                <label><input type="checkbox" v-model="genre.selected">{{genre['name_' + getLocale]}}</label>
+                <label><input type="checkbox" v-model="genre.selected"><span>{{genre['name_' + getLocale]}}</span></label>
               </li>
             </ul>
           </div>
@@ -69,7 +71,7 @@
           <div class="chek-box-list">
             <ul>
               <li v-for="rating in ratings" :key="rating.rating_id" :title="rating['title_' + getLocale]" v-bind:class="{selected: rating.selected }">
-                <label><input type="checkbox" v-model="rating.selected">{{rating.name}}</label>
+                <label><input type="checkbox" v-model="rating.selected"><span>{{rating.name}}</span></label>
               </li>
             </ul>
           </div>
@@ -86,7 +88,7 @@
             <ul>
               <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title" v-bind:class="{selected: duration.selected }">
                 <label>
-                  <input type="checkbox" v-model="duration.selected">{{duration['name_' + getLocale]}}
+                  <input type="checkbox" v-model="duration.selected"><span>{{duration['name_' + getLocale]}}</span>
                 </label>
               </li>
             </ul>
@@ -104,7 +106,7 @@
             <ul>
               <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu" v-bind:class="{selected: season.selected }">
                 <label>
-                  <input type="checkbox" v-model="season.selected">{{season['name_' + getLocale]}}
+                  <input type="checkbox" v-model="season.selected"><span>{{season['name_' + getLocale]}}</span>
                 </label>
               </li>
             </ul>
@@ -121,19 +123,19 @@
           <div class="chek-box-list">
             <ul>
               <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"> 8+
+                <input autocomplete="off" type="checkbox"><span>8+</span>
               </li>
               <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  7+
+                <input autocomplete="off" type="checkbox"><span>7+</span>
               </li>
               <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  6+
+                <input autocomplete="off" type="checkbox"><span>6+</span>
               </li>
               <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  5+
+                <input autocomplete="off" type="checkbox"><span>5+</span>
               </li>
               <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox">  <5
+                <input autocomplete="off" type="checkbox"><span><5</span>
               </li>
             </ul>
           </div>
@@ -149,16 +151,16 @@
           <div class="chek-box-list">
             <ul>
               <li data-field="status">
-                <input autocomplete="off" type="checkbox"> {{$t('completed')}}
+                <input autocomplete="off" type="checkbox"><span>{{$t('completed')}}</span>
               </li>
               <li data-field="status">
-                <input autocomplete="off" type="checkbox">  {{$t('plan to watch')}}
+                <input autocomplete="off" type="checkbox"><span>{{$t('plan to watch')}}</span>
               </li>
               <li data-field="status">
-                <input autocomplete="off" type="checkbox">  {{$t('dropped')}}
+                <input autocomplete="off" type="checkbox"><span>{{$t('dropped')}}</span>
               </li>
               <li data-field="status">
-                <input autocomplete="off" type="checkbox">  {{$t('on-hold')}}
+                <input autocomplete="off" type="checkbox"><span>{{$t('on-hold')}}</span>
               </li>
             </ul>
           </div>
@@ -1071,6 +1073,11 @@ export default {
   border-radius: 7px;
   padding: 0.2rem;
 }
+@media (min-width: 991px) {
+  .selector-block .selector .chek-box-list ul li label > span{
+    margin-left: 4px;
+  }
+}
 /* Small devices (landscape phones, 991px and up) */
 @media (max-width: 991px) {
   .filter-block .filter {
@@ -1096,8 +1103,8 @@ export default {
     white-space: pre;
     overflow: inherit;
     display: inline;
-    padding-top: 19px;
-    margin: 8px;
+    padding: 8px 12px 8px;
+    margin: 0 4px;
     text-align:center;
   }
   .selector > .chek-box-list > ul > li > label > input {

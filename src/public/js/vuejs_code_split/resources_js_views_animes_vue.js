@@ -216,6 +216,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AnimeFilterComponent",
@@ -1043,7 +1045,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.filter[data-v-7b3df9bc]{\n    background: #424755;\n    border-radius: 14px;\n    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n    padding: .8rem;\n}\n.filter > .selector-block[data-v-7b3df9bc]{\n    box-sizing: border-box;\n    margin-bottom: 20px;\n}\n.selector > .chek-box-list > ul > li.selected[data-v-7b3df9bc] {\n    background: #3490dc;\n    border-radius: 0.4rem;\n}\n.selector-block > .selector > .placeholder[data-v-7b3df9bc]{\n    cursor: inherit;\n    box-sizing: border-box;\n    padding: 10px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    justify-content: space-between;\n    display: flex;\n    align-items: center;\n    background: #424755;\n}\n.selector-block > .selector.cursor-drop > .placeholder[data-v-7b3df9bc]{\n    cursor: pointer;\n}\n.selector-block > .selector > .placeholder >.selected[data-v-7b3df9bc]{\n    color: #FFFFFF;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    flex: 0 0 6px;\n    margin-right: 6.5px;\n    transition: transform .2s;\n    transform: rotate(270deg);\n}\n.selector-block > .selector.open > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    transform: rotate(179deg);\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon > svg[data-v-7b3df9bc]{\n    color: black;\n}\n.selector-block > .selector > .drop-options[data-v-7b3df9bc]{\n    display: none;\n    font-size: 14px;\n    box-sizing: border-box;\n    left: 0;\n    position: inherit;\n    background-color: #424755;\n    width: 100%;\n    z-index: 20;\n    overflow-y: auto;\n    max-height: 200px;\n    border-radius: 0 0 14px 14px;\n    transform: scale(1);\n}\n.selector-block > .selector.open > .drop-options[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block > .selector > .drop-options > .item[data-v-7b3df9bc]{\n    font-size: 14px;\n    box-sizing: border-box;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-bottom: 1px solid rgba(61,64,74,.4);\n    padding: 12px 15px;\n    color: #fff;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 20.34px;\n  margin: 1px 0 2px;\n  padding: 1px 3px 0;\n}\n.selector-block .selector .chek-box-list ul li label[data-v-7b3df9bc]{\n  width: 100%;\n}\n.selector-block .selector .chek-box-list ul[data-v-7b3df9bc]{\n  margin-left: 2px;\n  padding-left: 2px;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n  background: #009BEB;\n  height: 7vh;\n  display: none;\n}\n.filter-block > .filter > .footer[data-v-7b3df9bc]{\n  display: none;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n  padding-left: 1rem;\n  padding-right: 1rem;\n  padding-top: 2.2vh;\n}\n.filter-block > .body > .row > .col-auto > .button[data-v-7b3df9bc]{\n  height: 100%;\n  background: #dfdfe0;\n  border-radius: 7px;\n  padding: 0.2rem;\n}\n/* Small devices (landscape phones, 991px and up) */\n@media (max-width: 991px) {\n.filter-block .filter[data-v-7b3df9bc] {\n    border-radius: 0;\n    height: 100vh;\n    height: 95%;\n    padding-bottom: 2rem;\n    overflow-y: auto;\n    overflow-x: hidden;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n    display: block;\n}\n.filter-block > .filter > .footer[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block .selector .chek-box-list[data-v-7b3df9bc]{\n    overflow-x: auto;\n    overflow-y: hidden;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n    font-size: 17px;\n    white-space: pre;\n    overflow: inherit;\n    display: inline;\n    padding-top: 19px;\n    margin: 8px;\n    text-align:center;\n}\n.selector > .chek-box-list > ul > li > label > input[data-v-7b3df9bc] {\n    display: none;\n}\n.selector > .chek-box-list > ul[data-v-7b3df9bc]{\n    display:flex;\n    list-style:none;\n}\n.filter-block[data-v-7b3df9bc]{\n    position: fixed;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 1000;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.filter[data-v-7b3df9bc]{\n    background: #424755;\n    border-radius: 14px;\n    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n    padding: .8rem;\n}\n.filter > .selector-block[data-v-7b3df9bc]{\n    box-sizing: border-box;\n    margin-bottom: 20px;\n}\n.selector > .chek-box-list > ul > li.selected[data-v-7b3df9bc] {\n    background: #3490dc;\n    border-radius: 0.4rem;\n}\n.selector-block > .selector > .placeholder[data-v-7b3df9bc]{\n    cursor: inherit;\n    box-sizing: border-box;\n    padding: 10px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    justify-content: space-between;\n    display: flex;\n    align-items: center;\n    background: #424755;\n}\n.selector-block > .selector.cursor-drop > .placeholder[data-v-7b3df9bc]{\n    cursor: pointer;\n}\n.selector-block > .selector > .placeholder >.selected[data-v-7b3df9bc]{\n    color: #FFFFFF;\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    font-size: 14px;\n    font-weight: 400;\n    font-stretch: normal;\n    font-style: normal;\n    line-height: 1.43;\n    letter-spacing: normal;\n    box-sizing: border-box;\n    flex: 0 0 6px;\n    margin-right: 6.5px;\n    transition: transform .2s;\n    transform: rotate(270deg);\n}\n.selector-block > .selector.open > .placeholder >.icon-inline.dropdown-icon[data-v-7b3df9bc]{\n    transform: rotate(179deg);\n}\n.selector-block > .selector > .placeholder >.icon-inline.dropdown-icon > svg[data-v-7b3df9bc]{\n    color: black;\n}\n.selector-block > .selector > .drop-options[data-v-7b3df9bc]{\n    display: none;\n    font-size: 14px;\n    box-sizing: border-box;\n    left: 0;\n    position: inherit;\n    background-color: #424755;\n    width: 100%;\n    z-index: 20;\n    overflow-y: auto;\n    max-height: 200px;\n    border-radius: 0 0 14px 14px;\n    transform: scale(1);\n}\n.selector-block > .selector.open > .drop-options[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block > .selector > .drop-options > .item[data-v-7b3df9bc]{\n    font-size: 14px;\n    box-sizing: border-box;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-bottom: 1px solid rgba(61,64,74,.4);\n    padding: 12px 15px;\n    color: #fff;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: #FFFFFF;\n  font-size: 12px;\n  line-height: 20.34px;\n  margin: 1px 0 2px;\n  padding: 1px 3px 0;\n}\n.selector-block .selector .chek-box-list ul li label[data-v-7b3df9bc]{\n  width: 100%;\n}\n.selector-block .selector .chek-box-list ul[data-v-7b3df9bc]{\n  margin-left: 2px;\n  padding-left: 2px;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n  background: #009BEB;\n  height: 7vh;\n  display: none;\n}\n.filter-block > .filter > .footer[data-v-7b3df9bc]{\n  display: none;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n  padding-left: 1rem;\n  padding-right: 1rem;\n  padding-top: 2.2vh;\n}\n.filter-block > .body > .row > .col-auto > .button[data-v-7b3df9bc]{\n  height: 100%;\n  background: #dfdfe0;\n  border-radius: 7px;\n  padding: 0.2rem;\n}\n@media (min-width: 991px) {\n.selector-block .selector .chek-box-list ul li label > span[data-v-7b3df9bc]{\n    margin-left: 4px;\n}\n}\n/* Small devices (landscape phones, 991px and up) */\n@media (max-width: 991px) {\n.filter-block .filter[data-v-7b3df9bc] {\n    border-radius: 0;\n    height: 100vh;\n    height: 95%;\n    padding-bottom: 2rem;\n    overflow-y: auto;\n    overflow-x: hidden;\n}\n.filter-block > .body[data-v-7b3df9bc]{\n    display: block;\n}\n.filter-block > .filter > .footer[data-v-7b3df9bc]{\n    display: block;\n}\n.selector-block .selector .chek-box-list[data-v-7b3df9bc]{\n    overflow-x: auto;\n    overflow-y: hidden;\n}\n.selector-block .selector .chek-box-list ul li[data-v-7b3df9bc]{\n    font-size: 17px;\n    white-space: pre;\n    overflow: inherit;\n    display: inline;\n    padding: 8px 12px 8px;\n    margin: 0 4px;\n    text-align:center;\n}\n.selector > .chek-box-list > ul > li > label > input[data-v-7b3df9bc] {\n    display: none;\n}\n.selector > .chek-box-list > ul[data-v-7b3df9bc]{\n    display:flex;\n    list-style:none;\n}\n.filter-block[data-v-7b3df9bc]{\n    position: fixed;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 1000;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1404,7 +1406,9 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(_vm._s(statusItem["name_" + _vm.getLocale])),
+                      _c("span", [
+                        _vm._v(_vm._s(statusItem["name_" + _vm.getLocale])),
+                      ]),
                     ]),
                   ]
                 )
@@ -1476,7 +1480,9 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(_vm._s(type["name_" + _vm.getLocale])),
+                      _c("span", [
+                        _vm._v(_vm._s(type["name_" + _vm.getLocale])),
+                      ]),
                     ]),
                   ]
                 )
@@ -1548,7 +1554,9 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(_vm._s(genre["name_" + _vm.getLocale])),
+                      _c("span", [
+                        _vm._v(_vm._s(genre["name_" + _vm.getLocale])),
+                      ]),
                     ]),
                   ]
                 )
@@ -1624,7 +1632,7 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(_vm._s(rating.name)),
+                      _c("span", [_vm._v(_vm._s(rating.name))]),
                     ]),
                   ]
                 )
@@ -1700,10 +1708,9 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(
-                        _vm._s(duration["name_" + _vm.getLocale]) +
-                          "\n              "
-                      ),
+                      _c("span", [
+                        _vm._v(_vm._s(duration["name_" + _vm.getLocale])),
+                      ]),
                     ]),
                   ]
                 )
@@ -1779,10 +1786,9 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(
-                        _vm._s(season["name_" + _vm.getLocale]) +
-                          "\n              "
-                      ),
+                      _c("span", [
+                        _vm._v(_vm._s(season["name_" + _vm.getLocale])),
+                      ]),
                     ]),
                   ]
                 )
@@ -1819,30 +1825,28 @@ var render = function () {
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v(" " + _vm._s(_vm.$t("completed")) + "\n            "),
+                _c("span", [_vm._v(_vm._s(_vm.$t("completed")))]),
               ]),
               _vm._v(" "),
               _c("li", { attrs: { "data-field": "status" } }, [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v(
-                  "  " + _vm._s(_vm.$t("plan to watch")) + "\n            "
-                ),
+                _c("span", [_vm._v(_vm._s(_vm.$t("plan to watch")))]),
               ]),
               _vm._v(" "),
               _c("li", { attrs: { "data-field": "status" } }, [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  " + _vm._s(_vm.$t("dropped")) + "\n            "),
+                _c("span", [_vm._v(_vm._s(_vm.$t("dropped")))]),
               ]),
               _vm._v(" "),
               _c("li", { attrs: { "data-field": "status" } }, [
                 _c("input", {
                   attrs: { autocomplete: "off", type: "checkbox" },
                 }),
-                _vm._v("  " + _vm._s(_vm.$t("on-hold")) + "\n            "),
+                _c("span", [_vm._v(_vm._s(_vm.$t("on-hold")))]),
               ]),
             ]),
           ]),
@@ -1914,27 +1918,27 @@ var staticRenderFns = [
       _c("ul", [
         _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
           _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
-          _vm._v(" 8+\n            "),
+          _c("span", [_vm._v("8+")]),
         ]),
         _vm._v(" "),
         _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
           _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
-          _vm._v("  7+\n            "),
+          _c("span", [_vm._v("7+")]),
         ]),
         _vm._v(" "),
         _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
           _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
-          _vm._v("  6+\n            "),
+          _c("span", [_vm._v("6+")]),
         ]),
         _vm._v(" "),
         _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
           _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
-          _vm._v("  5+\n            "),
+          _c("span", [_vm._v("5+")]),
         ]),
         _vm._v(" "),
         _c("li", { attrs: { "data-field": "status", "data-value": "anons" } }, [
           _c("input", { attrs: { autocomplete: "off", type: "checkbox" } }),
-          _vm._v("  <5\n            "),
+          _c("span", [_vm._v("<5")]),
         ]),
       ]),
     ])
