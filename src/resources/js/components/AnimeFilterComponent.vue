@@ -21,9 +21,7 @@
           <div class="chek-box-list">
             <ul>
               <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu" v-bind:class="{selected: statusItem.selected }">
-                <label>
-                  <input type="checkbox" v-model="statusItem.selected">  {{statusItem['name_' + getLocale]}}
-                </label>
+                <label><input type="checkbox" v-model="statusItem.selected">{{statusItem['name_' + getLocale]}}</label>
               </li>
             </ul>
           </div>
@@ -39,9 +37,7 @@
           <div class="chek-box-list">
             <ul>
               <li v-for="type in types" :key="type.id" :title="type.nameEn" v-bind:class="{selected: type.selected }">
-                <label>
-                  <input type="checkbox" v-model="type.selected">  {{type['name_' + getLocale]}}
-                </label>
+                <label><input type="checkbox" v-model="type.selected">{{type['name_' + getLocale]}}</label>
               </li>
             </ul>
           </div>
@@ -57,10 +53,7 @@
           <div class="chek-box-list">
             <ul>
               <li data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title" v-bind:class="{selected: genre.selected }">
-                <label>
-                  <input type="checkbox" v-model="genre.selected">
-                  {{genre['name_' + getLocale]}}
-                </label>
+                <label><input type="checkbox" v-model="genre.selected">{{genre['name_' + getLocale]}}</label>
               </li>
             </ul>
           </div>
@@ -76,9 +69,7 @@
           <div class="chek-box-list">
             <ul>
               <li v-for="rating in ratings" :key="rating.rating_id" :title="rating['title_' + getLocale]" v-bind:class="{selected: rating.selected }">
-                <label>
-                  <input type="checkbox" v-model="rating.selected">  {{rating.name}}
-                </label>
+                <label><input type="checkbox" v-model="rating.selected">{{rating.name}}</label>
               </li>
             </ul>
           </div>
@@ -95,7 +86,7 @@
             <ul>
               <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title" v-bind:class="{selected: duration.selected }">
                 <label>
-                  <input type="checkbox" v-model="duration.selected">  {{duration['name_' + getLocale]}}
+                  <input type="checkbox" v-model="duration.selected">{{duration['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
@@ -113,7 +104,7 @@
             <ul>
               <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu" v-bind:class="{selected: season.selected }">
                 <label>
-                  <input type="checkbox" v-model="season.selected">  {{season['name_' + getLocale]}}
+                  <input type="checkbox" v-model="season.selected">{{season['name_' + getLocale]}}
                 </label>
               </li>
             </ul>
