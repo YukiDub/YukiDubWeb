@@ -30,6 +30,10 @@
         </div>
     </div>
 
+    <div class="modals">
+        <modal-wrappers>
+        </modal-wrappers>
+    </div>
 </div>
 <script src="../js/app.js"></script>
 

@@ -1,13 +1,5 @@
 <template>
   <div class="navigation">
-    <modal v-show="isModalVisible" @close="closeModal" :title="$t('basic site settings')">
-        <select v-model="lang" class="mx-auto w-75">
-          <option value="en">{{ 'english' }}</option>
-          <option value="ru">{{ 'русский' }}</option>
-          <option value="jp">{{ '日本' }}</option>
-        </select>
-      <p class="text-center">В будущем здесь будут располагаться настройки языка и стилей :)</p>
-    </modal>
     <router-link :to="{name: 'home'}" class="logo nav-icon" title="Главная" aria-current="page">
       <i class="bi bi-house-fill"></i>
     </router-link>
@@ -44,39 +36,19 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
-import modal from '../components/ModalComponent.vue';
-    export default {
-      computed: {
-        lang: {
-          get() {
-            return this.$store.getters.getLocale;
-          },
-          set(newValue) {
-            this.$store.commit("updateLocale", newValue);
-          }
-        }
-      },
-      mounted() {
 
-      },
-      components: {
-        modal,
-      },
-      data() {
-        return {
-          isModalVisible: false,
-        };
-      },
-      methods: {
-        showModal() {
-          this.isModalVisible = true;
-        },
-        closeModal() {
-          this.isModalVisible = false;
-        }
+import settingsModal from '../components/modals/settings-modal'
+export default {
+    methods:{
+      showModal(){
+        this.$modals.open({
+          title: this.$t('basic site settings'),
+          center: true,
+          component: settingsModal
+        })
       }
     }
+}
 </script>
 
 <style>

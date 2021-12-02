@@ -9,7 +9,8 @@ import Vue from "vue";
 require('./bootstrap');
 require('../css/app.css');
 require('../sass/app.scss');
-import i18n from "./helpers/i18n.js"
+import i18n from "./utils/i18n.js"
+import modals from './modal'
 import router from "./vueRouter";
 import store from './store';
 
@@ -25,14 +26,12 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('nav-bar', require('./components/NavigationBarComponent.vue').default);
 Vue.component('nav-bar', () => import('./components/NavigationBarComponent.vue'));
 Vue.component('footer-component', () => import('./components/FooterComponent'));
-// Vue.component('footer-component', require('./components/FooterComponent').default);
 Vue.component('page-header', require('./components/PageHeaderComponent').default);
 Vue.component('catalog-entry', require('./components/CatalogEntryComponent').default);
-// Vue.component('loading', require('./components/LoadingComponent').default);
 Vue.component('loading', () => import('./components/LoadingComponent'));
+Vue.component('modal-wrappers', () => import('./modal/modal-wrappers'));
 
 
 /**
@@ -57,6 +56,7 @@ axios.interceptors.response.use(
     }
 )
 
+Vue.use(modals.install)
 const app = new Vue({
     store,
     el: '#app',

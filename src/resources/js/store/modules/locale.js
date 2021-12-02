@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import i18n, { selectedLocale } from '../../helpers/i18n';
+import i18n, { selectedLocale } from '../../utils/i18n';
 
 Vue.use(Vuex);
 
