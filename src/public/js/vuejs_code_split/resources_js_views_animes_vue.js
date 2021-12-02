@@ -216,15 +216,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AnimeFilterComponent",
@@ -1413,11 +1404,7 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(
-                        "  " +
-                          _vm._s(statusItem["name_" + _vm.getLocale]) +
-                          "\n              "
-                      ),
+                      _vm._v(_vm._s(statusItem["name_" + _vm.getLocale])),
                     ]),
                   ]
                 )
@@ -1489,11 +1476,7 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(
-                        "  " +
-                          _vm._s(type["name_" + _vm.getLocale]) +
-                          "\n              "
-                      ),
+                      _vm._v(_vm._s(type["name_" + _vm.getLocale])),
                     ]),
                   ]
                 )
@@ -1565,11 +1548,7 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(genre["name_" + _vm.getLocale]) +
-                          "\n              "
-                      ),
+                      _vm._v(_vm._s(genre["name_" + _vm.getLocale])),
                     ]),
                   ]
                 )
@@ -1645,7 +1624,7 @@ var render = function () {
                           },
                         },
                       }),
-                      _vm._v("  " + _vm._s(rating.name) + "\n              "),
+                      _vm._v(_vm._s(rating.name)),
                     ]),
                   ]
                 )
@@ -1722,8 +1701,7 @@ var render = function () {
                         },
                       }),
                       _vm._v(
-                        "  " +
-                          _vm._s(duration["name_" + _vm.getLocale]) +
+                        _vm._s(duration["name_" + _vm.getLocale]) +
                           "\n              "
                       ),
                     ]),
@@ -1802,8 +1780,7 @@ var render = function () {
                         },
                       }),
                       _vm._v(
-                        "  " +
-                          _vm._s(season["name_" + _vm.getLocale]) +
+                        _vm._s(season["name_" + _vm.getLocale]) +
                           "\n              "
                       ),
                     ]),

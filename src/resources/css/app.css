@@ -304,6 +304,7 @@ p {
         -ms-flex-direction: row;
         flex-direction: row;
         width: 100%;
+        border-top: 1px solid #1f2631;
     }
     .navigation>.logo {
         border-bottom: none;
