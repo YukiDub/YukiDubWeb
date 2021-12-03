@@ -1,7 +1,7 @@
 <template>
   <div class="col catalog-entry" v-on:click="active = !active" v-bind:class="{active: active}">
     <div class="poster-container">
-      <img class="poster" :src="poster_url" alt="poster">
+      <img class="poster" v-lazy-load-img :data-src="poster_url" alt="poster">
       <span class="score">
         {{score}} <i class="bi bi-star-fill"></i>
       </span>

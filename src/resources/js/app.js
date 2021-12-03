@@ -13,6 +13,7 @@ import i18n from "./utils/i18n.js"
 import modals from './modal'
 import router from "./vueRouter";
 import store from './store';
+import lazyLoadingImage from "./directive/lazyLoading/image"
 
 window.Vue = require('vue').default;
 /**
@@ -32,6 +33,7 @@ Vue.component('page-header', require('./components/PageHeaderComponent').default
 Vue.component('catalog-entry', require('./components/CatalogEntryComponent').default);
 Vue.component('loading', () => import('./components/LoadingComponent'));
 Vue.component('modal-wrappers', () => import('./modal/modal-wrappers'));
+Vue.directive('lazy-load-img', lazyLoadingImage)
 
 
 /**
