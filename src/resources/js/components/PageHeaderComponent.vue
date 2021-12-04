@@ -55,11 +55,12 @@
               Список аниме
             </a>
             <a href="#" class="line">
-              Список манги
+              Список ранобэ
             </a>
             <a href="#" class="line">
-              Друзья
+              Список манги
             </a>
+            <router-link class="line" :to='{name: "friends", params: {name: getUserLogin.name}}'>Друзья</router-link>
             <a href="#" class="line">
               Сообщения
             </a>
