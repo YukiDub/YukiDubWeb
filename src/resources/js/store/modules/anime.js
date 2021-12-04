@@ -18,7 +18,6 @@ export default {
                     type.url = '/animes?genre=' + type.name
                 })
             })
-
             commit('updateAnimePagination', animeData.meta)
             commit('updateAnimesList', animeData)
         },

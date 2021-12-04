@@ -5,18 +5,10 @@
   -->
 
 <template>
-  <div class="row">
+  <div class="row anime-list">
     <div class="col order-1">
-      <div class="row mb-2 mt-sm-4 mt-md-0">
-        <div class="col-auto me-auto">
-          <h6 class="p-title">{{$t('anime')}} - {{$tc('message.page', 1, { page: page, count: animePagination.last_page })}}</h6>
-        </div>
-        <div class="col-auto">
-          <div class="btn" v-on:click="page = page > 1 ? page - 1 : 1"> < </div>
-          <div class="btn" v-on:click="page = page < animePagination.last_page ? page + 1 : page"> > </div>
-        </div>
-      </div>
-      <div class="entry-list">
+      <p class="p-title">Аниме</p>
+      <div class="entry-list mb-2">
         <div v-if="loading" class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 pt-1 ms-1 me-1 pb-4 g-3">
           <catalog-entry
               v-for=       "anime in animeList"
@@ -34,6 +26,7 @@
         </div>
         <loading v-else></loading>
       </div>
+      <pagination :last-page="animePagination.last_page" v-model:selected-page="page"/>
     </div>
     <div id="filter-block" class="col-xs-12 col-md-3 order-2 d-none d-lg-block">
       <h6 class="p-title mb-3">{{$tc('filter', 2)}}</h6>
@@ -52,12 +45,14 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import animeFilter from '../components/AnimeFilterComponent';
+import pagination from '../components/PaginationComponent';
 
 export default {
   name: "index",
 
   components: {
     animeFilter,
+    pagination
   },
 
   computed: mapGetters(['animeList', 'animePagination', 'getLocale']),
@@ -141,7 +136,6 @@ export default {
 </script>
 
 <style scoped>
-
 .btn-filter{
   position: fixed;
   width: 7rem;
