@@ -28,17 +28,7 @@
       </div>
       <pagination :last-page="animePagination.last_page" v-model:selected-page="page"/>
     </div>
-    <div id="filter-block" class="col-xs-12 col-md-3 order-2 d-none d-lg-block">
-      <h6 class="p-title mb-3">{{$tc('filter', 2)}}</h6>
-      <div class="col-12">
-        <animeFilter @close="filterOnClick()">
-
-        </animeFilter>
-      </div>
-    </div>
-    <div class="btn-filter d-block d-lg-none" v-on:click="filterOnClick()">
-      <i class="bi bi-filter-circle-fill"></i>
-    </div>
+    <animeFilter class="col-0 col-lg-3 order-2"/>
   </div>
 </template>
 
@@ -109,17 +99,6 @@ export default {
       }
     },
     ...mapActions(["loadAnimesList"]),
-    filterOnClick(){
-      let filter = document.getElementById("filter-block")
-      if(this.openFilter){
-        this.openFilter = false;
-        filter.classList.add('d-none')
-      }
-      else{
-        this.openFilter = true;
-        filter.classList.remove('d-none')
-      }
-    }
   }
   // methods: {
   //   loadPage(){
@@ -136,17 +115,5 @@ export default {
 </script>
 
 <style scoped>
-.btn-filter{
-  position: fixed;
-  width: 7rem;
-  bottom: 3.5rem;
-  right: -0.2rem;
-  z-index: 4;
-  filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 2.25));
-}
 
-.btn-filter > i{
-  font-size: 4.5rem;
-  color: aliceblue;
-}
 </style>

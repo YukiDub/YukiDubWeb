@@ -1,207 +1,217 @@
 <template>
-  <div class="filter-block">
-    <div class="body">
-      <div class="row">
-        <div class="col-auto me-auto">
-          <h6 class="p-title">{{$tc('filter', 2)}}</h6>
-        </div>
-        <div class="col-auto">
-          <div class="button" v-on:click="close()"> {{$t('apply')}} </div>
+  <div class="filter-container">
+    <div class="d-lg-block" v-bind:class="{'d-none': closeFilter}">
+      <h6 class="p-title mb-3">{{$tc('filter', 2)}}</h6>
+      <div class="col-12">
+        <div class="filter-block">
+          <div class="body">
+            <div class="row">
+              <div class="col-auto me-auto">
+                <h6 class="p-title">{{$tc('filter', 2)}}</h6>
+              </div>
+              <div class="col-auto">
+                <div class="button" v-on:click="filterOnClick"> {{$t('apply')}} </div>
+              </div>
+            </div>
+          </div>
+          <div class="filter">
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('status')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu" v-bind:class="{selected: statusItem.selected }">
+                      <label>
+                        <input type="checkbox" v-model="statusItem.selected"><span>{{statusItem['name_' + getLocale]}}</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('type')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li v-for="type in types" :key="type.id" :title="type.nameEn" v-bind:class="{selected: type.selected }">
+                      <label><input type="checkbox" v-model="type.selected"><span>{{type['name_' + getLocale]}}</span></label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('genres')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title" v-bind:class="{selected: genre.selected }">
+                      <label><input type="checkbox" v-model="genre.selected"><span>{{genre['name_' + getLocale]}}</span></label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('rating')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li v-for="rating in ratings" :key="rating.rating_id" :title="rating['title_' + getLocale]" v-bind:class="{selected: rating.selected }">
+                      <label><input type="checkbox" v-model="rating.selected"><span>{{rating.name}}</span></label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('episode duration')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title" v-bind:class="{selected: duration.selected }">
+                      <label>
+                        <input type="checkbox" v-model="duration.selected"><span>{{duration['name_' + getLocale]}}</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('season')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu" v-bind:class="{selected: season.selected }">
+                      <label>
+                        <input type="checkbox" v-model="season.selected"><span>{{season['name_' + getLocale]}}</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('score')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li data-field="status" data-value="anons">
+                      <input autocomplete="off" type="checkbox"><span>8+</span>
+                    </li>
+                    <li data-field="status" data-value="anons">
+                      <input autocomplete="off" type="checkbox"><span>7+</span>
+                    </li>
+                    <li data-field="status" data-value="anons">
+                      <input autocomplete="off" type="checkbox"><span>6+</span>
+                    </li>
+                    <li data-field="status" data-value="anons">
+                      <input autocomplete="off" type="checkbox"><span>5+</span>
+                    </li>
+                    <li data-field="status" data-value="anons">
+                      <input autocomplete="off" type="checkbox"><span><5</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block">
+              <div class="selector">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('my list')}}</span>
+                  </div>
+                </div>
+                <div class="chek-box-list">
+                  <ul>
+                    <li data-field="status">
+                      <input autocomplete="off" type="checkbox"><span>{{$t('completed')}}</span>
+                    </li>
+                    <li data-field="status">
+                      <input autocomplete="off" type="checkbox"><span>{{$t('plan to watch')}}</span>
+                    </li>
+                    <li data-field="status">
+                      <input autocomplete="off" type="checkbox"><span>{{$t('dropped')}}</span>
+                    </li>
+                    <li data-field="status">
+                      <input autocomplete="off" type="checkbox"><span>{{$t('on-hold')}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="selector-block pb-5">
+              <div class="selector sort cursor-drop" v-on:click="openSort">
+                <div class="placeholder">
+                  <div class="selected">
+                    <span>{{$t('sorted by')}}</span>
+                  </div>
+                  <div class="icon-inline dropdown-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
+                      <path fill="#FFF" fill-rule="nonzero" d="M8.618 5.772l.003.003c.35.336.873.29 1.174-.102a1.04 1.04 0 0 0-.078-1.334L5.55.233a.765.765 0 0 0-1.1 0L.28 4.342c-.342.345-.375.94-.075 1.331.301.393.825.438 1.177.099L5 2.207l3.618 3.565z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="drop-options">
+                  <div class="item">
+                    По алфавиту
+                  </div>
+                  <div class="item">
+                    По рейтингу
+                  </div>
+                  <div class="item">
+                    По дате премьеры
+                  </div>
+                  <div class="item">
+                    По дате выхода
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="d-grid gap-2 button-block mx-0">
+              <div class="btn" type="button">{{$t('reset filter')}}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="filter">
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('status')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li v-for="statusItem in status" :key="statusItem.status_id" :title="statusItem.nameRu" v-bind:class="{selected: statusItem.selected }">
-                <label>
-                  <input type="checkbox" v-model="statusItem.selected"><span>{{statusItem['name_' + getLocale]}}</span>
-                </label>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('type')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li v-for="type in types" :key="type.id" :title="type.nameEn" v-bind:class="{selected: type.selected }">
-                <label><input type="checkbox" v-model="type.selected"><span>{{type['name_' + getLocale]}}</span></label>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('genres')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li data-value="#" v-for="genre in genres" :key="genre.genre_id" :title="genre.title" v-bind:class="{selected: genre.selected }">
-                <label><input type="checkbox" v-model="genre.selected"><span>{{genre['name_' + getLocale]}}</span></label>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('rating')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li v-for="rating in ratings" :key="rating.rating_id" :title="rating['title_' + getLocale]" v-bind:class="{selected: rating.selected }">
-                <label><input type="checkbox" v-model="rating.selected"><span>{{rating.name}}</span></label>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('episode duration')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li v-for="duration in durations" :key="duration.duration_id" :title="duration.title" v-bind:class="{selected: duration.selected }">
-                <label>
-                  <input type="checkbox" v-model="duration.selected"><span>{{duration['name_' + getLocale]}}</span>
-                </label>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('season')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li v-for="season in seasons" :key="season.season_id" :title="season.nameRu" v-bind:class="{selected: season.selected }">
-                <label>
-                  <input type="checkbox" v-model="season.selected"><span>{{season['name_' + getLocale]}}</span>
-                </label>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('score')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"><span>8+</span>
-              </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"><span>7+</span>
-              </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"><span>6+</span>
-              </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"><span>5+</span>
-              </li>
-              <li data-field="status" data-value="anons">
-                <input autocomplete="off" type="checkbox"><span><5</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('my list')}}</span>
-            </div>
-          </div>
-          <div class="chek-box-list">
-            <ul>
-              <li data-field="status">
-                <input autocomplete="off" type="checkbox"><span>{{$t('completed')}}</span>
-              </li>
-              <li data-field="status">
-                <input autocomplete="off" type="checkbox"><span>{{$t('plan to watch')}}</span>
-              </li>
-              <li data-field="status">
-                <input autocomplete="off" type="checkbox"><span>{{$t('dropped')}}</span>
-              </li>
-              <li data-field="status">
-                <input autocomplete="off" type="checkbox"><span>{{$t('on-hold')}}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="selector-block">
-        <div class="selector sort cursor-drop" v-on:click="openSort()">
-          <div class="placeholder">
-            <div class="selected">
-              <span>{{$t('sorted by')}}</span>
-            </div>
-            <div class="icon-inline dropdown-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
-                <path fill="#FFF" fill-rule="nonzero" d="M8.618 5.772l.003.003c.35.336.873.29 1.174-.102a1.04 1.04 0 0 0-.078-1.334L5.55.233a.765.765 0 0 0-1.1 0L.28 4.342c-.342.345-.375.94-.075 1.331.301.393.825.438 1.177.099L5 2.207l3.618 3.565z"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="drop-options">
-            <div class="item">
-              По алфавиту
-            </div>
-            <div class="item">
-              По рейтингу
-            </div>
-            <div class="item">
-              По дате премьеры
-            </div>
-            <div class="item">
-              По дате выхода
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-grid gap-2 button-block mx-0">
-        <div class="btn" type="button">{{$t('reset filter')}}</div>
-      </div>
-      <div class="footer">
-
-      </div>
+    <div class="btn-filter d-block d-lg-none" v-on:click="filterOnClick()">
+      <i class="bi bi-filter-circle-fill"></i>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -213,6 +223,8 @@ export default {
   computed: mapGetters(['getLocale']),
   data: function (){
     return {
+      closeFilter: true,
+
       status: [
         {
           "status_id": 1,
@@ -858,7 +870,7 @@ export default {
         this.selectedStatus = "";
         this.status.forEach((statusItem) => {
           if(statusItem.selected){
-            this.selectedStatus += statusItem.nameEn + ",";
+            this.selectedStatus += statusItem.name_en + ",";
           }
         })
         this.selectedStatus = this.selectedStatus.slice(0, -1);
@@ -871,7 +883,7 @@ export default {
         this.selectedTypes = "";
         this.types.forEach((typesItem) => {
           if(typesItem.selected){
-            this.selectedTypes += typesItem.nameEn + ",";
+            this.selectedTypes += typesItem.name_en + ",";
           }
         })
         this.selectedTypes = this.selectedTypes.slice(0, -1);
@@ -897,7 +909,7 @@ export default {
         this.selectedDurations = "";
         this.durations.forEach((durationItem) => {
           if(durationItem.selected){
-            this.selectedDurations += durationItem.nameEn + ",";
+            this.selectedDurations += durationItem.name_en + ",";
           }
         })
         this.selectedDurations = this.selectedDurations.slice(0, -1);
@@ -914,8 +926,8 @@ export default {
   },
 
   methods: {
-    close() {
-      this.$emit('close');
+    filterOnClick(){
+      this.closeFilter = !this.closeFilter;
     },
     updateFiler(){
       this.$router.replace({
@@ -1059,9 +1071,6 @@ export default {
   height: 7vh;
   display: none;
 }
-.filter-block > .filter > .footer{
-  display: none;
-}
 .filter-block > .body{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1082,17 +1091,25 @@ export default {
 @media (max-width: 991px) {
   .filter-block .filter {
     border-radius: 0;
-    height: 100vh;
-    height: 95%;
+    height: 100%;
     padding-bottom: 2rem;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
+    background: #0f1318;
+  }
+  .selector-block > .selector > .placeholder{
+    background: none;
   }
   .filter-block > .body{
     display: block;
   }
-  .filter-block > .filter > .footer{
-    display: block;
+  .filter-block > .footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .filter-block > .footer .btn{
+    background: #009beb;
+    border-radius: 0;
   }
   .selector-block .selector .chek-box-list{
     overflow-x: auto;
@@ -1122,6 +1139,20 @@ export default {
     height: 100%;
     z-index: 1000;
   }
+  .selector-block > .selector > .drop-options{
+    background: #0f1318;
+  }
 }
-
+.btn-filter{
+  position: fixed;
+  width: 7rem;
+  bottom: 3.5rem;
+  right: -0.2rem;
+  z-index: 4;
+  filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 2.25));
+}
+.btn-filter > i{
+  font-size: 4.5rem;
+  color: aliceblue;
+}
 </style>
