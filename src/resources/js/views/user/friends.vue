@@ -8,7 +8,7 @@
       <div class="friend" v-for="friend in friends.slice(0, 20)" :key="friend.id" :title="friend.name">
         <img class="avatar" src="/assets/images/avatars/default.png" :alt="friend.name">
         <div class="text-center">
-          <router-link :to="{name: 'userProfile', params: {name: friend.name}}">{{friend.name}}</router-link>
+          <router-link :to="{name: 'user.profile', params: {name: friend.name}}">{{friend.name}}</router-link>
         </div>
       </div>
     </div>

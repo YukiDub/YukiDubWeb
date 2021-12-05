@@ -15,7 +15,7 @@
               <div class="friend" v-for="friend in friends.slice(0, 20)" :key="friend.id" :title="friend.name">
                 <img class="avatar" src="/assets/images/avatars/default.png" :alt="friend.name">
                 <div class="hover">
-                  <router-link :to="{name: 'userProfile', params: {name: friend.name}}" class="text">подробнее</router-link>
+                  <router-link :to="{name: 'user.profile', params: {name: friend.name}}" class="text">подробнее</router-link>
                 </div>
               </div>
             </div>

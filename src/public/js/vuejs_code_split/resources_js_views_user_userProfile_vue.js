@@ -461,7 +461,7 @@ var render = function () {
                                       staticClass: "text",
                                       attrs: {
                                         to: {
-                                          name: "userProfile",
+                                          name: "user.profile",
                                           params: { name: friend.name },
                                         },
                                       },

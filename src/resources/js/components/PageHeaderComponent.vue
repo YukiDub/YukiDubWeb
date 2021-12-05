@@ -50,17 +50,12 @@
             <img src="/assets/images/avatars/default.png" :alt="getUserLogin.name">
           </a>
           <div class="header-user-menu drop-menu">
-            <router-link class="line" :to='{name: "userProfile", params: {name: getUserLogin.name}}'>Мой профиль</router-link>
-            <a href="#" class="line">
-              Список аниме
-            </a>
-            <a href="#" class="line">
-              Список ранобэ
-            </a>
-            <a href="#" class="line">
-              Список манги
-            </a>
-            <router-link class="line" :to='{name: "friends", params: {name: getUserLogin.name}}'>Друзья</router-link>
+            <router-link class="line" :to='{name: "user.profile", params: {name: getUserLogin.name}}'>Мой профиль</router-link>
+            <router-link class="line" :to='{name: "user.titles", params: {name: getUserLogin.name, category: "anime"}}'>Список аниме</router-link>
+            <router-link class="line" :to='{name: "user.titles", params: {name: getUserLogin.name, category: "light_novel"}}'>Список ранобэ</router-link>
+            <router-link class="line" :to='{name: "user.titles", params: {name: getUserLogin.name, category: "manga"}}'>Список манги</router-link>
+            <router-link class="line" :to='{name: "user.friends", params: {name: getUserLogin.name}}'>Друзья</router-link>
+
             <a href="#" class="line">
               Сообщения
             </a>
