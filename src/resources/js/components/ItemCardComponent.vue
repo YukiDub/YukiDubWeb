@@ -22,7 +22,7 @@
 
 <style>
   .card {
-    background: #424755;
+    background: var(--block-color);
     border-radius: 10px;
     padding: 1rem;
     margin-top: 1rem;

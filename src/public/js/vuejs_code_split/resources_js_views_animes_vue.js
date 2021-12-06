@@ -52,8 +52,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -218,41 +216,34 @@ var render = function () {
         "div",
         { staticClass: "col order-1" },
         [
-          _c("p", { staticClass: "p-title" }, [_vm._v("Аниме")]),
+          _c("p", { staticClass: "p-title mb-0 ps-3" }, [_vm._v("Аниме")]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "entry-list mb-2" },
-            [
-              _vm.loading
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 pt-1 ms-1 me-1 pb-4 g-3",
+          _vm.loading
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 ms-1 me-1 pb-4 g-3",
+                },
+                _vm._l(_vm.animeList, function (anime) {
+                  return _c("catalog-entry", {
+                    key: anime.id,
+                    attrs: {
+                      id: anime.id,
+                      name: anime["name_" + _vm.getLocale],
+                      type: anime.type,
+                      genres: anime.genres,
+                      poster_url: anime.poster.preview,
+                      status: anime.status,
+                      studios: anime.studios,
+                      route: { name: "anime", params: { id: anime.id } },
+                      score: anime.shiki_score,
                     },
-                    _vm._l(_vm.animeList, function (anime) {
-                      return _c("catalog-entry", {
-                        key: anime.id,
-                        attrs: {
-                          id: anime.id,
-                          name: anime["name_" + _vm.getLocale],
-                          type: anime.type,
-                          genres: anime.genres,
-                          poster_url: anime.poster.preview,
-                          status: anime.status,
-                          studios: anime.studios,
-                          route: { name: "anime", params: { id: anime.id } },
-                          score: anime.shiki_score,
-                        },
-                      })
-                    }),
-                    1
-                  )
-                : _c("loading"),
-            ],
-            1
-          ),
+                  })
+                }),
+                1
+              )
+            : _c("loading"),
           _vm._v(" "),
           _c("pagination", {
             attrs: { "last-page": _vm.animePagination.last_page },
@@ -268,7 +259,7 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c("animeFilter", { staticClass: "col-0 col-lg-3 order-2" }),
+      _c("animeFilter", { staticClass: "col-0 col-lg-2 order-2" }),
     ],
     1
   )

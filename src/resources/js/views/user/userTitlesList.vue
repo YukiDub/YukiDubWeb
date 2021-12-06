@@ -12,8 +12,7 @@
           </select>
         </div>
       </div>
-      <div class="entry-list mb-2">
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 pt-1 ms-1 me-1 pb-4 g-3">
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 pt-1 ms-1 me-1 pb-4 g-3 mb-2">
           <catalog-entry
               v-for=       "anime in animeList"
               v-bind:key=  "anime.id"
@@ -27,7 +26,6 @@
               :route=      "{name: 'anime', params:{id: anime.id}}"
               :score=      "anime.shiki_score"
           ></catalog-entry>
-        </div>
       </div>
       <pagination :last-page="animePagination.last_page" v-model:selected-page="page"/>
     </div>

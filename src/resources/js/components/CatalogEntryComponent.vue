@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="d-flex flex-column">
-        <router-link class="btn" type="button" :to="route">{{$t('view more')}}</router-link>
+        <router-link class="button" type="button" :to="route">{{$t('view more')}}</router-link>
       </div>
     </div>
   </div>
@@ -85,7 +85,6 @@ import {mapGetters} from 'vuex'
   .catalog-entry .hover .title {
     font-size: medium;
     font-weight: bold;
-    color: #FFFFFF;
     margin-bottom: 0.8vh;
   }
   .catalog-entry > .poster-container{
@@ -124,13 +123,21 @@ import {mapGetters} from 'vuex'
     right:0;
     bottom:0;
     padding: .8rem;
-    background: linear-gradient(to bottom, #101217, #1F232E);
+    background: linear-gradient(to bottom, #181e25, #000000);
     opacity: 0.95;
     -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
     -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
     box-shadow:0 5px 5px rgba(0,0,0,0.3);
     font-size: small;
     border-radius: 2.8%;
+  }
+  .catalog-entry > .hover > .d-flex > .button{
+    border: none;
+    text-align: center;
+    color: var(--text-color);
+    border-radius: 7px;
+    padding: .5rem 2rem;
+    background: var(--focus-color);
   }
   @media (max-width: 575px) {
     .catalog-entry:not(.active) .hover {

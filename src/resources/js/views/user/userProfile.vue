@@ -4,9 +4,7 @@
       <div class="row">
         <div class="order-last order-lg-0 col-12 col-lg-2 header">
           <div class="friends mb-3">
-            <div class="box-background">
-              <p class="text-center">Друзья</p>
-            </div>
+            <p class="text-center">Друзья</p>
             <div class="list empty" v-if="friends.length === 0">
               <p>У пользователя пока что нет друзей</p>
               <p><i class="bi bi-person-x-fill"></i></p>
@@ -21,9 +19,7 @@
             </div>
           </div>
           <div class="communities mb-3">
-            <div class="box-background">
-              <p class="text-center">Сообщества</p>
-            </div>
+            <p class="text-center">Сообщества</p>
             <div class="list empty" v-if="community.length === 0">
               <p>Пользователь ещё не вступал ни в одно из сообществ</p>
               <p><i class="bi bi-x-lg"></i></p>
@@ -282,20 +278,8 @@ export default {
 </script>
 
 <style scoped>
-.graph>.background>.line{
-  height: 0.1rem;
-  width: 100%;
-  background: aliceblue;
-  margin-bottom: 2rem;
-  text-align: end;
-}
-.graph>.lines{
-  position: relative;
-  left: -10px;
-  top: -160px;
-}
 .profile>.header{
-  background: #424755;
+  background: var(--block-color);
   border-radius: 24px;
   padding: 2rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.21);
@@ -353,10 +337,6 @@ export default {
   margin-left: 34%;
   margin-bottom: 1.4rem;
 }
-.box-background{
-  background: #353944;
-  border-radius: 76px;
-}
 .profile>.header>.row>.footer>.row>.buttons{
   display: flex;
   flex-direction: row;
@@ -382,7 +362,6 @@ export default {
 }
 .history>.history-item{
   display: flex;
-  background: #353944;
   border-radius: 6px;
   padding: .4rem;
   margin-bottom: 0.6rem;

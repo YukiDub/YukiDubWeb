@@ -7,28 +7,26 @@
 <template>
   <div class="row anime-list">
     <div class="col order-1">
-      <p class="p-title">Аниме</p>
-      <div class="entry-list mb-2">
-        <div v-if="loading" class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 pt-1 ms-1 me-1 pb-4 g-3">
-          <catalog-entry
-              v-for=       "anime in animeList"
-              v-bind:key=  "anime.id"
-              :id=         "anime.id"
-              :name=       "anime['name_' + getLocale]"
-              :type=       "anime.type"
-              :genres=     "anime.genres"
-              :poster_url= "anime.poster.preview"
-              :status=     "anime.status"
-              :studios=    "anime.studios"
-              :route=      "{name: 'anime', params:{id: anime.id}}"
-              :score=      "anime.shiki_score"
-          ></catalog-entry>
-        </div>
-        <loading v-else></loading>
-      </div>
+      <p class="p-title mb-0 ps-3">Аниме</p>
+       <div v-if="loading" class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 mt-0 ms-1 me-1 pb-4 g-3">
+         <catalog-entry
+             v-for=       "anime in animeList"
+             v-bind:key=  "anime.id"
+             :id=         "anime.id"
+             :name=       "anime['name_' + getLocale]"
+             :type=       "anime.type"
+             :genres=     "anime.genres"
+             :poster_url= "anime.poster.preview"
+             :status=     "anime.status"
+             :studios=    "anime.studios"
+             :route=      "{name: 'anime', params:{id: anime.id}}"
+             :score=      "anime.shiki_score"
+         ></catalog-entry>
+       </div>
+       <loading v-else></loading>
       <pagination :last-page="animePagination.last_page" v-model:selected-page="page"/>
     </div>
-    <animeFilter class="col-0 col-lg-3 order-2"/>
+    <animeFilter class="col-0 col-lg-2 order-2"/>
   </div>
 </template>
 

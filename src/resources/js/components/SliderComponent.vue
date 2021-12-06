@@ -50,13 +50,16 @@ export default {
   }
   .slider>.buttons>div{
     position: absolute;
-    background: rgb(66 71 85 / 80%);
+    background: var(--block-color);
     border-radius: 50%;
+    opacity: 75%;
     top: 25%;
     cursor: pointer;
     -moz-user-select: none;
-    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+
   }
   .slider>.buttons>.left{
     left: 0;

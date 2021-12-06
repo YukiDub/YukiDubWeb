@@ -157,17 +157,19 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+:root {
+    --bg-color: #1d232c;
+    --block-color: #12181f;
+    --navigation-color: #181e25;
+    --text-color: #FFFF;
+    --focus-color: #3490dc;
 
+}
 .container{
     padding-bottom: 2rem;
 }
-.btn{
-    border: none;
-    text-align: center;
-    color: #ffff;
-}
 body {
-    background: #353944;
+    background: var(--bg-color);;
     padding: 0;
     margin: 0;
     overflow-x: hidden;
@@ -179,15 +181,15 @@ input{
     outline:none;
 }
 .btn {
-    background: #424755;
+    border: none;
+    text-align: center;
+    color: var(--text-color);
+    background: var(--block-color);
     border-radius: 7px;
-    padding: .5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: .5rem 2rem;
     filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
 }
 .btn>a {
-    font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -221,7 +223,7 @@ h4 {
     font-style: normal;
     font-weight: bold;
     text-align: center;
-    color: #ffffff;
+    color: var(--text-color);
     text-decoration: none;
 }
 a:hover{
@@ -237,7 +239,7 @@ a:hover{
     min-height: calc(100vh - 72px);
 }
 p {
-    color: #EEECF1;
+    color: var(--text-color);
 }
 ::-webkit-scrollbar{
     height: 6px;
@@ -245,7 +247,7 @@ p {
 }
 ::-webkit-scrollbar-thumb{
     border-radius: 8px;
-    background: #009BEB;
+    background: var(--focus-color);
 }
 .p-title{
     font-family: IBM Plex Sans;
@@ -254,13 +256,13 @@ p {
     font-weight: bold;
     font-size: 18px;
     line-height: 23px;
-    color: #DFDFDF;
+    color: var(--text-color);
 }
 .navigation {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 62px;
     flex: 0 0 62px;
-    background-color: #424755;
+    background-color: var(--navigation-color);
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -268,7 +270,7 @@ p {
     position: relative;
     line-height: 16px;
     display: flex;
-    box-shadow: 12px 0px 20px rgb(0 0 0 / 9%);
+    box-shadow: 12px 0 20px rgb(0 0 0 / 9%);
 }
 .nav-icon {
     padding-top: 1.4rem;
@@ -290,7 +292,7 @@ p {
 }
 .navigation>.logo.activeTabs path,
 .navigation>.logo.router-link-exact-active path {
-    fill: #fff
+    fill: var(--text-color);
 }
 .navigation>.menu-buttons {
     display: -webkit-box;
@@ -411,7 +413,7 @@ p {
     overflow: hidden;
 }
 .entry-list {
-    background: #424755;
+    background: var(--block-color);
     border-radius: 14px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -496,16 +498,12 @@ p {
 
 /* ЗАГРУЗКА СТРАНИЦЫ */
 .preloader {
-    /*фиксированное позиционирование*/
     position: fixed;
-    /* координаты положения */
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    /* фоновый цвет элемента */
     background: #353944;
-    /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
     z-index: 1001;
 }
 .preloader__row {
@@ -566,6 +564,7 @@ p {
     border-bottom: 1px solid #282828;
     transition: background-color .1s ease-in, top .2s ease-in, border-bottom-color .3s ease-in;
     z-index: 99;
+    background: var(--navigation-color);
 
 }
 .page-header.show,
@@ -586,7 +585,7 @@ p {
     z-index: 1
 }
 .search-box {
-    background: #1f2631;
+    background: var(--bg-color);
     color: white;
     border: none;
     width: 100%;
@@ -755,9 +754,9 @@ p {
     align-items: center;
     background: #1f2631;
     font-family: Roboto;
-    font-style: normal;
     font-weight: bold;
     font-size: 16px;
+    background: var(--bg-color);
 }
 .search-line>.icon-inline {
     padding: 0 10px 0 16px;
@@ -994,8 +993,8 @@ p {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    background-color: #1f2631;
-    color: #fff
+    background-color: var(--block-color);
+    color: var(--text-color);
 }
 @media(max-width:575.98px) {
     .header-user-menu {
@@ -1024,7 +1023,7 @@ p {
     width: inherit
 }
 .header-user-menu>.line>.icon-inline>svg path {
-    fill: #fff
+    fill: var(--text-color)
 }
 .header-user-menu>.line.exit {
     border-top: 1px solid rgba(61, 64, 74, .4)
@@ -1039,7 +1038,6 @@ p {
     padding-left: 10px;
     opacity: 0;
 }
-
 .tags + .tags::before {
     content: ", ";
 }

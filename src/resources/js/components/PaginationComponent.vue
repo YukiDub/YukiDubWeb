@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .pagination{
   overflow: hidden;
-  background: rgb(66 71 85);
+  background: var(--block-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
