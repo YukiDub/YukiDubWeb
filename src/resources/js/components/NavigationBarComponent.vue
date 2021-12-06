@@ -5,18 +5,27 @@
     </router-link>
     <div class="menu-buttons">
       <div class="main-buttons">
-        <router-link :to="{name: 'animes'}" class="" title="Аниме">
+        <router-link
+            :to="{name: 'animes'}"
+            title="Аниме"
+            :class="{'router-link-exact-active router-link-active': $route.name ==='anime'}"
+        >
           <div class="icon-inline button-link play">
             <i class="bi bi-play-fill"></i>
           </div>
         </router-link>
-
         <a href="#" class="" title="Манга">
           <div class="icon-inline button-link manga">
             <i class="bi bi-book-fill"></i>
           </div>
         </a>
-
+        <router-link
+            :class="{'router-link-exact-active router-link-active': $route.name ==='user.titles' || $route.name === 'user.friends' || $route.name === 'user.profile'}"
+            :to="{name: 'users'}" title="Пользователи">
+          <div class="icon-inline button-link users">
+            <i class="bi bi-people-fill"></i>
+          </div>
+        </router-link>
 
         <a href="#" class="" title="Новости"><div class="wrapper-news"><div class="new"></div><div class="icon-inline button-link about"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
           <path fill="#797C84" fill-rule="evenodd" d="M16.797 0C17.461 0 18 .579 18 1.295v14.779C18 17.138 17.185 18 16.205 18H1.19C.54 18 0 17.427 0 16.72V5.143h2.4v8.353c0 .347.268.647.598.647H3.6V1.295C3.6.58 4.147 0 4.803 0h11.994zm-5.386 12.857H7.79c-.33 0-.589.288-.589.643 0 .345.264.643.589.643h3.622c.33 0 .589-.288.589-.643 0-.345-.264-.643-.589-.643zm2.4-2.571H7.789c-.316 0-.589.288-.589.643 0 .344.264.642.59.642h6.02c.317 0 .59-.287.59-.642 0-.345-.264-.643-.59-.643zm0-6.429H7.789c-.316 0-.589.282-.589.63V8.37c0 .354.264.631.59.631h6.02c.317 0 .59-.282.59-.63V4.487c0-.354-.264-.63-.59-.63z"></path>

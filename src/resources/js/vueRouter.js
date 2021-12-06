@@ -6,8 +6,6 @@
 
 import VueRouter from 'vue-router';
 import Vue from 'vue';
-import friends from "./views/user/friends";
-import userTitlesList from "./views/user/userTitlesList";
 
 Vue.use(VueRouter)
 
@@ -16,6 +14,9 @@ const notFound = () => import("./views/notFound")
 const animes = () => import("./views/animes")
 const anime = () => import("./views/anime")
 const userProfile = () => import("./views/user/userProfile")
+const friends = () => import("./views/user/friends")
+const users = () => import("./views/users")
+const userTitlesList = () => import("./views/user/userTitlesList")
 
 
 const routes = [
@@ -38,6 +39,12 @@ const routes = [
         meta: {'title': "Аниме", 'headerName': 'anime'}
     },
     {
+        path: '/users',
+        component: friends,
+        name: 'users',
+        meta: {'title': "Пользователи", 'headerName': 'users'}
+    },
+    {
         path: '/:name',
         component: userProfile,
         name: 'user.profile',
@@ -45,7 +52,7 @@ const routes = [
     },
     {
         path: '/:name/friends',
-        component: friends,
+        component: users,
         name: 'user.friends',
         meta: {'title': "Пользователи", 'headerName': 'users'}
     },

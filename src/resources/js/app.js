@@ -63,5 +63,5 @@ const app = new Vue({
     store,
     el: '#app',
     router: router,
-    i18n,
+    i18n
 });

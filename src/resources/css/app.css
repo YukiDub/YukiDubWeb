@@ -350,6 +350,9 @@ p {
 .navigation>.menu-buttons>.main-buttons>a .button-link.manga {
     padding: 24.25px 16px
 }
+.navigation>.menu-buttons>.main-buttons>a .button-link.users {
+    padding: 24.25px 16px
+}
 .navigation>.menu-buttons>.main-buttons>a .button-link.manga i {
     font-size: 1.2rem;
 }

@@ -49,6 +49,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
@@ -436,7 +445,13 @@ var render = function () {
           [
             _c(
               "router-link",
-              { attrs: { to: { name: "animes" }, title: "Аниме" } },
+              {
+                class: {
+                  "router-link-exact-active router-link-active":
+                    _vm.$route.name === "anime",
+                },
+                attrs: { to: { name: "animes" }, title: "Аниме" },
+              },
               [
                 _c("div", { staticClass: "icon-inline button-link play" }, [
                   _c("i", { staticClass: "bi bi-play-fill" }),
@@ -445,6 +460,24 @@ var render = function () {
             ),
             _vm._v(" "),
             _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                class: {
+                  "router-link-exact-active router-link-active":
+                    _vm.$route.name === "user.titles" ||
+                    _vm.$route.name === "user.friends" ||
+                    _vm.$route.name === "user.profile",
+                },
+                attrs: { to: { name: "users" }, title: "Пользователи" },
+              },
+              [
+                _c("div", { staticClass: "icon-inline button-link users" }, [
+                  _c("i", { staticClass: "bi bi-people-fill" }),
+                ]),
+              ]
+            ),
             _vm._v(" "),
             _c("a", { attrs: { href: "#", title: "Новости" } }, [
               _c("div", { staticClass: "wrapper-news" }, [

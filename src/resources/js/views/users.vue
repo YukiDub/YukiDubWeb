@@ -2,13 +2,13 @@
   <div class="friends-page">
     <div class="header">
       <p class="button back" v-on:click="$router.go(-1)"><i class="bi bi-arrow-left-short"></i>вернуться назад</p>
-      <p class="p-title">Все пользователи</p>
+      <p class="p-title">Друзья пользователя {{user.name}}</p>
     </div>
     <div class="content entry-list">
-      <div class="friend" v-for="user in users.slice(0, 20)" :key="user.id" :title="user.name">
-        <img class="avatar" src="/assets/images/avatars/default.png" :alt="user.name">
+      <div class="friend" v-for="friend in friends.slice(0, 20)" :key="friend.id" :title="friend.name">
+        <img class="avatar" src="/assets/images/avatars/default.png" :alt="friend.name">
         <div class="text-center">
-          <router-link :to="{name: 'user.profile', params: {name: user.name}}">{{user.name}}</router-link>
+          <router-link :to="{name: 'user.profile', params: {name: friend.name}}">{{friend.name}}</router-link>
         </div>
       </div>
     </div>
@@ -18,6 +18,9 @@
 <script>
 export default {
   name: "friends",
+  mounted() {
+    console.log(this.$route.name)
+  },
   data(){
     return {
       user: {
@@ -25,7 +28,7 @@ export default {
         name: this.$route.params.name,
         avatar_url: '/assets/images/avatars/default.png',
       },
-      users: [
+      friends: [
         {
           id: 1,
           name: "test 1",
@@ -55,13 +58,6 @@ export default {
 .friends-page > .header > .button.back{
   cursor: pointer;
   font-size: 1rem;
-  flex: 1;
-}
-.friends-page > .header > .title{
-  font-family: IBM Plex Sans;
-  text-transform: uppercase;
-  font-size: 18px;
-  line-height: 23px;
   flex: 1;
 }
 .friends-page>.content{
