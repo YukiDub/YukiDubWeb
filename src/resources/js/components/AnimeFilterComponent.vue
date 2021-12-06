@@ -954,6 +954,7 @@ export default {
 
 <style scoped>
   .filter{
+    color: var(--text-color);
     padding: 0;
   }
   .filter > .selector-block{
@@ -982,7 +983,6 @@ export default {
     cursor: pointer;
   }
   .selector-block > .selector > .placeholder >.selected{
-    color: #FFFFFF;
     font-size: 16px;
     font-weight: 800;
     font-stretch: normal;
@@ -1020,7 +1020,6 @@ export default {
     box-sizing: border-box;
     left: 0;
     position: inherit;
-    background-color: var(--block-color);
     width: 100%;
     z-index: 20;
     overflow-y: auto;
@@ -1037,7 +1036,6 @@ export default {
     user-select: none;
     border-bottom: 1px solid rgba(61,64,74,.4);
     padding: 12px 15px;
-    color: #fff;
 }
 .selector-block .selector .chek-box-list ul li{
   -moz-user-select: none;
@@ -1045,7 +1043,6 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #FFFFFF;
   font-size: 12px;
   line-height: 20.34px;
   padding: 1px 3px 0;
@@ -1147,6 +1144,6 @@ export default {
 }
 .btn-filter > i{
   font-size: 4.5rem;
-  color: aliceblue;
+  color: var(--text-color);
 }
 </style>
