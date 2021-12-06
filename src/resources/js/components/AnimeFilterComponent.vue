@@ -1,7 +1,6 @@
 <template>
   <div class="filter-container">
     <div class="d-lg-block" v-bind:class="{'d-none': closeFilter}">
-      <h6 class="p-title mb-3">{{$tc('filter', 2)}}</h6>
       <div class="col-12">
         <div class="filter-block">
           <div class="body">
@@ -955,10 +954,7 @@ export default {
 
 <style scoped>
   .filter{
-    background: #424755;
-    border-radius: 14px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    padding: .8rem;
+    padding: 0;
   }
   .filter > .selector-block{
     box-sizing: border-box;
@@ -973,25 +969,22 @@ export default {
     box-sizing: border-box;
     padding: 10px 15px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: bolder;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.43;
     letter-spacing: normal;
-    -webkit-box-pack: justify;
     justify-content: space-between;
     display: flex;
-    -webkit-box-align: center;
     align-items: center;
-    background: #424755;
   }
   .selector-block > .selector.cursor-drop > .placeholder{
     cursor: pointer;
   }
   .selector-block > .selector > .placeholder >.selected{
     color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 800;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.43;
@@ -1027,7 +1020,7 @@ export default {
     box-sizing: border-box;
     left: 0;
     position: inherit;
-    background-color: #424755;
+    background-color: var(--block-color);
     width: 100%;
     z-index: 20;
     overflow-y: auto;
@@ -1048,7 +1041,6 @@ export default {
 }
 .selector-block .selector .chek-box-list ul li{
   -moz-user-select: none;
-  -khtml-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1056,11 +1048,16 @@ export default {
   color: #FFFFFF;
   font-size: 12px;
   line-height: 20.34px;
-  margin: 1px 0 2px;
   padding: 1px 3px 0;
+  margin: 1px 0 0.5rem;
 }
 .selector-block .selector .chek-box-list ul li label{
-  width: 100%;
+  font-size: .8rem;
+  padding-bottom: 0.3rem;
+  padding-top: 0.3rem;
+}
+.selector-block .selector .chek-box-list ul li label > input {
+  display: none;
 }
 .selector-block .selector .chek-box-list ul{
   margin-left: 2px;
@@ -1084,7 +1081,7 @@ export default {
 }
 @media (min-width: 991px) {
   .selector-block .selector .chek-box-list ul li label > span{
-    margin-left: 4px;
+    margin-left: 17px;
   }
 }
 /* Small devices (landscape phones, 991px and up) */
@@ -1138,9 +1135,6 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 1000;
-  }
-  .selector-block > .selector > .drop-options{
-    background: #0f1318;
   }
 }
 .btn-filter{
