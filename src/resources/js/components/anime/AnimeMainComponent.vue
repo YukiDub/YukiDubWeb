@@ -17,7 +17,8 @@
         Статистика
       </button>
     </div>
-      <component v-bind:is="selectedTab"/>
+    <component v-bind:is="selectedTab" class="mb-4"/>
+    <comments></comments>
   </div>
 </template>
 
@@ -25,13 +26,15 @@
 import characterTab from "../anime/AnimeCharactersComponent";
 import authorsTab from "../anime/AnimeAuthorsComponent";
 import relatedTab from "../anime/AnimeRelatedComponent";
+import comments from "../CommentsComponent";
 
 export default {
   name: "AnimeMainComponent",
   components: {
     characterTab,
     authorsTab,
-    relatedTab
+    relatedTab,
+    comments
   },
   data(){
     return {
