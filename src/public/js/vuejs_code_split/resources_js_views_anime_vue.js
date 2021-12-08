@@ -1,6 +1,80 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_anime_vue"],{
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AnimeAuthorsComponent"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _haracterEntryComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../СharacterEntryComponent */ "./resources/js/components/СharacterEntryComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AnimeCharactersComponent",
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['animeItem']),
+  components: {
+    characterEntryComponent: _haracterEntryComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeEditorComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeEditorComponent.vue?vue&type=script&lang=js& ***!
@@ -55,24 +129,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _haracterEntryComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../СharacterEntryComponent */ "./resources/js/components/СharacterEntryComponent.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _anime_AnimeCharactersComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../anime/AnimeCharactersComponent */ "./resources/js/components/anime/AnimeCharactersComponent.vue");
+/* harmony import */ var _anime_AnimeAuthorsComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../anime/AnimeAuthorsComponent */ "./resources/js/components/anime/AnimeAuthorsComponent.vue");
+/* harmony import */ var _anime_AnimeRelatedComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../anime/AnimeRelatedComponent */ "./resources/js/components/anime/AnimeRelatedComponent.vue");
 //
 //
 //
@@ -97,14 +156,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    CharacterEntryComponent: _haracterEntryComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   name: "AnimeMainComponent",
+  components: {
+    characterTab: _anime_AnimeCharactersComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    authorsTab: _anime_AnimeAuthorsComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    relatedTab: _anime_AnimeRelatedComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      selectedTab: _anime_AnimeCharactersComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+      characterTab: _anime_AnimeCharactersComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+      authorsTab: _anime_AnimeAuthorsComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+      relatedTab: _anime_AnimeRelatedComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+    };
+  },
   props: {
     anime: Object
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AnimeRelatedComponent"
 });
 
 /***/ }),
@@ -324,7 +422,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#anime-tab > button[data-v-18e99296] {\r\n  background: none;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  font-size: 1.2rem;\r\n  font-weight: 600;\r\n  margin-right: 14px;\n}\n#anime-tab > button.active[data-v-18e99296]::after {\r\n  content: \"\";\r\n  display: block;\r\n  background: #009BEB;\r\n  border-radius: 6px 5px 0px 0px;\r\n  width: 108px;\r\n  height: 4px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tabs > .anime-tab[data-v-18e99296] {\r\n  background: none;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  font-size: 1.2rem;\r\n  font-weight: 600;\n}\n.tabs > .anime-tab > button[data-v-18e99296]{\r\n  cursor: pointer;\r\n  background: none;\r\n  border: none;\r\n  color: var(--text-color);\n}\n.tabs > .anime-tab > button.active[data-v-18e99296]::after {\r\n  content: \"\";\r\n  display: block;\r\n  background: #009BEB;\r\n  border-radius: 6px 5px 0px 0px;\r\n  width: 108px;\r\n  height: 4px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -412,6 +510,82 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./resources/js/components/anime/AnimeAuthorsComponent.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeAuthorsComponent.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AnimeAuthorsComponent_vue_vue_type_template_id_68d6a0b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true& */ "./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true&");
+/* harmony import */ var _AnimeAuthorsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimeAuthorsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimeAuthorsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimeAuthorsComponent_vue_vue_type_template_id_68d6a0b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AnimeAuthorsComponent_vue_vue_type_template_id_68d6a0b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "68d6a0b3",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/anime/AnimeAuthorsComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/anime/AnimeCharactersComponent.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeCharactersComponent.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AnimeCharactersComponent_vue_vue_type_template_id_51db6205_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true& */ "./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true&");
+/* harmony import */ var _AnimeCharactersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimeCharactersComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimeCharactersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimeCharactersComponent_vue_vue_type_template_id_51db6205_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AnimeCharactersComponent_vue_vue_type_template_id_51db6205_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "51db6205",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/anime/AnimeCharactersComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/anime/AnimeEditorComponent.vue":
 /*!****************************************************************!*\
   !*** ./resources/js/components/anime/AnimeEditorComponent.vue ***!
@@ -486,6 +660,44 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/anime/AnimeMainComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/anime/AnimeRelatedComponent.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeRelatedComponent.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AnimeRelatedComponent_vue_vue_type_template_id_3271bdb0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true& */ "./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true&");
+/* harmony import */ var _AnimeRelatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimeRelatedComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimeRelatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimeRelatedComponent_vue_vue_type_template_id_3271bdb0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AnimeRelatedComponent_vue_vue_type_template_id_3271bdb0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "3271bdb0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/anime/AnimeRelatedComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -568,6 +780,36 @@ component.options.__file = "resources/js/views/anime.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeAuthorsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeAuthorsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeAuthorsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeCharactersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeCharactersComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeCharactersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/anime/AnimeEditorComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/anime/AnimeEditorComponent.vue?vue&type=script&lang=js& ***!
@@ -595,6 +837,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeMainComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeMainComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeMainComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeMainComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeRelatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeRelatedComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeRelatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -652,6 +909,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeAuthorsComponent_vue_vue_type_template_id_68d6a0b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeAuthorsComponent_vue_vue_type_template_id_68d6a0b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeAuthorsComponent_vue_vue_type_template_id_68d6a0b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true& ***!
+  \***************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeCharactersComponent_vue_vue_type_template_id_51db6205_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeCharactersComponent_vue_vue_type_template_id_51db6205_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeCharactersComponent_vue_vue_type_template_id_51db6205_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/anime/AnimeEditorComponent.vue?vue&type=template&id=79ae54e2&scoped=true&":
 /*!***********************************************************************************************************!*\
   !*** ./resources/js/components/anime/AnimeEditorComponent.vue?vue&type=template&id=79ae54e2&scoped=true& ***!
@@ -684,6 +973,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeRelatedComponent_vue_vue_type_template_id_3271bdb0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeRelatedComponent_vue_vue_type_template_id_3271bdb0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimeRelatedComponent_vue_vue_type_template_id_3271bdb0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true&":
 /*!********************************************************************************************************!*\
   !*** ./resources/js/components/СharacterEntryComponent.vue?vue&type=template&id=726b4012&scoped=true& ***!
@@ -712,6 +1017,113 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_anime_vue_vue_type_template_id_44d22d05_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_anime_vue_vue_type_template_id_44d22d05_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./anime.vue?vue&type=template&id=44d22d05&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/anime.vue?vue&type=template&id=44d22d05&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeAuthorsComponent.vue?vue&type=template&id=68d6a0b3&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "authors-tab" }, [
+      _c("div", { staticClass: "header" }, [
+        _c("h4", { staticClass: "text-center text-md-start pb-3 pt-4" }, [
+          _vm._v("Авторы"),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "list" }),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeCharactersComponent.vue?vue&type=template&id=51db6205&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "characters-tab" }, [
+    _vm.animeItem.characters.length !== 0
+      ? _c("div", { staticClass: "characters pl-4" }, [
+          _c("h4", { staticClass: "text-center text-md-start pb-3 pt-4" }, [
+            _vm._v("ГЛАВНЫЕ ГЕРОИ"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
+            },
+            _vm._l(_vm.animeItem.characters, function (character) {
+              return _c("character-entry-component", {
+                key: character.id,
+                attrs: {
+                  name: character.name_ru,
+                  poster_url: "/storage/images/animes/preview/1.jpg",
+                },
+              })
+            }),
+            1
+          ),
+          _vm._v(" "),
+          _c("h4", { staticClass: "text-center text-md-start pb-3 pt-4" }, [
+            _vm._v("ДРУГИЕ ПЕРСОНАЖИ"),
+          ]),
+          _vm._v(" "),
+          _c("div", {
+            staticClass:
+              "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
+          }),
+        ])
+      : _c("div", { staticClass: "characters pl-4" }, [
+          _c("p", { staticClass: "text-center mt-4" }, [
+            _vm._v("Персонажи для данного аниме не найдены"),
+          ]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "img-fluid w-25 mx-auto d-block",
+            attrs: { src: "/assets/images/nya404.webp", alt: "nya 404" },
+          }),
+        ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
 
 
 /***/ }),
@@ -875,168 +1287,105 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tabs" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "tab-content", attrs: { id: "anime-tabContent" } },
-      [
+  return _c(
+    "div",
+    { staticClass: "tabs" },
+    [
+      _c("div", { staticClass: "nav justify-content-center anime-tab" }, [
         _c(
-          "div",
+          "button",
           {
-            staticClass: "tab-pane show active",
-            attrs: {
-              id: "nav-characters",
-              role: "tabpanel",
-              "aria-labelledby": "nav-characters-tab",
+            class: { active: _vm.selectedTab === _vm.characterTab },
+            attrs: { type: "button" },
+            on: {
+              click: function ($event) {
+                _vm.selectedTab = _vm.characterTab
+              },
             },
           },
-          [
-            _vm.anime.characters.length !== 0
-              ? _c("div", { staticClass: "characters pl-4" }, [
-                  _c(
-                    "h4",
-                    { staticClass: "text-center text-md-start pb-3 pt-4" },
-                    [_vm._v("ГЛАВНЫЕ ГЕРОИ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
-                    },
-                    _vm._l(_vm.anime.characters, function (character) {
-                      return _c("character-entry-component", {
-                        key: character.id,
-                        attrs: {
-                          name: character.name_ru,
-                          poster_url: "/storage/images/animes/preview/1.jpg",
-                        },
-                      })
-                    }),
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h4",
-                    { staticClass: "text-center text-md-start pb-3 pt-4" },
-                    [_vm._v("ДРУГИЕ ПЕРСОНАЖИ")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass:
-                      "row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-3",
-                  }),
-                ])
-              : _c("div", { staticClass: "characters pl-4" }, [
-                  _c("p", { staticClass: "text-center mt-4" }, [
-                    _vm._v("Персонажи для данного аниме не найдены"),
-                  ]),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "img-fluid w-25 mx-auto d-block",
-                    attrs: {
-                      src: "/assets/images/nya404.webp",
-                      alt: "nya 404",
-                    },
-                  }),
-                ]),
-          ]
+          [_vm._v("\n      Персонажи\n    ")]
         ),
         _vm._v(" "),
         _c(
-          "div",
+          "button",
           {
-            staticClass: "tab-pane",
-            attrs: {
-              id: "nav-staff",
-              role: "tabpanel",
-              "aria-labelledby": "nav-staff-tab",
+            class: { active: _vm.selectedTab === _vm.authorsTab },
+            attrs: { type: "button" },
+            on: {
+              click: function ($event) {
+                _vm.selectedTab = _vm.authorsTab
+              },
             },
           },
-          [_vm._v("\n      авторы\n    ")]
+          [_vm._v("\n      Авторы\n    ")]
         ),
         _vm._v(" "),
         _c(
-          "div",
+          "button",
           {
-            staticClass: "tab-pane",
-            attrs: {
-              id: "nav-review",
-              role: "tabpanel",
-              "aria-labelledby": "nav-review-tab",
+            class: { active: _vm.selectedTab === _vm.relatedTab },
+            attrs: { type: "button" },
+            on: {
+              click: function ($event) {
+                _vm.selectedTab = _vm.relatedTab
+              },
             },
           },
-          [_vm._v("\n      отзыввы\n    ")]
+          [_vm._v("\n      Связанное\n    ")]
         ),
-      ]
-    ),
-  ])
+        _vm._v(" "),
+        _c("button", { attrs: { type: "button" } }, [
+          _vm._v("\n      Похожее\n    "),
+        ]),
+        _vm._v(" "),
+        _c("button", { attrs: { type: "button" } }, [
+          _vm._v("\n      Статистика\n    "),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c(_vm.selectedTab, { tag: "component" }),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/anime/AnimeRelatedComponent.vue?vue&type=template&id=3271bdb0&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "nav justify-content-center",
-        attrs: { id: "anime-tab", role: "tablist" },
-      },
-      [
-        _c(
-          "button",
-          {
-            staticClass: " active",
-            attrs: {
-              id: "nav-characters-tab",
-              "data-bs-toggle": "tab",
-              "data-bs-target": "#nav-characters",
-              type: "button",
-              role: "tab",
-              "aria-controls": "nav-home",
-              "aria-selected": "true",
-            },
-          },
-          [_vm._v("Персонажи")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            attrs: {
-              id: "nav-staff-tab",
-              "data-bs-toggle": "tab",
-              "data-bs-target": "#nav-staff",
-              type: "button",
-              role: "tab",
-              "aria-controls": "nav-profile",
-              "aria-selected": "false",
-            },
-          },
-          [_vm._v("Авторы")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            attrs: {
-              id: "nav-review-tab",
-              "data-bs-toggle": "tab",
-              "data-bs-target": "#nav-review",
-              type: "button",
-              role: "tab",
-              "aria-controls": "nav-contact",
-              "aria-selected": "false",
-            },
-          },
-          [_vm._v("Отзывы")]
-        ),
-      ]
-    )
+    return _c("div", { staticClass: "related-tab" }, [
+      _c("div", { staticClass: "header" }, [
+        _c("h4", { staticClass: "text-center text-md-start pb-3 pt-4" }, [
+          _vm._v("Связанное"),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "list" }),
+    ])
   },
 ]
 render._withStripped = true
