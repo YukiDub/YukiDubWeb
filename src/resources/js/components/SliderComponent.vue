@@ -82,7 +82,7 @@ export default {
   }
   @media (min-width: 391px) {
     .slider>.catalog-entry{
-      width: 35%;
+      width: 32%;
     }
   }
   @media (min-width: 768px) {
@@ -97,7 +97,7 @@ export default {
   }
   @media (min-width: 1200px) {
     .slider>.catalog-entry{
-      width: 12%;
+      width: 13.5%;
     }
   }
 </style>
