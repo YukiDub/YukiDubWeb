@@ -15,12 +15,10 @@
             <div class="preloader__item"></div>
         </div>
     </div>
-    <div class="layout">
+    <main class="layout">
         <nav-bar></nav-bar>
-
         <div class="wrapper">
             <page-header login={{false}}></page-header>
-
             <div class="container mt-4 mb-5">
                 <transition name="slide-fade">
                     <router-view></router-view>
@@ -28,8 +26,7 @@
             </div>
             <footer-component></footer-component>
         </div>
-    </div>
-
+    </main>
     <div class="modals">
         <modal-wrappers>
         </modal-wrappers>
