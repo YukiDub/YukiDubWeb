@@ -17,7 +17,7 @@
         Статистика
       </button>
     </div>
-    <component v-bind:is="selectedTab"/>
+      <component v-bind:is="selectedTab"/>
   </div>
 </template>
 
@@ -65,8 +65,7 @@ export default {
   content: "";
   display: block;
   background: #009BEB;
-  border-radius: 6px 5px 0px 0px;
-  width: 108px;
+  border-radius: 6px 5px 0 0;
   height: 4px;
 }
 </style>

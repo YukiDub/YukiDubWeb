@@ -6,7 +6,7 @@
 
 <template>
   <div class="anime" v-if="!loading">
-    <div class="content-header mb-4">
+    <div class="content-header">
       <div class="cover" v-bind:style="{ 'background-image': 'url(' + animeItem.poster.original + ')' }"></div>
       <div class="row-container">
         <div class="row-information">
@@ -55,29 +55,12 @@
                 <label for="star-5" title="Оценка «5»" class="star bi bi-star-fill"></label>
               </div>
             </div>
-
-            <div class="description">
-              <p>Описание:</p>
-              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">русское</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">английское</button>
-                </li>
-              </ul>
-              <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                  <p class="text">{{animeItem.description_ru}}</p>
-                  <p>Автор: <a :href="animeItem.description_ru_source" target=»_blank>{{animeItem.description_ru_source.split('/')[2]}}</a></p>
-                </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                  <p class="text">{{animeItem.description_en}}</p>
-                  <p>Автор: <a href="#">none</a></p>
-                </div>
-              </div>
-            </div>
-
+            <description
+                :ru="animeItem.description_ru"
+                :ru_source="animeItem.description_ru_source"
+                :en="animeItem.description_en"
+                :en_source="animeItem.description_en_source"
+            />
           </div>
         </div>
       </div>
@@ -112,12 +95,14 @@ import {mapGetters, mapActions} from 'vuex'
 import CharacterEntryComponent from "../components/СharacterEntryComponent";
 import MainComponent from "../components/anime/AnimeMainComponent";
 import EditorComponent from "../components/anime/AnimeEditorComponent";
+import description from "../components/DescriptionComponent";
 export default {
   name: "index",
   components: {
     CharacterEntryComponent,
     MainComponent,
-    EditorComponent
+    EditorComponent,
+    description
   },
 
   data(){
@@ -256,11 +241,6 @@ export default {
     width: 349px;
     height: 500px;
   }
-}
-.anime .description .text {
-  height: 154px;
-  overflow-x: hidden;
-  overflow-y: scroll;
 }
 .anime>.content-header.loading > .row-container>.row-information>.warp-poster {
   width: 276px;
