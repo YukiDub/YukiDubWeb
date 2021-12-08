@@ -151,6 +151,9 @@ export default {
   top: 72px;
   filter: drop-shadow(0px 4px 52px rgba(0, 0, 0, 0.25));
 }
+.anime>.content-header>.cover {
+  min-height: 43.6rem;
+}
 @media (max-width: 1399px) {
   .anime>.content-header>.cover {
     display: none;
