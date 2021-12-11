@@ -18,7 +18,7 @@
       </button>
     </div>
     <component v-bind:is="selectedTab" class="mb-4"/>
-    <comments></comments>
+    <comments :comments="comments" :click-more-comments="moreComments"/>
   </div>
 </template>
 
@@ -42,10 +42,28 @@ export default {
       characterTab: characterTab,
       authorsTab: authorsTab,
       relatedTab: relatedTab,
+
+      comments: [
+        {
+          id: 1,
+          user:{
+            id: 1,
+            name: "admin",
+            avatar: '/assets/images/avatars/default.png'
+          },
+          text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, officiis tenetur? Iure, consectetur suscipit quos earum dolore dolorum expedita deserunt temporibus nulla nostrum nobis, dignissimos delectus id tempora? Ea, deserunt!",
+          time: "2021-12-01 17:20:47"
+        }
+      ]
     }
   },
   props: {
     anime: Object
+  },
+  methods:{
+    moreComments(){
+      console.log('more comments!!!')
+    }
   }
 }
 </script>

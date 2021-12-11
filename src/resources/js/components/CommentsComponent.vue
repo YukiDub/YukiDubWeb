@@ -1,5 +1,5 @@
 <template>
-  <div class="comments">
+  <section class="comments">
     <div class="header">
       <p class="title">Комментарии</p>
       <div class="buttons">
@@ -7,56 +7,30 @@
         <button class="button">Популярные</button>
       </div>
     </div>
-    <div class="content">
-      <p class="text-center">Загрузить более старые комментарии</p>
-      <div class="comment-item">
+    <div class="content" v-if="comments.length > 0">
+      <p class="show-more" @click="moreComments">Загрузить более старые комментарии</p>
+      <div class="comment-item" v-for="comment in comments" :key="comment.id">
         <div class="header">
-          <img src="/assets/images/avatars/default.png" alt="Admin">
-          <p>Admin</p>
-          <p class="date">10 минут назад</p>
+          <router-link :to="{name: 'user.profile', params: {name: comment.user.name}}"><img src="/assets/images/avatars/default.png" alt="Admin"></router-link>
+          <router-link class="username" :to="{name: 'user.profile', params: {name: comment.user.name}}">{{comment.user.name}}</router-link>
+          <p class="date">{{comment.time}}</p>
         </div>
         <div class="comment">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, officiis tenetur? Iure, consectetur suscipit quos earum dolore dolorum expedita deserunt temporibus nulla nostrum nobis, dignissimos delectus id tempora?
-            Ea, deserunt!
-          </p>
-        </div>
-      </div>
-      <div class="comment-item">
-        <div class="header">
-          <img src="/assets/images/avatars/default.png" alt="Admin">
-          <p>Admin</p>
-          <p class="date">3 минуты назад</p>
-        </div>
-        <div class="comment">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, officiis tenetur? Iure, consectetur suscipit quos earum dolore dolorum expedita deserunt temporibus nulla nostrum nobis, dignissimos delectus id tempora?
-            Ea, deserunt!
-          </p>
-        </div>
-      </div>
-      <div class="comment-item">
-        <div class="header">
-          <img src="/assets/images/avatars/default.png" alt="Admin">
-          <p>Admin</p>
-          <p class="date">1 минуту назад</p>
-        </div>
-        <div class="comment">
-          <p>
-            Abnoba, ventus, et adgium. Abnoba, ventus, et adgium. Abnoba, ventus, et adgium. Abnoba, ventus, et adgium. Abnoba, ventus, et adgium. Abnoba, ventus, et adgium. Abnoba, ventus, et adgium. Abnoba, ventus, et adgium.
-          </p>
+          <p class="text">{{comment.text}}</p>
+          <button class="button more" @click="more">Подробнее</button>
         </div>
       </div>
     </div>
+    <div class="content" v-else>
+      <p class="text-start">Комментарии не найдены.</p>
+    </div>
     <div class="send">
-      <editor>
-
-      </editor>
+      <editor/>
       <button type="button">
         Отправить
       </button>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -65,6 +39,26 @@ export default {
   name: "CommentsComponent",
   components: {
     editor
+  },
+  props: {
+    comments:{
+      type: Array
+    },
+    clickMoreComments: {
+      type: Function,
+      default() {
+        return function () {};
+      }
+    }
+  },
+  methods: {
+    more(e){
+      e.target.
+      e.target.style.overflow = "auto"
+    },
+    moreComments: function (){
+      this.clickMoreComments();
+    }
   }
 }
 </script>
@@ -85,6 +79,7 @@ export default {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   padding-top: 1rem;
+  flex-wrap: wrap;
 }
 .comments > .header > .title{
   font-size: large;
@@ -103,17 +98,34 @@ export default {
   font-size: large;
   font-weight: 700;
 }
+.comments >.content > .show-more{
+  text-align: center;
+  cursor: pointer;
+}
+.comments >.content > .show-more:hover{
+  color: var(--focus-color);
+}
 .comments >.content > .comment-item > .header{
   display: flex;
   align-content: center;
   gap: 2rem;
   margin-bottom: 0.8rem;
 }
-.comments >.content > .comment-item > .header > p{
+.comments >.content > .comment-item > .header > .username{
   margin-top: auto;
   margin-bottom: auto;
 }
 .comments >.content > .comment-item > .header > .date{
   margin-left: auto;
+}
+.comments >.content > .comment-item > .comment > .text{
+  max-height: 113px;
+  overflow: hidden;
+}
+.comments >.content > .comment-item > .comment > .button.more{
+  border: none;
+  background: none;
+  color: aliceblue;
+  padding: 0 0 0 14px;
 }
 </style>
