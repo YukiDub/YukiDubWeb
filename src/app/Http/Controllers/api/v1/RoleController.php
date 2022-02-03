@@ -6,29 +6,34 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Http\Requests\PeopleRoleRequest;
 use App\Http\Resources\RoleCollection;
 use App\Http\Resources\RoleResource;
-use App\Repositories\GenresRepository;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends ApiController
 {
-    public $repository;
-
-    public function __construct()
-    {
-        $this->repository = new GenresRepository();
-    }
 
     /**
      * Display a listing of the resource.
      *
+     * @param PeopleRoleRequest $request
      * @return RoleCollection
      *
      * @OA\Get(
      *     path="/roles",
      *     tags = {"People"},
      *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Parameter(
+     *         name="perPage",
+     *         in="path",
+     *         description="Number of people roles per page. 1 > perPage <= 40",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
      *     @OA\Response(
      *          response="404",
      *          description="not found",
@@ -40,9 +45,10 @@ class RoleController extends ApiController
      *
      * )
      */
-    public function index(): RoleCollection
+    public function index(PeopleRoleRequest $request): RoleCollection
     {
-        return new RoleCollection($this->repository->getList());
+        $perPage = $request->get('perPage') ?? 12;
+        return new RoleCollection(Role::paginate($perPage));
     }
 
     /**
@@ -60,13 +66,35 @@ class RoleController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
+     * @param Role $role
      * @return RoleResource
+     *
+     * @OA\Get(
+     *     path="/roles/{id}",
+     *     tags = {"People"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The role id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Display a listing of the resource"),
+     *     @OA\Response(
+     *          response="404",
+     *          description="not found",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/NotFoundRequest")
+     *          )
+     *      )
+     * )
      */
-    public function show($id): RoleResource
+    public function show(Role $role): RoleResource
     {
-        return new RoleResource($this->repository->get($id));
+        return new RoleResource($role);
     }
 
     /**
