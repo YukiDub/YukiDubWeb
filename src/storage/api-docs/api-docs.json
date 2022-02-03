@@ -278,7 +278,7 @@
                 "tags": [
                     "Anime"
                 ],
-                "summary": "Sending vote",
+                "summary": "Sending vote.",
                 "operationId": "e79861431504a27a7bbba71e778984bb",
                 "parameters": [
                     {
@@ -349,7 +349,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "New user registration",
+                "summary": "New user registration.",
                 "operationId": "a7ec57acc2a0a8b7898382c574daeb48",
                 "parameters": [
                     {
@@ -722,7 +722,7 @@
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing changes",
+                "summary": "Display a listing changes.",
                 "operationId": "77bc9c2c5b67dd2bf55a5e7af7f276c0",
                 "parameters": [
                     {
@@ -760,7 +760,7 @@
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing of the work this person",
+                "summary": "Display a listing of the work this person.",
                 "operationId": "52ff67ca9fc0322d11de7e05e2bdf666",
                 "parameters": [
                     {
@@ -798,7 +798,7 @@
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing of the anime list this person",
+                "summary": "Display a listing of the anime list this person.",
                 "operationId": "f9da4106f959ee0289ef3d0e46d9eb79",
                 "parameters": [
                     {
@@ -845,7 +845,7 @@
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing of the manga list this person",
+                "summary": "Display a listing of the manga list this person.",
                 "operationId": "bd7480add95050731611b90c4450e8e8",
                 "parameters": [
                     {
@@ -883,7 +883,7 @@
                 "tags": [
                     "People"
                 ],
-                "summary": "Display a listing of the roles this person",
+                "summary": "Display a listing of the roles this person.",
                 "operationId": "b15e2b493ae7c5c4cd0988b769fa397a",
                 "parameters": [
                     {
@@ -923,6 +923,55 @@
                 ],
                 "summary": "Display a listing of the resource.",
                 "operationId": "4baf15bf19bdd61eaa6ab9da8f8eac18",
+                "parameters": [
+                    {
+                        "name": "perPage",
+                        "in": "path",
+                        "description": "Number of people roles per page. 1 > perPage <= 40",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of the resource"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NotFoundRequest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/{id}": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Display the specified resource.",
+                "operationId": "e991a4e61c93003855296139fb3dca1b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The role id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Display a listing of the resource"
