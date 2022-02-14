@@ -63,7 +63,6 @@ class AnimeResource extends JsonResource
             'characters'              => new CharactersCollection($this->whenLoaded('characters')),
             'studios'                 => AnimeStudiosResource::collection($this->whenLoaded('studios')),
             'score_info'              => new ScoreInfoResource($this->whenLoaded('scoreInfo')),
-            'score_votes'             => $this->when($this->score_votes, $this->score_votes),
             'anime_favoured'          => false,
         ];
     }
