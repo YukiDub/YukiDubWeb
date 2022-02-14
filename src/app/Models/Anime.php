@@ -181,8 +181,8 @@ class Anime extends Model
     {
         return $this->hasOne(Score::class, 'score_id', 'score')
             ->leftJoin('score_votes', 'score_votes.score_id', '=', 'scores.score_id')
-            ->selectRaw('scores.*, count(score_votes.score_vote_id) as count_votes')
-            ->groupBy('scores.score_id');
+            ->selectRaw('scores.*, COUNT(score_votes.score_vote_id) AS count_votes')
+            ->groupBy('scores.score_id', 'scores.rating');
     }
 
     public function scoreVotes()
